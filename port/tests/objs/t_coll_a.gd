@@ -4,6 +4,7 @@ var kill_other: bool = false
 
 func _collision_t_coll_b(other: GMObject) -> void:
 	rec("hit " + String(other.get("tag")))
+	assert(GM.other == other)
 	if kill_other:
 		GM.instance_destroy(other)
 

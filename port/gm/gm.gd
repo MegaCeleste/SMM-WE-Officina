@@ -10,6 +10,10 @@ extends "res://gm/gm_input.gd"
 
 var col: GMCollision = GMCollision.new()
 
+## GML 的 other：Collision 事件执行期间是碰撞的对方，其余时候为 null。
+## 碰撞事件里调用的 user event / 脚本通过它拿到 other（方法参数 other 只在事件方法内可见）。
+var other: GMObject = null
+
 ## false 时不自动推进，由测试手动调 tick()
 var auto_tick: bool = true
 var tick_count: int = 0
@@ -796,11 +800,11 @@ func _phase_other() -> void:
 		var cls: GMClass = inst._cls
 		if cls.has_outside_room:
 			var outside: bool = inst._br < 0.0 or inst._bl > room_width or inst._bbm < 0.0 or inst._bt > room_height
-			if outside and not inst._outside_room:
-				inst._outside_room = true
+			if outside and not inst._was_outside:
+				inst._was_outside = true
 				inst.call(&"_outside_room")
 			else:
-				inst._outside_room = outside
+				inst._was_outside = outside
 		if cls.has_outside_view0 and view_enabled and view_visible[0] and not inst._destroyed:
 			if inst._bb_dirty:
 				inst._bb_update()
@@ -850,13 +854,16 @@ func _phase_collision() -> void:
 				if fired.has(key):
 					continue
 				fired[key] = true
+				other = b
 				a.call(h[1], b)
 				for hb: Array in b._cls.collisions:
 					if a._cls.is_a[hb[0]] != 0:
 						var key2: Vector3i = Vector3i(b._uid, a._uid, hb[0])
 						if not fired.has(key2):
 							fired[key2] = true
+							other = a
 							b.call(hb[1], a)
+				other = null
 				if _pending_room >= 0:
 					return
 

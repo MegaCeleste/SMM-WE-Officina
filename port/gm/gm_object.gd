@@ -37,7 +37,7 @@ var _colcheck: int = 0
 var _mask_spr: GMSprite = null  ## 当前用于碰撞的 sprite（mask_index 或 sprite_index），没有则为 null
 var _sp_lock: bool = false
 var _mouse_over: bool = false
-var _outside_room: bool = false
+var _was_outside: bool = false
 var _room_inst_name: String = ""
 
 # ---- GMS 内置变量 ----

@@ -68,7 +68,7 @@ tools/           一次性导入/生成脚本（读 original/，只写 port/）
 | instance | `GMObject` 节点，创建时登记到 `GM` 的实例表 | 实例表按创建顺序保存，另按 object（含后代）建索引。“实例 id”就是对象引用，`noone` 对应 `null` |
 | `instance_create(x,y,obj)` | `GM.instance_create(x, y, A.obj_xxx)` | depth 取自 `tables/object_depths`（来源见 §1）。room 里摆放的实例 depth 取所在图层的 depth |
 | 函数的 `obj` 参数 | `Variant`：int（object 编号，含后代）、`GMObject`（单个实例）、`GM.all`、`GM.noone` 或 `null` | 碰撞查询、`with_list`、`instance_exists` 等都这样 |
-| `instance_destroy()` | `GM.instance_destroy(self)` | 立刻触发 Destroy 事件并从索引移除，节点在 tick 结束时 `queue_free` |
+| `instance_destroy()` | `instance_destroy()`（实例方法）；销毁别的实例用 `GM.instance_destroy(inst)` | 立刻触发 Destroy 事件并从索引移除，节点在 tick 结束时 `queue_free` |
 | `instance_deactivate_*` / `activate_*` | 实例表上的 `active` 标记 | 未激活的实例不跑事件、不参与碰撞、`with`/`instance_exists` 找不到。原版用法：`obj_levelmanager/Step_2.gml:164-167`、`obj_editormanager/Alarm_2.gml` |
 | `asset_get_index(name)` / `object_get_name` | `GM.asset_get_index(name)` 返回编号，查不到返回 -1 | 关卡文件靠它还原实例（清单 §6.7） |
 | room | 一个场景 + 实例列表，`GM.room_goto()` 负责 Room End / Room Start 事件 | `obj_persistent` 是唯一 persistent 对象，挂在 autoload 下 |
@@ -87,7 +87,7 @@ tools/           一次性导入/生成脚本（读 original/，只写 port/）
 | Step_1 / Step_0 / Step_2 | `_step_begin()` / `_step()` / `_step_end()` | |
 | Alarm_n | `_alarm_n()` | |
 | Collision_objX | `_collision_objX(other: GMObject)` | |
-| Other_10…25 | `_user_0()`…`_user_15()` | `event_user(n)` → `GM.event_user(self, n)`，n 为字面量时直接调方法 |
+| Other_10…25 | `_user_0()`…`_user_15()` | `event_user(n)`：n 为字面量时直接调 `_user_n()`，否则调 `GMObject.event_user(n)` |
 | Other_4 / Other_5 | `_room_start()` / `_room_end()` | |
 | Other_2 / Other_3 | `_game_start()` / `_game_end()` | |
 | Other_7 | `_animation_end()` | |
@@ -263,4 +263,4 @@ U4、U5、U7 最可能影响手感。它们各自只在兼容层的一处实现�
 |---|---|---|---|
 | 0 | 完成（2026-11-10） | `--import`、`--quit` 均无错误，退出码 0 | Opus 子代理执行，主会话复核。产物：`tools/`、`port/tables/`、`port/assets/`、`docs/level-format.md`、`docs/user-events.md`、`docs/batch0-notes.md`。遗留的“不确定”条目记在这三份文档里 |
 | 1 | 完成（2026-11-10） | `--quit` 无输出、退出码 0；`tests/test_main.tscn` 221 项检查全过（headless 和真实渲染器各跑过一次） | 产物：`port/gm/`（`gm.gd` 及其继承链 `gm_input ← gm_audio ← gm_draw ← gm_base`、`gm_object.gd`、`gm_class.gd`、`gm_collision.gd`、`gm_sprite.gd`、生成的 `a.gd`）、`port/tests/`、`tools/gen_runtime.py`、`tools/gen_masks.py`。行为对照了 HTML5 runner 源码，§3–§6、UNVERIFIED 清单已按实现更新。**没做的**：path（`path_start` 等，第 7 批）、粒子（第 7 批）、surface 和 shader（第 11 批）、room 的背景图层和图块（第 2 批）、`instance_change`（3 处调用，用到时做）、`audio_sound_gain` 的渐变、文件读写（第 3/9 批）。**没验证的**：画面没有人眼看过，只确认了绘制调用不报错 |
-| 1b | 未开始 | – | |
+| 1b | 完成（2026-11-10） | 草稿 1105 个文件逐个 `load()` 无编译错误；`tests/test_main.tscn` 221 项全过 | Opus 子代理写，主会话抽查。`tools/gml2gd.py`（用法和局限见 `docs/gml2gd-notes.md`）。全工程试转 128547 行，带 `# TODO-GML:` 的 6772 行（5.27%），解析失败 0。草稿输出到 `port/_draft/`（不入库）。**只验证了能编译，没验证运行行为**；脚本类草稿没有逐行核对。遗留给第 2、3 批定的事：`Scr.`（脚本怎么组织）和 `G.`（global 变量类型）目前是占位；`noone` 与 `null` 的统一规则；`obj_x.foo` 读写（3768 行 TODO，GML 语义是读第一个实例、写全部实例，转换脚本还没按此生成）；ds_map/ds_list/文件函数（1111 行 TODO）怎么映射 |

@@ -9,3 +9,6 @@ __pycache__/
 *.py[cod]
 tools/.venv/
 .venv/
+
+# gml2gd.py 生成的草稿（未核对，不入库；目录里有 .gdignore，Godot 不扫描）
+port/_draft/

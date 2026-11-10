@@ -10,6 +10,10 @@ config/description="SMM_WE (OpenWE) 的 Godot 4 移植。AGPL-3.0，见 LICENSE�
 config/features=PackedStringArray("4.7")
 run/main_scene="res://main.tscn"
 
+[autoload]
+
+GM="*res://gm/gm.gd"
+
 [display]
 
 window/size/viewport_width=384

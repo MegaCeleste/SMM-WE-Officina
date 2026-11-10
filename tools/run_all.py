@@ -7,7 +7,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-STEPS = ["import_sprites", "import_sounds", "import_fonts", "gen_objects", "gen_depths", "gen_rooms", "gen_globals", "gen_asset_names", "check_counts"]
+STEPS = ["import_sprites", "import_sounds", "import_fonts", "gen_objects", "gen_depths", "gen_rooms", "gen_globals", "gen_asset_names", "check_counts", "gen_runtime", "gen_masks"]
 
 
 def main() -> int:

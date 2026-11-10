@@ -1,6 +1,6 @@
 # OpenWE 移植计划（GMS 2023.11 → Godot 4.7.2）
 
-> 状态：定稿（2026-11-10）。§9 的事项已全部拍板，其中两项因原版未实测而标为 UNVERIFIED。
+> 状态：定稿（2026-11-10）；同日第 1 批完成后按实现修订了 §3–§6 和 UNVERIFIED 清单。§9 的事项已全部拍板，未实测的行为集中列在 UNVERIFIED 清单里。
 > 依据：`docs/inventory.md`（Sonnet 整理）+ 本文 §1 的抽查。路径均相对 `original/openwe-ref/`。
 > 本文是移植规则的唯一依据（见 CLAUDE.md）。规则与原版行为冲突时，以原版行为为准并回来改本文。
 
@@ -44,7 +44,7 @@
 ```
 port/
   project.godot
-  gm/            兼容层（autoload `GM`、基类 `GMObject`、碰撞、绘制、音频、视图）
+  gm/            兼容层（autoload `GM`、基类 `GMObject`、碰撞、绘制、音频、视图、资源名常量 `A`）
   globals/       autoload `G`：原版全部 global.* 变量，逐个声明类型
   objects/       一个 object 一个 .gd，文件名与原名相同（obj_koopa.gd）
   scripts/       一个 GML 脚本一个静态函数，按原文件夹归到若干 .gd
@@ -63,15 +63,17 @@ tools/           一次性导入/生成脚本（读 original/，只写 port/）
 
 | GMS | Godot | 说明 |
 |---|---|---|
-| object | `class_name obj_xxx extends <父类>` 的脚本，根基类 `GMObject extends Node2D` | 继承关系照搬 yy 的 `parentObjectId` |
-| instance | 节点，创建时登记到 `GM` 的实例表 | 实例表按创建顺序保存，另按 object（含后代）建索引 |
-| `instance_create(x,y,obj)` | `GM.instance_create(x, y, obj_xxx)` | depth 取自 `tables/object_depths`（来源见 §1） |
+| 资源名（`obj_koopa`、`spr_koopa`、`snd_coin`、`rm_logo`…） | `A.obj_koopa` 这样的 int 常量（`port/gm/a.gd`，脚本生成） | 和 GML 一样，资源就是编号。编号是 yyp 顺序，不是 GMS 运行时编号。object、sprite、sound、room 各自从 0 起 |
+| object | `port/objects/obj_xxx.gd`，写 `extends "res://objects/<父类>.gd"`，没有父类的写 `extends GMObject`；**不写 `class_name`** | 根基类 `GMObject extends Node`（不是 Node2D：绘制不走节点，见 §6）。继承关系照搬 yy。`GM` 按编号懒加载脚本，没移植的 object 用空壳顶替并报一次警告 |
+| instance | `GMObject` 节点，创建时登记到 `GM` 的实例表 | 实例表按创建顺序保存，另按 object（含后代）建索引。“实例 id”就是对象引用，`noone` 对应 `null` |
+| `instance_create(x,y,obj)` | `GM.instance_create(x, y, A.obj_xxx)` | depth 取自 `tables/object_depths`（来源见 §1）。room 里摆放的实例 depth 取所在图层的 depth |
+| 函数的 `obj` 参数 | `Variant`：int（object 编号，含后代）、`GMObject`（单个实例）、`GM.all`、`GM.noone` 或 `null` | 碰撞查询、`with_list`、`instance_exists` 等都这样 |
 | `instance_destroy()` | `GM.instance_destroy(self)` | 立刻触发 Destroy 事件并从索引移除，节点在 tick 结束时 `queue_free` |
 | `instance_deactivate_*` / `activate_*` | 实例表上的 `active` 标记 | 未激活的实例不跑事件、不参与碰撞、`with`/`instance_exists` 找不到。原版用法：`obj_levelmanager/Step_2.gml:164-167`、`obj_editormanager/Alarm_2.gml` |
-| `asset_get_index(name)` / `object_get_name` | `tables/` 里的名字↔资源双向表 | 关卡文件靠它还原实例（清单 §6.7） |
+| `asset_get_index(name)` / `object_get_name` | `GM.asset_get_index(name)` 返回编号，查不到返回 -1 | 关卡文件靠它还原实例（清单 §6.7） |
 | room | 一个场景 + 实例列表，`GM.room_goto()` 负责 Room End / Room Start 事件 | `obj_persistent` 是唯一 persistent 对象，挂在 autoload 下 |
-| depth | `z_index = -depth` | GMS 的 depth 越小越靠前。超出 Godot z_index 范围的背景层单独处理 |
-| sprite | 图集 + 元数据（原点、帧数、包围盒、遮罩类型、播放速度） | 由导入脚本生成；精确遮罩另出每帧位图 |
+| depth | `GMObject.depth`，`GM` 按 depth 分桶，每 tick 从大到小画 | 不用 `z_index`，所以没有范围限制。相同 depth 按加入顺序画（UNVERIFIED U11） |
+| sprite | int 编号；元数据在 `GM.sprites[编号]`（`GMSprite`），贴图是横向条带 | 精确遮罩由 `tools/gen_masks.py` 生成到 `tables/masks.bin` |
 | `global.x` | `G.x`（autoload，逐个声明类型） | 9266 处引用，变量清单由脚本从原码抽取 |
 | `ds_map/ds_list` | `Dictionary` / `Array` | 只在 19 个文件里用，基本都是关卡读写 |
 | `#macro` / `enum` | `const` / `enum` | 清单 §5.4 |
@@ -89,8 +91,13 @@ tools/           一次性导入/生成脚本（读 original/，只写 port/）
 | Other_4 / Other_5 | `_room_start()` / `_room_end()` | |
 | Other_2 / Other_3 | `_game_start()` / `_game_end()` | |
 | Other_7 | `_animation_end()` | |
+| Other_0 / Other_40 / Other_8 | `_outside_room()` / `_outside_view_0()` / `_path_end()` | Outside View 0 只在 `GM.view_enabled` 且 `GM.view_visible[0]` 为真时触发；Path End 等路径在第 7 批实现 |
 | Draw_0 / Draw_64 | `_gm_draw()` / `_gm_draw_gui()` | 没有 Draw 事件的 object 走默认的 `draw_self` |
-| Mouse_* / KeyPress_* | `_mouse_n()` / `_keypress_n()` | 由 `GM` 在输入阶段派发 |
+| Mouse_n / KeyPress_n | `_mouse_n()` / `_keypress_n()` | n 就是 GMS 的事件号（Mouse_4 = 左键按下，Mouse_53 = 全局左键按下；KeyPress_13 = 回车）。由 `GM` 在输入阶段派发 |
+
+`GMObject` 基类不声明任何事件方法。`GM` 在某个 object 第一次实例化时扫描它有哪些事件方法（含继承来的），没有的事件不派发。所以方法名必须严格按上表写；父类没有某个事件时不能写 `super._xxx()`（GML 里那是空操作，翻译时直接去掉）。
+
+内置函数放在两处：以实例自身为主语的（`collision_rectangle`、`place_meeting`、`instance_place`、`position_meeting`、`motion_set`、`motion_add`、`move_towards_point`、`move_snap`、`event_user`、`draw_self`、`instance_destroy`）是 `GMObject` 的方法，在事件方法里直接按 GML 原样调用；其余全部是 `GM.` 下的同名函数（`GM.instance_create`、`GM.audio_play_sound`、`GM.draw_sprite_ext`、`GM.keyboard_check`…）。GML 里隐含 self 的全局函数多带一个参数：`instance_deactivate_all(notme)` → `GM.instance_deactivate_all(notme, self)`。
 | Other_60/63/70（异步） | 60、70 不移植；63（文本输入对话框）换实现，见 §9 Q10 | |
 
 ### 3.3 语法翻译规则
@@ -100,9 +107,11 @@ tools/           一次性导入/生成脚本（读 original/，只写 port/）
 3. `with (X) { … }` → `for inst in GM.with_list(X): …`，块内的隐式 self 全部改写成 `inst.`，块内的 `other` 改写成外层的 `self`。`with_list` 在进入时取快照，顺序为创建顺序。
 4. 碰撞事件里的 `other` → 方法参数 `other`。
 5. 数值：GML 只有双精度实数。GDScript 的整数相除会截断，所以**凡参与算术的变量一律声明为 `float`**，字面量写成 `2.0`；只有数组下标、枚举、计数循环变量用 `int`。
-6. `round()` → `GM.gm_round()`（GML 是四舍六入五成双，Godot 不是）。`div`、`mod`、`sign`、`string_*`（GML 字符串下标从 1 开始）等统一走 `GM.` 下的同名函数，不直接用 Godot 内置函数替代。
-7. 真值：GML 里 `if (inst)`、`if (x)` 以 `> 0.5` 为真，`noone` 是 -4。返回实例的函数在 Godot 侧返回 `GMObject` 或 `null`，条件写成 `!= null`；数值条件写成显式比较。
-8. `variable_instance_exists(inst, "name")` → `"name" in inst`。因此实例变量必须在 `_create()` 赋值处才出现，不能提前在类体里全部声明默认值——具体做法等 Q4 定了再写死。
+6. `round()` → `GM.gm_round()`（GML 是四舍六入五成双，Godot 不是）。`div` → `GM.gm_div`，`mod` → `GM.gm_mod`，`sign` → `GM.gm_sign`，`string()` → `GM.string()`（整数值不带小数，其余两位小数），`string_*`（GML 字符串下标从 1 开始）、`lengthdir_*`、`point_direction`、`choose`、`random*` 等统一走 `GM.` 下的同名函数，不直接用 Godot 内置函数替代。`abs/floor/ceil/min/max/sqrt/sin/cos/clamp/lerp/power` 用 Godot 的 `absf/floorf/ceilf/minf/maxf/sqrt/sin/cos/clampf/lerpf/pow`。
+6a. GML 的实数比较带容差：`a == b` 是 `|a - b| <= 0.00001`，`a < b` 是 `a - b < -0.00001`（原版 `math_set_epsilon(0.00001)`，也是默认值）。GDScript 的浮点比较是精确的。翻译时默认用 GDScript 的精确比较；两边都是整数值（计数器、状态号、帧号常量）时两者没有区别。**一边是逐帧累加出来的小数、另一边是小数常量的 `==`/`!=`**（如 `hspeed == 0.3`）必须写成 `GM.eq(a, b)` / `not GM.eq(a, b)`。见风险 R15。
+7. 真值：GML 里 `if (inst)`、`if (x)` 以 `> 0.5` 为真，`noone` 是 -4。返回实例的函数在 Godot 侧返回 `GMObject` 或 `null`，条件写成 `!= null`；数值条件写成显式比较。GML 的 `prec`、`notme`、`loop` 这类 0/1 实参翻成 `false`/`true`。
+8. `variable_instance_exists(inst, "name")` → `GM.variable_instance_exists(inst, "name")`，含义是“这个类声明了该变量，并且已经赋过值（不是 null）”。因此：在 `_create()` 里赋值的实例变量照常声明类型和初值；**只在别的事件里才第一次赋值的实例变量声明成不带类型、初值 `null`**（`var key = null`），这样它在赋值前“不存在”。原版 `variable_instance_exists(object_index, "key")` 的写法按 Q4 传 `self`。
+8a. 访问别的实例的变量（`other.vspeed`、`inst.key`）：内置变量直接访问；object 自己的变量因为没有 `class_name`，静态类型查不到，把实例放进不带类型的局部变量再访问（`var o = other` 后 `o.key`），或用 `inst.get("key")` / `inst.set("key", v)`。
 9. 内置变量 `x y hspeed vspeed speed direction gravity friction image_index image_speed image_xscale image_yscale image_angle image_alpha sprite_index mask_index depth visible xstart ystart xprevious yprevious bbox_* alarm[]` 都是 `GMObject` 的属性，名字不变。`hspeed/vspeed` 与 `speed/direction` 的联动照 GMS 实现。
 10. 每个翻译出的方法头部写一行来源注释：`# from objects/obj_koopa/Step_0.gml`。
 
@@ -112,20 +121,23 @@ tools/           一次性导入/生成脚本（读 original/，只写 port/）
 
 实现：`physics_ticks_per_second = 60`，`GM._physics_process` 每次执行一个 GMS step；渲染不做插值。掉帧时游戏变慢而不是跳帧（与 GMS 一致），并限制单帧最多补的 tick 数。
 
-每个 tick 内的顺序（GMS 的固定顺序，实现后用测试锁住）：
+每个 tick 内的顺序。第 1 批实现时对照了 GameMaker 官方开源的 HTML5 runner 源码（`GameMaker_DoAStep`、`HandleAlarm`、`UpdatePositions`、`UpdateImages`、`HandleCollision`），以它为准，并用 `port/tests` 锁住。它与最初的计划有两处不同：动画推进在 tick 最前面而不是最后；alarm 只有在 object 有对应事件时才走时。
 
-1. 记录 `xprevious/yprevious`
-2. Begin Step
-3. Alarm：每个 `alarm[n] > 0` 的减 1，减到 0 时触发并置 -1（`alarm = 0` 的边界行为见 §9 Q6）
-4. 键盘、鼠标事件
-5. Step
-6. 内置运动：`friction`、`gravity` 作用于速度，然后 `x += hspeed; y += vspeed`
-7. Collision 事件
-8. End Step
-9. 动画推进 `image_index += image_speed × sprite 播放速度`，越界时触发 Animation End
-10. Draw（按 depth 从大到小），再 Draw GUI
+1. 锁存输入（这一步的“刚按下/刚松开”）
+2. 记录 `xprevious/yprevious`；动画推进 `image_index += image_speed × sprite 播放速度`；越界时减去（或加上）帧数并触发 Animation End
+3. Begin Step
+4. Alarm：只处理有对应事件的 alarm。值先截断成整数，`>= 0` 则减 1；减完恰好等于 0 时触发，之后停在 0，下一步变成 -1。所以 `alarm[n] = 0` 不触发
+5. KeyPress 事件、鼠标事件
+6. Step
+7. 内置运动：先 `friction` 再 `gravity` 作用于速度，然后 `x += hspeed; y += vspeed`
+8. Outside Room / Outside View 事件
+9. Collision 事件
+10. End Step
+11. 释放已销毁的实例；相机跟随；Draw（按 depth 从大到小），再 Draw GUI
 
-同一阶段内，实例按创建顺序执行。阶段中途新建的实例是否参加本 tick 剩余阶段，按 GMS 行为实现并写测试。
+任何一个阶段里调用了 `room_goto`，本步剩余阶段全部跳过（包括 Draw）；换完 room 后在同一帧里立刻再跑一个完整的 step。
+
+同一阶段内，实例按创建顺序执行（UNVERIFIED U4）。阶段进行中新建的实例不参加本阶段，从下一个阶段起参加；内置运动阶段例外，它不看创建时间，所以 Step 里新建的实例当步就会移动。销毁立刻触发 Destroy 和 CleanUp 事件，实例从此查不到，节点在第 11 步释放。
 
 其他计时相关：
 
@@ -140,21 +152,24 @@ tools/           一次性导入/生成脚本（读 original/，只写 port/）
 
 要素：
 
-1. **包围盒**：每个实例由 `mask_index`（没有则 `sprite_index`）的遮罩矩形 + 原点 + `image_xscale/yscale/angle` + 位置算出 `bbox_left/top/right/bottom`。因为开了 collision compatibility，按旧版语义：包围盒取整、右/下边界为闭区间（宽 16 的方块 `bbox_right = bbox_left + 15`）。这一条是整个方案的地基，第 1 批里先写测试；有原版可运行环境的话用原版实测校准（§9 Q2）。
+1. **包围盒**：每个实例由 `mask_index`（没有则 `sprite_index`）的遮罩矩形 + 原点 + `image_xscale/yscale/angle` + 位置算出 `bbox_left/top/right/bottom`。因为开了 collision compatibility，按旧版语义：包围盒取整、右/下边界为闭区间（宽 16 的方块 `bbox_right = bbox_left + 15`）。公式取自 HTML5 runner 的 `Compute_BoundingBox`（compatibility 分支）：`left = round(x + xscale × (spr_left − xorigin))`，`right = round(left + xscale × 宽) − 1`，`round` 是四舍六入五成双；`left > right` 时交换（负缩放）；有旋转时走另一组公式。没有 sprite 也没有 mask 的实例包围盒退化成一个点，不参与任何碰撞。查询的边界条件也照 runner：矩形查询命中的条件是 `x1 < bbox_right + 1` 且 `x2 >= bbox_left`（纵向同理）。全部写在 `port/gm/gm_object.gd`、`gm_collision.gd`，测试在 `port/tests/test_main.gd`。
 2. **查询函数**：`collision_rectangle/point/line/circle`、`place_meeting`、`instance_place`、`position_meeting`、`instance_position`、`distance_to_object`、`instance_nearest`，签名与 GML 相同，`obj` 参数接受类（含后代）、单个实例或 `all`。
 3. **精确遮罩**：`prec=1` 的调用和 `place_meeting`/碰撞事件需要逐像素判断。sprite 的 `collisionKind` 分布为 0:3179、1:626、2:710、4:124、5:6（各编号对应的形状在第 0 批对照 GMS 文档确认）。只给实际被用作遮罩的 sprite 生成位图。斜坡（`obj_slopeparent`，用 `prec=1` 查询）是第一个验证对象。
-4. **空间索引**：统一网格（格子 32px），实例移动或换遮罩时更新。未激活实例不进索引。先求正确，性能在垂直切片后再测。
-5. **Collision 事件**（527 个事件 / 179 个 object）：tick 的第 7 步，对每个有碰撞方法的实例，按目标 object 查重叠实例，逐个调用 `_collision_objX(other)`。双方都有事件则各触发一次。
+4. **空间索引**：统一网格（格子 16px，一块地砖正好一格），实例移动或换遮罩后在下一次查询前重新入格。休眠实例留在网格里，查询时按 `active` 标记跳过（原版每 tick 都把几百个实例休眠再唤醒，进出网格太贵）。同时命中多个实例时返回创建最早的（UNVERIFIED U7）。
+5. **Collision 事件**（527 个事件 / 179 个 object）：tick 的第 9 步。对每个有碰撞事件的实例 a（创建顺序），按目标 object 找与它重叠的实例 b（恒为精确判定），先调用 a 的 `_collision_objX(b)`，紧接着调用 b 对 a 的碰撞事件（如果有）；同一对实例的同一个事件每 tick 只触发一次。a 的事件里把 b 销毁了，b 的事件仍然触发（HTML5 runner 如此）。细节未实测，见 UNVERIFIED U5。
 6. **视野外休眠**：`obj_deactivation` 的 205 个后代靠 `instance_deactivate_object` + `instance_activate_region` 开关，直接用 §3.1 的 `active` 标记实现，区域判断用包围盒。
+7. **精确遮罩的来源**：yy 的 `collisionKind` 0（Precise，全部帧合成一张）、4（逐帧）、2（椭圆）、3（菱形）在运行时都是“精确遮罩”，1（矩形）只看包围盒，5（随旋转的矩形，6 个装饰 sprite）暂按包围盒处理。椭圆的栅格化规则是自定的（UNVERIFIED U6）。
+8. **性能**（`port/tests/bench.tscn`，编辑器版二进制，导出的发行版会更快）：3000 个静止实例 + 200 个每步做 6 次矩形查询的移动实例，约 14 ms/tick，其中 1200 次查询占 7.4 ms（约 6 µs 一次）。预算是 16.7 ms。第 3 批用真实的玩家和敌人再测；不够的话查询部分是首要优化对象。
 
 ## 6. 绘制、视图、音频、输入
 
-- **绘制**：435 个 object 有自定义 Draw。`GMObject._draw()` 里调 `_gm_draw()`；`draw_sprite_ext`、`draw_text`、`draw_rectangle`、`draw_set_alpha/colour/font` 做成 `GM` 下的同名函数，内部用 `CanvasItem.draw_*` + 变换。每 tick 对可见实例 `queue_redraw()`。
+- **绘制**：435 个 object 有自定义 Draw。Draw 事件在 tick 的最后一个阶段里执行（GMS 的顺序，每 tick 恰好一次），所以不走节点的 `_draw()`：`GM` 持有一个世界 canvas item 和一个 GUI canvas item，每 tick 清空，`draw_sprite_ext`、`draw_text`、`draw_rectangle` 等 `GM` 下的同名函数直接往里写 `RenderingServer` 绘制命令。`draw_set_alpha/colour/font/halign/valign` 是全局状态，跨事件保留。没有 Draw 事件的实例画默认的 `draw_self`，画在视野外的直接跳过。颜色是 GML 的 `0xBBGGRR` 整数。字体：`font_add`（ttf）和 `font_add_sprite_ext`（原版的数字字体全是这种）。
 - **shader / surface**（97 行 / 43 文件）：3 个 shader 手工改写成 Godot shader；`sha_blendreplace`（玩家和头盔类绘制用）优先。`application_surface` 截图（暂停、淡入）用 `SubViewport`/屏幕纹理替代。`obj_lighting`、冲击波放在特效批次。
 - **视图**：所有 room 的 `enableViews=False`，视图由代码通过 `__view_get/__view_set` 和 `camera_*` 控制（1275 行）。`GM` 提供一个 view 0，映射到一个 `Camera2D`；`__view_get((n<<0), 0)` 的编号按 `scripts/__view_get` 的枚举翻译成具名访问。基准分辨率 384×216，整数倍放大，最近邻过滤（原版 `interpolate_pixels=False`）。
 - **音频**：2598 处 `audio_*`。`GM.audio_play_sound(snd, priority, loop)` 返回句柄，支持 `audio_is_playing/stop/pause/sound_pitch/gain`；用一个 `AudioStreamPlayer` 池。原版只有一个 audio group。
 - **输入**：键位存在 `global.*` 里用 `keyboard_check(global.abajo)` 读取；`GM.keyboard_check*` 接 GMS 的 vk 码并映射到 Godot keycode。手柄只在 2 个文件里出现。鼠标（493 行）主要是编辑器和菜单，`mouse_x/mouse_y` 给房间坐标。
-- **随机**：原版从不调 `randomize()`，GMS 每次启动种子相同。Godot 侧用固定种子的 `RandomNumberGenerator`，不追求与 GMS 数列一致。
+- **随机**：原版在 `obj_persistent/Create_0.gml:5` 调了 `randomise()`（英式拼写，最初检索 `randomize` 时漏了），所以每次启动的随机数列都不同。Godot 侧 `GM.randomise()` 用 `RandomNumberGenerator.randomize()`，不追求与 GMS 数列一致；测试里用 `GM.random_set_seed()`。
+- **测试**：`godot --headless --path port res://tests/test_main.tscn`，全过时退出码 0。性能基准：`res://tests/bench.tscn`。
 
 ## 7. 移植批次与顺序
 
@@ -197,7 +212,9 @@ tools/           一次性导入/生成脚本（读 original/，只写 port/）
 | R10 | `sprite 播放速度`、`image_speed` 默认值、`mask` 继承等“yy 里的默认值”被忽略 | object 清单表把 yy 里的 sprite、mask、visible、persistent、parent 全部带出来，基类按表初始化 |
 | R11 | 3 个 shader 和 `application_surface` 用法没有直接对应物 | 放到最后一批，核心玩法不依赖它们；`sha_blendreplace` 例外，第 4 批处理 |
 | R12 | 许可：原工程是 AGPL-3.0 | 移植版是衍生作品，同样按 AGPL-3.0 发布；`port/` 里放 LICENSE |
-| R13 | 没有原版运行环境，边界行为只能按文档实现 | §9 的 UNVERIFIED 清单集中登记；这些行为只在兼容层一处实现，实测结果不同时改一处即可 |
+| R13 | 没有 GameMaker，边界行为无法做最小实验 | 第 1 批改为对照官方开源的 HTML5 runner 源码实现（比文档精确得多，但它不是 Windows runner，两者可能有差异）；§9 的 UNVERIFIED 清单集中登记仍未确认的点；这些行为只在兼容层一处实现，结论不同时改一处即可 |
+| R15 | GML 的实数比较带 0.00001 的容差，GDScript 是精确比较。逐帧累加的小数和常量做 `==` 时会不相等 | §3.3 第 6a 条；转换脚本对“小数常量参与的 `==`/`!=`”自动生成 `GM.eq`；试玩时发现“状态切不过去”一类问题先查这里 |
+| R16 | GDScript 的速度：一次碰撞查询约 6 µs，一个 Mario 类的 object 每步可能有几十次 | §5 第 8 条的基准；第 3 批实测；转换脚本可以把同一表达式里的多个 `bbox_*` 读取合并；最后手段是把查询核心改写成 C++ 扩展 |
 
 ## 9. 拍板记录（2026-11-10）
 
@@ -221,17 +238,29 @@ tools/           一次性导入/生成脚本（读 original/，只写 port/）
 
 ### UNVERIFIED 清单
 
-| 项 | 当前实现假设 | 最小实验（有原版环境时跑） |
-|---|---|---|
-| U1 包围盒取整与闭区间（§5 第 1 条） | 旧版语义：取整，右/下为闭区间 | 16×16 sprite 放在 x=10.5，打印 `bbox_left/right` |
-| U2 `alarm[n] = 0`（Q6） | 不触发 | Create 里 `alarm[0] = 0`，Alarm 0 里 `show_debug_message` |
-| U3 `variable_instance_exists(object_index, …)`（Q4） | 等同于检查自身 | 在 `obj_koopa` 里对有 `key` 变量的实例打印该表达式 |
-| U4 阶段中途新建的实例是否参加本 tick 剩余阶段（§4） | 参加之后的阶段，不补跑已过的阶段 | Step 里创建实例，在其 End Step 里打印 |
+“依据”一栏：**源码** = 照 GameMaker 官方开源的 HTML5 runner（github.com/YoYoGames/GameMaker-HTML5）实现，但没有在 Windows runner 上实测；**假设** = 没有资料，自己定的。
+
+| 项 | 当前实现 | 依据 | 最小实验（有 GameMaker 时跑） |
+|---|---|---|---|
+| U1 包围盒取整与闭区间（§5 第 1 条） | 四舍六入五成双，右/下为闭区间 | 源码 | 16×16 sprite 放在 x=10.5，打印 `bbox_left/right` |
+| U2 `alarm[n] = 0`（Q6） | 不触发；没有事件的 alarm 不走时 | 源码 | Create 里 `alarm[0] = 0`，Alarm 0 里 `show_debug_message` |
+| U3 `variable_instance_exists(object_index, …)`（Q4） | 等同于检查自身 | 假设 | 在 `obj_koopa` 里对有 `key` 变量的实例打印该表达式 |
+| U4 同一阶段内各实例的执行顺序（§4） | 创建顺序 | 假设。HTML5 runner 的 Begin Step/Step/End Step 是按创建顺序的**逆序**执行的，Alarm 和 Collision 是正序；Windows runner 没有资料 | 两个实例在 Step 里各打印一行 |
+| U4b 阶段进行中新建的实例 | 不参加本阶段，参加之后的阶段；当步会移动 | 源码 | Step 里创建实例，在其 Step、End Step 里打印 |
+| U5 Collision 事件的细节（§5 第 5 条） | 见 §5。实例同时有“对父类 X”和“对 X 的子类 Y”两个碰撞事件、对方是 Y 时，两个都触发（原版有 304 组这样的 object/目标组合，如 `obj_tongue_blue` 对 `obj_holdparent` 和 `obj_pswitch`） | 配对和先后顺序是源码；“两个都触发”是假设 | A 有对父、对子两个碰撞事件，各打印一行，与子类实例重叠 |
+| U6 椭圆遮罩的形状（710 个 sprite） | 包围盒内，像素中心落在内接椭圆里的算实心 | 假设 | 椭圆遮罩的 sprite 用 `collision_point` 逐像素扫一遍打印 |
+| U7 查询同时命中多个实例时返回哪个 | 创建最早的 | 假设（新版 runner 用空间索引，顺序不明） | 两个重叠实例，打印 `collision_rectangle` 返回的 id |
+| U8 `move_snap` 正好在半格时的舍入 | 用 GML 的 `round`（五成双） | 假设 | `x = 8; move_snap(16, 16)` 后打印 x |
+| U9 没有 sprite 的实例是否触发 Animation End | 不触发 | 假设。HTML5 runner 会每步都触发 | 无 sprite 的 object 加 Animation End 事件打印 |
+| U10 `keyboard_key_press` 之后同一步内 `keyboard_check_pressed` | 按住状态立刻生效，“刚按下”下一步生效 | 假设 | Step 里先 `keyboard_key_press` 再打印 `keyboard_check_pressed` |
+| U11 相同 depth 的实例谁画在上面 | 后创建（或后改 depth）的在上 | 假设 | 两个同 depth 的重叠实例截图 |
+
+U4、U5、U7 最可能影响手感。它们各自只在兼容层的一处实现，结论不同时改一处即可。没有 GameMaker 也可以间接判断：第 3 批起对照 3.5.1 原版试玩，出现“先后顺序”类的差异时优先查这三项。
 
 ## 10. 进度表
 
 | 批 | 状态 | headless 检查 | 备注 |
 |---|---|---|---|
 | 0 | 完成（2026-11-10） | `--import`、`--quit` 均无错误，退出码 0 | Opus 子代理执行，主会话复核。产物：`tools/`、`port/tables/`、`port/assets/`、`docs/level-format.md`、`docs/user-events.md`、`docs/batch0-notes.md`。遗留的“不确定”条目记在这三份文档里 |
-| 1 | 未开始 | – | |
+| 1 | 完成（2026-11-10） | `--quit` 无输出、退出码 0；`tests/test_main.tscn` 221 项检查全过（headless 和真实渲染器各跑过一次） | 产物：`port/gm/`（`gm.gd` 及其继承链 `gm_input ← gm_audio ← gm_draw ← gm_base`、`gm_object.gd`、`gm_class.gd`、`gm_collision.gd`、`gm_sprite.gd`、生成的 `a.gd`）、`port/tests/`、`tools/gen_runtime.py`、`tools/gen_masks.py`。行为对照了 HTML5 runner 源码，§3–§6、UNVERIFIED 清单已按实现更新。**没做的**：path（`path_start` 等，第 7 批）、粒子（第 7 批）、surface 和 shader（第 11 批）、room 的背景图层和图块（第 2 批）、`instance_change`（3 处调用，用到时做）、`audio_sound_gain` 的渐变、文件读写（第 3/9 批）。**没验证的**：画面没有人眼看过，只确认了绘制调用不报错 |
 | 1b | 未开始 | – | |

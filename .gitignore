@@ -1,0 +1,11 @@
+# 原 GMS 工程（只读参考，不入库）
+original/
+
+# Godot 生成的缓存
+port/.godot/
+
+# Python
+__pycache__/
+*.py[cod]
+tools/.venv/
+.venv/

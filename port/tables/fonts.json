@@ -1,0 +1,194 @@
+{
+ "ttf_files": [
+  "assets/fonts/font_as.ttf",
+  "assets/fonts/fontcjk.ttf"
+ ],
+ "call_count": 11,
+ "calls": [
+  {
+   "location": "objects/obj_persistent/Create_0.gml:112",
+   "global": "global.font_google_legacy",
+   "function": "font_add",
+   "args_raw": [
+    "\"font_as.ttf\"",
+    "12",
+    "0",
+    "0",
+    "32",
+    "128"
+   ],
+   "source": "global.font_google_legacy = font_add(\"font_as.ttf\", 12, 0, 0, 32, 128)",
+   "font_file": "font_as.ttf",
+   "size": 12.0,
+   "bold": "0",
+   "italic": "0",
+   "first": "32",
+   "last": "128"
+  },
+  {
+   "location": "objects/obj_persistent/Create_0.gml:113",
+   "global": "global.font_google",
+   "function": "font_add",
+   "args_raw": [
+    "\"fontcjk.ttf\"",
+    "12",
+    "0",
+    "0",
+    "32",
+    "128"
+   ],
+   "source": "global.font_google = font_add(\"fontcjk.ttf\", 12, 0, 0, 32, 128)",
+   "font_file": "fontcjk.ttf",
+   "size": 12.0,
+   "bold": "0",
+   "italic": "0",
+   "first": "32",
+   "last": "128"
+  },
+  {
+   "location": "objects/obj_persistent/Create_0.gml:119",
+   "global": "global.wdigits_SMB",
+   "function": "font_add_sprite_ext",
+   "args_raw": [
+    "spr_SMB_numbers",
+    "\"0123456789\"",
+    "0",
+    "0"
+   ],
+   "source": "global.wdigits_SMB = font_add_sprite_ext(spr_SMB_numbers, \"0123456789\", 0, 0)",
+   "sprite": "spr_SMB_numbers",
+   "string_map": "0123456789",
+   "proportional": "0",
+   "separation": "0"
+  },
+  {
+   "location": "objects/obj_persistent/Create_0.gml:120",
+   "global": "global.wdigits_SMB3",
+   "function": "font_add_sprite_ext",
+   "args_raw": [
+    "spr_SMB3_numbers",
+    "\"0123456789\"",
+    "0",
+    "0"
+   ],
+   "source": "global.wdigits_SMB3 = font_add_sprite_ext(spr_SMB3_numbers, \"0123456789\", 0, 0)",
+   "sprite": "spr_SMB3_numbers",
+   "string_map": "0123456789",
+   "proportional": "0",
+   "separation": "0"
+  },
+  {
+   "location": "objects/obj_persistent/Create_0.gml:121",
+   "global": "global.wdigits",
+   "function": "font_add_sprite_ext",
+   "args_raw": [
+    "spr_numbers",
+    "\"0123456789\"",
+    "0",
+    "0"
+   ],
+   "source": "global.wdigits = font_add_sprite_ext(spr_numbers, \"0123456789\", 0, 0)",
+   "sprite": "spr_numbers",
+   "string_map": "0123456789",
+   "proportional": "0",
+   "separation": "0"
+  },
+  {
+   "location": "objects/obj_persistent/Create_0.gml:122",
+   "global": "global.wdigits_NSMBU",
+   "function": "font_add_sprite_ext",
+   "args_raw": [
+    "spr_NSMBU_numbers",
+    "\"0123456789\"",
+    "0",
+    "0"
+   ],
+   "source": "global.wdigits_NSMBU = font_add_sprite_ext(spr_NSMBU_numbers, \"0123456789\", 0, 0)",
+   "sprite": "spr_NSMBU_numbers",
+   "string_map": "0123456789",
+   "proportional": "0",
+   "separation": "0"
+  },
+  {
+   "location": "objects/obj_persistent/Create_0.gml:123",
+   "global": "global.wdigits_NSMBU_points",
+   "function": "font_add_sprite_ext",
+   "args_raw": [
+    "spr_NSMBU_numbers_points",
+    "\"0123456789\"",
+    "0",
+    "0"
+   ],
+   "source": "global.wdigits_NSMBU_points = font_add_sprite_ext(spr_NSMBU_numbers_points, \"0123456789\", 0, 0)",
+   "sprite": "spr_NSMBU_numbers_points",
+   "string_map": "0123456789",
+   "proportional": "0",
+   "separation": "0"
+  },
+  {
+   "location": "objects/obj_persistent/Create_0.gml:124",
+   "global": "global.big_digits",
+   "function": "font_add_sprite_ext",
+   "args_raw": [
+    "spr_numbers_big",
+    "\"0123456789\"",
+    "0",
+    "0"
+   ],
+   "source": "global.big_digits = font_add_sprite_ext(spr_numbers_big, \"0123456789\", 0, 0)",
+   "sprite": "spr_numbers_big",
+   "string_map": "0123456789",
+   "proportional": "0",
+   "separation": "0"
+  },
+  {
+   "location": "objects/obj_persistent/Create_0.gml:125",
+   "global": "global.time_digits",
+   "function": "font_add_sprite_ext",
+   "args_raw": [
+    "spr_numbers_time",
+    "\"0123456789\"",
+    "0",
+    "0"
+   ],
+   "source": "global.time_digits = font_add_sprite_ext(spr_numbers_time, \"0123456789\", 0, 0)",
+   "sprite": "spr_numbers_time",
+   "string_map": "0123456789",
+   "proportional": "0",
+   "separation": "0"
+  },
+  {
+   "location": "objects/obj_persistent/Create_0.gml:126",
+   "global": "global.time_digits_white",
+   "function": "font_add_sprite_ext",
+   "args_raw": [
+    "spr_numbers_time_white",
+    "\"0123456789\"",
+    "0",
+    "0"
+   ],
+   "source": "global.time_digits_white = font_add_sprite_ext(spr_numbers_time_white, \"0123456789\", 0, 0)",
+   "sprite": "spr_numbers_time_white",
+   "string_map": "0123456789",
+   "proportional": "0",
+   "separation": "0"
+  },
+  {
+   "location": "objects/obj_persistent/Create_0.gml:127",
+   "global": "global.numbers_lives",
+   "function": "font_add_sprite_ext",
+   "args_raw": [
+    "spr_numbers_lives",
+    "\"0123456789\"",
+    "0",
+    "0"
+   ],
+   "source": "global.numbers_lives = font_add_sprite_ext(spr_numbers_lives, \"0123456789\", 0, 0)",
+   "sprite": "spr_numbers_lives",
+   "string_map": "0123456789",
+   "proportional": "0",
+   "separation": "0"
+  }
+ ],
+ "unparsed": []
+}

@@ -1,0 +1,66 @@
+{
+ "anomaly_count": 12,
+ "anomalies": [
+  {
+   "sprite": "spr_NSMBU_pow_explode",
+   "kind": "frame_size",
+   "detail": "帧 1 尺寸 16x16 与 yy 32x32 不一致，按左上角对齐贴入"
+  },
+  {
+   "sprite": "spr_NSMBU_pow_explode",
+   "kind": "frame_size",
+   "detail": "帧 2 尺寸 8x8 与 yy 32x32 不一致，按左上角对齐贴入"
+  },
+  {
+   "sprite": "spr_NSMBU_pow_explode",
+   "kind": "frame_size",
+   "detail": "帧 3 尺寸 4x4 与 yy 32x32 不一致，按左上角对齐贴入"
+  },
+  {
+   "sprite": "spr_NSMBU_pow_explode",
+   "kind": "frame_size",
+   "detail": "帧 5 尺寸 16x16 与 yy 32x32 不一致，按左上角对齐贴入"
+  },
+  {
+   "sprite": "spr_NSMBU_pow_explode",
+   "kind": "frame_size",
+   "detail": "帧 6 尺寸 8x8 与 yy 32x32 不一致，按左上角对齐贴入"
+  },
+  {
+   "sprite": "spr_NSMBU_pow_explode",
+   "kind": "frame_size",
+   "detail": "帧 7 尺寸 4x4 与 yy 32x32 不一致，按左上角对齐贴入"
+  },
+  {
+   "sprite": "spr_NSMBU_pow_explode",
+   "kind": "frame_size",
+   "detail": "帧 8 尺寸 3x3 与 yy 32x32 不一致，按左上角对齐贴入"
+  },
+  {
+   "sprite": "spr_NSMBU_pow_explode",
+   "kind": "frame_size",
+   "detail": "帧 9 尺寸 12x12 与 yy 32x32 不一致，按左上角对齐贴入"
+  },
+  {
+   "sprite": "spr_NSMBU_pow_explode",
+   "kind": "frame_size",
+   "detail": "帧 11 尺寸 16x16 与 yy 32x32 不一致，按左上角对齐贴入"
+  },
+  {
+   "sprite": "spr_NSMBU_pow_explode",
+   "kind": "frame_size",
+   "detail": "帧 12 尺寸 12x12 与 yy 32x32 不一致，按左上角对齐贴入"
+  },
+  {
+   "sprite": "spr_NSMBU_pow_explode",
+   "kind": "frame_size",
+   "detail": "帧 13 尺寸 8x8 与 yy 32x32 不一致，按左上角对齐贴入"
+  },
+  {
+   "sprite": "spr_NSMBU_pow_explode",
+   "kind": "frame_size",
+   "detail": "帧 14 尺寸 3x3 与 yy 32x32 不一致，按左上角对齐贴入"
+  }
+ ],
+ "removed_stale_png": []
+}

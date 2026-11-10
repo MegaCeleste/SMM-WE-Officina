@@ -1,0 +1,4289 @@
+{
+ "count": 276,
+ "total_refs": 11504,
+ "scanned_gml_files": 5011,
+ "type_summary": {
+  "array": 9,
+  "bool": 3,
+  "ds_list": 1,
+  "font": 11,
+  "number": 159,
+  "string": 14,
+  "不确定": 79
+ },
+ "note": "first_assignment 为按文件路径字典序的第一处静态赋值，不代表运行时先后。`if (global.x = 1)` 这类比较语境不计入赋值，列在 comparison_eq_sites。",
+ "globals": {
+  "__argument_relative": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/__init_action/__init_action.gml:5",
+    "rhs": "false"
+   },
+   "assignment_kinds": {
+    "bool": 1
+   },
+   "inferred_type": "bool",
+   "likely_type": "bool"
+  },
+  "__d_free": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/discord_init_dll/discord_init_dll.gml:5",
+    "rhs": "external_define(dll, \"FreeDiscord\", 0, 0, 0)"
+   },
+   "assignment_kinds": {
+    "不确定": 1
+   },
+   "inferred_type": "不确定（混合：不确定×1）",
+   "likely_type": null
+  },
+  "__d_init": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/discord_init_dll/discord_init_dll.gml:3",
+    "rhs": "external_define(dll, \"InitDiscord\", 0, 0, 1, 1)"
+   },
+   "assignment_kinds": {
+    "不确定": 1
+   },
+   "inferred_type": "不确定（混合：不确定×1）",
+   "likely_type": null
+  },
+  "__d_update": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/discord_init_dll/discord_init_dll.gml:4",
+    "rhs": "external_define(dll, \"UpdatePresence\", 0, 0, 4, 1, 1, 1, 1)"
+   },
+   "assignment_kinds": {
+    "不确定": 1
+   },
+   "inferred_type": "不确定（混合：不确定×1）",
+   "likely_type": null
+  },
+  "__objectDepths": {
+   "refs": 797,
+   "files": 1,
+   "assignment_count": 795,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/__global_object_depths/__global_object_depths.gml:8",
+    "rhs": "-9"
+   },
+   "assignment_kinds": {
+    "array": 795
+   },
+   "inferred_type": "array",
+   "likely_type": "array"
+  },
+  "__objectID2Depth": {
+   "refs": 4,
+   "files": 2,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/__global_object_depths/__global_object_depths.gml:1602",
+    "rhs": "[]"
+   },
+   "assignment_kinds": {
+    "array": 2
+   },
+   "inferred_type": "array",
+   "likely_type": "array"
+  },
+  "__objectNames": {
+   "refs": 796,
+   "files": 1,
+   "assignment_count": 795,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/__global_object_depths/__global_object_depths.gml:804",
+    "rhs": "\"obj_lighting\""
+   },
+   "assignment_kinds": {
+    "array": 795
+   },
+   "inferred_type": "array",
+   "likely_type": "array"
+  },
+  "__part_emit": {
+   "refs": 2,
+   "files": 1,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/__init_action/__init_action.gml:4",
+    "rhs": "[]"
+   },
+   "assignment_kinds": {
+    "array": 2
+   },
+   "inferred_type": "array",
+   "likely_type": "array"
+  },
+  "__part_syst": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/__init_action/__init_action.gml:3",
+    "rhs": "-1"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "__part_type": {
+   "refs": 2,
+   "files": 1,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/__init_action/__init_action.gml:6",
+    "rhs": "[]"
+   },
+   "assignment_kinds": {
+    "array": 2
+   },
+   "inferred_type": "array",
+   "likely_type": "array"
+  },
+  "abajo": {
+   "refs": 90,
+   "files": 41,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Other_2.gml:42",
+    "rhs": "real(file_text_read_string(file))"
+   },
+   "assignment_kinds": {
+    "number": 3,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "apariencia": {
+   "refs": 2320,
+   "files": 1216,
+   "assignment_count": 10,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/cre_control/Create_0.gml:14",
+    "rhs": "2"
+   },
+   "assignment_kinds": {
+    "number": 7,
+    "不确定": 3
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 3 处无法判断）",
+   "likely_type": "number",
+   "comparison_eq_sites": [
+    "objects/obj_bombilla_or/Create_0.gml:3",
+    "objects/obj_bombilla_or/Step_0.gml:1",
+    "objects/obj_charginchuck/Create_0.gml:55",
+    "objects/obj_coin/Collision_obj_clown.gml:2",
+    "objects/obj_coin/Collision_obj_enemyparent_held.gml:2",
+    "objects/obj_coin/Collision_obj_player_goal_parent.gml:1",
+    "objects/obj_coin/Collision_obj_shell_held.gml:1",
+    "objects/obj_galoomba/Step_0.gml:5",
+    "objects/obj_galoomba/Step_0.gml:97",
+    "objects/obj_mariostart_m/Draw_0.gml:8"
+   ]
+  },
+  "arriba": {
+   "refs": 65,
+   "files": 34,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Other_2.gml:40",
+    "rhs": "real(file_text_read_string(file))"
+   },
+   "assignment_kinds": {
+    "number": 3,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "audiomaster": {
+   "refs": 6,
+   "files": 5,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:6",
+    "rhs": "0.25"
+   },
+   "assignment_kinds": {
+    "number": 2,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "author": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:9",
+    "rhs": "\"\""
+   },
+   "assignment_kinds": {
+    "string": 1
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "autoavance": {
+   "refs": 22,
+   "files": 9,
+   "assignment_count": 6,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_autoavance/Mouse_4.gml:5",
+    "rhs": "value"
+   },
+   "assignment_kinds": {
+    "number": 5,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "bg_level": {
+   "refs": 1920,
+   "files": 418,
+   "assignment_count": 7,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bg1/Mouse_4.gml:9",
+    "rhs": "bg_s"
+   },
+   "assignment_kinds": {
+    "number": 2,
+    "string": 3,
+    "不确定": 2
+   },
+   "inferred_type": "不确定（混合：number×2, string×3, 不确定×2）",
+   "likely_type": null,
+   "comparison_eq_sites": [
+    "objects/obj_marioU/Step_0.gml:391",
+    "objects/obj_marioU/Step_0.gml:393"
+   ]
+  },
+  "big_digits": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:124",
+    "rhs": "font_add_sprite_ext(spr_numbers_big, \"0123456789\", 0, 0)"
+   },
+   "assignment_kinds": {
+    "font": 1
+   },
+   "inferred_type": "font",
+   "likely_type": "font"
+  },
+  "billbanzai": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_billbanzai_red_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "bobomb": {
+   "refs": 5,
+   "files": 5,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bobomb_ready_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 4
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "bocina": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bocina_snd_res/Other_11.gml:6",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "bombilla": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bombilla_snd_res/Other_11.gml:6",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "bonus_music": {
+   "refs": 19,
+   "files": 8,
+   "assignment_count": 10,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bonus_or/Other_10.gml:2",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 10
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "bonus_obj": {
+   "refs": 7,
+   "files": 6,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bonus_or/Other_10.gml:3",
+    "rhs": "id"
+   },
+   "assignment_kinds": {
+    "instance": 3,
+    "number": 2
+   },
+   "inferred_type": "不确定（混合：instance×3, number×2）",
+   "likely_type": null
+  },
+  "boospinning": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:50",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "boss_music": {
+   "refs": 19,
+   "files": 8,
+   "assignment_count": 10,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_boss_or/Other_10.gml:3",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 10
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "bowser": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:64",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "bowser_obj": {
+   "refs": 7,
+   "files": 6,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_boss_or/Other_10.gml:4",
+    "rhs": "id"
+   },
+   "assignment_kinds": {
+    "instance": 1,
+    "number": 4
+   },
+   "inferred_type": "不确定（混合：instance×1, number×4）",
+   "likely_type": null
+  },
+  "brothers": {
+   "refs": 6,
+   "files": 6,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_boomerangbro_res/Other_11.gml:6",
+    "rhs": "transform"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 4
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 4 处无法判断）",
+   "likely_type": "number"
+  },
+  "bulletbill_base": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bullebill_base_red_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "buzzy": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:19",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "cannon": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_cannon_red_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "card": {
+   "refs": 3,
+   "files": 1,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:128",
+    "rhs": "-1"
+   },
+   "assignment_kinds": {
+    "array": 3
+   },
+   "inferred_type": "array",
+   "likely_type": "array"
+  },
+  "cardscore": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:142",
+    "rhs": "80000"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "carrieditem": {
+   "refs": 5,
+   "files": 3,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_editormanager/Create_0.gml:31",
+    "rhs": "-4"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "carriedsprite": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_editormanager/Create_0.gml:32",
+    "rhs": "-4"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "carritedsprite": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_yoshi2/Create_0.gml:38",
+    "rhs": "noone"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "checkpoint": {
+   "refs": 10,
+   "files": 10,
+   "assignment_count": 10,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_continue_btn/Alarm_0.gml:7",
+    "rhs": "-4"
+   },
+   "assignment_kinds": {
+    "number": 10
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "checkpoint_x": {
+   "refs": 15,
+   "files": 10,
+   "assignment_count": 7,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Collision_obj_mario.gml:45",
+    "rhs": "x"
+   },
+   "assignment_kinds": {
+    "number": 7
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "checkpoint_y": {
+   "refs": 15,
+   "files": 10,
+   "assignment_count": 7,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Collision_obj_mario.gml:46",
+    "rhs": "y"
+   },
+   "assignment_kinds": {
+    "number": 7
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "checkpointroom": {
+   "refs": 22,
+   "files": 18,
+   "assignment_count": 10,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Collision_obj_mario.gml:47",
+    "rhs": "room"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "resource:room": 2
+   },
+   "inferred_type": "不确定（混合：number×8, resource:room×2）",
+   "likely_type": null
+  },
+  "cheepcheep": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_cheepcheep2_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "chomp": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:46",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "cintas": {
+   "refs": 8,
+   "files": 6,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_cinta_on_res/Other_11.gml:8",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 5
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "clear": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:120",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "clown": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_clown_fire_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "coin10": {
+   "refs": 8,
+   "files": 5,
+   "assignment_count": 7,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_coin10_res/Other_11.gml:9",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 7
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "coins": {
+   "refs": 33,
+   "files": 20,
+   "assignment_count": 6,
+   "compound_count": 21,
+   "first_assignment": {
+    "location": "objects/obj_deadmario/Alarm_1.gml:16",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 6
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "complete_CR": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:30",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "completed_levels": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:54",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "condiciones": {
+   "refs": 57,
+   "files": 35,
+   "assignment_count": 13,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bt_gb_close/Mouse_4.gml:4",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 13
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "condiciones_clear": {
+   "refs": 29,
+   "files": 21,
+   "assignment_count": 10,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_condiciones/Other_10.gml:12",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 10
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "condiciones_count": {
+   "refs": 38,
+   "files": 22,
+   "assignment_count": 12,
+   "compound_count": 2,
+   "first_assignment": {
+    "location": "objects/obj_bt_gb_close/Mouse_4.gml:7",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 12
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "condiciones_object": {
+   "refs": 14,
+   "files": 9,
+   "assignment_count": 10,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bt_gb_close/Mouse_4.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 10
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "condiciones_type": {
+   "refs": 19,
+   "files": 13,
+   "assignment_count": 11,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bt_gb_close/Mouse_4.gml:5",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 11
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "controles_tactiles": {
+   "refs": 20,
+   "files": 17,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_settings_controls/Mouse_4.gml:5",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "controller": {
+   "refs": 9,
+   "files": 7,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_configurar_controles_reset/Mouse_4.gml:2",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 4
+   },
+   "inferred_type": "number",
+   "likely_type": "number",
+   "comparison_eq_sites": [
+    "objects/obj_configurar_controles_reset/Mouse_4.gml:1"
+   ]
+  },
+  "cooldown": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:147",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "count_cull": {
+   "refs": 4,
+   "files": 2,
+   "assignment_count": 2,
+   "compound_count": 1,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:6",
+    "rhs": "5"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "ctor": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:116",
+    "rhs": "\"2024 | OpenWE\" //"
+   },
+   "assignment_kinds": {
+    "string": 1
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "cull_previous_x": {
+   "refs": 3,
+   "files": 2,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:4",
+    "rhs": "x"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "cull_previous_y": {
+   "refs": 3,
+   "files": 2,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:5",
+    "rhs": "y"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "cursor": {
+   "refs": 216,
+   "files": 115,
+   "assignment_count": 50,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_arrow_res/Mouse_4.gml:37",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 50
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "cursor_draw": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:87",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "data": {
+   "refs": 4,
+   "files": 1,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:146",
+    "rhs": "\"\""
+   },
+   "assignment_kinds": {
+    "array": 4
+   },
+   "inferred_type": "array",
+   "likely_type": "array"
+  },
+  "dead_type": {
+   "refs": 7,
+   "files": 4,
+   "assignment_count": 6,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_deadmario/Create_0.gml:8",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 6
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "derecha": {
+   "refs": 61,
+   "files": 25,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Other_2.gml:46",
+    "rhs": "real(file_text_read_string(file))"
+   },
+   "assignment_kinds": {
+    "number": 3,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "desc": {
+   "refs": 10,
+   "files": 9,
+   "assignment_count": 7,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_gb_level/Create_0.gml:131",
+    "rhs": "ds_map_find_value(_map,\"description\")"
+   },
+   "assignment_kinds": {
+    "number": 3,
+    "string": 3,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（混合：number×3, string×3, 不确定×1）",
+   "likely_type": null
+  },
+  "descver": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:118",
+    "rhs": "\"OpenWE | Build ver. 1.0.0 - 11012024\""
+   },
+   "assignment_kinds": {
+    "string": 1
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "died": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_deadmario/Create_0.gml:80",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "difficulty": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:96",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "difficultyd": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:95",
+    "rhs": "-1"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "directorio": {
+   "refs": 21,
+   "files": 10,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_notification_aceptar/Other_10.gml:9",
+    "rhs": "(global.directorio_temp + \"/\")"
+   },
+   "assignment_kinds": {
+    "不确定": 4
+   },
+   "inferred_type": "不确定（混合：不确定×4）",
+   "likely_type": null
+  },
+  "directorio_temp": {
+   "refs": 7,
+   "files": 3,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_notification_aceptar/Other_10.gml:8",
+    "rhs": "getDire1(\"SMM_WE\")"
+   },
+   "assignment_kinds": {
+    "不确定": 4
+   },
+   "inferred_type": "不确定（混合：不确定×4）",
+   "likely_type": null
+  },
+  "directorio_temporal": {
+   "refs": 2,
+   "files": 1,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:133",
+    "rhs": "(working_directory + \"/temp/\")"
+   },
+   "assignment_kinds": {
+    "不确定": 2
+   },
+   "inferred_type": "不确定（混合：不确定×2）",
+   "likely_type": null
+  },
+  "discord_initialized": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Alarm_9.gml:4",
+    "rhs": "false"
+   },
+   "assignment_kinds": {
+    "bool": 2
+   },
+   "inferred_type": "bool",
+   "likely_type": "bool"
+  },
+  "door": {
+   "refs": 8,
+   "files": 5,
+   "assignment_count": 7,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_door_lock_res/Other_11.gml:10",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 7
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "drez": {
+   "refs": 5,
+   "files": 5,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:115",
+    "rhs": "\"2559F35097-2021\""
+   },
+   "assignment_kinds": {
+    "string": 1
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "dsm": {
+   "refs": 21,
+   "files": 15,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:94",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number",
+   "comparison_eq_sites": [
+    "objects/obj_button_superado/Create_0.gml:3",
+    "objects/obj_deadmario/Alarm_1.gml:15",
+    "objects/obj_levelmanager/KeyPress_13.gml:5",
+    "objects/obj_levelmanager/KeyPress_13.gml:9",
+    "objects/obj_levelmanager/Other_19.gml:20",
+    "objects/obj_levelmanager/Other_19.gml:38",
+    "objects/obj_levelmanager/Other_20.gml:5",
+    "objects/obj_levelmanager/Other_20.gml:19",
+    "objects/obj_menu_pausa/Create_0.gml:101",
+    "objects/obj_menu_pausa/Other_11.gml:74"
+   ]
+  },
+  "DSM_2": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:13",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "dsm_entorno": {
+   "refs": 5,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_load/scr_load.gml:18",
+    "rhs": "base64_decode(file_text_read_string(file))"
+   },
+   "assignment_kinds": {
+    "array": 1
+   },
+   "inferred_type": "array",
+   "likely_type": "array"
+  },
+  "editor_activity": {
+   "refs": 46,
+   "files": 46,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:78",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "editor_lock": {
+   "refs": 17,
+   "files": 10,
+   "assignment_count": 17,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_grinder_res/Alarm_0.gml:46",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 17
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "ef_repeat": {
+   "refs": 25,
+   "files": 13,
+   "assignment_count": 21,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bonus_or/Other_10.gml:4",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 21
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "effect_star": {
+   "refs": 31,
+   "files": 27,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_settings_estrella/Mouse_4.gml:7",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 4
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "entorno": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:92",
+    "rhs": "\"ground\""
+   },
+   "assignment_kinds": {
+    "string": 1
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "estalactita": {
+   "refs": 14,
+   "files": 6,
+   "assignment_count": 13,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_icicle2_res/Other_11.gml:9",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 13
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "etiq_nm": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:44",
+    "rhs": "\"\""
+   },
+   "assignment_kinds": {
+    "string": 1
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "etiqueta1": {
+   "refs": 12,
+   "files": 5,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_etiquetas/Mouse_4.gml:8",
+    "rhs": "idd"
+   },
+   "assignment_kinds": {
+    "number": 3,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "etiqueta1_temp": {
+   "refs": 10,
+   "files": 6,
+   "assignment_count": 6,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_notification_aceptar/Other_10.gml:219",
+    "rhs": "global.etiqueta1"
+   },
+   "assignment_kinds": {
+    "alias:etiqueta1": 1,
+    "number": 5
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "etiqueta2": {
+   "refs": 12,
+   "files": 5,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_etiquetas/Mouse_4.gml:22",
+    "rhs": "idd"
+   },
+   "assignment_kinds": {
+    "number": 3,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "etiqueta2_temp": {
+   "refs": 11,
+   "files": 7,
+   "assignment_count": 6,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_notification_aceptar/Other_10.gml:220",
+    "rhs": "global.etiqueta2"
+   },
+   "assignment_kinds": {
+    "alias:etiqueta2": 1,
+    "number": 5
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "fade": {
+   "refs": 6,
+   "files": 2,
+   "assignment_count": 6,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Alarm_10.gml:2",
+    "rhs": "0.3"
+   },
+   "assignment_kinds": {
+    "number": 6
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "floruga": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_floruga_angry_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "flower": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_card_logo/Mouse_4.gml:303",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "font_google": {
+   "refs": 71,
+   "files": 65,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:113",
+    "rhs": "font_add(\"fontcjk.ttf\", 12, 0, 0, 32, 128)"
+   },
+   "assignment_kinds": {
+    "font": 1
+   },
+   "inferred_type": "font",
+   "likely_type": "font"
+  },
+  "font_google_legacy": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:112",
+    "rhs": "font_add(\"font_as.ttf\", 12, 0, 0, 32, 128)"
+   },
+   "assignment_kinds": {
+    "font": 1
+   },
+   "inferred_type": "font",
+   "likely_type": "font"
+  },
+  "foo": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_foo_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "fuegos": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_destello_snd_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "gato": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_chisporreteo_snd_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "gh": {
+   "refs": 17,
+   "files": 13,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:111",
+    "rhs": "216"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "goomba": {
+   "refs": 6,
+   "files": 6,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_goomba_b_res/Other_11.gml:6",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 5
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "grrrol": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_thwomp_b_res/Other_11.gml:6",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "gw": {
+   "refs": 17,
+   "files": 13,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:110",
+    "rhs": "384"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "hammerbro": {
+   "refs": 7,
+   "files": 7,
+   "assignment_count": 6,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_boomerangbro_res/Other_13.gml:2",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 6
+   },
+   "inferred_type": "number",
+   "likely_type": "number",
+   "comparison_eq_sites": [
+    "objects/obj_panel_circle/Other_14.gml:53"
+   ]
+  },
+  "hardness": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:14",
+    "rhs": "\"\""
+   },
+   "assignment_kinds": {
+    "string": 1
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "hd": {
+   "refs": 7,
+   "files": 5,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_btn_settings_hd/Mouse_4.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 4
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "hen_mushroom": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_frogsuit_res/Other_11.gml:6",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "hongo_e": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:63",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "icecoin": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_coin_res/Other_11.gml:6",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "id_CR": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:28",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "idioma": {
+   "refs": 76,
+   "files": 32,
+   "assignment_count": 7,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_settings_idioma/Mouse_4.gml:4",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 7
+   },
+   "inferred_type": "number",
+   "likely_type": "number",
+   "comparison_eq_sites": [
+    "objects/obj_apariencia/Draw_0.gml:2",
+    "objects/obj_autoavance/Create_0.gml:2",
+    "objects/obj_autoavance/Draw_0.gml:2",
+    "objects/obj_autoavance/Draw_0.gml:4",
+    "objects/obj_autoavance/Draw_0.gml:6",
+    "objects/obj_autoavance/Draw_0.gml:8",
+    "objects/obj_bg_selection/Draw_0.gml:2",
+    "objects/obj_bg_selection/Draw_0.gml:4",
+    "objects/obj_button_save_changes/Draw_0.gml:6",
+    "objects/obj_button_save_load/Draw_0.gml:2"
+   ]
+  },
+  "init_DSM": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:11",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "instance_deactivate": {
+   "refs": 26,
+   "files": 21,
+   "assignment_count": 23,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_notification_aceptar/Alarm_0.gml:7",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 23
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "intentos": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:22",
+    "rhs": "\"\""
+   },
+   "assignment_kinds": {
+    "string": 1
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "inventory": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:153",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "array": 1
+   },
+   "inferred_type": "array",
+   "likely_type": "array"
+  },
+  "izquierda": {
+   "refs": 61,
+   "files": 25,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Other_2.gml:44",
+    "rhs": "real(file_text_read_string(file))"
+   },
+   "assignment_kinds": {
+    "number": 3,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "jugador": {
+   "refs": 345,
+   "files": 70,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Other_2.gml:38",
+    "rhs": "real(file_text_read_string(file))"
+   },
+   "assignment_kinds": {
+    "number": 2,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number",
+   "comparison_eq_sites": [
+    "objects/obj_marioU/Step_2.gml:296",
+    "objects/obj_marioU/Step_2.gml:312",
+    "objects/obj_marioU/Step_2.gml:1376"
+   ]
+  },
+  "jump": {
+   "refs": 3,
+   "files": 2,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:43",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "key_br": {
+   "refs": 28,
+   "files": 11,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_settings_sm4j/Mouse_4.gml:7",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 4
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "key_h": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:68",
+    "rhs": "\"clave765409\""
+   },
+   "assignment_kinds": {
+    "string": 1
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "keymod": {
+   "refs": 8,
+   "files": 6,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_settings_close2/Mouse_4.gml:7",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "keys": {
+   "refs": 25,
+   "files": 11,
+   "assignment_count": 6,
+   "compound_count": 4,
+   "first_assignment": {
+    "location": "objects/obj_door_lock/Step_0.gml:59",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 6
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "koopa": {
+   "refs": 6,
+   "files": 6,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_koopa_b_res/Other_11.gml:6",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 5
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "lanzar_agarrar": {
+   "refs": 69,
+   "files": 33,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Other_2.gml:30",
+    "rhs": "real(file_text_read_string(file))"
+   },
+   "assignment_kinds": {
+    "number": 4,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "last_level": {
+   "refs": 13,
+   "files": 11,
+   "assignment_count": 8,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bt_gb_edit/Alarm_1.gml:1",
+    "rhs": "global.levelguardabot"
+   },
+   "assignment_kinds": {
+    "alias:levelguardabot": 3,
+    "alias:save_changes": 1,
+    "string": 2,
+    "不确定": 2
+   },
+   "inferred_type": "不确定（已识别的赋值均为 string，另有 2 处无法判断）",
+   "likely_type": "string"
+  },
+  "lava_lift": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_fast_lava_lift_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "level_g": {
+   "refs": 9,
+   "files": 9,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bt_gb_play/Alarm_1.gml:1",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 4
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "level_group": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:17",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "level_id": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:20",
+    "rhs": "\"\""
+   },
+   "assignment_kinds": {
+    "string": 2
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "level_like": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:24",
+    "rhs": "3"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "level_name": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:21",
+    "rhs": "\"\""
+   },
+   "assignment_kinds": {
+    "string": 1
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "levelguardabot": {
+   "refs": 32,
+   "files": 19,
+   "assignment_count": 8,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bt_gb_delete/Alarm_1.gml:2",
+    "rhs": "\"\""
+   },
+   "assignment_kinds": {
+    "alias:last_level": 4,
+    "string": 3,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 string，另有 1 处无法判断）",
+   "likely_type": "string"
+  },
+  "levelmusic": {
+   "refs": 4,
+   "files": 2,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_levelmanager/Other_4.gml:6",
+    "rhs": "levelmusic"
+   },
+   "assignment_kinds": {
+    "resource:sound": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 resource:sound，另有 1 处无法判断）",
+   "likely_type": "resource:sound"
+  },
+  "liked_CR": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:29",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "liveleves": {
+   "refs": 6,
+   "files": 5,
+   "assignment_count": 2,
+   "compound_count": 1,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:117",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "lives": {
+   "refs": 12,
+   "files": 11,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:55",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "map_consult": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_home/Mouse_4.gml:20",
+    "rhs": "-4"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "mariostart": {
+   "refs": 5,
+   "files": 4,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_editormanager/Create_0.gml:30",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 4
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "meteoritos": {
+   "refs": 17,
+   "files": 9,
+   "assignment_count": 7,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_meteoritos/Mouse_4.gml:6",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 7
+   },
+   "inferred_type": "number",
+   "likely_type": "number",
+   "comparison_eq_sites": [
+    "objects/obj_button_meteoritos/Mouse_4.gml:5"
+   ]
+  },
+  "minutos": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:148",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "modo_noche": {
+   "refs": 1390,
+   "files": 431,
+   "assignment_count": 10,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_angrysun_res/Other_11.gml:8",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 10
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "modojuego": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_editormanager/Create_0.gml:8",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "mondi": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:15",
+    "rhs": "7"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "ms": {
+   "refs": 9,
+   "files": 5,
+   "assignment_count": 4,
+   "compound_count": 1,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Collision_obj_mario.gml:51",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 4
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "ms_check": {
+   "refs": 5,
+   "files": 5,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Collision_obj_mario.gml:50",
+    "rhs": "global.ms"
+   },
+   "assignment_kinds": {
+    "alias:ms": 2,
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "mushroom_platform": {
+   "refs": 6,
+   "files": 4,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_mushroom_platform_res/Other_11.gml:6",
+    "rhs": "transform"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "music_effect": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:14",
+    "rhs": "-4"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "my1": {
+   "refs": 20,
+   "files": 15,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bl2/Mouse_4.gml:5",
+    "rhs": "obj_iname.new_texto"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "string": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（混合：number×1, string×1, 不确定×1）",
+   "likely_type": null
+  },
+  "my2": {
+   "refs": 6,
+   "files": 4,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:57",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "my3": {
+   "refs": 6,
+   "files": 4,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:58",
+    "rhs": "-1"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "my4": {
+   "refs": 6,
+   "files": 4,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:59",
+    "rhs": "-1"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "my5": {
+   "refs": 6,
+   "files": 4,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:60",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "my6": {
+   "refs": 6,
+   "files": 4,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:61",
+    "rhs": "-1"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "my7": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:62",
+    "rhs": "-1"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "n64": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:62",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "n64_music": {
+   "refs": 10,
+   "files": 8,
+   "assignment_count": 8,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_creator_jugar_editar/Other_13.gml:215",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 8
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "name_user": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:65",
+    "rhs": "\"\""
+   },
+   "assignment_kinds": {
+    "string": 1
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "name_users": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:66",
+    "rhs": "\"\""
+   },
+   "assignment_kinds": {
+    "string": 2
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "nm_play": {
+   "refs": 8,
+   "files": 7,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:19",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "nota": {
+   "refs": 5,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_nota_musical_snd_res/Other_11.gml:6",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "noteblock": {
+   "refs": 8,
+   "files": 5,
+   "assignment_count": 7,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_musicblock_res/Other_11.gml:10",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 7
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "nrecord": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:34",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "number_like": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:23",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "numbers_lives": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:127",
+    "rhs": "font_add_sprite_ext(spr_numbers_lives, \"0123456789\", 0, 0)"
+   },
+   "assignment_kinds": {
+    "font": 1
+   },
+   "inferred_type": "font",
+   "likely_type": "font"
+  },
+  "onoff": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_onoffplatform_blue_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "onoffblock": {
+   "refs": 11,
+   "files": 9,
+   "assignment_count": 6,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_editormanager/Create_0.gml:36",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 6
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "pages_nm": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:31",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "palaceblue": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:133",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "palacegreen": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:135",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "palacered": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:132",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "palaceyellow": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:134",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "pause": {
+   "refs": 5,
+   "files": 3,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Other_2.gml:36",
+    "rhs": "real(file_text_read_string(file))"
+   },
+   "assignment_kinds": {
+    "number": 3,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pblock": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_pblock2_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "pink_coin10_x": {
+   "refs": 12,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:50",
+    "rhs": "pink_coin10_x"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin10_y": {
+   "refs": 11,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:51",
+    "rhs": "pink_coin10_y"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin1_x": {
+   "refs": 12,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:5",
+    "rhs": "pink_coin1_x"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin1_y": {
+   "refs": 11,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:6",
+    "rhs": "pink_coin1_y"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin2_x": {
+   "refs": 12,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:10",
+    "rhs": "pink_coin2_x"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin2_y": {
+   "refs": 11,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:11",
+    "rhs": "pink_coin2_y"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin3_x": {
+   "refs": 12,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:15",
+    "rhs": "pink_coin3_x"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin3_y": {
+   "refs": 11,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:16",
+    "rhs": "pink_coin3_y"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin4_x": {
+   "refs": 12,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:20",
+    "rhs": "pink_coin4_x"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin4_y": {
+   "refs": 11,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:21",
+    "rhs": "pink_coin4_y"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin5_x": {
+   "refs": 12,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:25",
+    "rhs": "pink_coin5_x"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin5_y": {
+   "refs": 11,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:26",
+    "rhs": "pink_coin5_y"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin6_x": {
+   "refs": 12,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:30",
+    "rhs": "pink_coin6_x"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin6_y": {
+   "refs": 11,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:31",
+    "rhs": "pink_coin6_y"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin7_x": {
+   "refs": 12,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:35",
+    "rhs": "pink_coin7_x"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin7_y": {
+   "refs": 11,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:36",
+    "rhs": "pink_coin7_y"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin8_x": {
+   "refs": 12,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:40",
+    "rhs": "pink_coin8_x"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin8_y": {
+   "refs": 11,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:41",
+    "rhs": "pink_coin8_y"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin9_x": {
+   "refs": 12,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:45",
+    "rhs": "pink_coin9_x"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coin9_y": {
+   "refs": 11,
+   "files": 11,
+   "assignment_count": 9,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:46",
+    "rhs": "pink_coin9_y"
+   },
+   "assignment_kinds": {
+    "number": 8,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coins": {
+   "refs": 25,
+   "files": 16,
+   "assignment_count": 11,
+   "compound_count": 1,
+   "first_assignment": {
+    "location": "objects/obj_checkpoint/Other_11.gml:54",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 10,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pink_coins_draw": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_creator_jugar_editar/Other_13.gml:157",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "pink_coins_total": {
+   "refs": 16,
+   "files": 10,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_creator_jugar_editar/Other_13.gml:155",
+    "rhs": "instance_number(obj_pink_coin)"
+   },
+   "assignment_kinds": {
+    "number": 4
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "pinkcoins_count": {
+   "refs": 7,
+   "files": 7,
+   "assignment_count": 7,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_continue_btn/Alarm_0.gml:11",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 7
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "pipetype": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:146",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "plant": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_plant_fire_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "platform": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_platform_blue_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "play": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:76",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "play_lock": {
+   "refs": 5,
+   "files": 5,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_dog/Mouse_4.gml:3",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 4
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "played_levels": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:69",
+    "rhs": "ds_list_create()"
+   },
+   "assignment_kinds": {
+    "ds_list": 1
+   },
+   "inferred_type": "ds_list",
+   "likely_type": "ds_list"
+  },
+  "player_trail": {
+   "refs": 8,
+   "files": 6,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_trail/Mouse_4.gml:6",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "postchange": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:136",
+    "rhs": "-1"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "postnivel": {
+   "refs": 10,
+   "files": 8,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_alert_button/Mouse_4.gml:6",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 4
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "postx": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:137",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "posty": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:138",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "powerup": {
+   "refs": 937,
+   "files": 228,
+   "assignment_count": 18,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/cre_control/Create_0.gml:13",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 12,
+    "不确定": 6
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 6 处无法判断）",
+   "likely_type": "number"
+  },
+  "powerup_editor": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_mario_editor/Step_0.gml:3",
+    "rhs": "type_powerup"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "pp": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:16",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "press_load": {
+   "refs": 7,
+   "files": 6,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_gb_button/Mouse_4.gml:7",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "pswitch": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_editormanager/Create_0.gml:34",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 2,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "record": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:35",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "reserveitem": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:122",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "resource_block": {
+   "refs": 50,
+   "files": 45,
+   "assignment_count": 50,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_arrow_res/Mouse_4.gml:34",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 50
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "resource_create": {
+   "refs": 45,
+   "files": 45,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_cursor/Mouse_50.gml:34",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 4
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "resource_move": {
+   "refs": 36,
+   "files": 33,
+   "assignment_count": 33,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_arrow_res/Mouse_4.gml:42",
+    "rhs": "object_index"
+   },
+   "assignment_kinds": {
+    "number": 2,
+    "不确定": 31
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 31 处无法判断）",
+   "likely_type": "number"
+  },
+  "risas": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_bebe_snd_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "saltar": {
+   "refs": 66,
+   "files": 32,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Other_2.gml:32",
+    "rhs": "real(file_text_read_string(file))"
+   },
+   "assignment_kinds": {
+    "number": 4,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "saltar_spin": {
+   "refs": 64,
+   "files": 25,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Other_2.gml:34",
+    "rhs": "real(file_text_read_string(file))"
+   },
+   "assignment_kinds": {
+    "number": 3,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "save_changes": {
+   "refs": 11,
+   "files": 9,
+   "assignment_count": 6,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_notification_aceptar/Other_10.gml:216",
+    "rhs": "(obj_input.new_texto + \".swe\")"
+   },
+   "assignment_kinds": {
+    "alias:levelguardabot": 2,
+    "number": 3,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "scroll_perc": {
+   "refs": 5,
+   "files": 5,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:52",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 3
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 3 处无法判断）",
+   "likely_type": "number"
+  },
+  "select_resource": {
+   "refs": 48,
+   "files": 16,
+   "assignment_count": 13,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_card_block_sounds/Mouse_4.gml:6",
+    "rhs": "obj_resource_empty"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "resource:object": 10,
+    "不确定": 2
+   },
+   "inferred_type": "不确定（混合：number×1, resource:object×10, 不确定×2）",
+   "likely_type": null
+  },
+  "semisolid_platform": {
+   "refs": 6,
+   "files": 4,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_semisolid_platform1/Other_11.gml:6",
+    "rhs": "transform"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "serpentina": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_aplausos_snd_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "shadows": {
+   "refs": 9,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_sombras/Mouse_4.gml:4",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "shallihold": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_editormanager/Create_0.gml:33",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "showfps": {
+   "refs": 7,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:108",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "size": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_cursor/Create_0.gml:37",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "sm4j_style": {
+   "refs": 12,
+   "files": 8,
+   "assignment_count": 4,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_settings_sm4j/Mouse_4.gml:5",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 4
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "smb2mush": {
+   "refs": 5,
+   "files": 3,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_SMB2_mushroom_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 5
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "sonidos": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:53",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "soplete": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_soplete_res/Other_11.gml:10",
+    "rhs": "sprout"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "soplete_fire": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:15",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "sounds_level": {
+   "refs": 19,
+   "files": 10,
+   "assignment_count": 8,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_sdog/Mouse_4.gml:6",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 8
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "spacekey": {
+   "refs": 2,
+   "files": 1,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_titlemenu_key/KeyPress_1.gml:17",
+    "rhs": "32"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "spiketop": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:51",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "spiny": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:20",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "spring": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_spring_land_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "ss": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:64",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "star": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_editormanager/Create_0.gml:35",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "star_flash": {
+   "refs": 15,
+   "files": 14,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:51",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "starcoin": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:144",
+    "rhs": "-1"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "style_course": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:25",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "subpixels": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:150",
+    "rhs": "true"
+   },
+   "assignment_kinds": {
+    "bool": 1
+   },
+   "inferred_type": "bool",
+   "likely_type": "bool"
+  },
+  "tabvalue": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:32",
+    "rhs": "2"
+   },
+   "assignment_kinds": {
+    "number": 2
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "tag1_pub": {
+   "refs": 5,
+   "files": 4,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_gb_level/Create_0.gml:136",
+    "rhs": "text[global.etiqueta1_temp]"
+   },
+   "assignment_kinds": {
+    "string": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 string，另有 1 处无法判断）",
+   "likely_type": "string"
+  },
+  "tag2_pub": {
+   "refs": 5,
+   "files": 4,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_gb_level/Create_0.gml:137",
+    "rhs": "text[global.etiqueta2_temp]"
+   },
+   "assignment_kinds": {
+    "string": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 string，另有 1 处无法判断）",
+   "likely_type": "string"
+  },
+  "time_digits": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:125",
+    "rhs": "font_add_sprite_ext(spr_numbers_time, \"0123456789\", 0, 0)"
+   },
+   "assignment_kinds": {
+    "font": 1
+   },
+   "inferred_type": "font",
+   "likely_type": "font"
+  },
+  "time_digits_white": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:126",
+    "rhs": "font_add_sprite_ext(spr_numbers_time_white, \"0123456789\", 0, 0)"
+   },
+   "assignment_kinds": {
+    "font": 1
+   },
+   "inferred_type": "font",
+   "likely_type": "font"
+  },
+  "timer": {
+   "refs": 62,
+   "files": 19,
+   "assignment_count": 15,
+   "compound_count": 9,
+   "first_assignment": {
+    "location": "objects/cre_control/Create_0.gml:12",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 12,
+    "不确定": 3
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 3 处无法判断）",
+   "likely_type": "number"
+  },
+  "tuberia": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_tuberia_res/Other_11.gml:20",
+    "rhs": "transform"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "type_consult": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_home/Mouse_4.gml:19",
+    "rhs": "-4"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "ubsi": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_ahh_snd_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "uhh": {
+   "refs": 4,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_auh_snd_res/Other_11.gml:6",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "user_gb": {
+   "refs": 5,
+   "files": 4,
+   "assignment_count": 2,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_gb_level/Create_0.gml:134",
+    "rhs": "user"
+   },
+   "assignment_kinds": {
+    "string": 1,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 string，另有 1 处无法判断）",
+   "likely_type": "string"
+  },
+  "ver": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:117",
+    "rhs": "\"V1.0.0\""
+   },
+   "assignment_kinds": {
+    "string": 1
+   },
+   "inferred_type": "string",
+   "likely_type": "string"
+  },
+  "verpub": {
+   "refs": 3,
+   "files": 3,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_alert_button/Mouse_4.gml:7",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 3
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "vsync": {
+   "refs": 10,
+   "files": 6,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:12",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 5
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "w_scale": {
+   "refs": 5,
+   "files": 4,
+   "assignment_count": 3,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Other_2.gml:54",
+    "rhs": "real(file_text_read_string(file))"
+   },
+   "assignment_kinds": {
+    "number": 2,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "warp_item": {
+   "refs": 10,
+   "files": 7,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_enemyparent_held/Step_2.gml:129",
+    "rhs": "sprite_index"
+   },
+   "assignment_kinds": {
+    "number": 2,
+    "不确定": 3
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 3 处无法判断）",
+   "likely_type": "number"
+  },
+  "warp_x": {
+   "refs": 5,
+   "files": 2,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:37",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 4
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 4 处无法判断）",
+   "likely_type": "number"
+  },
+  "warp_y": {
+   "refs": 5,
+   "files": 2,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:38",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1,
+    "不确定": 4
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 4 处无法判断）",
+   "likely_type": "number"
+  },
+  "water_speed": {
+   "refs": 17,
+   "files": 8,
+   "assignment_count": 6,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_button_speed_water/Mouse_4.gml:2",
+    "rhs": "v_speed"
+   },
+   "assignment_kinds": {
+    "number": 5,
+    "不确定": 1
+   },
+   "inferred_type": "不确定（已识别的赋值均为 number，另有 1 处无法判断）",
+   "likely_type": "number"
+  },
+  "wdigits": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:121",
+    "rhs": "font_add_sprite_ext(spr_numbers, \"0123456789\", 0, 0)"
+   },
+   "assignment_kinds": {
+    "font": 1
+   },
+   "inferred_type": "font",
+   "likely_type": "font"
+  },
+  "wdigits_NSMBU": {
+   "refs": 3,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:122",
+    "rhs": "font_add_sprite_ext(spr_NSMBU_numbers, \"0123456789\", 0, 0)"
+   },
+   "assignment_kinds": {
+    "font": 1
+   },
+   "inferred_type": "font",
+   "likely_type": "font"
+  },
+  "wdigits_NSMBU_points": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:123",
+    "rhs": "font_add_sprite_ext(spr_NSMBU_numbers_points, \"0123456789\", 0, 0)"
+   },
+   "assignment_kinds": {
+    "font": 1
+   },
+   "inferred_type": "font",
+   "likely_type": "font"
+  },
+  "wdigits_SMB": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:119",
+    "rhs": "font_add_sprite_ext(spr_SMB_numbers, \"0123456789\", 0, 0)"
+   },
+   "assignment_kinds": {
+    "font": 1
+   },
+   "inferred_type": "font",
+   "likely_type": "font"
+  },
+  "wdigits_SMB2": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 0,
+   "compound_count": 0,
+   "first_assignment": null,
+   "assignment_kinds": {},
+   "inferred_type": "不确定（无赋值）",
+   "likely_type": null
+  },
+  "wdigits_SMB3": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_persistent/Create_0.gml:120",
+    "rhs": "font_add_sprite_ext(spr_SMB3_numbers, \"0123456789\", 0, 0)"
+   },
+   "assignment_kinds": {
+    "font": 1
+   },
+   "inferred_type": "font",
+   "likely_type": "font"
+  },
+  "world": {
+   "refs": 1,
+   "files": 1,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:91",
+    "rhs": "1"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "ycolor": {
+   "refs": 2,
+   "files": 2,
+   "assignment_count": 1,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "scripts/scr_init_globals/scr_init_globals.gml:140",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 1
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "yoshi": {
+   "refs": 127,
+   "files": 53,
+   "assignment_count": 21,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_kuribo_drybones/Create_0.gml:20",
+    "rhs": "2"
+   },
+   "assignment_kinds": {
+    "number": 21
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  },
+  "yoshi_egg": {
+   "refs": 8,
+   "files": 8,
+   "assignment_count": 5,
+   "compound_count": 0,
+   "first_assignment": {
+    "location": "objects/obj_egg_red_res/Other_11.gml:6",
+    "rhs": "0"
+   },
+   "assignment_kinds": {
+    "number": 5
+   },
+   "inferred_type": "number",
+   "likely_type": "number"
+  }
+ }
+}

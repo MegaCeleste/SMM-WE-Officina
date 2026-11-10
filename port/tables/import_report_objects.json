@@ -1,0 +1,25 @@
+{
+ "anomaly_count": 4,
+ "anomalies": [
+  {
+   "object": "obj_dcw",
+   "kind": "object_properties",
+   "detail": "有 object variables（properties/overriddenProperties）"
+  },
+  {
+   "object": "obj_clown",
+   "kind": "collision_missing_target",
+   "detail": "yy 缺 collisionObjectId，按目标=自身记录（磁盘有 Collision_obj_clown.gml: True）"
+  },
+  {
+   "object": "obj_enemyparent_held",
+   "kind": "collision_missing_target",
+   "detail": "yy 缺 collisionObjectId，按目标=自身记录（磁盘有 Collision_obj_enemyparent_held.gml: True）"
+  },
+  {
+   "object": "obj_parent_resource",
+   "kind": "collision_missing_target",
+   "detail": "yy 缺 collisionObjectId，按目标=自身记录（磁盘有 Collision_obj_parent_resource.gml: True）"
+  }
+ ]
+}

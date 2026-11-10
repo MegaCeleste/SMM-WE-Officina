@@ -1,0 +1,30 @@
+; Engine configuration file.
+; OpenWE port (GameMaker Studio 2 -> Godot 4). 设置依据 docs/port-plan.md §0、§4、§6。
+
+config_version=5
+
+[application]
+
+config/name="OpenWE"
+config/description="SMM_WE (OpenWE) 的 Godot 4 移植。AGPL-3.0，见 LICENSE。"
+config/features=PackedStringArray("4.7")
+run/main_scene="res://main.tscn"
+
+[display]
+
+window/size/viewport_width=384
+window/size/viewport_height=216
+window/size/window_width_override=1152
+window/size/window_height_override=648
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+window/stretch/scale_mode="integer"
+
+[physics]
+
+common/physics_ticks_per_second=60
+common/max_physics_steps_per_frame=8
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

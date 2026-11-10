@@ -1,0 +1,5698 @@
+{
+ "source": "scripts/__global_object_depths/__global_object_depths.gml",
+ "array_entries": 795,
+ "matched_yyp_objects": 750,
+ "depth_by_object": {
+  "obj_big_pplant": 0,
+  "obj_slopes": 0,
+  "obj_goomba_intro": 0,
+  "obj_scrollbar4": 0,
+  "obj_yoshi_runaway_blue": -4,
+  "obj_tongue_blue": 0,
+  "obj_fishbone": 0,
+  "obj_btn_header_1": -11,
+  "obj_big_pplant_b_res": 0,
+  "obj_scrollbar3": 0,
+  "obj_big_plant_b_dead": 0,
+  "obj_sparkles_blend": 0,
+  "obj_yoshi_blue": -7,
+  "obj_button_sombras": -19,
+  "obj_NSMBU_charginchuck": 0,
+  "obj_grrrol_new_res": 0,
+  "obj_big_pplant_res": 0,
+  "obj_grrrol_b_res": 0,
+  "obj_waddlewing_res": 0,
+  "obj_bl2": -23,
+  "obj_rename": 0,
+  "obj_input_desc": 0,
+  "obj_create_account": 0,
+  "obj_grrrol_b": 0,
+  "obj_rename_button2": 0,
+  "obj_bonus_trail": 0,
+  "obj_rename_input": 0,
+  "obj_btn_header_2": -11,
+  "obj_big_plant_dead": 0,
+  "obj_rails_res": 8,
+  "obj_shell_trail": 0,
+  "obj_rename_button3": 0,
+  "obj_bt_rename": 0,
+  "obj_cooligan": 0,
+  "obj_egg_blue": -2,
+  "obj_btn_header_3": -11,
+  "obj_thwomp_intro": 0,
+  "obj_waddlewing": 0,
+  "obj_vsync": 0,
+  "obj_sm4j_jump": 0,
+  "obj_rails": 0,
+  "obj_blend_ring": 0,
+  "obj_dcw": 0,
+  "obj_input_rename": 0,
+  "obj_rename_close": 0,
+  "obj_audio_control": 0,
+  "obj_rename_control": 0,
+  "obj_btn_header_4": -11,
+  "obj_galoomba_hold2_b": 0,
+  "obj_goombrat_b_res": 0,
+  "obj_ludwig_res": 0,
+  "obj_cooligan_res": 0,
+  "obj_fishbone_res": 0,
+  "obj_lighting": -9,
+  "obj_persistent": -99,
+  "obj_rainmaker": -20,
+  "obj_firemaker": -7,
+  "obj_leafmaker": -7,
+  "obj_snowmaker": -7,
+  "obj_levelmanager": -11,
+  "obj_editormanager": -9,
+  "obj_fallow_view": 0,
+  "obj_bganimator": 0,
+  "obj_mario": -8,
+  "obj_meteorites": 0,
+  "obj_meteorites_big": 0,
+  "obj_solidtop": -1,
+  "obj_solid": -1,
+  "obj_platform_help": -8,
+  "obj_title_controller": -26,
+  "obj_intro_controller": 0,
+  "obj_load_level": 0,
+  "obj_load_guardabot": 0,
+  "obj_guardabot": -6,
+  "obj_cursor": -40,
+  "obj_grid": 369,
+  "obj_powerupsprout": 10,
+  "obj_powerupsprout_note": 10,
+  "obj_blockparent": -1,
+  "obj_deactivation": 0,
+  "obj_physicsparent": 0,
+  "obj_enemyparent": 0,
+  "obj_invincibility": -9,
+  "obj_spike_ball": -3,
+  "obj_deactenemyparent": 0,
+  "obj_grrrol": -2,
+  "obj_shell": -1,
+  "obj_brohammer": -7,
+  "obj_shell_held": -1,
+  "obj_cannonball": -2,
+  "obj_wrench": -8,
+  "obj_bone": -7,
+  "obj_espina": 0,
+  "obj_pinchos": -2,
+  "obj_banzaibill": -8,
+  "obj_bulletbull_red": 10,
+  "obj_bulletbill": 10,
+  "obj_lakitu": -1,
+  "obj_onewaygate_right": 14,
+  "obj_shield_right": 0,
+  "obj_onewaygate_left": 14,
+  "obj_shield_left": 0,
+  "obj_powerupparent": 0,
+  "obj_physicssolid": 0,
+  "obj_muncher": -1,
+  "obj_bullebill_base": -2,
+  "obj_plantfire": -3,
+  "obj_holdparent": 0,
+  "obj_clown": 2,
+  "obj_thwomp": -2,
+  "obj_snow_ball": 0,
+  "obj_snow_ball_held": -1,
+  "obj_buzzy_ceiling": 0,
+  "obj_helmet": -9,
+  "obj_bowser_fire_down": -7,
+  "obj_kuriboshoe": -9,
+  "obj_kuribo_drybones": -11,
+  "obj_bowser_fire": -7,
+  "obj_spinner": -8,
+  "obj_link_atack": -8,
+  "obj_onewaygate_bottom": 14,
+  "obj_grinder": -7,
+  "obj_link_down_atack": -8,
+  "obj_link_bomb": 0,
+  "obj_spiny": 0,
+  "obj_buzzybeetle": 0,
+  "obj_spring_land": 0,
+  "obj_link_arrow": 0,
+  "obj_link_dash_atack": -8,
+  "obj_bowserjr_shell": -2,
+  "obj_brohammer_yoshi": -7,
+  "obj_hammer": -9,
+  "obj_bobomb": 0,
+  "obj_superball": -2,
+  "obj_yoshifire": -7,
+  "obj_platform_parent": -7,
+  "obj_icicle": -5,
+  "obj_bossparent": -2,
+  "obj_boomboom": -2,
+  "obj_block_pow_hold": 0,
+  "obj_rockparent": 9,
+  "obj_block_ice": 9,
+  "obj_block_rock": 9,
+  "obj_onoffblock": 1,
+  "obj_explosion": -7,
+  "obj_enemyparent_held": -2,
+  "obj_galoomba_hold": 0,
+  "obj_bobomb_hold": 0,
+  "obj_fireball": -2,
+  "obj_fireball_b": 0,
+  "obj_magic": -7,
+  "obj_podoboo": -7,
+  "obj_snowball": -2,
+  "obj_superball_trail": -1,
+  "obj_bones_yoshi": -7,
+  "obj_autoscroll": 0,
+  "obj_bones_yoshi_one": -7,
+  "obj_hammer_b": -9,
+  "obj_galoomba_hold2": 0,
+  "obj_angrysun_movement": 0,
+  "obj_crumblebones": 0,
+  "obj_crumblebony": 0,
+  "obj_crumblebony_b": 0,
+  "obj_call_mario": 0,
+  "obj_silbido": 0,
+  "obj_link_arrow_anim": -8,
+  "obj_link": -2,
+  "obj_key_res": 0,
+  "obj_parent_save": 0,
+  "obj_parent_resource": 0,
+  "obj_link_res": 0,
+  "obj_smoke": -2,
+  "obj_effect_link": -8,
+  "obj_marioU": -8,
+  "obj_deadmario": -14,
+  "obj_mario_temp": -8,
+  "obj_doormario": -5,
+  "obj_doormario_exit": -5,
+  "obj_mario_pballon": -8,
+  "obj_player_warp": 13,
+  "obj_flagpole": 12,
+  "obj_player_goal_parent": 0,
+  "obj_player_goal_smb1": -5,
+  "obj_player_goal_smb3": -5,
+  "obj_player_goal_smw": -5,
+  "obj_player_goal_smw_castle": -5,
+  "obj_player_goal_nsmbu": -5,
+  "obj_player_goal_smb2": -5,
+  "obj_slider": 0,
+  "obj_puller": -8,
+  "obj_mario_transform2": -6,
+  "obj_penguin_attack": 0,
+  "obj_groundpount": 0,
+  "obj_cap_mario": -4,
+  "obj_mario_editor": -7,
+  "obj_panelparent": 0,
+  "obj_parent_layout": 0,
+  "obj_panelsparent": 0,
+  "obj_enemyparent_lava": 0,
+  "obj_slopeparent": 0,
+  "obj_header": -11,
+  "obj_slopeleft": 0,
+  "obj_sloperight": 0,
+  "obj_groundparent": 0,
+  "obj_modelbgo": 280,
+  "obj_modelsolid": 5,
+  "obj_modelbgo_dec": 280,
+  "obj_modelsizable": 270,
+  "obj_button_parent": 0,
+  "obj_decoracion_parent": 0,
+  "obj_arrow_lock": 0,
+  "obj_parent_sounds": -7,
+  "obj_creation_preview": 15,
+  "obj_resource_empty": 0,
+  "obj_player_trail": 0,
+  "obj_parent_resource_block": 0,
+  "obj_galoomba_hold_b": 0,
+  "obj_climb": 1,
+  "obj_solidphy": -1,
+  "obj_enabledsolid": 1,
+  "obj_hurtsolid2": -1,
+  "obj_solidhold": -1,
+  "obj_solid_appear": -1,
+  "obj_block": 9,
+  "obj_block_multicoin": 9,
+  "obj_block_coinchain": 1,
+  "obj_block_hidden": 9,
+  "obj_flipblock": 9,
+  "obj_flipblock_anim": 9,
+  "obj_block_gold": 9,
+  "obj_noteblock": -1,
+  "obj_musicblock": -7,
+  "obj_noteblock_s": -7,
+  "obj_onoffplatform_blue": 1,
+  "obj_pblock": 1,
+  "obj_anti_pblock": 1,
+  "obj_onoffplatform": 1,
+  "obj_onoffplatform_d": 0,
+  "obj_nube": 2,
+  "obj_pipebase": 9,
+  "obj_tile_trigger": 0,
+  "obj_ground": 1,
+  "obj_ground2": 10,
+  "obj_ground3": 300,
+  "obj_ground_slope": 0,
+  "obj_koopa": -7,
+  "obj_koopa_b": -7,
+  "obj_koopa_red": -7,
+  "obj_koopa_red_b": -7,
+  "obj_galoomba": 0,
+  "obj_galoomba_b": 0,
+  "obj_galoomba2": 0,
+  "obj_piranhaplant": 12,
+  "obj_jumppiranha": -6,
+  "obj_plant_fire": 0,
+  "obj_mechakoopa": 0,
+  "obj_mechakoopa_held": -2,
+  "obj_buzzybeetle_b": 0,
+  "obj_spiny_ball": 0,
+  "obj_pokey": -2,
+  "obj_spiny_thrown": -3,
+  "obj_chain_chomp_free": -7,
+  "obj_chain_chomp_free_b": -7,
+  "obj_cloud_lakitu": 2,
+  "obj_beachkoopa": 0,
+  "obj_beachkoopa_b": 0,
+  "obj_beachkoopa_red_b": 0,
+  "obj_beachkoopa_red": 0,
+  "obj_angrysun": -7,
+  "obj_rocangrejo": 0,
+  "obj_floruga": -2,
+  "obj_floruga_body": 0,
+  "obj_spike": -2,
+  "obj_spike_ball_b": -3,
+  "obj_snow_ball_b": 0,
+  "obj_goomba_swim": 0,
+  "obj_cheepcheep": -7,
+  "obj_cheepcheep2": -7,
+  "obj_blooper": -7,
+  "obj_monty_chase": -2,
+  "obj_bullebill_base_red": -2,
+  "obj_cannon": -3,
+  "obj_cannon_red": -3,
+  "obj_billbanzai_red": -8,
+  "obj_rocky": -2,
+  "obj_boo": -2,
+  "obj_magikoopa": -2,
+  "obj_thwomp_b": 0,
+  "obj_bonybeetle": 0,
+  "obj_drybones": 0,
+  "obj_btn_header_parent": 0,
+  "obj_bonybeetle_b": 0,
+  "obj_bobomb_ready": 0,
+  "obj_firebar": -7,
+  "obj_podoboo_b": -7,
+  "obj_soplete": -2,
+  "obj_soplete_invert": -2,
+  "obj_soplete_global": 0,
+  "obj_soplete_invert_global": 0,
+  "obj_skewer": 9,
+  "obj_skewertrunk": 0,
+  "obj_foo": -2,
+  "obj_SMB_bowser": -1,
+  "obj_SMB3_bowser": -1,
+  "obj_NSMBU_bowser": -1,
+  "obj_bowserjr": -1,
+  "obj_NSMBU_bowserjr": -1,
+  "obj_NSMBU_boomboom": -2,
+  "obj_NSMBU_boomboom_b": 0,
+  "obj_NSMBU_bowserjr_b": 0,
+  "obj_SMW_bowser": -1,
+  "obj_enemy_dead_castle": -8,
+  "obj_bowser_dead_castle": -8,
+  "obj_bowserjr_dead_castle": -8,
+  "obj_grrrol_new": 0,
+  "obj_enemy_dead": -8,
+  "obj_enemy_multidead": 0,
+  "obj_bowser_dead": -8,
+  "obj_boomboom_b": -2,
+  "obj_sledgebro": -2,
+  "obj_hammerbro": -2,
+  "obj_boomerangbro": 0,
+  "obj_icebro": 0,
+  "obj_firebro": -2,
+  "obj_charginchuck": -2,
+  "obj_shell_drybones_held": -1,
+  "obj_yoshi_abandon": -7,
+  "obj_yoshi_runaway": -4,
+  "obj_egg": -2,
+  "obj_claw": -1,
+  "obj_ninji": 0,
+  "obj_NSMBU_ninji": 0,
+  "obj_ninji_res": 0,
+  "obj_mini_flag": 11,
+  "obj_NSMBU_flag_mario": 10,
+  "obj_SMB_castle": 10,
+  "obj_SMB_castle_front": 10,
+  "obj_SMB_flag": 11,
+  "obj_goalcard": 301,
+  "obj_goalcard_get": -5,
+  "obj_goalgate": 9,
+  "obj_goalgate_front": -11,
+  "obj_goalgate_tape": 8,
+  "obj_crystalorb": 0,
+  "obj_hawmask": 0,
+  "obj_checkpoint": 8,
+  "obj_axe_smw": 10,
+  "obj_castle_floor": 6,
+  "obj_castle": 10,
+  "obj_castle_front": 10,
+  "obj_score": -2,
+  "obj_score_flag": -6,
+  "obj_shake_mario": -14,
+  "obj_foo_fog": -11,
+  "obj_block_pow_active": -7,
+  "obj_yoshifire_one": -7,
+  "obj_yoshifire_purple": 0,
+  "obj_smoke_shoe": -7,
+  "obj_kuriboshoe_movement": 0,
+  "obj_fire_clown_small": -12,
+  "obj_fire_clown": -12,
+  "obj_clown_explotion": -7,
+  "obj_gold_explosion": -7,
+  "obj_rorock": -2,
+  "obj_NSMBU_bowser_fire": -7,
+  "obj_NSMBU_bowser_fire_up": -7,
+  "obj_bowserfire_up": -7,
+  "obj_bowserjr_fire": -7,
+  "obj_NSMBU_bowserjr_fire": -7,
+  "obj_blownbubble": 0,
+  "obj_shard": -7,
+  "obj_smoke_goomba": 0,
+  "obj_smoke_steps": -2,
+  "obj_statuesmoke": -6,
+  "obj_spinsmoke": -7,
+  "obj_spinthump": -9,
+  "obj_bubble": -1,
+  "obj_sparkletrail": -1,
+  "obj_sparkles_coin": 0,
+  "obj_smoke_cap": -7,
+  "obj_detroy_enemy": -7,
+  "obj_gotas": 0,
+  "obj_lave_draw": -9,
+  "obj_lava_water": -7,
+  "obj_lava_water_drybones": -20,
+  "obj_fireball_bro": -2,
+  "obj_frozenmario": 0,
+  "obj_snowball_bro": 0,
+  "obj_enemyfrozen": 0,
+  "obj_stomped": 0,
+  "obj_curtainin": -30,
+  "obj_curtainout": -30,
+  "obj_fadein": -99,
+  "obj_fadeout": -99,
+  "obj_door": 5,
+  "obj_door_exit": 5,
+  "obj_door_switch": 5,
+  "obj_door_switch_exit": 5,
+  "obj_door_lock": 5,
+  "obj_door_lock_exit": 5,
+  "obj_wings_dead": -8,
+  "obj_wings_dead_b": -8,
+  "obj_paracaidas_dead": -7,
+  "obj_paracaidas_go": 5,
+  "obj_yoshi2": -7,
+  "obj_yoshi_red": -7,
+  "obj_yoshi_runaway_red": -4,
+  "obj_pswitch": -2,
+  "obj_coin10": 1,
+  "obj_tongue": -7,
+  "obj_getshoe": 0,
+  "obj_kuriboshoe2": -9,
+  "obj_clown_fire": 2,
+  "obj_shell_empty": -1,
+  "obj_spiny_empty": -1,
+  "obj_shell_drybones": -1,
+  "obj_rotten_signal": -8,
+  "obj_splash_agua": -12,
+  "obj_splash_lava": -12,
+  "obj_splash_posion": -12,
+  "obj_stomp": 0,
+  "obj_blockbumper": 0,
+  "obj_sidefade": -10,
+  "obj_meteorites_maker": 0,
+  "obj_cinta_parent": 0,
+  "obj_cinta": 0,
+  "obj_cinta_on_res": -1,
+  "obj_cinta_res": -1,
+  "obj_cinta_switch": 0,
+  "obj_plataforma": -7,
+  "obj_lava_lift": 5,
+  "obj_fast_lava_lift": 5,
+  "obj_plataforma_blue": -7,
+  "obj_donut": -7,
+  "obj_lava_lift_part": 5,
+  "obj_bouncycloud": 0,
+  "obj_galoomba2_b": 0,
+  "obj_icecoin": 9,
+  "obj_coin": 1,
+  "obj_pink_coin": 1,
+  "obj_coin50": 1,
+  "obj_coin30": 1,
+  "obj_coin_pow": 1,
+  "obj_coin_pow_big": 1,
+  "obj_blockcoin": 2,
+  "obj_coinchain": 2,
+  "obj_veggiecoin": -1,
+  "obj_multiveggiecoin": -1,
+  "obj_coinchange": 0,
+  "obj_key": 0,
+  "obj_key_appear": 0,
+  "obj_key_fallow": -7,
+  "obj_1up": -2,
+  "obj_egg_hatch": 2,
+  "obj_egg_red": -2,
+  "obj_parcarry": -11,
+  "obj_icon_dead": -15,
+  "obj_boomerang": 0,
+  "obj_cannonball_red": 0,
+  "obj_mushroom": -2,
+  "obj_SMB2_mushroom": 0,
+  "obj_superflower": 2,
+  "obj_fireflower": -2,
+  "obj_cap": -7,
+  "obj_megamushroom": -2,
+  "obj_hen_mushroom": -2,
+  "obj_pballon": 0,
+  "obj_star": -2,
+  "obj_propellershroom": 2,
+  "obj_frogsuit": 2,
+  "obj_penguin_suit": 0,
+  "obj_hammersuit": 2,
+  "obj_superarcon": 0,
+  "obj_mini_icicle": -5,
+  "obj_icicle2": -5,
+  "obj_mini_icicle2": -5,
+  "obj_spring": 0,
+  "obj_pswitch_press": 0,
+  "obj_bumper": -7,
+  "obj_onewaygate_top": 14,
+  "obj_bortice": -7,
+  "obj_big_pplant_b": 0,
+  "obj_torbellino": -3,
+  "obj_tuberia": 11,
+  "obj_helmet_spiny": -9,
+  "obj_brickhelmet": -9,
+  "obj_muncher_b": -1,
+  "obj_vine_green": 6,
+  "obj_beanstalk": 259,
+  "obj_vine": 260,
+  "obj_arrow": 14,
+  "obj_quicksand": -6,
+  "obj_arrow_big": 10,
+  "obj_decoracion_1": 299,
+  "obj_decoracion_2": 299,
+  "obj_decoracion_3": 299,
+  "obj_decoracion_4": 299,
+  "obj_btn_invitado": 0,
+  "obj_btn_social": 0,
+  "obj_btn_iniciar": 0,
+  "obj_play_screen": -25,
+  "obj_editor_screen": -25,
+  "obj_logo_c": -2,
+  "obj_menu_pausa": -16,
+  "obj_pausa_button": -17,
+  "obj_version": 0,
+  "obj_apariencia": -11,
+  "obj_card_logo": -12,
+  "obj_bg_selection": -11,
+  "obj_bg1": -12,
+  "obj_button_ok": -12,
+  "obj_time": -11,
+  "obj_button_time": -12,
+  "obj_autoavance": -11,
+  "obj_button_autoavance": -12,
+  "obj_condiciones": -11,
+  "obj_tabs_condiciones": -12,
+  "obj_alert_condicion": -25,
+  "obj_condiciones_button": -12,
+  "obj_button_save_load": -12,
+  "obj_panel_save_load": -11,
+  "obj_button_save_changes": -12,
+  "obj_alert_load": -15,
+  "obj_noti_load_button": -16,
+  "obj_etiquetas": -16,
+  "obj_creator_jugar_editar": -14,
+  "obj_robot": -12,
+  "obj_erase": -10,
+  "obj_card_block_sounds": -10,
+  "obj_logo_game": -12,
+  "obj_card_bg": -12,
+  "obj_card_bout": -12,
+  "obj_card_autoavance": -12,
+  "obj_panel_time": -12,
+  "obj_card_condiciones": -12,
+  "obj_card_rocket": -10,
+  "obj_expand": -10,
+  "obj_dog": -10,
+  "obj_card_item": -10,
+  "obj_button_close": -11,
+  "obj_zoomclose": -24,
+  "obj_panel_left": -8,
+  "obj_night_change": -12,
+  "obj_expand_panels": -10,
+  "obj_expand_panels_left": -10,
+  "obj_expand_paneles_top": -10,
+  "obj_button_meteoritos": -12,
+  "obj_panel_circle": -11,
+  "obj_card_circle": -12,
+  "obj_water_move": -10,
+  "obj_water_move_limit": -11,
+  "obj_bt_close_water": -11,
+  "obj_water_level_control": -6,
+  "obj_ventana_water": -12,
+  "obj_ventana": -19,
+  "obj_button_speed_water": -13,
+  "obj_window_button": -20,
+  "obj_button_wings": -20,
+  "obj_ventana_mario": -19,
+  "obj_window_mario_button": -20,
+  "obj_modo_sonidos_control": -6,
+  "obj_effect_touch": -20,
+  "obj_button_trail": -12,
+  "obj_button_sdog": -12,
+  "obj_change_view": -23,
+  "obj_shell_intro": 0,
+  "obj_mario_intro": -1,
+  "obj_settings_panel": -18,
+  "obj_configurar_controles": -19,
+  "obj_configurar_controles_reset": -19,
+  "obj_button_settings_estrella": -19,
+  "obj_button_settings_controls": -19,
+  "obj_button_settings_sombras": -19,
+  "obj_button_settings_idioma": -19,
+  "obj_button_settings_sm4j": -19,
+  "obj_btn_settings_hd": -19,
+  "obj_selecting_player": -19,
+  "obj_window_select": -19,
+  "obj_button_settings_close": -19,
+  "obj_button_settings_close2": -19,
+  "obj_selecting_fps": -19,
+  "obj_button_creditos": -19,
+  "obj_st_slider": -19,
+  "obj_settings_custom": -19,
+  "obj_settings_controls": -19,
+  "obj_titlemenu_key": 0,
+  "obj_gb_button": -5,
+  "obj_gb_level": -6,
+  "obj_bt_gb_play": -7,
+  "obj_bt_gb_delete": -7,
+  "obj_bt_gb_close": -7,
+  "obj_btn_reload": -4,
+  "obj_bt_gb_edit": -7,
+  "obj_slopesa": 0,
+  "obj_login_control": 0,
+  "obj_iname_control": -22,
+  "obj_iname": -23,
+  "obj_iname_close": -23,
+  "obj_iname_control2": -22,
+  "obj_lun": -23,
+  "obj_lp": -23,
+  "obj_input": -16,
+  "obj_edit_menu": -15,
+  "obj_settings_button": -16,
+  "obj_button_home": -16,
+  "obj_profile": -16,
+  "obj_button_close_menu": -16,
+  "obj_mariostart": -100,
+  "obj_mariostart_m": -101,
+  "obj_title_oprime": -25,
+  "obj_alert_message": -10,
+  "obj_alert_button": -16,
+  "obj_alert_close": -16,
+  "obj_scrollbar2": -3,
+  "obj_continue_btn": -22,
+  "obj_button_superado": -21,
+  "obj_game_over": -5,
+  "obj_button_back": 0,
+  "obj_timeup": -100,
+  "cre_control": 0,
+  "obj_ccred": -19,
+  "obj_window_alert": -15,
+  "obj_load_btn_c": -16,
+  "obj_load_image": -18,
+  "obj_button_notification_aceptar": -16,
+  "obj_button_notification_cancelar": -16,
+  "obj_toast": -18,
+  "obj_menu_editor": -10,
+  "obj_menu_editor_ext": -10,
+  "obj_panel_expand": -10,
+  "obj_next_before": -11,
+  "obj_bowser_res": 0,
+  "obj_bowserjr_res": 0,
+  "obj_pswitch_res": 0,
+  "obj_pow_res": 0,
+  "obj_rock_res": 0,
+  "obj_pipebase_res": 0,
+  "obj_ice_res": 0,
+  "obj_coin_res": 0,
+  "obj_icecoin_res": 0,
+  "obj_pink_coin_res": 0,
+  "obj_coin10_res": 0,
+  "obj_coin30_res": 0,
+  "obj_coin50_res": 0,
+  "obj_goomba_res": 0,
+  "obj_goombrat_res": 0,
+  "obj_koopa_b_res": -1,
+  "obj_koopa_res": -1,
+  "obj_koopa_red_res": -1,
+  "obj_koopa_red_b_res": -1,
+  "obj_buzzybeetle_b_res": 0,
+  "obj_buzzybeetle_res": 0,
+  "obj_bonybeetle_res": 0,
+  "obj_bonybeetle_b_res": 0,
+  "obj_spiny_res": 0,
+  "obj_rocangrejo_res": 0,
+  "obj_pplant_res": 0,
+  "obj_tuberia_res": 0,
+  "obj_angrysun_res": 0,
+  "obj_floruga_res": 0,
+  "obj_floruga_angry_res": 0,
+  "obj_drybones_res": 0,
+  "obj_shell_drybones_res": 0,
+  "obj_spiny_shell_res": 0,
+  "obj_buzzy_shell_res": 0,
+  "obj_donut_res": 0,
+  "obj_blooper_res": 0,
+  "obj_lakitu_res": 0,
+  "obj_hammerbro_res": 0,
+  "obj_firebro_res": 0,
+  "obj_boomerangbro_res": 0,
+  "obj_icebro_res": 0,
+  "obj_sledgebro_res": 0,
+  "obj_charginchuck_res": 0,
+  "obj_boomboom_res": 0,
+  "obj_boomboom_b_res": 0,
+  "obj_thwomp_res": 0,
+  "obj_thwomp_b_res": 0,
+  "obj_grrrol_res": 0,
+  "obj_grinder_res": -1,
+  "obj_bumper_res": -1,
+  "obj_bobomb_res": 0,
+  "obj_mechakoopa_res": 0,
+  "obj_bobomb_ready_res": 0,
+  "obj_bullebill_base_res": 0,
+  "obj_bullebill_base_red_res": 0,
+  "obj_cannon_res": 0,
+  "obj_cannon_red_res": 0,
+  "obj_soplete_res": -1,
+  "obj_monty_res": 0,
+  "obj_rocky_res": 0,
+  "obj_1up_res": 0,
+  "obj_mushroom_res": 0,
+  "obj_SMB2_mushroom_res": 0,
+  "obj_fireflower_res": 0,
+  "obj_frogsuit_res": 0,
+  "obj_hen_mushroom_res": 0,
+  "obj_superflower_res": 0,
+  "obj_cap_res": 0,
+  "obj_star_res": 0,
+  "obj_spring_res": 0,
+  "obj_spring_land_res": 0,
+  "obj_qblock_res": 0,
+  "obj_block_hidden_res": 0,
+  "obj_block_res": 0,
+  "obj_block_gold_res": 0,
+  "obj_noteblock_res": 0,
+  "obj_musicblock_res": 0,
+  "obj_noteblock_s_res": 0,
+  "obj_plant_fire_res": 0,
+  "obj_muncher_res": -1,
+  "obj_muncher_b_res": -1,
+  "obj_billbanzai_res": 0,
+  "obj_billbanzai_red_res": 0,
+  "obj_spike_res": 0,
+  "obj_spike_ball_res": 0,
+  "obj_torbellino_res": 0,
+  "obj_foo_res": 0,
+  "obj_onoffblock_res": 0,
+  "obj_onoffplatform_res": 0,
+  "obj_onoffplatform_blue_res": 0,
+  "obj_pblock_res": 0,
+  "obj_pblock2_res": 0,
+  "obj_chomp_res": 0,
+  "obj_chomp_b_res": 0,
+  "obj_boo_res": 0,
+  "obj_pinchos_res": 0,
+  "obj_nube_res": 0,
+  "obj_oneway_res": 1,
+  "obj_checkpoint_res": 0,
+  "obj_door_res": 1,
+  "obj_door_exit_res": 1,
+  "obj_door_switch_res": 1,
+  "obj_door_switch_exit_res": 1,
+  "obj_door_lock_res": 1,
+  "obj_door_lock_exit_res": 1,
+  "obj_clown_res": 0,
+  "obj_clown_fire_res": 0,
+  "obj_egg_res": 0,
+  "obj_egg_red_res": 0,
+  "obj_podoboo_res": 0,
+  "obj_podoboo_b_res": 0,
+  "obj_mini_icicle_res": 0,
+  "obj_mini_icicle2_res": 0,
+  "obj_icicle_res": 0,
+  "obj_icicle2_res": 0,
+  "obj_cheepcheep_res": 0,
+  "obj_cheepcheep2_res": 0,
+  "obj_arrow_res": 0,
+  "obj_magikoopa_res": 0,
+  "obj_lava_lift_res": 0,
+  "obj_fast_lava_lift_res": 0,
+  "obj_bouncycloud_res": 0,
+  "obj_vine_res": 2,
+  "obj_semisolid_platform1": 271,
+  "obj_mushroom_platform_res": 8,
+  "obj_puente_res": 8,
+  "obj_platform_blue_res": 0,
+  "obj_pokey_res": 0,
+  "obj_platform_res": -1,
+  "obj_firebar_res": -1,
+  "obj_goomba_b_res": 0,
+  "obj_skewer_res": 0,
+  "obj_claw_res": -1,
+  "obj_spike_ball_b_res": 0,
+  "obj_efecto_musica": -7,
+  "obj_efecto_sonido": -7,
+  "obj_efecto_musica_bonus": 0,
+  "obj_parent_sound_o": 0,
+  "obj_ubsi_or": 0,
+  "obj_ahh_or": 0,
+  "obj_risas_or": 0,
+  "obj_bebe_or": 0,
+  "obj_serpentina_or": 0,
+  "obj_aplausos_or": 0,
+  "obj_uhh_or": 0,
+  "obj_auh_or": 0,
+  "obj_bocina_or": 0,
+  "obj_bombilla_or": 0,
+  "obj_error_or": 0,
+  "obj_nota_musical_or": 0,
+  "obj_remolino_or": 0,
+  "obj_fuegos_or": 0,
+  "obj_destello_or": 0,
+  "obj_golpe_gato_or": 0,
+  "obj_chisporreo_or": 0,
+  "obj_cerdito_or": 0,
+  "obj_n64_or": 0,
+  "obj_boss_or": 0,
+  "obj_bonus_or": 0,
+  "obj_ubsi_snd_res": -7,
+  "obj_ahh_snd_res": -7,
+  "obj_risas_snd_res": -7,
+  "obj_bebe_snd_res": -7,
+  "obj_serpentina_snd_res": -7,
+  "obj_aplausos_snd_res": -7,
+  "obj_auh_snd_res": -7,
+  "obj_uhh_snd_res": -7,
+  "obj_bocina_snd_res": -7,
+  "obj_cerdito_snd_res": -7,
+  "obj_bombilla_snd_res": -7,
+  "obj_error_snd_res": -7,
+  "obj_nota_musical_snd_res": -7,
+  "obj_remolino_snd_res": -7,
+  "obj_fuegos_snd_res": -7,
+  "obj_destello_snd_res": -7,
+  "obj_golpe_gato_snd_res": -7,
+  "obj_chisporreteo_snd_res": -7,
+  "obj_n64_snd_res": -7,
+  "obj_bonus_snd_res": -7,
+  "obj_boss_snd_res": -7
+ },
+ "table_entries": {
+  "obj_lighting": {
+   "depth": -9,
+   "array_index": 0,
+   "src_depth_line": 8,
+   "src_name_line": 804
+  },
+  "obj_rainmaker": {
+   "depth": -20,
+   "array_index": 1,
+   "src_depth_line": 9,
+   "src_name_line": 805
+  },
+  "obj_snowmaker": {
+   "depth": -7,
+   "array_index": 2,
+   "src_depth_line": 10,
+   "src_name_line": 806
+  },
+  "obj_leafmaker": {
+   "depth": -7,
+   "array_index": 3,
+   "src_depth_line": 11,
+   "src_name_line": 807
+  },
+  "obj_firemaker": {
+   "depth": -7,
+   "array_index": 4,
+   "src_depth_line": 12,
+   "src_name_line": 808
+  },
+  "obj_flagpole": {
+   "depth": 12,
+   "array_index": 5,
+   "src_depth_line": 13,
+   "src_name_line": 809
+  },
+  "obj_SMB_flag": {
+   "depth": 11,
+   "array_index": 6,
+   "src_depth_line": 14,
+   "src_name_line": 810
+  },
+  "obj_NSMBU_flag_mario": {
+   "depth": 10,
+   "array_index": 7,
+   "src_depth_line": 15,
+   "src_name_line": 811
+  },
+  "obj_score_flag": {
+   "depth": -6,
+   "array_index": 8,
+   "src_depth_line": 16,
+   "src_name_line": 812
+  },
+  "obj_SMB_castle": {
+   "depth": 10,
+   "array_index": 9,
+   "src_depth_line": 17,
+   "src_name_line": 813
+  },
+  "obj_SMB_castle_front": {
+   "depth": 10,
+   "array_index": 10,
+   "src_depth_line": 18,
+   "src_name_line": 814
+  },
+  "obj_mini_flag": {
+   "depth": 11,
+   "array_index": 11,
+   "src_depth_line": 19,
+   "src_name_line": 815
+  },
+  "obj_goalcard": {
+   "depth": 301,
+   "array_index": 12,
+   "src_depth_line": 20,
+   "src_name_line": 816
+  },
+  "obj_goalcard_get": {
+   "depth": -5,
+   "array_index": 13,
+   "src_depth_line": 21,
+   "src_name_line": 817
+  },
+  "obj_goalgate": {
+   "depth": 9,
+   "array_index": 14,
+   "src_depth_line": 22,
+   "src_name_line": 818
+  },
+  "obj_goalgate_front": {
+   "depth": -11,
+   "array_index": 15,
+   "src_depth_line": 23,
+   "src_name_line": 819
+  },
+  "obj_goalgate_tape": {
+   "depth": 8,
+   "array_index": 16,
+   "src_depth_line": 24,
+   "src_name_line": 820
+  },
+  "obj_mario": {
+   "depth": -8,
+   "array_index": 17,
+   "src_depth_line": 25,
+   "src_name_line": 821
+  },
+  "obj_marioU": {
+   "depth": -8,
+   "array_index": 18,
+   "src_depth_line": 26,
+   "src_name_line": 822
+  },
+  "obj_checkpoint": {
+   "depth": 8,
+   "array_index": 19,
+   "src_depth_line": 27,
+   "src_name_line": 823
+  },
+  "obj_levelmanager": {
+   "depth": -11,
+   "array_index": 20,
+   "src_depth_line": 28,
+   "src_name_line": 824
+  },
+  "obj_autoscroll": {
+   "depth": 0,
+   "array_index": 21,
+   "src_depth_line": 29,
+   "src_name_line": 825
+  },
+  "obj_bganimator": {
+   "depth": 0,
+   "array_index": 22,
+   "src_depth_line": 30,
+   "src_name_line": 826
+  },
+  "obj_shake_mario": {
+   "depth": -14,
+   "array_index": 23,
+   "src_depth_line": 31,
+   "src_name_line": 827
+  },
+  "obj_platform_help": {
+   "depth": -8,
+   "array_index": 24,
+   "src_depth_line": 32,
+   "src_name_line": 828
+  },
+  "obj_fallow_view": {
+   "depth": 0,
+   "array_index": 25,
+   "src_depth_line": 33,
+   "src_name_line": 829
+  },
+  "obj_koopa_b": {
+   "depth": -7,
+   "array_index": 26,
+   "src_depth_line": 34,
+   "src_name_line": 830
+  },
+  "obj_koopa_red_b": {
+   "depth": -7,
+   "array_index": 27,
+   "src_depth_line": 35,
+   "src_name_line": 831
+  },
+  "obj_beachkoopa_b": {
+   "depth": 0,
+   "array_index": 28,
+   "src_depth_line": 36,
+   "src_name_line": 832
+  },
+  "obj_beachkoopa_red_b": {
+   "depth": 0,
+   "array_index": 29,
+   "src_depth_line": 37,
+   "src_name_line": 833
+  },
+  "obj_galoomba": {
+   "depth": 0,
+   "array_index": 30,
+   "src_depth_line": 38,
+   "src_name_line": 834
+  },
+  "obj_galoomba2": {
+   "depth": 0,
+   "array_index": 31,
+   "src_depth_line": 39,
+   "src_name_line": 835
+  },
+  "obj_koopa": {
+   "depth": -7,
+   "array_index": 32,
+   "src_depth_line": 40,
+   "src_name_line": 836
+  },
+  "obj_koopa_red": {
+   "depth": -7,
+   "array_index": 33,
+   "src_depth_line": 41,
+   "src_name_line": 837
+  },
+  "obj_beachkoopa": {
+   "depth": 0,
+   "array_index": 34,
+   "src_depth_line": 42,
+   "src_name_line": 838
+  },
+  "obj_beachkoopa_red": {
+   "depth": 0,
+   "array_index": 35,
+   "src_depth_line": 43,
+   "src_name_line": 839
+  },
+  "obj_floruga": {
+   "depth": -2,
+   "array_index": 36,
+   "src_depth_line": 44,
+   "src_name_line": 840
+  },
+  "obj_floruga_body": {
+   "depth": 0,
+   "array_index": 37,
+   "src_depth_line": 45,
+   "src_name_line": 841
+  },
+  "obj_goomba_swim": {
+   "depth": 0,
+   "array_index": 38,
+   "src_depth_line": 46,
+   "src_name_line": 842
+  },
+  "obj_buzzybeetle": {
+   "depth": 0,
+   "array_index": 39,
+   "src_depth_line": 47,
+   "src_name_line": 843
+  },
+  "obj_buzzybeetle_b": {
+   "depth": 0,
+   "array_index": 40,
+   "src_depth_line": 48,
+   "src_name_line": 844
+  },
+  "obj_spiny": {
+   "depth": 0,
+   "array_index": 41,
+   "src_depth_line": 49,
+   "src_name_line": 845
+  },
+  "obj_spiny_ball": {
+   "depth": 0,
+   "array_index": 42,
+   "src_depth_line": 50,
+   "src_name_line": 846
+  },
+  "obj_buzzy_ceiling": {
+   "depth": 0,
+   "array_index": 43,
+   "src_depth_line": 51,
+   "src_name_line": 847
+  },
+  "obj_jumppiranha": {
+   "depth": -6,
+   "array_index": 44,
+   "src_depth_line": 52,
+   "src_name_line": 848
+  },
+  "obj_piranhaplant": {
+   "depth": 12,
+   "array_index": 45,
+   "src_depth_line": 53,
+   "src_name_line": 849
+  },
+  "obj_plant_fire": {
+   "depth": 0,
+   "array_index": 46,
+   "src_depth_line": 54,
+   "src_name_line": 850
+  },
+  "obj_cheepcheep": {
+   "depth": -7,
+   "array_index": 47,
+   "src_depth_line": 55,
+   "src_name_line": 851
+  },
+  "obj_cheepcheep2": {
+   "depth": -7,
+   "array_index": 48,
+   "src_depth_line": 56,
+   "src_name_line": 852
+  },
+  "obj_blooper": {
+   "depth": -7,
+   "array_index": 49,
+   "src_depth_line": 57,
+   "src_name_line": 853
+  },
+  "obj_angrysun": {
+   "depth": -7,
+   "array_index": 50,
+   "src_depth_line": 58,
+   "src_name_line": 854
+  },
+  "obj_monty_chase": {
+   "depth": -2,
+   "array_index": 51,
+   "src_depth_line": 59,
+   "src_name_line": 855
+  },
+  "obj_spike": {
+   "depth": -2,
+   "array_index": 52,
+   "src_depth_line": 60,
+   "src_name_line": 856
+  },
+  "obj_spike_ball": {
+   "depth": -3,
+   "array_index": 53,
+   "src_depth_line": 61,
+   "src_name_line": 857
+  },
+  "obj_snow_ball": {
+   "depth": 0,
+   "array_index": 54,
+   "src_depth_line": 62,
+   "src_name_line": 858
+  },
+  "obj_snow_ball_held": {
+   "depth": -1,
+   "array_index": 55,
+   "src_depth_line": 63,
+   "src_name_line": 859
+  },
+  "obj_pokey": {
+   "depth": -2,
+   "array_index": 56,
+   "src_depth_line": 64,
+   "src_name_line": 860
+  },
+  "obj_lakitu": {
+   "depth": -1,
+   "array_index": 57,
+   "src_depth_line": 65,
+   "src_name_line": 861
+  },
+  "obj_spiny_thrown": {
+   "depth": -3,
+   "array_index": 58,
+   "src_depth_line": 66,
+   "src_name_line": 862
+  },
+  "obj_cloud_lakitu": {
+   "depth": 2,
+   "array_index": 59,
+   "src_depth_line": 67,
+   "src_name_line": 863
+  },
+  "obj_boo": {
+   "depth": -2,
+   "array_index": 60,
+   "src_depth_line": 68,
+   "src_name_line": 864
+  },
+  "obj_drybones": {
+   "depth": 0,
+   "array_index": 61,
+   "src_depth_line": 69,
+   "src_name_line": 865
+  },
+  "obj_bonybeetle": {
+   "depth": 0,
+   "array_index": 62,
+   "src_depth_line": 70,
+   "src_name_line": 866
+  },
+  "obj_bonybeetle_b": {
+   "depth": 0,
+   "array_index": 63,
+   "src_depth_line": 71,
+   "src_name_line": 867
+  },
+  "obj_thwomp": {
+   "depth": -2,
+   "array_index": 64,
+   "src_depth_line": 72,
+   "src_name_line": 868
+  },
+  "obj_grrrol": {
+   "depth": -2,
+   "array_index": 65,
+   "src_depth_line": 73,
+   "src_name_line": 869
+  },
+  "obj_podoboo": {
+   "depth": -7,
+   "array_index": 66,
+   "src_depth_line": 74,
+   "src_name_line": 870
+  },
+  "obj_podoboo_b": {
+   "depth": -7,
+   "array_index": 67,
+   "src_depth_line": 75,
+   "src_name_line": 871
+  },
+  "obj_grinder": {
+   "depth": -7,
+   "array_index": 68,
+   "src_depth_line": 76,
+   "src_name_line": 872
+  },
+  "obj_magikoopa": {
+   "depth": -2,
+   "array_index": 69,
+   "src_depth_line": 77,
+   "src_name_line": 873
+  },
+  "obj_firebar": {
+   "depth": -7,
+   "array_index": 70,
+   "src_depth_line": 78,
+   "src_name_line": 874
+  },
+  "obj_bobomb": {
+   "depth": 0,
+   "array_index": 71,
+   "src_depth_line": 79,
+   "src_name_line": 875
+  },
+  "obj_bobomb_ready": {
+   "depth": 0,
+   "array_index": 72,
+   "src_depth_line": 80,
+   "src_name_line": 876
+  },
+  "obj_bullebill_base": {
+   "depth": -2,
+   "array_index": 73,
+   "src_depth_line": 81,
+   "src_name_line": 877
+  },
+  "obj_bullebill_base_red": {
+   "depth": -2,
+   "array_index": 74,
+   "src_depth_line": 82,
+   "src_name_line": 878
+  },
+  "obj_bulletbill": {
+   "depth": 10,
+   "array_index": 75,
+   "src_depth_line": 83,
+   "src_name_line": 879
+  },
+  "obj_bulletbull_red": {
+   "depth": 10,
+   "array_index": 76,
+   "src_depth_line": 84,
+   "src_name_line": 880
+  },
+  "obj_banzaibill": {
+   "depth": -8,
+   "array_index": 77,
+   "src_depth_line": 85,
+   "src_name_line": 881
+  },
+  "obj_billbanzai_red": {
+   "depth": -8,
+   "array_index": 78,
+   "src_depth_line": 86,
+   "src_name_line": 882
+  },
+  "obj_cannon": {
+   "depth": -3,
+   "array_index": 79,
+   "src_depth_line": 87,
+   "src_name_line": 883
+  },
+  "obj_cannon_red": {
+   "depth": -3,
+   "array_index": 80,
+   "src_depth_line": 88,
+   "src_name_line": 884
+  },
+  "obj_soplete": {
+   "depth": -2,
+   "array_index": 81,
+   "src_depth_line": 89,
+   "src_name_line": 885
+  },
+  "obj_soplete_invert": {
+   "depth": -2,
+   "array_index": 82,
+   "src_depth_line": 90,
+   "src_name_line": 886
+  },
+  "obj_soplete_global": {
+   "depth": 0,
+   "array_index": 83,
+   "src_depth_line": 91,
+   "src_name_line": 887
+  },
+  "obj_soplete_invert_global": {
+   "depth": 0,
+   "array_index": 84,
+   "src_depth_line": 92,
+   "src_name_line": 888
+  },
+  "obj_chain_chomp_free": {
+   "depth": -7,
+   "array_index": 85,
+   "src_depth_line": 93,
+   "src_name_line": 889
+  },
+  "obj_foo": {
+   "depth": -2,
+   "array_index": 86,
+   "src_depth_line": 94,
+   "src_name_line": 890
+  },
+  "obj_foo_fog": {
+   "depth": -11,
+   "array_index": 87,
+   "src_depth_line": 95,
+   "src_name_line": 891
+  },
+  "obj_mechakoopa": {
+   "depth": 0,
+   "array_index": 88,
+   "src_depth_line": 96,
+   "src_name_line": 892
+  },
+  "obj_mechakoopa_held": {
+   "depth": -2,
+   "array_index": 89,
+   "src_depth_line": 97,
+   "src_name_line": 893
+  },
+  "obj_rocky": {
+   "depth": -2,
+   "array_index": 90,
+   "src_depth_line": 98,
+   "src_name_line": 894
+  },
+  "obj_rocangrejo": {
+   "depth": 0,
+   "array_index": 91,
+   "src_depth_line": 99,
+   "src_name_line": 895
+  },
+  "obj_SMB_bowser": {
+   "depth": -1,
+   "array_index": 92,
+   "src_depth_line": 100,
+   "src_name_line": 896
+  },
+  "obj_SMB3_bowser": {
+   "depth": -1,
+   "array_index": 93,
+   "src_depth_line": 101,
+   "src_name_line": 897
+  },
+  "obj_SMW_bowser": {
+   "depth": -1,
+   "array_index": 94,
+   "src_depth_line": 102,
+   "src_name_line": 898
+  },
+  "obj_NSMBU_bowser": {
+   "depth": -1,
+   "array_index": 95,
+   "src_depth_line": 103,
+   "src_name_line": 899
+  },
+  "obj_bowserjr": {
+   "depth": -1,
+   "array_index": 96,
+   "src_depth_line": 104,
+   "src_name_line": 900
+  },
+  "obj_NSMBU_bowserjr": {
+   "depth": -1,
+   "array_index": 97,
+   "src_depth_line": 105,
+   "src_name_line": 901
+  },
+  "obj_bowserjr_shell": {
+   "depth": -2,
+   "array_index": 98,
+   "src_depth_line": 106,
+   "src_name_line": 902
+  },
+  "obj_boomboom": {
+   "depth": -2,
+   "array_index": 99,
+   "src_depth_line": 107,
+   "src_name_line": 903
+  },
+  "obj_NSMBU_boomboom": {
+   "depth": -2,
+   "array_index": 100,
+   "src_depth_line": 108,
+   "src_name_line": 904
+  },
+  "obj_hammerbro": {
+   "depth": -2,
+   "array_index": 101,
+   "src_depth_line": 109,
+   "src_name_line": 905
+  },
+  "obj_sledgebro": {
+   "depth": -2,
+   "array_index": 102,
+   "src_depth_line": 110,
+   "src_name_line": 906
+  },
+  "obj_charginchuck": {
+   "depth": -2,
+   "array_index": 103,
+   "src_depth_line": 111,
+   "src_name_line": 907
+  },
+  "obj_wings_dead": {
+   "depth": -8,
+   "array_index": 104,
+   "src_depth_line": 112,
+   "src_name_line": 908
+  },
+  "obj_wings_dead_b": {
+   "depth": -8,
+   "array_index": 105,
+   "src_depth_line": 113,
+   "src_name_line": 909
+  },
+  "obj_paracaidas_dead": {
+   "depth": -7,
+   "array_index": 106,
+   "src_depth_line": 114,
+   "src_name_line": 910
+  },
+  "obj_paracaidas_go": {
+   "depth": 5,
+   "array_index": 107,
+   "src_depth_line": 115,
+   "src_name_line": 911
+  },
+  "obj_solid": {
+   "depth": -1,
+   "array_index": 108,
+   "src_depth_line": 116,
+   "src_name_line": 912
+  },
+  "obj_solidtop": {
+   "depth": -1,
+   "array_index": 109,
+   "src_depth_line": 117,
+   "src_name_line": 913
+  },
+  "obj_climb": {
+   "depth": 1,
+   "array_index": 110,
+   "src_depth_line": 118,
+   "src_name_line": 914
+  },
+  "obj_solidphy": {
+   "depth": -1,
+   "array_index": 111,
+   "src_depth_line": 119,
+   "src_name_line": 915
+  },
+  "obj_enabledsolid": {
+   "depth": 1,
+   "array_index": 112,
+   "src_depth_line": 120,
+   "src_name_line": 916
+  },
+  "obj_hurtsolid2": {
+   "depth": -1,
+   "array_index": 113,
+   "src_depth_line": 121,
+   "src_name_line": 917
+  },
+  "obj_solidhold": {
+   "depth": -1,
+   "array_index": 114,
+   "src_depth_line": 122,
+   "src_name_line": 918
+  },
+  "obj_solid_appear": {
+   "depth": -1,
+   "array_index": 115,
+   "src_depth_line": 123,
+   "src_name_line": 919
+  },
+  "obj_block": {
+   "depth": 9,
+   "array_index": 116,
+   "src_depth_line": 124,
+   "src_name_line": 920
+  },
+  "obj_block_multicoin": {
+   "depth": 9,
+   "array_index": 117,
+   "src_depth_line": 125,
+   "src_name_line": 921
+  },
+  "obj_block_coinchain": {
+   "depth": 1,
+   "array_index": 118,
+   "src_depth_line": 126,
+   "src_name_line": 922
+  },
+  "obj_block_hidden": {
+   "depth": 9,
+   "array_index": 119,
+   "src_depth_line": 127,
+   "src_name_line": 923
+  },
+  "obj_flipblock": {
+   "depth": 9,
+   "array_index": 120,
+   "src_depth_line": 128,
+   "src_name_line": 924
+  },
+  "obj_flipblock_anim": {
+   "depth": 9,
+   "array_index": 121,
+   "src_depth_line": 129,
+   "src_name_line": 925
+  },
+  "obj_block_gold": {
+   "depth": 9,
+   "array_index": 122,
+   "src_depth_line": 130,
+   "src_name_line": 926
+  },
+  "obj_noteblock": {
+   "depth": -1,
+   "array_index": 123,
+   "src_depth_line": 131,
+   "src_name_line": 927
+  },
+  "obj_musicblock": {
+   "depth": -7,
+   "array_index": 124,
+   "src_depth_line": 132,
+   "src_name_line": 928
+  },
+  "obj_noteblock_s": {
+   "depth": -7,
+   "array_index": 125,
+   "src_depth_line": 133,
+   "src_name_line": 929
+  },
+  "obj_onoffblock": {
+   "depth": 1,
+   "array_index": 126,
+   "src_depth_line": 134,
+   "src_name_line": 930
+  },
+  "obj_onoffplatform": {
+   "depth": 1,
+   "array_index": 127,
+   "src_depth_line": 135,
+   "src_name_line": 931
+  },
+  "obj_onoffplatform_blue": {
+   "depth": 1,
+   "array_index": 128,
+   "src_depth_line": 136,
+   "src_name_line": 932
+  },
+  "obj_block_rock": {
+   "depth": 9,
+   "array_index": 129,
+   "src_depth_line": 137,
+   "src_name_line": 933
+  },
+  "obj_block_ice": {
+   "depth": 9,
+   "array_index": 130,
+   "src_depth_line": 138,
+   "src_name_line": 934
+  },
+  "obj_pblock": {
+   "depth": 1,
+   "array_index": 131,
+   "src_depth_line": 139,
+   "src_name_line": 935
+  },
+  "obj_anti_pblock": {
+   "depth": 1,
+   "array_index": 132,
+   "src_depth_line": 140,
+   "src_name_line": 936
+  },
+  "obj_nube": {
+   "depth": 2,
+   "array_index": 133,
+   "src_depth_line": 141,
+   "src_name_line": 937
+  },
+  "obj_onoffplatform_d": {
+   "depth": 0,
+   "array_index": 134,
+   "src_depth_line": 142,
+   "src_name_line": 938
+  },
+  "obj_pipebase": {
+   "depth": 9,
+   "array_index": 135,
+   "src_depth_line": 143,
+   "src_name_line": 939
+  },
+  "obj_vine_green": {
+   "depth": 6,
+   "array_index": 136,
+   "src_depth_line": 144,
+   "src_name_line": 940
+  },
+  "obj_beanstalk": {
+   "depth": 259,
+   "array_index": 137,
+   "src_depth_line": 145,
+   "src_name_line": 941
+  },
+  "obj_vine": {
+   "depth": 260,
+   "array_index": 138,
+   "src_depth_line": 146,
+   "src_name_line": 942
+  },
+  "obj_muncher": {
+   "depth": -1,
+   "array_index": 139,
+   "src_depth_line": 147,
+   "src_name_line": 943
+  },
+  "obj_muncher_b": {
+   "depth": -1,
+   "array_index": 140,
+   "src_depth_line": 148,
+   "src_name_line": 944
+  },
+  "obj_pinchos": {
+   "depth": -2,
+   "array_index": 141,
+   "src_depth_line": 149,
+   "src_name_line": 945
+  },
+  "obj_mini_icicle": {
+   "depth": -5,
+   "array_index": 142,
+   "src_depth_line": 150,
+   "src_name_line": 946
+  },
+  "obj_mini_icicle2": {
+   "depth": -5,
+   "array_index": 143,
+   "src_depth_line": 151,
+   "src_name_line": 947
+  },
+  "obj_icicle": {
+   "depth": -5,
+   "array_index": 144,
+   "src_depth_line": 152,
+   "src_name_line": 948
+  },
+  "obj_icicle2": {
+   "depth": -5,
+   "array_index": 145,
+   "src_depth_line": 153,
+   "src_name_line": 949
+  },
+  "obj_arrow": {
+   "depth": 14,
+   "array_index": 146,
+   "src_depth_line": 154,
+   "src_name_line": 950
+  },
+  "obj_plataforma": {
+   "depth": -7,
+   "array_index": 147,
+   "src_depth_line": 155,
+   "src_name_line": 951
+  },
+  "obj_plataforma_blue": {
+   "depth": -7,
+   "array_index": 148,
+   "src_depth_line": 156,
+   "src_name_line": 952
+  },
+  "obj_donut": {
+   "depth": -7,
+   "array_index": 149,
+   "src_depth_line": 157,
+   "src_name_line": 953
+  },
+  "obj_fast_lava_lift": {
+   "depth": 5,
+   "array_index": 150,
+   "src_depth_line": 158,
+   "src_name_line": 954
+  },
+  "obj_lava_lift": {
+   "depth": 5,
+   "array_index": 151,
+   "src_depth_line": 159,
+   "src_name_line": 955
+  },
+  "obj_lava_lift_part": {
+   "depth": 5,
+   "array_index": 152,
+   "src_depth_line": 160,
+   "src_name_line": 956
+  },
+  "obj_bouncycloud": {
+   "depth": 0,
+   "array_index": 153,
+   "src_depth_line": 161,
+   "src_name_line": 957
+  },
+  "obj_coin": {
+   "depth": 1,
+   "array_index": 154,
+   "src_depth_line": 162,
+   "src_name_line": 958
+  },
+  "obj_icecoin": {
+   "depth": 9,
+   "array_index": 155,
+   "src_depth_line": 163,
+   "src_name_line": 959
+  },
+  "obj_pink_coin": {
+   "depth": 1,
+   "array_index": 156,
+   "src_depth_line": 164,
+   "src_name_line": 960
+  },
+  "obj_coin10": {
+   "depth": 1,
+   "array_index": 157,
+   "src_depth_line": 165,
+   "src_name_line": 961
+  },
+  "obj_coin30": {
+   "depth": 1,
+   "array_index": 158,
+   "src_depth_line": 166,
+   "src_name_line": 962
+  },
+  "obj_coin50": {
+   "depth": 1,
+   "array_index": 159,
+   "src_depth_line": 167,
+   "src_name_line": 963
+  },
+  "obj_spring": {
+   "depth": 0,
+   "array_index": 160,
+   "src_depth_line": 168,
+   "src_name_line": 964
+  },
+  "obj_spring_land": {
+   "depth": 0,
+   "array_index": 161,
+   "src_depth_line": 169,
+   "src_name_line": 965
+  },
+  "obj_coin_pow": {
+   "depth": 1,
+   "array_index": 162,
+   "src_depth_line": 170,
+   "src_name_line": 966
+  },
+  "obj_coin_pow_big": {
+   "depth": 1,
+   "array_index": 163,
+   "src_depth_line": 171,
+   "src_name_line": 967
+  },
+  "obj_pswitch": {
+   "depth": -2,
+   "array_index": 164,
+   "src_depth_line": 172,
+   "src_name_line": 968
+  },
+  "obj_pswitch_press": {
+   "depth": 0,
+   "array_index": 165,
+   "src_depth_line": 173,
+   "src_name_line": 969
+  },
+  "obj_block_pow_hold": {
+   "depth": 0,
+   "array_index": 166,
+   "src_depth_line": 174,
+   "src_name_line": 970
+  },
+  "obj_block_pow_active": {
+   "depth": -7,
+   "array_index": 167,
+   "src_depth_line": 175,
+   "src_name_line": 971
+  },
+  "obj_quicksand": {
+   "depth": -6,
+   "array_index": 168,
+   "src_depth_line": 176,
+   "src_name_line": 972
+  },
+  "obj_bumper": {
+   "depth": -7,
+   "array_index": 169,
+   "src_depth_line": 177,
+   "src_name_line": 973
+  },
+  "obj_onewaygate_right": {
+   "depth": 14,
+   "array_index": 170,
+   "src_depth_line": 178,
+   "src_name_line": 974
+  },
+  "obj_onewaygate_left": {
+   "depth": 14,
+   "array_index": 171,
+   "src_depth_line": 179,
+   "src_name_line": 975
+  },
+  "obj_onewaygate_top": {
+   "depth": 14,
+   "array_index": 172,
+   "src_depth_line": 180,
+   "src_name_line": 976
+  },
+  "obj_onewaygate_bottom": {
+   "depth": 14,
+   "array_index": 173,
+   "src_depth_line": 181,
+   "src_name_line": 977
+  },
+  "obj_key": {
+   "depth": 0,
+   "array_index": 174,
+   "src_depth_line": 182,
+   "src_name_line": 978
+  },
+  "obj_key_appear": {
+   "depth": 0,
+   "array_index": 175,
+   "src_depth_line": 183,
+   "src_name_line": 979
+  },
+  "obj_key_fallow": {
+   "depth": -7,
+   "array_index": 176,
+   "src_depth_line": 184,
+   "src_name_line": 980
+  },
+  "obj_torbellino": {
+   "depth": -3,
+   "array_index": 177,
+   "src_depth_line": 185,
+   "src_name_line": 981
+  },
+  "obj_bortice": {
+   "depth": -7,
+   "array_index": 178,
+   "src_depth_line": 186,
+   "src_name_line": 982
+  },
+  "obj_door": {
+   "depth": 5,
+   "array_index": 179,
+   "src_depth_line": 187,
+   "src_name_line": 983
+  },
+  "obj_door_exit": {
+   "depth": 5,
+   "array_index": 180,
+   "src_depth_line": 188,
+   "src_name_line": 984
+  },
+  "obj_door_switch": {
+   "depth": 5,
+   "array_index": 181,
+   "src_depth_line": 189,
+   "src_name_line": 985
+  },
+  "obj_door_switch_exit": {
+   "depth": 5,
+   "array_index": 182,
+   "src_depth_line": 190,
+   "src_name_line": 986
+  },
+  "obj_door_lock": {
+   "depth": 5,
+   "array_index": 183,
+   "src_depth_line": 191,
+   "src_name_line": 987
+  },
+  "obj_door_lock_exit": {
+   "depth": 5,
+   "array_index": 184,
+   "src_depth_line": 192,
+   "src_name_line": 988
+  },
+  "obj_tuberia": {
+   "depth": 11,
+   "array_index": 185,
+   "src_depth_line": 193,
+   "src_name_line": 989
+  },
+  "obj_deactivation": {
+   "depth": 0,
+   "array_index": 186,
+   "src_depth_line": 194,
+   "src_name_line": 990
+  },
+  "obj_physicsparent": {
+   "depth": 0,
+   "array_index": 187,
+   "src_depth_line": 195,
+   "src_name_line": 991
+  },
+  "obj_powerupparent": {
+   "depth": 0,
+   "array_index": 188,
+   "src_depth_line": 196,
+   "src_name_line": 992
+  },
+  "obj_enemyparent": {
+   "depth": 0,
+   "array_index": 189,
+   "src_depth_line": 197,
+   "src_name_line": 993
+  },
+  "obj_deactenemyparent": {
+   "depth": 0,
+   "array_index": 190,
+   "src_depth_line": 198,
+   "src_name_line": 994
+  },
+  "obj_bossparent": {
+   "depth": -2,
+   "array_index": 191,
+   "src_depth_line": 199,
+   "src_name_line": 995
+  },
+  "obj_player_goal_parent": {
+   "depth": 0,
+   "array_index": 192,
+   "src_depth_line": 200,
+   "src_name_line": 996
+  },
+  "obj_blockparent": {
+   "depth": -1,
+   "array_index": 193,
+   "src_depth_line": 201,
+   "src_name_line": 997
+  },
+  "obj_rockparent": {
+   "depth": 9,
+   "array_index": 194,
+   "src_depth_line": 202,
+   "src_name_line": 998
+  },
+  "obj_holdparent": {
+   "depth": 0,
+   "array_index": 195,
+   "src_depth_line": 203,
+   "src_name_line": 999
+  },
+  "obj_slopeparent": {
+   "depth": 0,
+   "array_index": 196,
+   "src_depth_line": 204,
+   "src_name_line": 1000
+  },
+  "obj_enemyparent_held": {
+   "depth": -2,
+   "array_index": 197,
+   "src_depth_line": 205,
+   "src_name_line": 1001
+  },
+  "obj_enemyparent_lava": {
+   "depth": 0,
+   "array_index": 198,
+   "src_depth_line": 206,
+   "src_name_line": 1002
+  },
+  "obj_platform_parent": {
+   "depth": -7,
+   "array_index": 199,
+   "src_depth_line": 207,
+   "src_name_line": 1003
+  },
+  "obj_physicssolid": {
+   "depth": 0,
+   "array_index": 200,
+   "src_depth_line": 208,
+   "src_name_line": 1004
+  },
+  "obj_deadmario": {
+   "depth": -14,
+   "array_index": 201,
+   "src_depth_line": 209,
+   "src_name_line": 1005
+  },
+  "obj_mario_temp": {
+   "depth": -8,
+   "array_index": 202,
+   "src_depth_line": 210,
+   "src_name_line": 1006
+  },
+  "obj_doormario": {
+   "depth": -5,
+   "array_index": 203,
+   "src_depth_line": 211,
+   "src_name_line": 1007
+  },
+  "obj_doormario_exit": {
+   "depth": -5,
+   "array_index": 204,
+   "src_depth_line": 212,
+   "src_name_line": 1008
+  },
+  "obj_player_warp": {
+   "depth": 13,
+   "array_index": 205,
+   "src_depth_line": 213,
+   "src_name_line": 1009
+  },
+  "obj_mario_pballon": {
+   "depth": -8,
+   "array_index": 206,
+   "src_depth_line": 214,
+   "src_name_line": 1010
+  },
+  "obj_player_goal_smb1": {
+   "depth": -5,
+   "array_index": 207,
+   "src_depth_line": 215,
+   "src_name_line": 1011
+  },
+  "obj_player_goal_smb3": {
+   "depth": -5,
+   "array_index": 208,
+   "src_depth_line": 216,
+   "src_name_line": 1012
+  },
+  "obj_player_goal_smw": {
+   "depth": -5,
+   "array_index": 209,
+   "src_depth_line": 217,
+   "src_name_line": 1013
+  },
+  "obj_player_goal_smw_castle": {
+   "depth": -5,
+   "array_index": 210,
+   "src_depth_line": 218,
+   "src_name_line": 1014
+  },
+  "obj_player_goal_nsmbu": {
+   "depth": -5,
+   "array_index": 211,
+   "src_depth_line": 219,
+   "src_name_line": 1015
+  },
+  "obj_slider": {
+   "depth": 0,
+   "array_index": 212,
+   "src_depth_line": 220,
+   "src_name_line": 1016
+  },
+  "obj_spinner": {
+   "depth": -8,
+   "array_index": 213,
+   "src_depth_line": 221,
+   "src_name_line": 1017
+  },
+  "obj_mario_transform2": {
+   "depth": -6,
+   "array_index": 214,
+   "src_depth_line": 222,
+   "src_name_line": 1018
+  },
+  "obj_penguin_attack": {
+   "depth": 0,
+   "array_index": 215,
+   "src_depth_line": 223,
+   "src_name_line": 1019
+  },
+  "obj_groundpount": {
+   "depth": 0,
+   "array_index": 216,
+   "src_depth_line": 224,
+   "src_name_line": 1020
+  },
+  "obj_icon_dead": {
+   "depth": -15,
+   "array_index": 217,
+   "src_depth_line": 225,
+   "src_name_line": 1021
+  },
+  "obj_1up": {
+   "depth": -2,
+   "array_index": 218,
+   "src_depth_line": 226,
+   "src_name_line": 1022
+  },
+  "obj_mushroom": {
+   "depth": -2,
+   "array_index": 219,
+   "src_depth_line": 227,
+   "src_name_line": 1023
+  },
+  "obj_fireflower": {
+   "depth": -2,
+   "array_index": 220,
+   "src_depth_line": 228,
+   "src_name_line": 1024
+  },
+  "obj_superflower": {
+   "depth": 2,
+   "array_index": 221,
+   "src_depth_line": 229,
+   "src_name_line": 1025
+  },
+  "obj_cap": {
+   "depth": -7,
+   "array_index": 222,
+   "src_depth_line": 230,
+   "src_name_line": 1026
+  },
+  "obj_megamushroom": {
+   "depth": -2,
+   "array_index": 223,
+   "src_depth_line": 231,
+   "src_name_line": 1027
+  },
+  "obj_hen_mushroom": {
+   "depth": -2,
+   "array_index": 224,
+   "src_depth_line": 232,
+   "src_name_line": 1028
+  },
+  "obj_pballon": {
+   "depth": 0,
+   "array_index": 225,
+   "src_depth_line": 233,
+   "src_name_line": 1029
+  },
+  "obj_star": {
+   "depth": -2,
+   "array_index": 226,
+   "src_depth_line": 234,
+   "src_name_line": 1030
+  },
+  "obj_propellershroom": {
+   "depth": 2,
+   "array_index": 227,
+   "src_depth_line": 235,
+   "src_name_line": 1031
+  },
+  "obj_frogsuit": {
+   "depth": 2,
+   "array_index": 228,
+   "src_depth_line": 236,
+   "src_name_line": 1032
+  },
+  "obj_hammersuit": {
+   "depth": 2,
+   "array_index": 229,
+   "src_depth_line": 237,
+   "src_name_line": 1033
+  },
+  "obj_penguin_suit": {
+   "depth": 0,
+   "array_index": 230,
+   "src_depth_line": 238,
+   "src_name_line": 1034
+  },
+  "obj_superarcon": {
+   "depth": 0,
+   "array_index": 231,
+   "src_depth_line": 239,
+   "src_name_line": 1035
+  },
+  "obj_egg": {
+   "depth": -2,
+   "array_index": 232,
+   "src_depth_line": 240,
+   "src_name_line": 1036
+  },
+  "obj_egg_hatch": {
+   "depth": 2,
+   "array_index": 233,
+   "src_depth_line": 241,
+   "src_name_line": 1037
+  },
+  "obj_yoshi2": {
+   "depth": -7,
+   "array_index": 234,
+   "src_depth_line": 242,
+   "src_name_line": 1038
+  },
+  "obj_yoshi_runaway": {
+   "depth": -4,
+   "array_index": 235,
+   "src_depth_line": 243,
+   "src_name_line": 1039
+  },
+  "obj_yoshi_abandon": {
+   "depth": -7,
+   "array_index": 236,
+   "src_depth_line": 244,
+   "src_name_line": 1040
+  },
+  "obj_yoshifire": {
+   "depth": -7,
+   "array_index": 237,
+   "src_depth_line": 245,
+   "src_name_line": 1041
+  },
+  "obj_yoshifire_purple": {
+   "depth": 0,
+   "array_index": 238,
+   "src_depth_line": 246,
+   "src_name_line": 1042
+  },
+  "obj_yoshifire_one": {
+   "depth": -7,
+   "array_index": 239,
+   "src_depth_line": 247,
+   "src_name_line": 1043
+  },
+  "obj_tongue": {
+   "depth": -7,
+   "array_index": 240,
+   "src_depth_line": 248,
+   "src_name_line": 1044
+  },
+  "obj_egg_red": {
+   "depth": -2,
+   "array_index": 241,
+   "src_depth_line": 249,
+   "src_name_line": 1045
+  },
+  "obj_yoshi_red": {
+   "depth": -7,
+   "array_index": 242,
+   "src_depth_line": 250,
+   "src_name_line": 1046
+  },
+  "obj_yoshi_runaway_red": {
+   "depth": -4,
+   "array_index": 243,
+   "src_depth_line": 251,
+   "src_name_line": 1047
+  },
+  "obj_getshoe": {
+   "depth": 0,
+   "array_index": 244,
+   "src_depth_line": 252,
+   "src_name_line": 1048
+  },
+  "obj_kuriboshoe": {
+   "depth": -9,
+   "array_index": 245,
+   "src_depth_line": 253,
+   "src_name_line": 1049
+  },
+  "obj_kuriboshoe2": {
+   "depth": -9,
+   "array_index": 246,
+   "src_depth_line": 254,
+   "src_name_line": 1050
+  },
+  "obj_smoke_shoe": {
+   "depth": -7,
+   "array_index": 247,
+   "src_depth_line": 255,
+   "src_name_line": 1051
+  },
+  "obj_kuriboshoe_movement": {
+   "depth": 0,
+   "array_index": 248,
+   "src_depth_line": 256,
+   "src_name_line": 1052
+  },
+  "obj_kuribo_drybones": {
+   "depth": -11,
+   "array_index": 249,
+   "src_depth_line": 257,
+   "src_name_line": 1053
+  },
+  "obj_helmet": {
+   "depth": -9,
+   "array_index": 250,
+   "src_depth_line": 258,
+   "src_name_line": 1054
+  },
+  "obj_helmet_spiny": {
+   "depth": -9,
+   "array_index": 251,
+   "src_depth_line": 259,
+   "src_name_line": 1055
+  },
+  "obj_brickhelmet": {
+   "depth": -9,
+   "array_index": 252,
+   "src_depth_line": 260,
+   "src_name_line": 1056
+  },
+  "obj_clown": {
+   "depth": 2,
+   "array_index": 253,
+   "src_depth_line": 261,
+   "src_name_line": 1057
+  },
+  "obj_clown_fire": {
+   "depth": 2,
+   "array_index": 254,
+   "src_depth_line": 262,
+   "src_name_line": 1058
+  },
+  "obj_fire_clown": {
+   "depth": -12,
+   "array_index": 255,
+   "src_depth_line": 263,
+   "src_name_line": 1059
+  },
+  "obj_fire_clown_small": {
+   "depth": -12,
+   "array_index": 256,
+   "src_depth_line": 264,
+   "src_name_line": 1060
+  },
+  "obj_clown_explotion": {
+   "depth": -7,
+   "array_index": 257,
+   "src_depth_line": 265,
+   "src_name_line": 1061
+  },
+  "obj_cap_mario": {
+   "depth": -4,
+   "array_index": 258,
+   "src_depth_line": 266,
+   "src_name_line": 1062
+  },
+  "obj_powerupsprout": {
+   "depth": 10,
+   "array_index": 259,
+   "src_depth_line": 267,
+   "src_name_line": 1063
+  },
+  "obj_powerupsprout_note": {
+   "depth": 10,
+   "array_index": 260,
+   "src_depth_line": 268,
+   "src_name_line": 1064
+  },
+  "obj_fireball": {
+   "depth": -2,
+   "array_index": 261,
+   "src_depth_line": 269,
+   "src_name_line": 1065
+  },
+  "obj_fireball_b": {
+   "depth": 0,
+   "array_index": 262,
+   "src_depth_line": 270,
+   "src_name_line": 1066
+  },
+  "obj_snowball": {
+   "depth": -2,
+   "array_index": 263,
+   "src_depth_line": 271,
+   "src_name_line": 1067
+  },
+  "obj_superball": {
+   "depth": -2,
+   "array_index": 264,
+   "src_depth_line": 272,
+   "src_name_line": 1068
+  },
+  "obj_superball_trail": {
+   "depth": -1,
+   "array_index": 265,
+   "src_depth_line": 273,
+   "src_name_line": 1069
+  },
+  "obj_invincibility": {
+   "depth": -9,
+   "array_index": 266,
+   "src_depth_line": 274,
+   "src_name_line": 1070
+  },
+  "obj_brohammer_yoshi": {
+   "depth": -7,
+   "array_index": 267,
+   "src_depth_line": 275,
+   "src_name_line": 1071
+  },
+  "obj_bones_yoshi": {
+   "depth": -7,
+   "array_index": 268,
+   "src_depth_line": 276,
+   "src_name_line": 1072
+  },
+  "obj_bones_yoshi_one": {
+   "depth": -7,
+   "array_index": 269,
+   "src_depth_line": 277,
+   "src_name_line": 1073
+  },
+  "obj_hammer": {
+   "depth": -9,
+   "array_index": 270,
+   "src_depth_line": 278,
+   "src_name_line": 1074
+  },
+  "obj_hammer_b": {
+   "depth": -9,
+   "array_index": 271,
+   "src_depth_line": 279,
+   "src_name_line": 1075
+  },
+  "obj_gold_explosion": {
+   "depth": -7,
+   "array_index": 272,
+   "src_depth_line": 280,
+   "src_name_line": 1076
+  },
+  "obj_galoomba_hold": {
+   "depth": 0,
+   "array_index": 273,
+   "src_depth_line": 281,
+   "src_name_line": 1077
+  },
+  "obj_galoomba_hold2": {
+   "depth": 0,
+   "array_index": 274,
+   "src_depth_line": 282,
+   "src_name_line": 1078
+  },
+  "obj_plantfire": {
+   "depth": -3,
+   "array_index": 275,
+   "src_depth_line": 283,
+   "src_name_line": 1079
+  },
+  "obj_espina": {
+   "depth": 0,
+   "array_index": 276,
+   "src_depth_line": 284,
+   "src_name_line": 1080
+  },
+  "obj_angrysun_movement": {
+   "depth": 0,
+   "array_index": 277,
+   "src_depth_line": 285,
+   "src_name_line": 1081
+  },
+  "obj_crumblebones": {
+   "depth": 0,
+   "array_index": 278,
+   "src_depth_line": 286,
+   "src_name_line": 1082
+  },
+  "obj_crumblebony": {
+   "depth": 0,
+   "array_index": 279,
+   "src_depth_line": 287,
+   "src_name_line": 1083
+  },
+  "obj_crumblebony_b": {
+   "depth": 0,
+   "array_index": 280,
+   "src_depth_line": 288,
+   "src_name_line": 1084
+  },
+  "obj_magic": {
+   "depth": -7,
+   "array_index": 281,
+   "src_depth_line": 289,
+   "src_name_line": 1085
+  },
+  "obj_bone": {
+   "depth": -7,
+   "array_index": 282,
+   "src_depth_line": 290,
+   "src_name_line": 1086
+  },
+  "obj_bobomb_hold": {
+   "depth": 0,
+   "array_index": 283,
+   "src_depth_line": 291,
+   "src_name_line": 1087
+  },
+  "obj_cannonball": {
+   "depth": -2,
+   "array_index": 284,
+   "src_depth_line": 292,
+   "src_name_line": 1088
+  },
+  "obj_cannonball_red": {
+   "depth": 0,
+   "array_index": 285,
+   "src_depth_line": 293,
+   "src_name_line": 1089
+  },
+  "obj_wrench": {
+   "depth": -8,
+   "array_index": 286,
+   "src_depth_line": 294,
+   "src_name_line": 1090
+  },
+  "obj_rorock": {
+   "depth": -2,
+   "array_index": 287,
+   "src_depth_line": 295,
+   "src_name_line": 1091
+  },
+  "obj_bowser_fire": {
+   "depth": -7,
+   "array_index": 288,
+   "src_depth_line": 296,
+   "src_name_line": 1092
+  },
+  "obj_NSMBU_bowser_fire": {
+   "depth": -7,
+   "array_index": 289,
+   "src_depth_line": 297,
+   "src_name_line": 1093
+  },
+  "obj_NSMBU_bowser_fire_up": {
+   "depth": -7,
+   "array_index": 290,
+   "src_depth_line": 298,
+   "src_name_line": 1094
+  },
+  "obj_bowserfire_up": {
+   "depth": -7,
+   "array_index": 291,
+   "src_depth_line": 299,
+   "src_name_line": 1095
+  },
+  "obj_bowser_fire_down": {
+   "depth": -7,
+   "array_index": 292,
+   "src_depth_line": 300,
+   "src_name_line": 1096
+  },
+  "obj_bowserjr_fire": {
+   "depth": -7,
+   "array_index": 293,
+   "src_depth_line": 301,
+   "src_name_line": 1097
+  },
+  "obj_NSMBU_bowserjr_fire": {
+   "depth": -7,
+   "array_index": 294,
+   "src_depth_line": 302,
+   "src_name_line": 1098
+  },
+  "obj_enemy_dead": {
+   "depth": -8,
+   "array_index": 295,
+   "src_depth_line": 303,
+   "src_name_line": 1099
+  },
+  "obj_bowser_dead": {
+   "depth": -8,
+   "array_index": 296,
+   "src_depth_line": 304,
+   "src_name_line": 1100
+  },
+  "obj_enemy_dead_castle": {
+   "depth": -8,
+   "array_index": 297,
+   "src_depth_line": 305,
+   "src_name_line": 1101
+  },
+  "obj_bowser_dead_castle": {
+   "depth": -8,
+   "array_index": 298,
+   "src_depth_line": 306,
+   "src_name_line": 1102
+  },
+  "obj_bowserjr_dead_castle": {
+   "depth": -8,
+   "array_index": 299,
+   "src_depth_line": 307,
+   "src_name_line": 1103
+  },
+  "obj_enemy_multidead": {
+   "depth": 0,
+   "array_index": 300,
+   "src_depth_line": 308,
+   "src_name_line": 1104
+  },
+  "obj_stomped": {
+   "depth": 0,
+   "array_index": 301,
+   "src_depth_line": 309,
+   "src_name_line": 1105
+  },
+  "obj_shell": {
+   "depth": -1,
+   "array_index": 302,
+   "src_depth_line": 310,
+   "src_name_line": 1106
+  },
+  "obj_shell_held": {
+   "depth": -1,
+   "array_index": 303,
+   "src_depth_line": 311,
+   "src_name_line": 1107
+  },
+  "obj_shell_empty": {
+   "depth": -1,
+   "array_index": 304,
+   "src_depth_line": 312,
+   "src_name_line": 1108
+  },
+  "obj_spiny_empty": {
+   "depth": -1,
+   "array_index": 305,
+   "src_depth_line": 313,
+   "src_name_line": 1109
+  },
+  "obj_shell_drybones": {
+   "depth": -1,
+   "array_index": 306,
+   "src_depth_line": 314,
+   "src_name_line": 1110
+  },
+  "obj_shell_drybones_held": {
+   "depth": -1,
+   "array_index": 307,
+   "src_depth_line": 315,
+   "src_name_line": 1111
+  },
+  "obj_brohammer": {
+   "depth": -7,
+   "array_index": 308,
+   "src_depth_line": 316,
+   "src_name_line": 1112
+  },
+  "obj_enemyfrozen": {
+   "depth": 0,
+   "array_index": 309,
+   "src_depth_line": 317,
+   "src_name_line": 1113
+  },
+  "obj_blockcoin": {
+   "depth": 2,
+   "array_index": 310,
+   "src_depth_line": 318,
+   "src_name_line": 1114
+  },
+  "obj_coinchain": {
+   "depth": 2,
+   "array_index": 311,
+   "src_depth_line": 319,
+   "src_name_line": 1115
+  },
+  "obj_shard": {
+   "depth": -7,
+   "array_index": 312,
+   "src_depth_line": 320,
+   "src_name_line": 1116
+  },
+  "obj_veggiecoin": {
+   "depth": -1,
+   "array_index": 313,
+   "src_depth_line": 321,
+   "src_name_line": 1117
+  },
+  "obj_multiveggiecoin": {
+   "depth": -1,
+   "array_index": 314,
+   "src_depth_line": 322,
+   "src_name_line": 1118
+  },
+  "obj_coinchange": {
+   "depth": 0,
+   "array_index": 315,
+   "src_depth_line": 323,
+   "src_name_line": 1119
+  },
+  "obj_blownbubble": {
+   "depth": 0,
+   "array_index": 316,
+   "src_depth_line": 324,
+   "src_name_line": 1120
+  },
+  "obj_curtainin": {
+   "depth": -30,
+   "array_index": 317,
+   "src_depth_line": 325,
+   "src_name_line": 1121
+  },
+  "obj_curtainout": {
+   "depth": -30,
+   "array_index": 318,
+   "src_depth_line": 326,
+   "src_name_line": 1122
+  },
+  "obj_fadein": {
+   "depth": -99,
+   "array_index": 319,
+   "src_depth_line": 327,
+   "src_name_line": 1123
+  },
+  "obj_fadeout": {
+   "depth": -99,
+   "array_index": 320,
+   "src_depth_line": 328,
+   "src_name_line": 1124
+  },
+  "obj_score": {
+   "depth": -2,
+   "array_index": 321,
+   "src_depth_line": 329,
+   "src_name_line": 1125
+  },
+  "obj_smoke": {
+   "depth": -2,
+   "array_index": 776,
+   "src_depth_line": 782,
+   "src_name_line": 1578
+  },
+  "obj_smoke_steps": {
+   "depth": -2,
+   "array_index": 323,
+   "src_depth_line": 331,
+   "src_name_line": 1127
+  },
+  "obj_statuesmoke": {
+   "depth": -6,
+   "array_index": 324,
+   "src_depth_line": 332,
+   "src_name_line": 1128
+  },
+  "obj_spinsmoke": {
+   "depth": -7,
+   "array_index": 325,
+   "src_depth_line": 333,
+   "src_name_line": 1129
+  },
+  "obj_spinthump": {
+   "depth": -9,
+   "array_index": 326,
+   "src_depth_line": 334,
+   "src_name_line": 1130
+  },
+  "obj_bubble": {
+   "depth": -1,
+   "array_index": 327,
+   "src_depth_line": 335,
+   "src_name_line": 1131
+  },
+  "obj_sparkletrail": {
+   "depth": -1,
+   "array_index": 328,
+   "src_depth_line": 336,
+   "src_name_line": 1132
+  },
+  "obj_sparkles_coin": {
+   "depth": 0,
+   "array_index": 329,
+   "src_depth_line": 337,
+   "src_name_line": 1133
+  },
+  "obj_smoke_cap": {
+   "depth": -7,
+   "array_index": 330,
+   "src_depth_line": 338,
+   "src_name_line": 1134
+  },
+  "obj_detroy_enemy": {
+   "depth": -7,
+   "array_index": 331,
+   "src_depth_line": 339,
+   "src_name_line": 1135
+  },
+  "obj_rotten_signal": {
+   "depth": -8,
+   "array_index": 332,
+   "src_depth_line": 340,
+   "src_name_line": 1136
+  },
+  "obj_gotas": {
+   "depth": 0,
+   "array_index": 333,
+   "src_depth_line": 341,
+   "src_name_line": 1137
+  },
+  "obj_splash_agua": {
+   "depth": -12,
+   "array_index": 334,
+   "src_depth_line": 342,
+   "src_name_line": 1138
+  },
+  "obj_splash_lava": {
+   "depth": -12,
+   "array_index": 335,
+   "src_depth_line": 343,
+   "src_name_line": 1139
+  },
+  "obj_splash_posion": {
+   "depth": -12,
+   "array_index": 336,
+   "src_depth_line": 344,
+   "src_name_line": 1140
+  },
+  "obj_menu_pausa": {
+   "depth": -16,
+   "array_index": 337,
+   "src_depth_line": 345,
+   "src_name_line": 1141
+  },
+  "obj_pausa_button": {
+   "depth": -17,
+   "array_index": 338,
+   "src_depth_line": 346,
+   "src_name_line": 1142
+  },
+  "obj_axe_smw": {
+   "depth": 10,
+   "array_index": 339,
+   "src_depth_line": 347,
+   "src_name_line": 1143
+  },
+  "obj_castle_floor": {
+   "depth": 6,
+   "array_index": 340,
+   "src_depth_line": 348,
+   "src_name_line": 1144
+  },
+  "obj_castle": {
+   "depth": 10,
+   "array_index": 341,
+   "src_depth_line": 349,
+   "src_name_line": 1145
+  },
+  "obj_castle_front": {
+   "depth": 10,
+   "array_index": 342,
+   "src_depth_line": 350,
+   "src_name_line": 1146
+  },
+  "obj_explosion": {
+   "depth": -7,
+   "array_index": 343,
+   "src_depth_line": 351,
+   "src_name_line": 1147
+  },
+  "obj_blockbumper": {
+   "depth": 0,
+   "array_index": 344,
+   "src_depth_line": 352,
+   "src_name_line": 1148
+  },
+  "obj_stomp": {
+   "depth": 0,
+   "array_index": 345,
+   "src_depth_line": 353,
+   "src_name_line": 1149
+  },
+  "obj_sidefade": {
+   "depth": -10,
+   "array_index": 346,
+   "src_depth_line": 354,
+   "src_name_line": 1150
+  },
+  "obj_title_controller": {
+   "depth": -26,
+   "array_index": 347,
+   "src_depth_line": 355,
+   "src_name_line": 1151
+  },
+  "obj_title_oprime": {
+   "depth": -25,
+   "array_index": 348,
+   "src_depth_line": 356,
+   "src_name_line": 1152
+  },
+  "obj_editor_screen": {
+   "depth": -25,
+   "array_index": 349,
+   "src_depth_line": 357,
+   "src_name_line": 1153
+  },
+  "obj_play_screen": {
+   "depth": -25,
+   "array_index": 350,
+   "src_depth_line": 358,
+   "src_name_line": 1154
+  },
+  "obj_load_level": {
+   "depth": 0,
+   "array_index": 351,
+   "src_depth_line": 359,
+   "src_name_line": 1155
+  },
+  "obj_mariostart": {
+   "depth": -100,
+   "array_index": 352,
+   "src_depth_line": 360,
+   "src_name_line": 1156
+  },
+  "obj_mariostart_m": {
+   "depth": -101,
+   "array_index": 353,
+   "src_depth_line": 361,
+   "src_name_line": 1157
+  },
+  "obj_intro_controller": {
+   "depth": 0,
+   "array_index": 354,
+   "src_depth_line": 362,
+   "src_name_line": 1158
+  },
+  "obj_mario_intro": {
+   "depth": -1,
+   "array_index": 355,
+   "src_depth_line": 363,
+   "src_name_line": 1159
+  },
+  "obj_shell_intro": {
+   "depth": 0,
+   "array_index": 356,
+   "src_depth_line": 364,
+   "src_name_line": 1160
+  },
+  "obj_settings_panel": {
+   "depth": -18,
+   "array_index": 357,
+   "src_depth_line": 365,
+   "src_name_line": 1161
+  },
+  "obj_configurar_controles": {
+   "depth": -19,
+   "array_index": 358,
+   "src_depth_line": 366,
+   "src_name_line": 1162
+  },
+  "obj_configurar_controles_reset": {
+   "depth": -19,
+   "array_index": 359,
+   "src_depth_line": 367,
+   "src_name_line": 1163
+  },
+  "obj_button_settings_estrella": {
+   "depth": -19,
+   "array_index": 360,
+   "src_depth_line": 368,
+   "src_name_line": 1164
+  },
+  "obj_button_settings_controls": {
+   "depth": -19,
+   "array_index": 361,
+   "src_depth_line": 369,
+   "src_name_line": 1165
+  },
+  "obj_button_settings_sombras": {
+   "depth": -19,
+   "array_index": 362,
+   "src_depth_line": 370,
+   "src_name_line": 1166
+  },
+  "obj_button_settings_idioma": {
+   "depth": -19,
+   "array_index": 363,
+   "src_depth_line": 371,
+   "src_name_line": 1167
+  },
+  "obj_button_settings_sm4j": {
+   "depth": -19,
+   "array_index": 364,
+   "src_depth_line": 372,
+   "src_name_line": 1168
+  },
+  "obj_selecting_player": {
+   "depth": -19,
+   "array_index": 365,
+   "src_depth_line": 373,
+   "src_name_line": 1169
+  },
+  "obj_window_select": {
+   "depth": -19,
+   "array_index": 366,
+   "src_depth_line": 374,
+   "src_name_line": 1170
+  },
+  "obj_button_settings_close": {
+   "depth": -19,
+   "array_index": 367,
+   "src_depth_line": 375,
+   "src_name_line": 1171
+  },
+  "obj_button_creditos": {
+   "depth": -19,
+   "array_index": 368,
+   "src_depth_line": 376,
+   "src_name_line": 1172
+  },
+  "obj_selecting_fps": {
+   "depth": -19,
+   "array_index": 369,
+   "src_depth_line": 377,
+   "src_name_line": 1173
+  },
+  "obj_st_slider": {
+   "depth": -19,
+   "array_index": 370,
+   "src_depth_line": 378,
+   "src_name_line": 1174
+  },
+  "obj_persistent": {
+   "depth": -99,
+   "array_index": 371,
+   "src_depth_line": 379,
+   "src_name_line": 1175
+  },
+  "obj_arrow_big": {
+   "depth": 10,
+   "array_index": 372,
+   "src_depth_line": 380,
+   "src_name_line": 1176
+  },
+  "obj_alert_message": {
+   "depth": -10,
+   "array_index": 373,
+   "src_depth_line": 381,
+   "src_name_line": 1177
+  },
+  "obj_alert_button": {
+   "depth": -16,
+   "array_index": 374,
+   "src_depth_line": 382,
+   "src_name_line": 1178
+  },
+  "obj_alert_close": {
+   "depth": -16,
+   "array_index": 375,
+   "src_depth_line": 383,
+   "src_name_line": 1179
+  },
+  "obj_guardabot": {
+   "depth": -6,
+   "array_index": 376,
+   "src_depth_line": 384,
+   "src_name_line": 1180
+  },
+  "obj_load_guardabot": {
+   "depth": 0,
+   "array_index": 377,
+   "src_depth_line": 385,
+   "src_name_line": 1181
+  },
+  "obj_gb_button": {
+   "depth": -5,
+   "array_index": 378,
+   "src_depth_line": 386,
+   "src_name_line": 1182
+  },
+  "obj_gb_level": {
+   "depth": -6,
+   "array_index": 379,
+   "src_depth_line": 387,
+   "src_name_line": 1183
+  },
+  "obj_bt_gb_play": {
+   "depth": -7,
+   "array_index": 380,
+   "src_depth_line": 388,
+   "src_name_line": 1184
+  },
+  "obj_bt_gb_delete": {
+   "depth": -7,
+   "array_index": 381,
+   "src_depth_line": 389,
+   "src_name_line": 1185
+  },
+  "obj_bt_gb_close": {
+   "depth": -7,
+   "array_index": 382,
+   "src_depth_line": 390,
+   "src_name_line": 1186
+  },
+  "obj_btn_reload": {
+   "depth": -4,
+   "array_index": 383,
+   "src_depth_line": 391,
+   "src_name_line": 1187
+  },
+  "obj_scrollbar2": {
+   "depth": -3,
+   "array_index": 385,
+   "src_depth_line": 393,
+   "src_name_line": 1189
+  },
+  "obj_iname_control": {
+   "depth": -22,
+   "array_index": 386,
+   "src_depth_line": 394,
+   "src_name_line": 1190
+  },
+  "obj_iname": {
+   "depth": -23,
+   "array_index": 387,
+   "src_depth_line": 395,
+   "src_name_line": 1191
+  },
+  "obj_bl2": {
+   "depth": -23,
+   "array_index": 388,
+   "src_depth_line": 396,
+   "src_name_line": 1192
+  },
+  "obj_iname_close": {
+   "depth": -23,
+   "array_index": 389,
+   "src_depth_line": 397,
+   "src_name_line": 1193
+  },
+  "obj_iname_control2": {
+   "depth": -22,
+   "array_index": 390,
+   "src_depth_line": 398,
+   "src_name_line": 1194
+  },
+  "obj_lun": {
+   "depth": -23,
+   "array_index": 391,
+   "src_depth_line": 399,
+   "src_name_line": 1195
+  },
+  "obj_lp": {
+   "depth": -23,
+   "array_index": 392,
+   "src_depth_line": 400,
+   "src_name_line": 1196
+  },
+  "obj_login_control": {
+   "depth": 0,
+   "array_index": 394,
+   "src_depth_line": 402,
+   "src_name_line": 1198
+  },
+  "obj_version": {
+   "depth": 0,
+   "array_index": 395,
+   "src_depth_line": 403,
+   "src_name_line": 1199
+  },
+  "obj_btn_iniciar": {
+   "depth": 0,
+   "array_index": 396,
+   "src_depth_line": 404,
+   "src_name_line": 1200
+  },
+  "obj_btn_invitado": {
+   "depth": 0,
+   "array_index": 397,
+   "src_depth_line": 405,
+   "src_name_line": 1201
+  },
+  "obj_btn_social": {
+   "depth": 0,
+   "array_index": 398,
+   "src_depth_line": 406,
+   "src_name_line": 1202
+  },
+  "obj_continue_btn": {
+   "depth": -22,
+   "array_index": 400,
+   "src_depth_line": 408,
+   "src_name_line": 1204
+  },
+  "obj_button_superado": {
+   "depth": -21,
+   "array_index": 401,
+   "src_depth_line": 409,
+   "src_name_line": 1205
+  },
+  "obj_game_over": {
+   "depth": -5,
+   "array_index": 418,
+   "src_depth_line": 426,
+   "src_name_line": 1222
+  },
+  "obj_timeup": {
+   "depth": -100,
+   "array_index": 419,
+   "src_depth_line": 427,
+   "src_name_line": 1223
+  },
+  "obj_button_back": {
+   "depth": 0,
+   "array_index": 420,
+   "src_depth_line": 428,
+   "src_name_line": 1224
+  },
+  "cre_control": {
+   "depth": 0,
+   "array_index": 421,
+   "src_depth_line": 429,
+   "src_name_line": 1225
+  },
+  "obj_ccred": {
+   "depth": -19,
+   "array_index": 422,
+   "src_depth_line": 430,
+   "src_name_line": 1226
+  },
+  "obj_logo_c": {
+   "depth": -2,
+   "array_index": 423,
+   "src_depth_line": 431,
+   "src_name_line": 1227
+  },
+  "obj_apariencia": {
+   "depth": -11,
+   "array_index": 424,
+   "src_depth_line": 432,
+   "src_name_line": 1228
+  },
+  "obj_card_logo": {
+   "depth": -12,
+   "array_index": 425,
+   "src_depth_line": 433,
+   "src_name_line": 1229
+  },
+  "obj_bg_selection": {
+   "depth": -11,
+   "array_index": 426,
+   "src_depth_line": 434,
+   "src_name_line": 1230
+  },
+  "obj_bg1": {
+   "depth": -12,
+   "array_index": 427,
+   "src_depth_line": 435,
+   "src_name_line": 1231
+  },
+  "obj_time": {
+   "depth": -11,
+   "array_index": 428,
+   "src_depth_line": 436,
+   "src_name_line": 1232
+  },
+  "obj_button_ok": {
+   "depth": -12,
+   "array_index": 429,
+   "src_depth_line": 437,
+   "src_name_line": 1233
+  },
+  "obj_button_time": {
+   "depth": -12,
+   "array_index": 430,
+   "src_depth_line": 438,
+   "src_name_line": 1234
+  },
+  "obj_autoavance": {
+   "depth": -11,
+   "array_index": 431,
+   "src_depth_line": 439,
+   "src_name_line": 1235
+  },
+  "obj_button_autoavance": {
+   "depth": -12,
+   "array_index": 432,
+   "src_depth_line": 440,
+   "src_name_line": 1236
+  },
+  "obj_condiciones": {
+   "depth": -11,
+   "array_index": 433,
+   "src_depth_line": 441,
+   "src_name_line": 1237
+  },
+  "obj_condiciones_button": {
+   "depth": -12,
+   "array_index": 434,
+   "src_depth_line": 442,
+   "src_name_line": 1238
+  },
+  "obj_tabs_condiciones": {
+   "depth": -12,
+   "array_index": 435,
+   "src_depth_line": 443,
+   "src_name_line": 1239
+  },
+  "obj_alert_condicion": {
+   "depth": -25,
+   "array_index": 436,
+   "src_depth_line": 444,
+   "src_name_line": 1240
+  },
+  "obj_edit_menu": {
+   "depth": -15,
+   "array_index": 437,
+   "src_depth_line": 445,
+   "src_name_line": 1241
+  },
+  "obj_button_home": {
+   "depth": -16,
+   "array_index": 438,
+   "src_depth_line": 446,
+   "src_name_line": 1242
+  },
+  "obj_settings_button": {
+   "depth": -16,
+   "array_index": 440,
+   "src_depth_line": 447,
+   "src_name_line": 1243
+  },
+  "obj_button_close_menu": {
+   "depth": -16,
+   "array_index": 441,
+   "src_depth_line": 448,
+   "src_name_line": 1244
+  },
+  "obj_groundparent": {
+   "depth": 0,
+   "array_index": 442,
+   "src_depth_line": 449,
+   "src_name_line": 1245
+  },
+  "obj_ground2": {
+   "depth": 10,
+   "array_index": 443,
+   "src_depth_line": 450,
+   "src_name_line": 1246
+  },
+  "obj_ground3": {
+   "depth": 300,
+   "array_index": 444,
+   "src_depth_line": 451,
+   "src_name_line": 1247
+  },
+  "obj_panel_save_load": {
+   "depth": -11,
+   "array_index": 445,
+   "src_depth_line": 452,
+   "src_name_line": 1248
+  },
+  "obj_button_save_load": {
+   "depth": -12,
+   "array_index": 446,
+   "src_depth_line": 453,
+   "src_name_line": 1249
+  },
+  "obj_button_save_changes": {
+   "depth": -12,
+   "array_index": 447,
+   "src_depth_line": 454,
+   "src_name_line": 1250
+  },
+  "obj_alert_load": {
+   "depth": -15,
+   "array_index": 448,
+   "src_depth_line": 455,
+   "src_name_line": 1251
+  },
+  "obj_noti_load_button": {
+   "depth": -16,
+   "array_index": 449,
+   "src_depth_line": 456,
+   "src_name_line": 1252
+  },
+  "obj_load_btn_c": {
+   "depth": -16,
+   "array_index": 450,
+   "src_depth_line": 457,
+   "src_name_line": 1253
+  },
+  "obj_load_image": {
+   "depth": -18,
+   "array_index": 451,
+   "src_depth_line": 458,
+   "src_name_line": 1254
+  },
+  "obj_window_alert": {
+   "depth": -15,
+   "array_index": 452,
+   "src_depth_line": 459,
+   "src_name_line": 1255
+  },
+  "obj_button_notification_aceptar": {
+   "depth": -16,
+   "array_index": 453,
+   "src_depth_line": 460,
+   "src_name_line": 1256
+  },
+  "obj_button_notification_cancelar": {
+   "depth": -16,
+   "array_index": 454,
+   "src_depth_line": 461,
+   "src_name_line": 1257
+  },
+  "obj_input": {
+   "depth": -16,
+   "array_index": 455,
+   "src_depth_line": 462,
+   "src_name_line": 1258
+  },
+  "obj_toast": {
+   "depth": -18,
+   "array_index": 456,
+   "src_depth_line": 463,
+   "src_name_line": 1259
+  },
+  "obj_etiquetas": {
+   "depth": -16,
+   "array_index": 457,
+   "src_depth_line": 464,
+   "src_name_line": 1260
+  },
+  "obj_panelparent": {
+   "depth": 0,
+   "array_index": 458,
+   "src_depth_line": 465,
+   "src_name_line": 1261
+  },
+  "obj_creator_jugar_editar": {
+   "depth": -14,
+   "array_index": 459,
+   "src_depth_line": 466,
+   "src_name_line": 1262
+  },
+  "obj_menu_editor": {
+   "depth": -10,
+   "array_index": 460,
+   "src_depth_line": 467,
+   "src_name_line": 1263
+  },
+  "obj_menu_editor_ext": {
+   "depth": -10,
+   "array_index": 461,
+   "src_depth_line": 468,
+   "src_name_line": 1264
+  },
+  "obj_robot": {
+   "depth": -12,
+   "array_index": 462,
+   "src_depth_line": 469,
+   "src_name_line": 1265
+  },
+  "obj_erase": {
+   "depth": -10,
+   "array_index": 463,
+   "src_depth_line": 470,
+   "src_name_line": 1266
+  },
+  "obj_card_block_sounds": {
+   "depth": -10,
+   "array_index": 464,
+   "src_depth_line": 471,
+   "src_name_line": 1267
+  },
+  "obj_logo_game": {
+   "depth": -12,
+   "array_index": 465,
+   "src_depth_line": 472,
+   "src_name_line": 1268
+  },
+  "obj_card_bg": {
+   "depth": -12,
+   "array_index": 466,
+   "src_depth_line": 473,
+   "src_name_line": 1269
+  },
+  "obj_card_bout": {
+   "depth": -12,
+   "array_index": 467,
+   "src_depth_line": 474,
+   "src_name_line": 1270
+  },
+  "obj_card_autoavance": {
+   "depth": -12,
+   "array_index": 468,
+   "src_depth_line": 475,
+   "src_name_line": 1271
+  },
+  "obj_panel_time": {
+   "depth": -12,
+   "array_index": 469,
+   "src_depth_line": 476,
+   "src_name_line": 1272
+  },
+  "obj_card_condiciones": {
+   "depth": -12,
+   "array_index": 470,
+   "src_depth_line": 477,
+   "src_name_line": 1273
+  },
+  "obj_card_rocket": {
+   "depth": -10,
+   "array_index": 471,
+   "src_depth_line": 478,
+   "src_name_line": 1274
+  },
+  "obj_expand": {
+   "depth": -10,
+   "array_index": 472,
+   "src_depth_line": 479,
+   "src_name_line": 1275
+  },
+  "obj_dog": {
+   "depth": -10,
+   "array_index": 473,
+   "src_depth_line": 480,
+   "src_name_line": 1276
+  },
+  "obj_zoomclose": {
+   "depth": -24,
+   "array_index": 474,
+   "src_depth_line": 481,
+   "src_name_line": 1277
+  },
+  "obj_card_item": {
+   "depth": -10,
+   "array_index": 475,
+   "src_depth_line": 482,
+   "src_name_line": 1278
+  },
+  "obj_lave_draw": {
+   "depth": -9,
+   "array_index": 476,
+   "src_depth_line": 483,
+   "src_name_line": 1279
+  },
+  "obj_panel_left": {
+   "depth": -8,
+   "array_index": 477,
+   "src_depth_line": 484,
+   "src_name_line": 1280
+  },
+  "obj_night_change": {
+   "depth": -12,
+   "array_index": 478,
+   "src_depth_line": 485,
+   "src_name_line": 1281
+  },
+  "obj_expand_panels": {
+   "depth": -10,
+   "array_index": 479,
+   "src_depth_line": 486,
+   "src_name_line": 1282
+  },
+  "obj_expand_panels_left": {
+   "depth": -10,
+   "array_index": 480,
+   "src_depth_line": 487,
+   "src_name_line": 1283
+  },
+  "obj_expand_paneles_top": {
+   "depth": -10,
+   "array_index": 481,
+   "src_depth_line": 488,
+   "src_name_line": 1284
+  },
+  "obj_button_parent": {
+   "depth": 0,
+   "array_index": 482,
+   "src_depth_line": 489,
+   "src_name_line": 1285
+  },
+  "obj_panelsparent": {
+   "depth": 0,
+   "array_index": 483,
+   "src_depth_line": 490,
+   "src_name_line": 1286
+  },
+  "obj_decoracion_1": {
+   "depth": 299,
+   "array_index": 484,
+   "src_depth_line": 491,
+   "src_name_line": 1287
+  },
+  "obj_decoracion_2": {
+   "depth": 299,
+   "array_index": 485,
+   "src_depth_line": 492,
+   "src_name_line": 1288
+  },
+  "obj_decoracion_3": {
+   "depth": 299,
+   "array_index": 486,
+   "src_depth_line": 493,
+   "src_name_line": 1289
+  },
+  "obj_decoracion_4": {
+   "depth": 299,
+   "array_index": 487,
+   "src_depth_line": 494,
+   "src_name_line": 1290
+  },
+  "obj_decoracion_parent": {
+   "depth": 0,
+   "array_index": 488,
+   "src_depth_line": 495,
+   "src_name_line": 1291
+  },
+  "obj_modelbgo": {
+   "depth": 280,
+   "array_index": 489,
+   "src_depth_line": 496,
+   "src_name_line": 1292
+  },
+  "obj_modelsolid": {
+   "depth": 5,
+   "array_index": 490,
+   "src_depth_line": 497,
+   "src_name_line": 1293
+  },
+  "obj_modelbgo_dec": {
+   "depth": 280,
+   "array_index": 491,
+   "src_depth_line": 498,
+   "src_name_line": 1294
+  },
+  "obj_modelsizable": {
+   "depth": 270,
+   "array_index": 492,
+   "src_depth_line": 499,
+   "src_name_line": 1295
+  },
+  "obj_ground": {
+   "depth": 1,
+   "array_index": 493,
+   "src_depth_line": 500,
+   "src_name_line": 1296
+  },
+  "obj_tile_trigger": {
+   "depth": 0,
+   "array_index": 494,
+   "src_depth_line": 501,
+   "src_name_line": 1297
+  },
+  "obj_bowser_res": {
+   "depth": 0,
+   "array_index": 495,
+   "src_depth_line": 502,
+   "src_name_line": 1298
+  },
+  "obj_bowserjr_res": {
+   "depth": 0,
+   "array_index": 496,
+   "src_depth_line": 503,
+   "src_name_line": 1299
+  },
+  "obj_pswitch_res": {
+   "depth": 0,
+   "array_index": 497,
+   "src_depth_line": 504,
+   "src_name_line": 1300
+  },
+  "obj_pow_res": {
+   "depth": 0,
+   "array_index": 498,
+   "src_depth_line": 505,
+   "src_name_line": 1301
+  },
+  "obj_rock_res": {
+   "depth": 0,
+   "array_index": 499,
+   "src_depth_line": 506,
+   "src_name_line": 1302
+  },
+  "obj_pipebase_res": {
+   "depth": 0,
+   "array_index": 500,
+   "src_depth_line": 507,
+   "src_name_line": 1303
+  },
+  "obj_ice_res": {
+   "depth": 0,
+   "array_index": 501,
+   "src_depth_line": 508,
+   "src_name_line": 1304
+  },
+  "obj_coin_res": {
+   "depth": 0,
+   "array_index": 502,
+   "src_depth_line": 509,
+   "src_name_line": 1305
+  },
+  "obj_icecoin_res": {
+   "depth": 0,
+   "array_index": 503,
+   "src_depth_line": 510,
+   "src_name_line": 1306
+  },
+  "obj_pink_coin_res": {
+   "depth": 0,
+   "array_index": 504,
+   "src_depth_line": 511,
+   "src_name_line": 1307
+  },
+  "obj_coin10_res": {
+   "depth": 0,
+   "array_index": 505,
+   "src_depth_line": 512,
+   "src_name_line": 1308
+  },
+  "obj_coin30_res": {
+   "depth": 0,
+   "array_index": 506,
+   "src_depth_line": 513,
+   "src_name_line": 1309
+  },
+  "obj_coin50_res": {
+   "depth": 0,
+   "array_index": 507,
+   "src_depth_line": 514,
+   "src_name_line": 1310
+  },
+  "obj_key_res": {
+   "depth": 0,
+   "array_index": 508,
+   "src_depth_line": 515,
+   "src_name_line": 1311
+  },
+  "obj_goomba_res": {
+   "depth": 0,
+   "array_index": 509,
+   "src_depth_line": 516,
+   "src_name_line": 1312
+  },
+  "obj_goombrat_res": {
+   "depth": 0,
+   "array_index": 510,
+   "src_depth_line": 517,
+   "src_name_line": 1313
+  },
+  "obj_koopa_b_res": {
+   "depth": -1,
+   "array_index": 511,
+   "src_depth_line": 518,
+   "src_name_line": 1314
+  },
+  "obj_koopa_res": {
+   "depth": -1,
+   "array_index": 512,
+   "src_depth_line": 519,
+   "src_name_line": 1315
+  },
+  "obj_koopa_red_res": {
+   "depth": -1,
+   "array_index": 513,
+   "src_depth_line": 520,
+   "src_name_line": 1316
+  },
+  "obj_koopa_red_b_res": {
+   "depth": -1,
+   "array_index": 514,
+   "src_depth_line": 521,
+   "src_name_line": 1317
+  },
+  "obj_buzzybeetle_res": {
+   "depth": 0,
+   "array_index": 515,
+   "src_depth_line": 522,
+   "src_name_line": 1318
+  },
+  "obj_buzzybeetle_b_res": {
+   "depth": 0,
+   "array_index": 516,
+   "src_depth_line": 523,
+   "src_name_line": 1319
+  },
+  "obj_bonybeetle_res": {
+   "depth": 0,
+   "array_index": 517,
+   "src_depth_line": 524,
+   "src_name_line": 1320
+  },
+  "obj_bonybeetle_b_res": {
+   "depth": 0,
+   "array_index": 518,
+   "src_depth_line": 525,
+   "src_name_line": 1321
+  },
+  "obj_spiny_res": {
+   "depth": 0,
+   "array_index": 519,
+   "src_depth_line": 526,
+   "src_name_line": 1322
+  },
+  "obj_rocangrejo_res": {
+   "depth": 0,
+   "array_index": 520,
+   "src_depth_line": 527,
+   "src_name_line": 1323
+  },
+  "obj_tuberia_res": {
+   "depth": 0,
+   "array_index": 521,
+   "src_depth_line": 528,
+   "src_name_line": 1324
+  },
+  "obj_angrysun_res": {
+   "depth": 0,
+   "array_index": 522,
+   "src_depth_line": 529,
+   "src_name_line": 1325
+  },
+  "obj_floruga_res": {
+   "depth": 0,
+   "array_index": 523,
+   "src_depth_line": 530,
+   "src_name_line": 1326
+  },
+  "obj_floruga_angry_res": {
+   "depth": 0,
+   "array_index": 524,
+   "src_depth_line": 531,
+   "src_name_line": 1327
+  },
+  "obj_drybones_res": {
+   "depth": 0,
+   "array_index": 525,
+   "src_depth_line": 532,
+   "src_name_line": 1328
+  },
+  "obj_shell_drybones_res": {
+   "depth": 0,
+   "array_index": 526,
+   "src_depth_line": 533,
+   "src_name_line": 1329
+  },
+  "obj_spiny_shell_res": {
+   "depth": 0,
+   "array_index": 527,
+   "src_depth_line": 534,
+   "src_name_line": 1330
+  },
+  "obj_buzzy_shell_res": {
+   "depth": 0,
+   "array_index": 528,
+   "src_depth_line": 535,
+   "src_name_line": 1331
+  },
+  "obj_donut_res": {
+   "depth": 0,
+   "array_index": 529,
+   "src_depth_line": 536,
+   "src_name_line": 1332
+  },
+  "obj_blooper_res": {
+   "depth": 0,
+   "array_index": 530,
+   "src_depth_line": 537,
+   "src_name_line": 1333
+  },
+  "obj_lakitu_res": {
+   "depth": 0,
+   "array_index": 531,
+   "src_depth_line": 538,
+   "src_name_line": 1334
+  },
+  "obj_hammerbro_res": {
+   "depth": 0,
+   "array_index": 532,
+   "src_depth_line": 539,
+   "src_name_line": 1335
+  },
+  "obj_sledgebro_res": {
+   "depth": 0,
+   "array_index": 533,
+   "src_depth_line": 540,
+   "src_name_line": 1336
+  },
+  "obj_charginchuck_res": {
+   "depth": 0,
+   "array_index": 534,
+   "src_depth_line": 541,
+   "src_name_line": 1337
+  },
+  "obj_boomboom_res": {
+   "depth": 0,
+   "array_index": 535,
+   "src_depth_line": 542,
+   "src_name_line": 1338
+  },
+  "obj_thwomp_res": {
+   "depth": 0,
+   "array_index": 536,
+   "src_depth_line": 543,
+   "src_name_line": 1339
+  },
+  "obj_grrrol_res": {
+   "depth": 0,
+   "array_index": 537,
+   "src_depth_line": 544,
+   "src_name_line": 1340
+  },
+  "obj_grinder_res": {
+   "depth": -1,
+   "array_index": 538,
+   "src_depth_line": 545,
+   "src_name_line": 1341
+  },
+  "obj_bumper_res": {
+   "depth": -1,
+   "array_index": 539,
+   "src_depth_line": 546,
+   "src_name_line": 1342
+  },
+  "obj_bobomb_res": {
+   "depth": 0,
+   "array_index": 540,
+   "src_depth_line": 547,
+   "src_name_line": 1343
+  },
+  "obj_mechakoopa_res": {
+   "depth": 0,
+   "array_index": 541,
+   "src_depth_line": 548,
+   "src_name_line": 1344
+  },
+  "obj_bobomb_ready_res": {
+   "depth": 0,
+   "array_index": 542,
+   "src_depth_line": 549,
+   "src_name_line": 1345
+  },
+  "obj_bullebill_base_res": {
+   "depth": 0,
+   "array_index": 543,
+   "src_depth_line": 550,
+   "src_name_line": 1346
+  },
+  "obj_bullebill_base_red_res": {
+   "depth": 0,
+   "array_index": 544,
+   "src_depth_line": 551,
+   "src_name_line": 1347
+  },
+  "obj_cannon_res": {
+   "depth": 0,
+   "array_index": 545,
+   "src_depth_line": 552,
+   "src_name_line": 1348
+  },
+  "obj_cannon_red_res": {
+   "depth": 0,
+   "array_index": 546,
+   "src_depth_line": 553,
+   "src_name_line": 1349
+  },
+  "obj_soplete_res": {
+   "depth": -1,
+   "array_index": 547,
+   "src_depth_line": 554,
+   "src_name_line": 1350
+  },
+  "obj_monty_res": {
+   "depth": 0,
+   "array_index": 548,
+   "src_depth_line": 555,
+   "src_name_line": 1351
+  },
+  "obj_rocky_res": {
+   "depth": 0,
+   "array_index": 549,
+   "src_depth_line": 556,
+   "src_name_line": 1352
+  },
+  "obj_1up_res": {
+   "depth": 0,
+   "array_index": 550,
+   "src_depth_line": 557,
+   "src_name_line": 1353
+  },
+  "obj_mushroom_res": {
+   "depth": 0,
+   "array_index": 551,
+   "src_depth_line": 558,
+   "src_name_line": 1354
+  },
+  "obj_fireflower_res": {
+   "depth": 0,
+   "array_index": 552,
+   "src_depth_line": 559,
+   "src_name_line": 1355
+  },
+  "obj_frogsuit_res": {
+   "depth": 0,
+   "array_index": 553,
+   "src_depth_line": 560,
+   "src_name_line": 1356
+  },
+  "obj_hen_mushroom_res": {
+   "depth": 0,
+   "array_index": 554,
+   "src_depth_line": 561,
+   "src_name_line": 1357
+  },
+  "obj_superflower_res": {
+   "depth": 0,
+   "array_index": 555,
+   "src_depth_line": 562,
+   "src_name_line": 1358
+  },
+  "obj_cap_res": {
+   "depth": 0,
+   "array_index": 556,
+   "src_depth_line": 563,
+   "src_name_line": 1359
+  },
+  "obj_star_res": {
+   "depth": 0,
+   "array_index": 557,
+   "src_depth_line": 564,
+   "src_name_line": 1360
+  },
+  "obj_spring_res": {
+   "depth": 0,
+   "array_index": 558,
+   "src_depth_line": 565,
+   "src_name_line": 1361
+  },
+  "obj_spring_land_res": {
+   "depth": 0,
+   "array_index": 559,
+   "src_depth_line": 566,
+   "src_name_line": 1362
+  },
+  "obj_qblock_res": {
+   "depth": 0,
+   "array_index": 560,
+   "src_depth_line": 567,
+   "src_name_line": 1363
+  },
+  "obj_block_hidden_res": {
+   "depth": 0,
+   "array_index": 561,
+   "src_depth_line": 568,
+   "src_name_line": 1364
+  },
+  "obj_block_res": {
+   "depth": 0,
+   "array_index": 562,
+   "src_depth_line": 569,
+   "src_name_line": 1365
+  },
+  "obj_block_gold_res": {
+   "depth": 0,
+   "array_index": 563,
+   "src_depth_line": 570,
+   "src_name_line": 1366
+  },
+  "obj_noteblock_res": {
+   "depth": 0,
+   "array_index": 564,
+   "src_depth_line": 571,
+   "src_name_line": 1367
+  },
+  "obj_musicblock_res": {
+   "depth": 0,
+   "array_index": 565,
+   "src_depth_line": 572,
+   "src_name_line": 1368
+  },
+  "obj_noteblock_s_res": {
+   "depth": 0,
+   "array_index": 566,
+   "src_depth_line": 573,
+   "src_name_line": 1369
+  },
+  "obj_pplant_res": {
+   "depth": 0,
+   "array_index": 567,
+   "src_depth_line": 574,
+   "src_name_line": 1370
+  },
+  "obj_plant_fire_res": {
+   "depth": 0,
+   "array_index": 568,
+   "src_depth_line": 575,
+   "src_name_line": 1371
+  },
+  "obj_muncher_res": {
+   "depth": -1,
+   "array_index": 569,
+   "src_depth_line": 576,
+   "src_name_line": 1372
+  },
+  "obj_muncher_b_res": {
+   "depth": -1,
+   "array_index": 570,
+   "src_depth_line": 577,
+   "src_name_line": 1373
+  },
+  "obj_billbanzai_res": {
+   "depth": 0,
+   "array_index": 571,
+   "src_depth_line": 578,
+   "src_name_line": 1374
+  },
+  "obj_billbanzai_red_res": {
+   "depth": 0,
+   "array_index": 572,
+   "src_depth_line": 579,
+   "src_name_line": 1375
+  },
+  "obj_spike_res": {
+   "depth": 0,
+   "array_index": 573,
+   "src_depth_line": 580,
+   "src_name_line": 1376
+  },
+  "obj_spike_ball_res": {
+   "depth": 0,
+   "array_index": 574,
+   "src_depth_line": 581,
+   "src_name_line": 1377
+  },
+  "obj_torbellino_res": {
+   "depth": 0,
+   "array_index": 575,
+   "src_depth_line": 582,
+   "src_name_line": 1378
+  },
+  "obj_foo_res": {
+   "depth": 0,
+   "array_index": 576,
+   "src_depth_line": 583,
+   "src_name_line": 1379
+  },
+  "obj_onoffblock_res": {
+   "depth": 0,
+   "array_index": 577,
+   "src_depth_line": 584,
+   "src_name_line": 1380
+  },
+  "obj_onoffplatform_res": {
+   "depth": 0,
+   "array_index": 578,
+   "src_depth_line": 585,
+   "src_name_line": 1381
+  },
+  "obj_onoffplatform_blue_res": {
+   "depth": 0,
+   "array_index": 579,
+   "src_depth_line": 586,
+   "src_name_line": 1382
+  },
+  "obj_pblock_res": {
+   "depth": 0,
+   "array_index": 580,
+   "src_depth_line": 587,
+   "src_name_line": 1383
+  },
+  "obj_pblock2_res": {
+   "depth": 0,
+   "array_index": 581,
+   "src_depth_line": 588,
+   "src_name_line": 1384
+  },
+  "obj_chomp_res": {
+   "depth": 0,
+   "array_index": 582,
+   "src_depth_line": 589,
+   "src_name_line": 1385
+  },
+  "obj_boo_res": {
+   "depth": 0,
+   "array_index": 583,
+   "src_depth_line": 590,
+   "src_name_line": 1386
+  },
+  "obj_pinchos_res": {
+   "depth": 0,
+   "array_index": 584,
+   "src_depth_line": 591,
+   "src_name_line": 1387
+  },
+  "obj_nube_res": {
+   "depth": 0,
+   "array_index": 585,
+   "src_depth_line": 592,
+   "src_name_line": 1388
+  },
+  "obj_oneway_res": {
+   "depth": 1,
+   "array_index": 586,
+   "src_depth_line": 593,
+   "src_name_line": 1389
+  },
+  "obj_checkpoint_res": {
+   "depth": 0,
+   "array_index": 587,
+   "src_depth_line": 594,
+   "src_name_line": 1390
+  },
+  "obj_door_res": {
+   "depth": 1,
+   "array_index": 588,
+   "src_depth_line": 595,
+   "src_name_line": 1391
+  },
+  "obj_door_exit_res": {
+   "depth": 1,
+   "array_index": 589,
+   "src_depth_line": 596,
+   "src_name_line": 1392
+  },
+  "obj_door_switch_res": {
+   "depth": 1,
+   "array_index": 590,
+   "src_depth_line": 597,
+   "src_name_line": 1393
+  },
+  "obj_door_switch_exit_res": {
+   "depth": 1,
+   "array_index": 591,
+   "src_depth_line": 598,
+   "src_name_line": 1394
+  },
+  "obj_door_lock_res": {
+   "depth": 1,
+   "array_index": 592,
+   "src_depth_line": 599,
+   "src_name_line": 1395
+  },
+  "obj_door_lock_exit_res": {
+   "depth": 1,
+   "array_index": 593,
+   "src_depth_line": 600,
+   "src_name_line": 1396
+  },
+  "obj_clown_res": {
+   "depth": 0,
+   "array_index": 594,
+   "src_depth_line": 601,
+   "src_name_line": 1397
+  },
+  "obj_clown_fire_res": {
+   "depth": 0,
+   "array_index": 595,
+   "src_depth_line": 602,
+   "src_name_line": 1398
+  },
+  "obj_egg_res": {
+   "depth": 0,
+   "array_index": 596,
+   "src_depth_line": 603,
+   "src_name_line": 1399
+  },
+  "obj_egg_red_res": {
+   "depth": 0,
+   "array_index": 597,
+   "src_depth_line": 604,
+   "src_name_line": 1400
+  },
+  "obj_podoboo_res": {
+   "depth": 0,
+   "array_index": 598,
+   "src_depth_line": 605,
+   "src_name_line": 1401
+  },
+  "obj_podoboo_b_res": {
+   "depth": 0,
+   "array_index": 599,
+   "src_depth_line": 606,
+   "src_name_line": 1402
+  },
+  "obj_mini_icicle_res": {
+   "depth": 0,
+   "array_index": 600,
+   "src_depth_line": 607,
+   "src_name_line": 1403
+  },
+  "obj_mini_icicle2_res": {
+   "depth": 0,
+   "array_index": 601,
+   "src_depth_line": 608,
+   "src_name_line": 1404
+  },
+  "obj_icicle_res": {
+   "depth": 0,
+   "array_index": 602,
+   "src_depth_line": 609,
+   "src_name_line": 1405
+  },
+  "obj_icicle2_res": {
+   "depth": 0,
+   "array_index": 603,
+   "src_depth_line": 610,
+   "src_name_line": 1406
+  },
+  "obj_cheepcheep_res": {
+   "depth": 0,
+   "array_index": 604,
+   "src_depth_line": 611,
+   "src_name_line": 1407
+  },
+  "obj_cheepcheep2_res": {
+   "depth": 0,
+   "array_index": 605,
+   "src_depth_line": 612,
+   "src_name_line": 1408
+  },
+  "obj_arrow_res": {
+   "depth": 0,
+   "array_index": 606,
+   "src_depth_line": 613,
+   "src_name_line": 1409
+  },
+  "obj_magikoopa_res": {
+   "depth": 0,
+   "array_index": 607,
+   "src_depth_line": 614,
+   "src_name_line": 1410
+  },
+  "obj_lava_lift_res": {
+   "depth": 0,
+   "array_index": 608,
+   "src_depth_line": 615,
+   "src_name_line": 1411
+  },
+  "obj_fast_lava_lift_res": {
+   "depth": 0,
+   "array_index": 609,
+   "src_depth_line": 616,
+   "src_name_line": 1412
+  },
+  "obj_bouncycloud_res": {
+   "depth": 0,
+   "array_index": 610,
+   "src_depth_line": 617,
+   "src_name_line": 1413
+  },
+  "obj_vine_res": {
+   "depth": 2,
+   "array_index": 611,
+   "src_depth_line": 618,
+   "src_name_line": 1414
+  },
+  "obj_pokey_res": {
+   "depth": 0,
+   "array_index": 612,
+   "src_depth_line": 619,
+   "src_name_line": 1415
+  },
+  "obj_semisolid_platform1": {
+   "depth": 271,
+   "array_index": 613,
+   "src_depth_line": 620,
+   "src_name_line": 1416
+  },
+  "obj_mushroom_platform_res": {
+   "depth": 8,
+   "array_index": 614,
+   "src_depth_line": 621,
+   "src_name_line": 1417
+  },
+  "obj_puente_res": {
+   "depth": 8,
+   "array_index": 615,
+   "src_depth_line": 622,
+   "src_name_line": 1418
+  },
+  "obj_platform_res": {
+   "depth": -1,
+   "array_index": 616,
+   "src_depth_line": 623,
+   "src_name_line": 1419
+  },
+  "obj_platform_blue_res": {
+   "depth": 0,
+   "array_index": 617,
+   "src_depth_line": 624,
+   "src_name_line": 1420
+  },
+  "obj_firebar_res": {
+   "depth": -1,
+   "array_index": 618,
+   "src_depth_line": 625,
+   "src_name_line": 1421
+  },
+  "obj_efecto_sonido": {
+   "depth": -7,
+   "array_index": 619,
+   "src_depth_line": 626,
+   "src_name_line": 1422
+  },
+  "obj_efecto_musica": {
+   "depth": -7,
+   "array_index": 620,
+   "src_depth_line": 627,
+   "src_name_line": 1423
+  },
+  "obj_parent_sound_o": {
+   "depth": 0,
+   "array_index": 621,
+   "src_depth_line": 628,
+   "src_name_line": 1424
+  },
+  "obj_ubsi_or": {
+   "depth": 0,
+   "array_index": 622,
+   "src_depth_line": 629,
+   "src_name_line": 1425
+  },
+  "obj_ahh_or": {
+   "depth": 0,
+   "array_index": 623,
+   "src_depth_line": 630,
+   "src_name_line": 1426
+  },
+  "obj_risas_or": {
+   "depth": 0,
+   "array_index": 624,
+   "src_depth_line": 631,
+   "src_name_line": 1427
+  },
+  "obj_bebe_or": {
+   "depth": 0,
+   "array_index": 625,
+   "src_depth_line": 632,
+   "src_name_line": 1428
+  },
+  "obj_serpentina_or": {
+   "depth": 0,
+   "array_index": 626,
+   "src_depth_line": 633,
+   "src_name_line": 1429
+  },
+  "obj_aplausos_or": {
+   "depth": 0,
+   "array_index": 627,
+   "src_depth_line": 634,
+   "src_name_line": 1430
+  },
+  "obj_uhh_or": {
+   "depth": 0,
+   "array_index": 628,
+   "src_depth_line": 635,
+   "src_name_line": 1431
+  },
+  "obj_auh_or": {
+   "depth": 0,
+   "array_index": 629,
+   "src_depth_line": 636,
+   "src_name_line": 1432
+  },
+  "obj_bocina_or": {
+   "depth": 0,
+   "array_index": 630,
+   "src_depth_line": 637,
+   "src_name_line": 1433
+  },
+  "obj_cerdito_or": {
+   "depth": 0,
+   "array_index": 631,
+   "src_depth_line": 638,
+   "src_name_line": 1434
+  },
+  "obj_bombilla_or": {
+   "depth": 0,
+   "array_index": 632,
+   "src_depth_line": 639,
+   "src_name_line": 1435
+  },
+  "obj_error_or": {
+   "depth": 0,
+   "array_index": 633,
+   "src_depth_line": 640,
+   "src_name_line": 1436
+  },
+  "obj_nota_musical_or": {
+   "depth": 0,
+   "array_index": 634,
+   "src_depth_line": 641,
+   "src_name_line": 1437
+  },
+  "obj_remolino_or": {
+   "depth": 0,
+   "array_index": 635,
+   "src_depth_line": 642,
+   "src_name_line": 1438
+  },
+  "obj_fuegos_or": {
+   "depth": 0,
+   "array_index": 636,
+   "src_depth_line": 643,
+   "src_name_line": 1439
+  },
+  "obj_destello_or": {
+   "depth": 0,
+   "array_index": 637,
+   "src_depth_line": 644,
+   "src_name_line": 1440
+  },
+  "obj_golpe_gato_or": {
+   "depth": 0,
+   "array_index": 638,
+   "src_depth_line": 645,
+   "src_name_line": 1441
+  },
+  "obj_chisporreo_or": {
+   "depth": 0,
+   "array_index": 639,
+   "src_depth_line": 646,
+   "src_name_line": 1442
+  },
+  "obj_ubsi_snd_res": {
+   "depth": -7,
+   "array_index": 640,
+   "src_depth_line": 647,
+   "src_name_line": 1443
+  },
+  "obj_ahh_snd_res": {
+   "depth": -7,
+   "array_index": 641,
+   "src_depth_line": 648,
+   "src_name_line": 1444
+  },
+  "obj_risas_snd_res": {
+   "depth": -7,
+   "array_index": 642,
+   "src_depth_line": 649,
+   "src_name_line": 1445
+  },
+  "obj_bebe_snd_res": {
+   "depth": -7,
+   "array_index": 643,
+   "src_depth_line": 650,
+   "src_name_line": 1446
+  },
+  "obj_serpentina_snd_res": {
+   "depth": -7,
+   "array_index": 644,
+   "src_depth_line": 651,
+   "src_name_line": 1447
+  },
+  "obj_aplausos_snd_res": {
+   "depth": -7,
+   "array_index": 645,
+   "src_depth_line": 652,
+   "src_name_line": 1448
+  },
+  "obj_auh_snd_res": {
+   "depth": -7,
+   "array_index": 646,
+   "src_depth_line": 653,
+   "src_name_line": 1449
+  },
+  "obj_uhh_snd_res": {
+   "depth": -7,
+   "array_index": 647,
+   "src_depth_line": 654,
+   "src_name_line": 1450
+  },
+  "obj_bocina_snd_res": {
+   "depth": -7,
+   "array_index": 648,
+   "src_depth_line": 655,
+   "src_name_line": 1451
+  },
+  "obj_cerdito_snd_res": {
+   "depth": -7,
+   "array_index": 649,
+   "src_depth_line": 656,
+   "src_name_line": 1452
+  },
+  "obj_bombilla_snd_res": {
+   "depth": -7,
+   "array_index": 650,
+   "src_depth_line": 657,
+   "src_name_line": 1453
+  },
+  "obj_error_snd_res": {
+   "depth": -7,
+   "array_index": 651,
+   "src_depth_line": 658,
+   "src_name_line": 1454
+  },
+  "obj_nota_musical_snd_res": {
+   "depth": -7,
+   "array_index": 652,
+   "src_depth_line": 659,
+   "src_name_line": 1455
+  },
+  "obj_remolino_snd_res": {
+   "depth": -7,
+   "array_index": 653,
+   "src_depth_line": 660,
+   "src_name_line": 1456
+  },
+  "obj_fuegos_snd_res": {
+   "depth": -7,
+   "array_index": 654,
+   "src_depth_line": 661,
+   "src_name_line": 1457
+  },
+  "obj_destello_snd_res": {
+   "depth": -7,
+   "array_index": 655,
+   "src_depth_line": 662,
+   "src_name_line": 1458
+  },
+  "obj_golpe_gato_snd_res": {
+   "depth": -7,
+   "array_index": 656,
+   "src_depth_line": 663,
+   "src_name_line": 1459
+  },
+  "obj_chisporreteo_snd_res": {
+   "depth": -7,
+   "array_index": 657,
+   "src_depth_line": 664,
+   "src_name_line": 1460
+  },
+  "obj_panel_expand": {
+   "depth": -10,
+   "array_index": 658,
+   "src_depth_line": 665,
+   "src_name_line": 1461
+  },
+  "obj_button_close": {
+   "depth": -11,
+   "array_index": 659,
+   "src_depth_line": 666,
+   "src_name_line": 1462
+  },
+  "obj_next_before": {
+   "depth": -11,
+   "array_index": 660,
+   "src_depth_line": 667,
+   "src_name_line": 1463
+  },
+  "obj_panel_circle": {
+   "depth": -11,
+   "array_index": 661,
+   "src_depth_line": 668,
+   "src_name_line": 1464
+  },
+  "obj_card_circle": {
+   "depth": -12,
+   "array_index": 662,
+   "src_depth_line": 669,
+   "src_name_line": 1465
+  },
+  "obj_water_move": {
+   "depth": -10,
+   "array_index": 663,
+   "src_depth_line": 670,
+   "src_name_line": 1466
+  },
+  "obj_water_move_limit": {
+   "depth": -11,
+   "array_index": 664,
+   "src_depth_line": 671,
+   "src_name_line": 1467
+  },
+  "obj_bt_close_water": {
+   "depth": -11,
+   "array_index": 665,
+   "src_depth_line": 672,
+   "src_name_line": 1468
+  },
+  "obj_water_level_control": {
+   "depth": -6,
+   "array_index": 666,
+   "src_depth_line": 673,
+   "src_name_line": 1469
+  },
+  "obj_lava_water": {
+   "depth": -7,
+   "array_index": 667,
+   "src_depth_line": 674,
+   "src_name_line": 1470
+  },
+  "obj_lava_water_drybones": {
+   "depth": -20,
+   "array_index": 668,
+   "src_depth_line": 675,
+   "src_name_line": 1471
+  },
+  "obj_ventana_water": {
+   "depth": -12,
+   "array_index": 669,
+   "src_depth_line": 676,
+   "src_name_line": 1472
+  },
+  "obj_button_speed_water": {
+   "depth": -13,
+   "array_index": 670,
+   "src_depth_line": 677,
+   "src_name_line": 1473
+  },
+  "obj_ventana": {
+   "depth": -19,
+   "array_index": 671,
+   "src_depth_line": 678,
+   "src_name_line": 1474
+  },
+  "obj_window_button": {
+   "depth": -20,
+   "array_index": 672,
+   "src_depth_line": 679,
+   "src_name_line": 1475
+  },
+  "obj_button_wings": {
+   "depth": -20,
+   "array_index": 673,
+   "src_depth_line": 680,
+   "src_name_line": 1476
+  },
+  "obj_ventana_mario": {
+   "depth": -19,
+   "array_index": 674,
+   "src_depth_line": 681,
+   "src_name_line": 1477
+  },
+  "obj_window_mario_button": {
+   "depth": -20,
+   "array_index": 675,
+   "src_depth_line": 682,
+   "src_name_line": 1478
+  },
+  "obj_modo_sonidos_control": {
+   "depth": -6,
+   "array_index": 676,
+   "src_depth_line": 683,
+   "src_name_line": 1479
+  },
+  "obj_editormanager": {
+   "depth": -9,
+   "array_index": 677,
+   "src_depth_line": 684,
+   "src_name_line": 1480
+  },
+  "obj_mario_editor": {
+   "depth": -7,
+   "array_index": 678,
+   "src_depth_line": 685,
+   "src_name_line": 1481
+  },
+  "obj_parent_layout": {
+   "depth": 0,
+   "array_index": 679,
+   "src_depth_line": 686,
+   "src_name_line": 1482
+  },
+  "obj_parent_save": {
+   "depth": 0,
+   "array_index": 680,
+   "src_depth_line": 687,
+   "src_name_line": 1483
+  },
+  "obj_parent_resource": {
+   "depth": 0,
+   "array_index": 681,
+   "src_depth_line": 688,
+   "src_name_line": 1484
+  },
+  "obj_arrow_lock": {
+   "depth": 0,
+   "array_index": 682,
+   "src_depth_line": 689,
+   "src_name_line": 1485
+  },
+  "obj_parent_sounds": {
+   "depth": -7,
+   "array_index": 683,
+   "src_depth_line": 690,
+   "src_name_line": 1486
+  },
+  "obj_creation_preview": {
+   "depth": 15,
+   "array_index": 684,
+   "src_depth_line": 691,
+   "src_name_line": 1487
+  },
+  "obj_resource_empty": {
+   "depth": 0,
+   "array_index": 685,
+   "src_depth_line": 692,
+   "src_name_line": 1488
+  },
+  "obj_cursor": {
+   "depth": -40,
+   "array_index": 686,
+   "src_depth_line": 693,
+   "src_name_line": 1489
+  },
+  "obj_grid": {
+   "depth": 369,
+   "array_index": 687,
+   "src_depth_line": 694,
+   "src_name_line": 1490
+  },
+  "obj_player_trail": {
+   "depth": 0,
+   "array_index": 688,
+   "src_depth_line": 695,
+   "src_name_line": 1491
+  },
+  "obj_effect_touch": {
+   "depth": -20,
+   "array_index": 689,
+   "src_depth_line": 696,
+   "src_name_line": 1492
+  },
+  "obj_button_trail": {
+   "depth": -12,
+   "array_index": 690,
+   "src_depth_line": 697,
+   "src_name_line": 1493
+  },
+  "obj_button_sdog": {
+   "depth": -12,
+   "array_index": 691,
+   "src_depth_line": 698,
+   "src_name_line": 1494
+  },
+  "obj_change_view": {
+   "depth": -23,
+   "array_index": 692,
+   "src_depth_line": 699,
+   "src_name_line": 1495
+  },
+  "obj_parent_resource_block": {
+   "depth": 0,
+   "array_index": 693,
+   "src_depth_line": 700,
+   "src_name_line": 1496
+  },
+  "obj_profile": {
+   "depth": -16,
+   "array_index": 694,
+   "src_depth_line": 701,
+   "src_name_line": 1497
+  },
+  "obj_crystalorb": {
+   "depth": 0,
+   "array_index": 695,
+   "src_depth_line": 702,
+   "src_name_line": 1498
+  },
+  "obj_hawmask": {
+   "depth": 0,
+   "array_index": 696,
+   "src_depth_line": 703,
+   "src_name_line": 1499
+  },
+  "obj_button_meteoritos": {
+   "depth": -12,
+   "array_index": 702,
+   "src_depth_line": 708,
+   "src_name_line": 1504
+  },
+  "obj_btn_settings_hd": {
+   "depth": -19,
+   "array_index": 703,
+   "src_depth_line": 709,
+   "src_name_line": 1505
+  },
+  "obj_bt_gb_edit": {
+   "depth": -7,
+   "array_index": 704,
+   "src_depth_line": 710,
+   "src_name_line": 1506
+  },
+  "obj_firebro": {
+   "depth": -2,
+   "array_index": 722,
+   "src_depth_line": 728,
+   "src_name_line": 1524
+  },
+  "obj_firebro_res": {
+   "depth": 0,
+   "array_index": 723,
+   "src_depth_line": 729,
+   "src_name_line": 1525
+  },
+  "obj_boomerangbro_res": {
+   "depth": 0,
+   "array_index": 724,
+   "src_depth_line": 730,
+   "src_name_line": 1526
+  },
+  "obj_boomerangbro": {
+   "depth": 0,
+   "array_index": 725,
+   "src_depth_line": 731,
+   "src_name_line": 1527
+  },
+  "obj_fireball_bro": {
+   "depth": -2,
+   "array_index": 726,
+   "src_depth_line": 732,
+   "src_name_line": 1528
+  },
+  "obj_icebro": {
+   "depth": 0,
+   "array_index": 727,
+   "src_depth_line": 733,
+   "src_name_line": 1529
+  },
+  "obj_icebro_res": {
+   "depth": 0,
+   "array_index": 728,
+   "src_depth_line": 734,
+   "src_name_line": 1530
+  },
+  "obj_skewer": {
+   "depth": 9,
+   "array_index": 729,
+   "src_depth_line": 735,
+   "src_name_line": 1531
+  },
+  "obj_skewer_res": {
+   "depth": 0,
+   "array_index": 730,
+   "src_depth_line": 736,
+   "src_name_line": 1532
+  },
+  "obj_skewertrunk": {
+   "depth": 0,
+   "array_index": 731,
+   "src_depth_line": 737,
+   "src_name_line": 1533
+  },
+  "obj_claw_res": {
+   "depth": -1,
+   "array_index": 732,
+   "src_depth_line": 738,
+   "src_name_line": 1534
+  },
+  "obj_claw": {
+   "depth": -1,
+   "array_index": 733,
+   "src_depth_line": 739,
+   "src_name_line": 1535
+  },
+  "obj_spike_ball_b": {
+   "depth": -3,
+   "array_index": 734,
+   "src_depth_line": 740,
+   "src_name_line": 1536
+  },
+  "obj_spike_ball_b_res": {
+   "depth": 0,
+   "array_index": 735,
+   "src_depth_line": 741,
+   "src_name_line": 1537
+  },
+  "obj_snow_ball_b": {
+   "depth": 0,
+   "array_index": 736,
+   "src_depth_line": 742,
+   "src_name_line": 1538
+  },
+  "obj_parcarry": {
+   "depth": -11,
+   "array_index": 737,
+   "src_depth_line": 743,
+   "src_name_line": 1539
+  },
+  "obj_snowball_bro": {
+   "depth": 0,
+   "array_index": 738,
+   "src_depth_line": 744,
+   "src_name_line": 1540
+  },
+  "obj_player_goal_smb2": {
+   "depth": -5,
+   "array_index": 739,
+   "src_depth_line": 745,
+   "src_name_line": 1541
+  },
+  "obj_frozenmario": {
+   "depth": 0,
+   "array_index": 740,
+   "src_depth_line": 746,
+   "src_name_line": 1542
+  },
+  "obj_puller": {
+   "depth": -8,
+   "array_index": 741,
+   "src_depth_line": 747,
+   "src_name_line": 1543
+  },
+  "obj_boomerang": {
+   "depth": 0,
+   "array_index": 742,
+   "src_depth_line": 748,
+   "src_name_line": 1544
+  },
+  "obj_cinta": {
+   "depth": 0,
+   "array_index": 743,
+   "src_depth_line": 749,
+   "src_name_line": 1545
+  },
+  "obj_cinta_on_res": {
+   "depth": -1,
+   "array_index": 744,
+   "src_depth_line": 750,
+   "src_name_line": 1546
+  },
+  "obj_cinta_parent": {
+   "depth": 0,
+   "array_index": 745,
+   "src_depth_line": 751,
+   "src_name_line": 1547
+  },
+  "obj_cinta_res": {
+   "depth": -1,
+   "array_index": 746,
+   "src_depth_line": 752,
+   "src_name_line": 1548
+  },
+  "obj_cinta_switch": {
+   "depth": 0,
+   "array_index": 747,
+   "src_depth_line": 753,
+   "src_name_line": 1549
+  },
+  "obj_meteorites_big": {
+   "depth": 0,
+   "array_index": 748,
+   "src_depth_line": 754,
+   "src_name_line": 1550
+  },
+  "obj_meteorites": {
+   "depth": 0,
+   "array_index": 749,
+   "src_depth_line": 755,
+   "src_name_line": 1551
+  },
+  "obj_meteorites_maker": {
+   "depth": 0,
+   "array_index": 750,
+   "src_depth_line": 756,
+   "src_name_line": 1552
+  },
+  "obj_n64_snd_res": {
+   "depth": -7,
+   "array_index": 751,
+   "src_depth_line": 757,
+   "src_name_line": 1553
+  },
+  "obj_bonus_snd_res": {
+   "depth": -7,
+   "array_index": 752,
+   "src_depth_line": 758,
+   "src_name_line": 1554
+  },
+  "obj_n64_or": {
+   "depth": 0,
+   "array_index": 753,
+   "src_depth_line": 759,
+   "src_name_line": 1555
+  },
+  "obj_efecto_musica_bonus": {
+   "depth": 0,
+   "array_index": 754,
+   "src_depth_line": 760,
+   "src_name_line": 1556
+  },
+  "obj_boss_or": {
+   "depth": 0,
+   "array_index": 755,
+   "src_depth_line": 761,
+   "src_name_line": 1557
+  },
+  "obj_bonus_or": {
+   "depth": 0,
+   "array_index": 756,
+   "src_depth_line": 762,
+   "src_name_line": 1558
+  },
+  "obj_boss_snd_res": {
+   "depth": -7,
+   "array_index": 757,
+   "src_depth_line": 763,
+   "src_name_line": 1559
+  },
+  "obj_shield_left": {
+   "depth": 0,
+   "array_index": 758,
+   "src_depth_line": 764,
+   "src_name_line": 1560
+  },
+  "obj_link_arrow_anim": {
+   "depth": -8,
+   "array_index": 759,
+   "src_depth_line": 765,
+   "src_name_line": 1561
+  },
+  "obj_link_dash_atack": {
+   "depth": -8,
+   "array_index": 760,
+   "src_depth_line": 766,
+   "src_name_line": 1562
+  },
+  "obj_link_down_atack": {
+   "depth": -8,
+   "array_index": 761,
+   "src_depth_line": 767,
+   "src_name_line": 1563
+  },
+  "obj_link": {
+   "depth": -2,
+   "array_index": 762,
+   "src_depth_line": 768,
+   "src_name_line": 1564
+  },
+  "obj_link_arrow": {
+   "depth": 0,
+   "array_index": 763,
+   "src_depth_line": 769,
+   "src_name_line": 1565
+  },
+  "obj_link_atack": {
+   "depth": -8,
+   "array_index": 764,
+   "src_depth_line": 770,
+   "src_name_line": 1566
+  },
+  "obj_link_bomb": {
+   "depth": 0,
+   "array_index": 765,
+   "src_depth_line": 771,
+   "src_name_line": 1567
+  },
+  "obj_link_res": {
+   "depth": 0,
+   "array_index": 766,
+   "src_depth_line": 772,
+   "src_name_line": 1568
+  },
+  "obj_shield_right": {
+   "depth": 0,
+   "array_index": 767,
+   "src_depth_line": 773,
+   "src_name_line": 1569
+  },
+  "obj_effect_link": {
+   "depth": -8,
+   "array_index": 768,
+   "src_depth_line": 774,
+   "src_name_line": 1570
+  },
+  "obj_settings_custom": {
+   "depth": -19,
+   "array_index": 769,
+   "src_depth_line": 775,
+   "src_name_line": 1571
+  },
+  "obj_settings_controls": {
+   "depth": -19,
+   "array_index": 770,
+   "src_depth_line": 776,
+   "src_name_line": 1572
+  },
+  "obj_button_settings_close2": {
+   "depth": -19,
+   "array_index": 771,
+   "src_depth_line": 777,
+   "src_name_line": 1573
+  },
+  "obj_boomboom_b_res": {
+   "depth": 0,
+   "array_index": 772,
+   "src_depth_line": 778,
+   "src_name_line": 1574
+  },
+  "obj_boomboom_b": {
+   "depth": -2,
+   "array_index": 773,
+   "src_depth_line": 779,
+   "src_name_line": 1575
+  },
+  "obj_chain_chomp_free_b": {
+   "depth": -7,
+   "array_index": 774,
+   "src_depth_line": 780,
+   "src_name_line": 1576
+  },
+  "obj_SMB2_mushroom": {
+   "depth": 0,
+   "array_index": 777,
+   "src_depth_line": 783,
+   "src_name_line": 1579
+  },
+  "obj_header": {
+   "depth": -11,
+   "array_index": 779,
+   "src_depth_line": 785,
+   "src_name_line": 1581
+  },
+  "obj_btn_header_1": {
+   "depth": -11,
+   "array_index": 780,
+   "src_depth_line": 786,
+   "src_name_line": 1582
+  },
+  "obj_btn_header_2": {
+   "depth": -11,
+   "array_index": 781,
+   "src_depth_line": 787,
+   "src_name_line": 1583
+  },
+  "obj_btn_header_3": {
+   "depth": -11,
+   "array_index": 782,
+   "src_depth_line": 788,
+   "src_name_line": 1584
+  },
+  "obj_btn_header_4": {
+   "depth": -11,
+   "array_index": 783,
+   "src_depth_line": 789,
+   "src_name_line": 1585
+  },
+  "obj_cooligan": {
+   "depth": 0,
+   "array_index": 784,
+   "src_depth_line": 790,
+   "src_name_line": 1586
+  },
+  "obj_cooligan_res": {
+   "depth": 0,
+   "array_index": 785,
+   "src_depth_line": 791,
+   "src_name_line": 1587
+  },
+  "obj_goombrat_b_res": {
+   "depth": 0,
+   "array_index": 786,
+   "src_depth_line": 792,
+   "src_name_line": 1588
+  },
+  "obj_galoomba2_b": {
+   "depth": 0,
+   "array_index": 787,
+   "src_depth_line": 793,
+   "src_name_line": 1589
+  },
+  "obj_button_sombras": {
+   "depth": -19,
+   "array_index": 788,
+   "src_depth_line": 794,
+   "src_name_line": 1590
+  },
+  "obj_yoshi_blue": {
+   "depth": -7,
+   "array_index": 789,
+   "src_depth_line": 795,
+   "src_name_line": 1591
+  },
+  "obj_yoshi_runaway_blue": {
+   "depth": -4,
+   "array_index": 790,
+   "src_depth_line": 796,
+   "src_name_line": 1592
+  },
+  "obj_egg_blue": {
+   "depth": -2,
+   "array_index": 791,
+   "src_depth_line": 797,
+   "src_name_line": 1593
+  },
+  "obj_rails_res": {
+   "depth": 8,
+   "array_index": 792,
+   "src_depth_line": 798,
+   "src_name_line": 1594
+  },
+  "obj_grrrol_new_res": {
+   "depth": 0,
+   "array_index": 795,
+   "src_depth_line": 801,
+   "src_name_line": 1597
+  },
+  "obj_grrrol_b_res": {
+   "depth": 0,
+   "array_index": 796,
+   "src_depth_line": 802,
+   "src_name_line": 1598
+  }
+ },
+ "in_table_not_in_yyp": [
+  {
+   "name": "obj_bt_pub",
+   "depth": -7,
+   "array_index": 384,
+   "src_depth_line": 392,
+   "src_name_line": 1188
+  },
+  {
+   "name": "obj_bl",
+   "depth": -23,
+   "array_index": 393,
+   "src_depth_line": 401,
+   "src_name_line": 1197
+  },
+  {
+   "name": "obj_superado_bg",
+   "depth": -20,
+   "array_index": 399,
+   "src_depth_line": 407,
+   "src_name_line": 1203
+  },
+  {
+   "name": "obj_nm_like_heart",
+   "depth": -21,
+   "array_index": 402,
+   "src_depth_line": 410,
+   "src_name_line": 1206
+  },
+  {
+   "name": "obj_nm_dislike_heart",
+   "depth": -21,
+   "array_index": 403,
+   "src_depth_line": 411,
+   "src_name_line": 1207
+  },
+  {
+   "name": "obj_nm_card_expand",
+   "depth": -2,
+   "array_index": 404,
+   "src_depth_line": 412,
+   "src_name_line": 1208
+  },
+  {
+   "name": "obj_nm_card_close",
+   "depth": -3,
+   "array_index": 405,
+   "src_depth_line": 413,
+   "src_name_line": 1209
+  },
+  {
+   "name": "obj_nm_play",
+   "depth": -3,
+   "array_index": 406,
+   "src_depth_line": 414,
+   "src_name_line": 1210
+  },
+  {
+   "name": "obj_id_input",
+   "depth": 0,
+   "array_index": 407,
+   "src_depth_line": 415,
+   "src_name_line": 1211
+  },
+  {
+   "name": "obj_id_button",
+   "depth": -2,
+   "array_index": 408,
+   "src_depth_line": 416,
+   "src_name_line": 1212
+  },
+  {
+   "name": "obj_nm_button_retry_id",
+   "depth": -3,
+   "array_index": 409,
+   "src_depth_line": 417,
+   "src_name_line": 1213
+  },
+  {
+   "name": "obj_creator_input",
+   "depth": 0,
+   "array_index": 410,
+   "src_depth_line": 418,
+   "src_name_line": 1214
+  },
+  {
+   "name": "obj_creator_button",
+   "depth": 0,
+   "array_index": 411,
+   "src_depth_line": 419,
+   "src_name_line": 1215
+  },
+  {
+   "name": "obj_nivelesmundiales",
+   "depth": -1,
+   "array_index": 412,
+   "src_depth_line": 420,
+   "src_name_line": 1216
+  },
+  {
+   "name": "obj_nm_tabs",
+   "depth": -2,
+   "array_index": 413,
+   "src_depth_line": 421,
+   "src_name_line": 1217
+  },
+  {
+   "name": "obj_nm_card",
+   "depth": 0,
+   "array_index": 414,
+   "src_depth_line": 422,
+   "src_name_line": 1218
+  },
+  {
+   "name": "obj_scrollbar",
+   "depth": -3,
+   "array_index": 415,
+   "src_depth_line": 423,
+   "src_name_line": 1219
+  },
+  {
+   "name": "obj_pages_button",
+   "depth": -2,
+   "array_index": 416,
+   "src_depth_line": 424,
+   "src_name_line": 1220
+  },
+  {
+   "name": "obj_nm_button_retry",
+   "depth": -3,
+   "array_index": 417,
+   "src_depth_line": 425,
+   "src_name_line": 1221
+  },
+  {
+   "name": "obj_DSM_control",
+   "depth": 100,
+   "array_index": 697,
+   "src_depth_line": 704,
+   "src_name_line": 1500
+  },
+  {
+   "name": "obj_DSM_button",
+   "depth": -5,
+   "array_index": 698,
+   "src_depth_line": 705,
+   "src_name_line": 1501
+  },
+  {
+   "name": "obj_DSM_level",
+   "depth": 0,
+   "array_index": 699,
+   "src_depth_line": 706,
+   "src_name_line": 1502
+  },
+  {
+   "name": "obj_DSM_mario",
+   "depth": -1,
+   "array_index": 700,
+   "src_depth_line": 707,
+   "src_name_line": 1503
+  },
+  {
+   "name": "obj_nm_style_game",
+   "depth": 0,
+   "array_index": 705,
+   "src_depth_line": 711,
+   "src_name_line": 1507
+  },
+  {
+   "name": "obj_nm_course_theme",
+   "depth": 0,
+   "array_index": 706,
+   "src_depth_line": 712,
+   "src_name_line": 1508
+  },
+  {
+   "name": "obj_nm_historial",
+   "depth": 0,
+   "array_index": 707,
+   "src_depth_line": 713,
+   "src_name_line": 1509
+  },
+  {
+   "name": "obj_nm_control",
+   "depth": 0,
+   "array_index": 708,
+   "src_depth_line": 714,
+   "src_name_line": 1510
+  },
+  {
+   "name": "obj_nm_orden",
+   "depth": 0,
+   "array_index": 709,
+   "src_depth_line": 715,
+   "src_name_line": 1511
+  },
+  {
+   "name": "obj_nm_button_big",
+   "depth": -5,
+   "array_index": 710,
+   "src_depth_line": 716,
+   "src_name_line": 1512
+  },
+  {
+   "name": "obj_nm_reaccion",
+   "depth": 0,
+   "array_index": 711,
+   "src_depth_line": 717,
+   "src_name_line": 1513
+  },
+  {
+   "name": "obj_nm_report",
+   "depth": -3,
+   "array_index": 712,
+   "src_depth_line": 718,
+   "src_name_line": 1514
+  },
+  {
+   "name": "obj_nm_search_btn",
+   "depth": 0,
+   "array_index": 713,
+   "src_depth_line": 719,
+   "src_name_line": 1515
+  },
+  {
+   "name": "obj_nm_input_text",
+   "depth": 0,
+   "array_index": 714,
+   "src_depth_line": 720,
+   "src_name_line": 1516
+  },
+  {
+   "name": "obj_nm_dificultad",
+   "depth": 0,
+   "array_index": 715,
+   "src_depth_line": 721,
+   "src_name_line": 1517
+  },
+  {
+   "name": "obj_nm_download",
+   "depth": -3,
+   "array_index": 716,
+   "src_depth_line": 722,
+   "src_name_line": 1518
+  },
+  {
+   "name": "obj_nm_star",
+   "depth": -3,
+   "array_index": 717,
+   "src_depth_line": 723,
+   "src_name_line": 1519
+  },
+  {
+   "name": "obj_nm_delete",
+   "depth": -3,
+   "array_index": 718,
+   "src_depth_line": 724,
+   "src_name_line": 1520
+  },
+  {
+   "name": "obj_nm_search_id_btn",
+   "depth": 0,
+   "array_index": 719,
+   "src_depth_line": 725,
+   "src_name_line": 1521
+  },
+  {
+   "name": "obj_btn_close_search",
+   "depth": -3,
+   "array_index": 720,
+   "src_depth_line": 726,
+   "src_name_line": 1522
+  },
+  {
+   "name": "obj_nm_tiempo",
+   "depth": 0,
+   "array_index": 721,
+   "src_depth_line": 727,
+   "src_name_line": 1523
+  },
+  {
+   "name": "obj_shadow",
+   "depth": -104,
+   "array_index": 775,
+   "src_depth_line": 781,
+   "src_name_line": 1577
+  },
+  {
+   "name": "obj_nm_refresh",
+   "depth": 0,
+   "array_index": 778,
+   "src_depth_line": 784,
+   "src_name_line": 1580
+  },
+  {
+   "name": "obj_DSM_clouds",
+   "depth": 5,
+   "array_index": 793,
+   "src_depth_line": 799,
+   "src_name_line": 1595
+  },
+  {
+   "name": "obj_DSM_control_game",
+   "depth": 0,
+   "array_index": 794,
+   "src_depth_line": 800,
+   "src_name_line": 1596
+  }
+ ],
+ "in_yyp_not_in_table": [
+  "obj_big_pplant",
+  "obj_slopes",
+  "obj_goomba_intro",
+  "obj_scrollbar4",
+  "obj_tongue_blue",
+  "obj_fishbone",
+  "obj_big_pplant_b_res",
+  "obj_scrollbar3",
+  "obj_big_plant_b_dead",
+  "obj_sparkles_blend",
+  "obj_NSMBU_charginchuck",
+  "obj_big_pplant_res",
+  "obj_waddlewing_res",
+  "obj_rename",
+  "obj_input_desc",
+  "obj_create_account",
+  "obj_grrrol_b",
+  "obj_rename_button2",
+  "obj_bonus_trail",
+  "obj_rename_input",
+  "obj_big_plant_dead",
+  "obj_shell_trail",
+  "obj_rename_button3",
+  "obj_bt_rename",
+  "obj_thwomp_intro",
+  "obj_waddlewing",
+  "obj_vsync",
+  "obj_sm4j_jump",
+  "obj_rails",
+  "obj_blend_ring",
+  "obj_dcw",
+  "obj_input_rename",
+  "obj_rename_close",
+  "obj_audio_control",
+  "obj_rename_control",
+  "obj_galoomba_hold2_b",
+  "obj_ludwig_res",
+  "obj_fishbone_res",
+  "obj_call_mario",
+  "obj_silbido",
+  "obj_slopeleft",
+  "obj_sloperight",
+  "obj_galoomba_hold_b",
+  "obj_ground_slope",
+  "obj_galoomba_b",
+  "obj_thwomp_b",
+  "obj_btn_header_parent",
+  "obj_NSMBU_boomboom_b",
+  "obj_NSMBU_bowserjr_b",
+  "obj_grrrol_new",
+  "obj_ninji",
+  "obj_NSMBU_ninji",
+  "obj_ninji_res",
+  "obj_smoke_goomba",
+  "obj_big_pplant_b",
+  "obj_titlemenu_key",
+  "obj_slopesa",
+  "obj_thwomp_b_res",
+  "obj_SMB2_mushroom_res",
+  "obj_chomp_b_res",
+  "obj_goomba_b_res"
+ ],
+ "note": "不在表里的 object：object_get_depth() 返回 0（scripts/object_get_depth/object_get_depth.gml:7-11）；表里有但 yyp 没有的名字，asset_get_index 返回 -1，被 __global_object_depths.gml:1605 的 objID >= 0 判断跳过",
+ "anomalies": [
+  "名字 obj_smoke 在表中出现多次（下标 322 与 776），原版循环后者覆盖前者",
+  "下标 777 的注释名 obj_SMB2_mushroom_res 与 __objectNames 的 obj_SMB2_mushroom 不一致"
+ ]
+}

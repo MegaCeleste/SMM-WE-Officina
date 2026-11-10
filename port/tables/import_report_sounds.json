@@ -1,0 +1,36 @@
+{
+ "anomaly_count": 6,
+ "anomalies": [
+  {
+   "sound": "snd_NSMBU_erupcion",
+   "kind": "ext_mismatch",
+   "detail": "扩展名 .wav 但文件头是 ogg"
+  },
+  {
+   "sound": "snd_NSMBU_volcanic_rocks",
+   "kind": "ext_mismatch",
+   "detail": "扩展名 .wav 但文件头是 ogg"
+  },
+  {
+   "sound": "snd_NSMBU_rocks_break",
+   "kind": "ext_mismatch",
+   "detail": "扩展名 .wav 但文件头是 ogg"
+  },
+  {
+   "sound": "snd_SMB_link_itemappear",
+   "kind": "ext_mismatch",
+   "detail": "扩展名 .wav 但文件头是 ogg"
+  },
+  {
+   "sound": "snd_goomba_stomped",
+   "kind": "ext_mismatch",
+   "detail": "扩展名 .wav 但文件头是 ogg"
+  },
+  {
+   "sound": "snd_SMB_clear_castle_link",
+   "kind": "ext_mismatch",
+   "detail": "扩展名 .wav 但文件头是 ogg"
+  }
+ ],
+ "removed_stale": []
+}

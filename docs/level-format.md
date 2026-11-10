@@ -231,3 +231,13 @@
 清单 §6.7 说 `global.directorio` 由 `directorio_temp + "/"` 赋值（`Create_0.gml:132`），那只是 Android 分支；Windows 分支两者都直接等于 `working_directory + "Niveles\\"`。
 
 **不确定**：GMS 在 Windows 上 `working_directory` 读写的实际目录（安装目录还是 `%LOCALAPPDATA%\<游戏名>\` 沙盒）取决于运行时与打包方式，仓库内无法确认；移植时用户关卡目录的位置需要你定。
+
+## 附：用原版 3.5.1 样本核对的结果（2026-11-10）
+
+样本：`docs/samples/3.5.1level1.swe`（用户用社区下载的 SMMWE V3.5.1 保存，13577 字节）。
+
+- 文件结构与本文一致：base64(JSON) + 40 位十六进制 + 1 个结尾 `\0`。
+- HMAC 是 **小写** 十六进制。用源码里的密钥 `2559F35097-2021` 对 base64 串算 HMAC-SHA1，与文件末尾的 40 位完全相同。所以 3.5.1 的密钥和算法与这份源码一致，§1 的“大小写不确定”已解决。
+- JSON 顶层键是 `S0`、`SB1`；`S0` 下是 `S1`–`S8`。整数值不带小数点（`"xx":704`），非整数按 17 位有效数字输出（样本里出现了 `0.20000000000000001`）。写关卡时要照这个数字格式输出，原版才认。
+- Windows 上原版的关卡目录是 `%LOCALAPPDATA%\SMM_WE\Niveles\`（GMS 的 `working_directory` 在 Windows 上是可写的存档目录，不是 exe 所在目录）。同目录上一级还有 `Settings351.dat`、`dsm_351.dat`。
+- 样本里没有传送带和斜坡，§“保存/读取不对称”那两条还没有样本可对。

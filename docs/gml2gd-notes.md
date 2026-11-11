@@ -102,6 +102,8 @@ tools/.venv/Scripts/python.exe tools/gml2gd.py stats
 
 ## 4. 占位约定（还没定，主会话决定后改脚本即可）
 
+> 第 2 批已定：`Scr.` 和 `G.` 不再是占位，组织方式见 port-plan §2、§3.3 第 11–14 条（`port/scripts/scr.gd` 门面 + 每个脚本一个文件；`port/globals/g.gd`）。`noone` 和 `obj_x.foo` 写入仍未定。
+
 - **`Scr.<名>(self, …)`**：脚本调用。port-plan §2 说脚本“按原文件夹归到若干 .gd”，但没定类名和组织方式，所以先统一写成 `Scr.` 前缀、第一个参数传调用者实例。宏写成 `Scr.<宏名>`、枚举写成 `Scr.<枚举>.<成员>`，也都是占位。宏的数字值输出成浮点常量（`const cs_big = 1.0`），因为它们主要和 float 的 global 比较、做 match 分支；如果要当数组下标用需要 `int()`。
 - **`G.x`**：global 变量（port-plan §3.1）。match 分支按 G 的变量是 float 来写（globals.json 里 number 类型的），G 的实际声明类型和这里不一致时 match 会静默不匹配。
 - **`GM.noone`**：`noone` 一律写 `GM.noone`（int -4），不标 TODO。只有“另一边静态上就是 GMObject”时写 `null`（不这样写编译不过）。注意：兼容层里“没有实例”是 `null`，所以 `var c = collision_rectangle(…)` 存进**未声明类型**的变量后再写 `c != GM.noone`，运行时 `null != -4` 为真，语义反了；实例变量里赋值的 `-4`（如 `mebelow = -4`）也照原样输出成 `-4.0`。复核时要逐个处理。

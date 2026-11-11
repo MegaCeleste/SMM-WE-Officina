@@ -44,6 +44,12 @@ func texture() -> Texture2D:
 	return _tex
 
 
+## 动态 sprite（截图）用：直接给贴图，不从文件读
+func set_texture(t: Texture2D) -> void:
+	_tex = t
+	_tex_tried = true
+
+
 ## 遮罩在 (u, v)（sprite 像素坐标）处是否实心。与 runner 的 ColMaskSet 相同：
 ## use_floor 为真时向下取整，否则向零截断。
 func mask_set(img: int, u: float, v: float, use_floor: bool) -> bool:

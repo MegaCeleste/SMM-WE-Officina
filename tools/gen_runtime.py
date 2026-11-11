@@ -101,7 +101,8 @@ def main() -> int:
             "name": n, "width": r["width"], "height": r["height"],
             "persistent": r["persistent"],
             "instances": insts,
-            "layers": [l for l in r["layers"] if l["type"] != "GMRInstanceLayer"],
+            # 全部图层（实例图层只留名字和 depth，实例本身在 instances 里）：layer_get_all 要列出它们
+            "layers": [{k: v for k, v in l.items() if k != "instances"} for l in r["layers"]],
         })
     write_json(TABLES / "runtime.json", {
         "objects": rt_objects, "sprites": rt_sprites, "sounds": rt_sounds, "rooms": rt_rooms,

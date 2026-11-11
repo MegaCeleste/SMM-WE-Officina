@@ -211,6 +211,15 @@ func _rebuild_class_ancestry() -> void:
 # ======================================================================
 
 ## GML 的 round：四舍六入五成双
+## GML 的真值：数值 > 0.5 为真
+func truthy(v: Variant) -> bool:
+	if v is bool:
+		return v
+	if v is int or v is float:
+		return float(v) > 0.5
+	return v != null
+
+
 func gm_round(a: float) -> float:
 	var i: float = floorf(absf(a)) * (1.0 if a >= 0.0 else -1.0)
 	var f: float = a - i

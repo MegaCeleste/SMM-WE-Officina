@@ -49,6 +49,18 @@ var _view_hport: Array[float] = []
 var room_width: float = VIEW_W
 var room_height: float = VIEW_H
 
+# ---- application_surface 与 GUI（第 2 批） ----
+## 世界层画进这个 SubViewport；它的纹理就是 application_surface（见 gm_system.gd）
+var _app_vp: SubViewport = null
+var _app_w: float = VIEW_W
+var _app_h: float = VIEW_H
+## application_surface 自动画到屏幕上用的 canvas item（application_surface_draw_enable(false) 时为空）
+var _app_node: Node2D = null
+var _ci_app: RID = RID()
+## display_set_gui_size 设的 GUI 坐标范围，映射到整个画面
+var _gui_w: float = VIEW_W
+var _gui_h: float = VIEW_H
+
 
 func _init_draw() -> void:
 	for i: int in 8:
@@ -66,9 +78,25 @@ func _init_draw() -> void:
 		_view_yport.append(0.0)
 		_view_wport.append(VIEW_W)
 		_view_hport.append(VIEW_H)
+	# GMS 的窗口底色是黑的；SubViewport 每帧用它清屏
+	RenderingServer.set_default_clear_color(Color.BLACK)
+	_app_vp = SubViewport.new()
+	_app_vp.name = "GMApplicationSurface"
+	_app_vp.size = Vector2i(int(_app_w), int(_app_h))
+	_app_vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	_app_vp.transparent_bg = false
+	_app_vp.disable_3d = true
+	_app_vp.canvas_item_default_texture_filter = Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
+	add_child(_app_vp)
 	_world_node = Node2D.new()
 	_world_node.name = "GMWorld"
-	add_child(_world_node)
+	_app_vp.add_child(_world_node)
+	_app_node = Node2D.new()
+	_app_node.name = "GMAppSurface"
+	add_child(_app_node)
+	_ci_app = RenderingServer.canvas_item_create()
+	RenderingServer.canvas_item_set_parent(_ci_app, _app_node.get_canvas_item())
+	_update_app_surface_quad()
 	_gui_layer = CanvasLayer.new()
 	_gui_layer.name = "GMGui"
 	_gui_layer.layer = 10
@@ -87,14 +115,39 @@ func _exit_tree() -> void:
 		RenderingServer.free_rid(_ci_world)
 	if _ci_gui.is_valid():
 		RenderingServer.free_rid(_ci_gui)
+	if _ci_app.is_valid():
+		RenderingServer.free_rid(_ci_app)
+
+
+func _set_app_surface_size(w: float, h: float) -> void:
+	_app_w = maxf(1.0, floorf(w))
+	_app_h = maxf(1.0, floorf(h))
+	if _app_vp != null:
+		_app_vp.size = Vector2i(int(_app_w), int(_app_h))
+	_update_app_surface_quad()
+
+
+## application_surface 自动显示：铺满整个画面（GMS 在 Draw 和 Draw GUI 之间画它）
+func _update_app_surface_quad() -> void:
+	if not _ci_app.is_valid():
+		return
+	RenderingServer.canvas_item_clear(_ci_app)
+	if _app_surface_draw_on():
+		RenderingServer.canvas_item_add_texture_rect(_ci_app, Rect2(0.0, 0.0, VIEW_W, VIEW_H), _app_vp.get_texture().get_rid())
+
+
+## gm_system.gd 覆盖
+func _app_surface_draw_on() -> bool:
+	return true
 
 
 func _begin_world_draw() -> void:
 	RenderingServer.canvas_item_clear(_ci_world)
 	RenderingServer.canvas_item_clear(_ci_gui)
-	var sx: float = VIEW_W / _cam_w[0]
-	var sy: float = VIEW_H / _cam_h[0]
+	var sx: float = _app_w / _cam_w[0]
+	var sy: float = _app_h / _cam_h[0]
 	RenderingServer.canvas_item_set_transform(_ci_world, Transform2D(0.0, Vector2(sx, sy), 0.0, Vector2(-_cam_x[0] * sx, -_cam_y[0] * sy)))
+	RenderingServer.canvas_item_set_transform(_ci_gui, Transform2D(0.0, Vector2(VIEW_W / _gui_w, VIEW_H / _gui_h), 0.0, Vector2.ZERO))
 	_ci = _ci_world
 	_xf_set = false
 
@@ -168,7 +221,7 @@ func draw_sprite(spr: int, subimg: float, px: float, py: float) -> void:
 
 
 func draw_sprite_ext(spr: int, subimg: float, px: float, py: float, xs: float, ys: float, rot: float, col: int, alpha: float) -> void:
-	if spr < 0:
+	if not sprite_exists(spr):
 		return
 	var s: GMSprite = sprites[spr]
 	var tex: Texture2D = s.texture()
@@ -190,7 +243,7 @@ func draw_sprite_part(spr: int, subimg: float, left: float, top: float, w: float
 
 
 func draw_sprite_part_ext(spr: int, subimg: float, left: float, top: float, w: float, h: float, px: float, py: float, xs: float, ys: float, col: int, alpha: float) -> void:
-	if spr < 0:
+	if not sprite_exists(spr):
 		return
 	var s: GMSprite = sprites[spr]
 	var tex: Texture2D = s.texture()
@@ -220,7 +273,7 @@ func draw_sprite_stretched(spr: int, subimg: float, px: float, py: float, w: flo
 
 
 func draw_sprite_stretched_ext(spr: int, subimg: float, px: float, py: float, w: float, h: float, col: int, alpha: float) -> void:
-	if spr < 0:
+	if not sprite_exists(spr):
 		return
 	var s: GMSprite = sprites[spr]
 	var tex: Texture2D = s.texture()
@@ -272,7 +325,7 @@ func sprite_get_name(spr: int) -> String:
 
 
 func sprite_exists(spr: int) -> bool:
-	return spr >= 0 and spr < sprites.size()
+	return spr >= 0 and spr < sprites.size() and sprites[spr] != null
 
 
 # ======================================================================

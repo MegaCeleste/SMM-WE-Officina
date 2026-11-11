@@ -45,9 +45,11 @@
 port/
   project.godot
   gm/            兼容层（autoload `GM`、基类 `GMObject`、碰撞、绘制、音频、视图、资源名常量 `A`）
-  globals/       autoload `G`：原版全部 global.* 变量，逐个声明类型
+  globals/       autoload `G`（g.gd，tools/gen_g.py 由 tables/globals.json 生成）：原版全部 global.* 变量，逐个声明类型
   objects/       一个 object 一个 .gd，文件名与原名相同（obj_koopa.gd）
-  scripts/       一个 GML 脚本一个静态函数，按原文件夹归到若干 .gd
+  scripts/       一个原版脚本资源一个 .gd（文件名同资源名），里面是 `static func 函数名(me: GMObject, …)`；
+                 scr.gd（class_name Scr，tools/gen_scr.py 生成）是门面：全部宏、枚举，和每个已移植函数的转发，
+                 调用处一律写 `Scr.函数名(self, …)`。（第 2 批定：没有按文件夹合并，便于逐个核对）
   rooms/         每个 room 一个 .tscn + 实例表
   assets/        由导入脚本从 original/ 生成，不手改
   tables/        生成的数据表：object 清单、depth 表、名字→资源映射
@@ -114,6 +116,10 @@ tools/           一次性导入/生成脚本（读 original/，只写 port/）
 8a. 访问别的实例的变量（`other.vspeed`、`inst.key`）：内置变量直接访问；object 自己的变量因为没有 `class_name`，静态类型查不到，把实例放进不带类型的局部变量再访问（`var o = other` 后 `o.key`），或用 `inst.get("key")` / `inst.set("key", v)`。
 9. 内置变量 `x y hspeed vspeed speed direction gravity friction image_index image_speed image_xscale image_yscale image_angle image_alpha sprite_index mask_index depth visible xstart ystart xprevious yprevious bbox_* alarm[]` 都是 `GMObject` 的属性，名字不变。`hspeed/vspeed` 与 `speed/direction` 的联动照 GMS 实现。
 10. 每个翻译出的方法头部写一行来源注释：`# from objects/obj_koopa/Step_0.gml`。
+11. 数组写入：GML 数组越界写入会自动扩展，GDScript 不会。可能越界的 `a[i] = v` 写成 `GM.aset(a, i, v)`；数组变量声明成 `Array = []`（GML 里给未赋值的变量写下标会自动建数组）。二维的先 `GM.aset(a, i, [])` 再写内层。
+12. G 的类型：number → float、string → String、bool → bool、字体/资源 → int、array/ds_list → Array，其余不带类型（规则在 tools/gen_g.py）。GML 读未赋值的 global 会报错，移植版都有初值，不会报。
+13. 原版脚本里有 4 个和内置函数同名的函数（`sprite_delete`、`sprite_exists`、`gpu_set_blendenable`、`gpu_set_blendmode`，在 background_delete.gml 等 GMS 生成的脚本里），调用的是内置函数，写 `GM.`。转换脚本已按此处理。
+14. 脚本的 static func 若声明 `-> Variant`，结尾补 `return null`（GML 走到结尾返回 undefined）。
 
 ## 4. 时间系统
 
@@ -164,6 +170,8 @@ tools/           一次性导入/生成脚本（读 original/，只写 port/）
 ## 6. 绘制、视图、音频、输入
 
 - **绘制**：435 个 object 有自定义 Draw。Draw 事件在 tick 的最后一个阶段里执行（GMS 的顺序，每 tick 恰好一次），所以不走节点的 `_draw()`：`GM` 持有一个世界 canvas item 和一个 GUI canvas item，每 tick 清空，`draw_sprite_ext`、`draw_text`、`draw_rectangle` 等 `GM` 下的同名函数直接往里写 `RenderingServer` 绘制命令。`draw_set_alpha/colour/font/halign/valign` 是全局状态，跨事件保留。没有 Draw 事件的实例画默认的 `draw_self`，画在视野外的直接跳过。颜色是 GML 的 `0xBBGGRR` 整数。字体：`font_add`（ttf）和 `font_add_sprite_ext`（原版的数字字体全是这种）。
+- **application_surface**（第 2 批实现）：世界层画进一个 SubViewport，它的纹理就是 `application_surface`，大小由 `surface_resize` 决定（原版设成 768×432，相机 384×216 放大 2 倍画进去）。原版调了 `application_surface_draw_enable(false)`，由 obj_persistent 的 Draw GUI 用 `draw_surface_stretched` 自己把它画到屏幕上，所以 `port_y`（屏幕震动）照原样生效。GUI 坐标按 `display_set_gui_size` 映射到整个 384×216 画面。因为最终画面仍是 384×216（§0 的决定），原版 2 倍 surface 上的半像素细节看不到。截图（`sprite_create_from_surface`，换 room 时的淡出）取 SubViewport 上一帧的图像，headless 下是全黑图。
+- **room 图层**（第 2 批实现，`port/gm/gm_layer.gd`）：room 的背景图层（纯色或 sprite，平铺/拉伸/滚动）按 depth 和实例混排绘制；`layer_*` 和 `layer_background_*` 实现了 GMS 生成的 `__background_*` 兼容脚本用到的全部函数（原版 1098 处 `__background_set` 都走这些脚本）。asset 图层（图块）只建空图层，内容第 3 批画。
 - **shader / surface**（97 行 / 43 文件）：3 个 shader 手工改写成 Godot shader；`sha_blendreplace`（玩家和头盔类绘制用）优先。`application_surface` 截图（暂停、淡入）用 `SubViewport`/屏幕纹理替代。`obj_lighting`、冲击波放在特效批次。
 - **视图**：所有 room 的 `enableViews=False`，视图由代码通过 `__view_get/__view_set` 和 `camera_*` 控制（1275 行）。`GM` 提供一个 view 0，映射到一个 `Camera2D`；`__view_get((n<<0), 0)` 的编号按 `scripts/__view_get` 的枚举翻译成具名访问。基准分辨率 384×216，整数倍放大，最近邻过滤（原版 `interpolate_pixels=False`）。
 - **音频**：2598 处 `audio_*`。`GM.audio_play_sound(snd, priority, loop)` 返回句柄，支持 `audio_is_playing/stop/pause/sound_pitch/gain`；用一个 `AudioStreamPlayer` 池。原版只有一个 audio group。
@@ -254,6 +262,8 @@ tools/           一次性导入/生成脚本（读 original/，只写 port/）
 | U9 没有 sprite 的实例是否触发 Animation End | 不触发 | 假设。HTML5 runner 会每步都触发 | 无 sprite 的 object 加 Animation End 事件打印 |
 | U10 `keyboard_key_press` 之后同一步内 `keyboard_check_pressed` | 按住状态立刻生效，“刚按下”下一步生效 | 假设 | Step 里先 `keyboard_key_press` 再打印 `keyboard_check_pressed` |
 | U11 相同 depth 的实例谁画在上面 | 后创建（或后改 depth）的在上 | 假设 | 两个同 depth 的重叠实例截图 |
+| U12 相同 depth 的图层谁在上面；同 depth 的背景图层和实例 | room 图层列表里靠前的（编辑器里靠上的）画在上面；同 depth 时先画背景图层再画实例 | 假设。rm_intro 的 Compatibility_Background_0（换成 bg_lg 后）和 Compatibility_Colour 同 depth，按此规则 bg_lg 盖住黄色底，与登录界面的意图一致 | 3.5.1 原版看 intro 结束后的登录界面背景 |
+| U13 背景图层的动画速度和滚动时机 | userdefinedAnimFPS 为假时用 sprite 自己的速度；图层按 hspeed/vspeed 滚动在 Draw 之前做 | 假设 | 有动画的背景 sprite 计帧 |
 
 U4、U5、U7 最可能影响手感。它们各自只在兼容层的一处实现，结论不同时改一处即可。没有 GameMaker 也可以间接判断：第 3 批起对照 3.5.1 原版试玩，出现“先后顺序”类的差异时优先查这三项。
 
@@ -263,4 +273,5 @@ U4、U5、U7 最可能影响手感。它们各自只在兼容层的一处实现�
 |---|---|---|---|
 | 0 | 完成（2026-11-10） | `--import`、`--quit` 均无错误，退出码 0 | Opus 子代理执行，主会话复核。产物：`tools/`、`port/tables/`、`port/assets/`、`docs/level-format.md`、`docs/user-events.md`、`docs/batch0-notes.md`。遗留的“不确定”条目记在这三份文档里 |
 | 1 | 完成（2026-11-10） | `--quit` 无输出、退出码 0；`tests/test_main.tscn` 221 项检查全过（headless 和真实渲染器各跑过一次） | 产物：`port/gm/`（`gm.gd` 及其继承链 `gm_input ← gm_audio ← gm_draw ← gm_base`、`gm_object.gd`、`gm_class.gd`、`gm_collision.gd`、`gm_sprite.gd`、生成的 `a.gd`）、`port/tests/`、`tools/gen_runtime.py`、`tools/gen_masks.py`。行为对照了 HTML5 runner 源码，§3–§6、UNVERIFIED 清单已按实现更新。**没做的**：path（`path_start` 等，第 7 批）、粒子（第 7 批）、surface 和 shader（第 11 批）、room 的背景图层和图块（第 2 批）、`instance_change`（3 处调用，用到时做）、`audio_sound_gain` 的渐变、文件读写（第 3/9 批）。**没验证的**：画面没有人眼看过，只确认了绘制调用不报错 |
+| 2 | 完成（2026-11-11） | `--quit` 无输出、退出码 0；`tests/test_main.tscn` 221 项全过；新增 `tests/test_boot.tscn`（启动链，57 项）全过；真实渲染器录 1000 帧（Movie Maker）人眼看过 logo、淡出截图、intro（龟壳）、标题落下、登录界面背景 | 产物：`port/globals/g.gd`（`tools/gen_g.py`）、`port/scripts/scr.gd`（`tools/gen_scr.py`）、11 个脚本（scr_language、scr_init_globals、init_shockwave、scr_snd_switchalert、`__background_*` 6 个、background_create_from_surface）、8 个 object（obj_persistent、obj_logo_c、obj_intro_controller、obj_mario_intro、obj_shell_intro、obj_thwomp_intro、obj_goomba_intro、obj_btn_social）、`main.gd` 启动入口。兼容层新增 `gm_layer.gd`（图层）、`gm_system.gd`（系统/日期/窗口/application_surface/截图/shader 空实现），继承链变成 `gm ← gm_input ← gm_audio ← gm_system ← gm_layer ← gm_draw ← gm_base`。修了第 1 批的一个 bug：实例在“待重新入格”时被销毁，节点释放后碰撞网格 flush 访问已释放对象（headless 测试在同一帧内跑完所以没发现）。obj_persistent 去掉了设置文件读写（固定走“无设置文件”的默认值）、Discord、Android 分支。intro 结束后进入登录界面（rm_intro 里），按钮 object（obj_login_control、obj_btn_invitado、obj_btn_iniciar、obj_cursor、obj_version）是空壳，第 10 批处理。转换脚本：认识新的兼容层文件、4 个和内置函数同名的脚本；全工程 TODO 比例 5.27% → 5.08%。**仍未定**：`noone`/`null` 的统一规则、`obj_x.foo = v` 的写入（第 3 批第一次大量出现时定）；`working_directory` 暂为 `user://`（第 3/9 批定文件读写时再定） |
 | 1b | 完成（2026-11-10） | 草稿 1105 个文件逐个 `load()` 无编译错误；`tests/test_main.tscn` 221 项全过 | Opus 子代理写，主会话抽查。`tools/gml2gd.py`（用法和局限见 `docs/gml2gd-notes.md`）。全工程试转 128547 行，带 `# TODO-GML:` 的 6772 行（5.27%），解析失败 0。草稿输出到 `port/_draft/`（不入库）。**只验证了能编译，没验证运行行为**；脚本类草稿没有逐行核对。遗留给第 2、3 批定的事：`Scr.`（脚本怎么组织）和 `G.`（global 变量类型）目前是占位；`noone` 与 `null` 的统一规则；`obj_x.foo` 读写（3768 行 TODO，GML 语义是读第一个实例、写全部实例，转换脚本还没按此生成）；ds_map/ds_list/文件函数（1111 行 TODO）怎么映射 |

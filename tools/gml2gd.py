@@ -962,7 +962,7 @@ class Proj:
         self.gm_funcs: dict[str, Sig] = {}
         self.gm_vars: dict[str, str] = {}
         self.gm_consts: dict[str, str] = {}
-        for f in ("gm_base.gd", "gm_draw.gd", "gm_audio.gd", "gm_input.gd", "gm.gd"):
+        for f in ("gm_base.gd", "gm_draw.gd", "gm_layer.gd", "gm_system.gd", "gm_audio.gd", "gm_input.gd", "gm.gd"):
             fu, va, co = scan_gd(GMDIR / f)
             self.gm_funcs.update({k: v for k, v in fu.items() if not k.startswith("_")})
             self.gm_vars.update({k: v for k, v in va.items() if not k.startswith("_")})
@@ -982,6 +982,9 @@ class Proj:
             self.script_funcs.update(re.findall(r"\bfunction\s+(\w+)\s*\(", masked))
             for m in re.finditer(r"\benum\s+(\w+)\s*\{([^}]*)\}", masked):
                 self.enums[m.group(1)] = [x.split("=")[0].strip() for x in m.group(2).split(",") if x.strip()]
+        # 和 GML 内置函数同名的脚本函数（GMS 导入旧工程时生成的 background_delete.gml 里定义了
+        # sprite_delete 等，函数体只是调用同名内置函数）：GMS 调用的是内置函数，否则会无限递归
+        self.script_funcs -= {"sprite_delete", "sprite_exists", "gpu_set_blendenable", "gpu_set_blendmode"}
         for gml in list((ORIG / "objects").rglob("*.gml")) + list((ORIG / "scripts").rglob("*.gml")):
             for m in re.finditer(r"^\s*#macro\s+(\w+)\s+(.*)$", read_text(gml), re.M):
                 self.macros[m.group(1)] = m.group(2).strip()

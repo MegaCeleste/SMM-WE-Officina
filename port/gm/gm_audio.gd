@@ -1,4 +1,4 @@
-extends "res://gm/gm_draw.gd"
+extends "res://gm/gm_system.gd"
 ## 兼容层第 3 层：音频。sound 资源编号 < FIRST_HANDLE，播放实例的句柄 >= FIRST_HANDLE，
 ## 所有 audio_* 函数两种编号都接受（与 GMS 一样）。
 

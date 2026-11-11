@@ -254,6 +254,10 @@ func _mark_dead(inst: GMObject) -> void:
 			_n_active[p] -= 1
 			p = classes[p].parent_id
 	col.remove(inst)
+	# 还在待重新入格的列表里的话要拿掉：节点释放后 flush 会碰到已释放的对象（第 2 批发现）
+	if inst._grid_dirty:
+		col.dirty.erase(inst)
+		inst._grid_dirty = false
 	_dead.append(inst)
 	_lists_dirty = true
 
@@ -906,9 +910,14 @@ func _update_view_follow() -> void:
 ## Draw（depth 从大到小；相同 depth 按加入顺序）再 Draw GUI
 func _phase_draw() -> void:
 	_update_view_follow()
-	if _depths_dirty:
+	_update_layers()
+	if _depths_dirty or _layers_dirty:
 		_depths_dirty = false
+		_layers_dirty = false
 		_depths.assign(_buckets.keys())
+		for ld: float in _layer_depths():
+			if not _buckets.has(ld):
+				_depths.append(ld)
 		_depths.sort()
 		_depths.reverse()
 	_begin_world_draw()
@@ -918,6 +927,11 @@ func _phase_draw() -> void:
 	var vx1: float = vx0 + _cam_w[0]
 	var vy1: float = vy0 + _cam_h[0]
 	for d: float in _depths:
+		# 同一 depth 上先画背景图层，再画实例（UNVERIFIED U12）
+		for l: GMLayer in _layers_at(d):
+			_draw_layer(l)
+		if not _buckets.has(d):
+			continue
 		for inst: GMObject in _buckets[d]:
 			if not inst._active or inst._destroyed or not inst.visible:
 				continue
@@ -940,6 +954,8 @@ func _phase_draw() -> void:
 	if any_gui:
 		_begin_gui_draw()
 		for d: float in _depths:
+			if not _buckets.has(d):
+				continue
 			for inst: GMObject in _buckets[d]:
 				if inst._active and not inst._destroyed and inst.visible and inst._cls.has_draw_gui:
 					_draw_inst = inst
@@ -976,6 +992,10 @@ func room_get_name(r: int) -> String:
 
 
 func game_end() -> void:
+	# 原版在 Game End 事件里又调了 game_end()（obj_persistent/Other_3.gml），不能重入
+	if _quit_requested:
+		return
+	_quit_requested = true
 	for inst: GMObject in with_list(all):
 		if inst._cls.has_game_end:
 			inst.call(&"_game_end")
@@ -1004,6 +1024,7 @@ func _switch_room(r: int) -> void:
 	room_width = float(def["width"])
 	room_height = float(def["height"])
 	room_persistent = bool(def["persistent"])
+	_load_room_layers(def.get("layers", []))
 	for it: Dictionary in def["instances"]:
 		var inst: GMObject = _spawn(float(it["x"]), float(it["y"]), float(it["depth"]), int(it["object"]), it)
 		var code: Variant = room_inst_code.get(it["name"])
@@ -1046,6 +1067,8 @@ func _reset_for_test() -> void:
 func _exit_tree() -> void:
 	super._exit_tree()
 	for h: int in _players.keys():
-		(_players[h] as AudioStreamPlayer).stop()
+		var pl: AudioStreamPlayer = _players[h]
+		pl.stop()
+		pl.stream = null  # 放掉回放对象，否则刚开始播放就退出时 ObjectDB 报泄漏
 	_players.clear()
 	_streams.clear()

@@ -85197,6 +85197,22 @@
    ],
    "layers": [
     {
+     "name": "Compatibility_Instances_Depth_-99",
+     "type": "GMRInstanceLayer",
+     "depth": -99,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-2",
+     "type": "GMRInstanceLayer",
+     "depth": -2,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
      "name": "background",
      "type": "GMRBackgroundLayer",
      "depth": 2147483600,
@@ -85260,6 +85276,22 @@
     }
    ],
    "layers": [
+    {
+     "name": "Compatibility_Instances_Depth_-1",
+     "type": "GMRInstanceLayer",
+     "depth": -1,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_0",
+     "type": "GMRInstanceLayer",
+     "depth": 0,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
     {
      "name": "Compatibility_Background_0",
      "type": "GMRBackgroundLayer",
@@ -85435,6 +85467,70 @@
    ],
    "layers": [
     {
+     "name": "Compatibility_Instances_Depth_-40",
+     "type": "GMRInstanceLayer",
+     "depth": -40,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-26",
+     "type": "GMRInstanceLayer",
+     "depth": -26,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-25",
+     "type": "GMRInstanceLayer",
+     "depth": -25,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-11",
+     "type": "GMRInstanceLayer",
+     "depth": -11,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-8",
+     "type": "GMRInstanceLayer",
+     "depth": -8,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_0",
+     "type": "GMRInstanceLayer",
+     "depth": 0,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_10",
+     "type": "GMRInstanceLayer",
+     "depth": 10,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_300",
+     "type": "GMRInstanceLayer",
+     "depth": 300,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
      "name": "Compatibility_Background_0_bg_ground",
      "type": "GMRBackgroundLayer",
      "depth": 2147483500,
@@ -85484,6 +85580,14 @@
     }
    ],
    "layers": [
+    {
+     "name": "Compatibility_Instances_Depth_-11",
+     "type": "GMRInstanceLayer",
+     "depth": -11,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
     {
      "name": "Compatibility_Tiles_Depth_9",
      "type": "GMRAssetLayer",
@@ -85568,6 +85672,14 @@
    ],
    "layers": [
     {
+     "name": "Compatibility_Instances_Depth_-5",
+     "type": "GMRInstanceLayer",
+     "depth": -5,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
      "name": "Compatibility_Colour",
      "type": "GMRBackgroundLayer",
      "depth": 2147483600,
@@ -85646,6 +85758,30 @@
    ],
    "layers": [
     {
+     "name": "Compatibility_Instances_Depth_-40",
+     "type": "GMRInstanceLayer",
+     "depth": -40,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-19",
+     "type": "GMRInstanceLayer",
+     "depth": -19,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_0",
+     "type": "GMRInstanceLayer",
+     "depth": 0,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
      "name": "Compatibility_Colour",
      "type": "GMRBackgroundLayer",
      "depth": 2147483600,
@@ -85680,6 +85816,22 @@
    "persistent": false,
    "instances": [],
    "layers": [
+    {
+     "name": "Compatibility_Instances_Depth_-40",
+     "type": "GMRInstanceLayer",
+     "depth": -40,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_0",
+     "type": "GMRInstanceLayer",
+     "depth": 0,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
     {
      "name": "Compatibility_Background_0_bg_super_experto",
      "type": "GMRBackgroundLayer",
@@ -85758,6 +85910,30 @@
     }
    ],
    "layers": [
+    {
+     "name": "Compatibility_Instances_Depth_-40",
+     "type": "GMRInstanceLayer",
+     "depth": -40,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-6",
+     "type": "GMRInstanceLayer",
+     "depth": -6,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-4",
+     "type": "GMRInstanceLayer",
+     "depth": -4,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
     {
      "name": "Compatibility_Background_0_bg_guardabot",
      "type": "GMRBackgroundLayer",
@@ -85890,6 +86066,46 @@
     }
    ],
    "layers": [
+    {
+     "name": "Compatibility_Instances_Depth_-11",
+     "type": "GMRInstanceLayer",
+     "depth": -11,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-8",
+     "type": "GMRInstanceLayer",
+     "depth": -8,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_0",
+     "type": "GMRInstanceLayer",
+     "depth": 0,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_10",
+     "type": "GMRInstanceLayer",
+     "depth": 10,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_300",
+     "type": "GMRInstanceLayer",
+     "depth": 300,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
     {
      "name": "Compatibility_Background_0_bg_ground",
      "type": "GMRBackgroundLayer",
@@ -86332,6 +86548,94 @@
     }
    ],
    "layers": [
+    {
+     "name": "Compatibility_Instances_Depth_-40",
+     "type": "GMRInstanceLayer",
+     "depth": -40,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-14",
+     "type": "GMRInstanceLayer",
+     "depth": -14,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-12",
+     "type": "GMRInstanceLayer",
+     "depth": -12,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-11",
+     "type": "GMRInstanceLayer",
+     "depth": -11,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-10",
+     "type": "GMRInstanceLayer",
+     "depth": -10,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-9",
+     "type": "GMRInstanceLayer",
+     "depth": -9,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-8",
+     "type": "GMRInstanceLayer",
+     "depth": -8,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_-7",
+     "type": "GMRInstanceLayer",
+     "depth": -7,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_10",
+     "type": "GMRInstanceLayer",
+     "depth": 10,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_300",
+     "type": "GMRInstanceLayer",
+     "depth": 300,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
+    {
+     "name": "Compatibility_Instances_Depth_369",
+     "type": "GMRInstanceLayer",
+     "depth": 369,
+     "visible": true,
+     "userdefinedDepth": true,
+     "parent_layer": null
+    },
     {
      "name": "Compatibility_Background_0_bg_ground",
      "type": "GMRBackgroundLayer",

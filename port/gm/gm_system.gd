@@ -342,3 +342,129 @@ func virtual_key_add(_px: float, _py: float, _w: float, _h: float, _key: float) 
 
 func virtual_key_delete(_id: Variant) -> void:
 	pass
+
+
+# ======================================================================
+# 文件与关卡读取（第 3 批）
+# ======================================================================
+
+## GML 路径 → Godot 路径：反斜杠换成斜杠；相对路径放到 working_directory 下
+func _fix_path(p: String) -> String:
+	var s: String = p.replace("\\", "/")
+	if not (s.begins_with("user://") or s.begins_with("res://") or s.is_absolute_path()):
+		s = working_directory + s
+	return s
+
+
+func file_exists(p: String) -> bool:
+	return FileAccess.file_exists(_fix_path(p))
+
+
+func directory_exists(p: String) -> bool:
+	return DirAccess.dir_exists_absolute(_fix_path(p).trim_suffix("/"))
+
+
+func directory_create(p: String) -> void:
+	DirAccess.make_dir_recursive_absolute(_fix_path(p).trim_suffix("/"))
+
+
+## 3.5.1 的关卡文件把键名缩短了（样本 docs/samples/3.5.1level1.swe），源码读的是旧键名。
+## 下面的对照表是按名字和各段的先后顺序推断的（docs/level-format.md 附录），读入时翻回旧键名；
+## 表里没有的键原样保留（源码不读它们）。 UNVERIFIED：没有 3.5.1 的源码可对。
+const SWE_SECTIONS: Dictionary = {
+	"S1": "AJUSTES", "S2": "SUELO", "S3": "DECORACION", "S4": "NIVEL",
+	"S5": "TUBERIAS", "S6": "CANNON", "S7": "PLATAFORMAS", "S8": "PUERTAS",
+}
+const SWE_KEYS_COMMON: Dictionary = {"xx": "x_pos", "yy": "y_pos", "ID": "object", "i": "index", "spr": "sprite"}
+const SWE_KEYS: Dictionary = {
+	"AJUSTES": {
+		"label_1": "etiqueta1", "label_2": "etiqueta2", "gamestyle": "apariencia", "gametheme": "entorno",
+		"timer": "cronometro", "autoscroll": "autoavance", "nightmode": "modo_noche", "start_y": "ground2",
+		"goal_x": "ground3_x", "goal_y": "ground3_y", "wl": "water_level", "wl_limit": "water_level_limit",
+		"wl_speed": "water_level_speed", "conditions": "condiciones", "t_conditions": "condiciones_type",
+		"o_conditions": "condiciones_object", "c_conditions": "condiciones_count", "mtrs": "meteorites",
+		"desc": "description",
+	},
+	"NIVEL": {
+		"progress": "progresivo", "rot": "rotacion", "dir": "direct_t", "parachute": "paracaidas",
+		"w_mode": "modo_water", "scl": "s_scaley",
+	},
+	"TUBERIAS": {
+		"sz": "size", "rot": "rotacion", "dir": "direct_t", "sclx": "scalex", "clr": "color", "msk": "mask",
+		"xscl": "xscale", "yscl": "yscale", "wrp": "warp", "t_sz": "t_size", "t_rot": "t_rotacion",
+		"t_dir": "t_direct_t", "t_s_sclx": "t_s_scalex", "t_clr": "t_color", "t_xscl": "t_xscale",
+		"t_yscl": "t_yscale",
+	},
+	"PLATAFORMAS": {"clr": "color", "dph": "depth", "wth": "width", "hht": "height", "dir": "direct_t"},
+	"PUERTAS": {"dr_x": "door_x", "dr_y": "door_y"},
+}
+
+
+## scripts/LoadJSONFromFile 的实现：文件 = base64(JSON) + 40 位 HMAC-SHA1（小写十六进制，
+## 密钥 global.drez，输入是 base64 串）+ 结尾 \0。校验不过或文件不存在返回 0.0（原版返回 0）。
+## 最近一次 swe_load_json 读到的是不是 3.5.1 的缩写键名格式
+var swe_last_was_351: bool = false
+
+
+func swe_load_json(p: String, key: String) -> Variant:
+	swe_last_was_351 = false
+	var path: String = _fix_path(p)
+	if not FileAccess.file_exists(path):
+		return 0.0
+	var raw: PackedByteArray = FileAccess.get_file_as_bytes(path)
+	while not raw.is_empty() and raw[raw.size() - 1] == 0:
+		raw.resize(raw.size() - 1)
+	var s: String = raw.get_string_from_utf8()
+	if s.length() <= 40:
+		return 0.0
+	var b64: String = s.substr(0, s.length() - 40)
+	var expected: String = s.substr(s.length() - 40)
+	var mac: String = Crypto.new().hmac_digest(HashingContext.HASH_SHA1, key.to_utf8_buffer(), b64.to_utf8_buffer()).hex_encode()
+	if mac != expected:
+		return 0.0
+	var data: Variant = JSON.parse_string(Marshalls.base64_to_utf8(b64))
+	if not (data is Dictionary):
+		return 0.0
+	return _swe_to_source_keys(data)
+
+
+func _swe_to_source_keys(data: Dictionary) -> Dictionary:
+	if not data.has("S0"):
+		return data
+	swe_last_was_351 = true
+	var out: Dictionary = {}
+	for top: String in data:
+		var w: Variant = data[top]
+		if top != "S0" or not (w is Dictionary):
+			out["SUB1" if top == "SB1" else top] = w
+			continue
+		var main: Dictionary = {}
+		for sec: String in w:
+			var sec_name: String = SWE_SECTIONS.get(sec, sec)
+			var keys: Dictionary = SWE_KEYS.get(sec_name, {})
+			var list: Array = []
+			for e: Variant in w[sec]:
+				if not (e is Dictionary):
+					list.append(e)
+					continue
+				var m: Dictionary = {}
+				for k: String in e:
+					var nk: String = keys.get(k, SWE_KEYS_COMMON.get(k, k))
+					m[nk] = e[k]
+				list.append(m)
+			main[sec_name] = list
+		out["MAIN"] = main
+	return out
+
+
+## GML 的 ==，两边类型可能不同时用（数值和字符串比较在 GML 里是 false，GDScript 里是运行时错误）。
+func veq(a: Variant, b: Variant) -> bool:
+	var na: bool = a is int or a is float or a is bool
+	var nb: bool = b is int or b is float or b is bool
+	if na and nb:
+		return absf(float(a) - float(b)) <= EPSILON
+	if na != nb:
+		return false
+	if typeof(a) != typeof(b) and not (a is String or a is StringName) :
+		return false
+	return a == b

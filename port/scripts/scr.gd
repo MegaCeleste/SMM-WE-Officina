@@ -37,18 +37,129 @@ const SMB2: float = 4.0
 enum e__BG { Visible, Foreground, Index, X, Y, Width, Height, HTiled, VTiled, XScale, YScale, HSpeed, VSpeed, Blend, Alpha }
 enum e__VW { XView, YView, WView, HView, Angle, HBorder, VBorder, HSpeed, VSpeed, Object, Visible, XPort, YPort, WPort, HPort, Camera, SurfaceID }
 
-# ---- 已移植脚本（11 个文件） ----
+# ---- 已移植脚本（122 个文件） ----
 const _m_background_get = preload("res://scripts/__background_get.gd")
 const _m_background_get_element = preload("res://scripts/__background_get_element.gd")
 const _m_background_get_internal = preload("res://scripts/__background_get_internal.gd")
 const _m_background_set = preload("res://scripts/__background_set.gd")
 const _m_background_set_element = preload("res://scripts/__background_set_element.gd")
 const _m_background_set_internal = preload("res://scripts/__background_set_internal.gd")
+const _m_view_get = preload("res://scripts/__view_get.gd")
 const _m_background_create_from_surface = preload("res://scripts/background_create_from_surface.gd")
+const _m_draw_sprite_custom_origin = preload("res://scripts/draw_sprite_custom_origin.gd")
 const _m_init_shockwave = preload("res://scripts/init_shockwave.gd")
+const _m_LoadJSONFromFile = preload("res://scripts/LoadJSONFromFile.gd")
+const _m_outside_view = preload("res://scripts/outside_view.gd")
+const _m_scr_auto_tile = preload("res://scripts/scr_auto_tile.gd")
+const _m_scr_bg_airship = preload("res://scripts/scr_bg_airship.gd")
+const _m_scr_bg_beach = preload("res://scripts/scr_bg_beach.gd")
+const _m_scr_bg_castle = preload("res://scripts/scr_bg_castle.gd")
+const _m_scr_bg_desert = preload("res://scripts/scr_bg_desert.gd")
+const _m_scr_bg_fall = preload("res://scripts/scr_bg_fall.gd")
+const _m_scr_bg_forest = preload("res://scripts/scr_bg_forest.gd")
+const _m_scr_bg_ghost_house = preload("res://scripts/scr_bg_ghost_house.gd")
+const _m_scr_bg_ground = preload("res://scripts/scr_bg_ground.gd")
+const _m_scr_bg_mountain = preload("res://scripts/scr_bg_mountain.gd")
+const _m_scr_bg_sky = preload("res://scripts/scr_bg_sky.gd")
+const _m_scr_bg_snow = preload("res://scripts/scr_bg_snow.gd")
+const _m_scr_bg_underground = preload("res://scripts/scr_bg_underground.gd")
+const _m_scr_bg_underwater = preload("res://scripts/scr_bg_underwater.gd")
+const _m_scr_canhold = preload("res://scripts/scr_canhold.gd")
+const _m_scr_canpull = preload("res://scripts/scr_canpull.gd")
+const _m_scr_constant_get_sprite = preload("res://scripts/scr_constant_get_sprite.gd")
+const _m_scr_constant_make_object = preload("res://scripts/scr_constant_make_object.gd")
+const _m_scr_cont_lives = preload("res://scripts/scr_cont_lives.gd")
+const _m_scr_create_bg_anim = preload("res://scripts/scr_create_bg_anim.gd")
+const _m_scr_edit_to_play = preload("res://scripts/scr_edit_to_play.gd")
 const _m_scr_init_globals = preload("res://scripts/scr_init_globals.gd")
+const _m_scr_insideview = preload("res://scripts/scr_insideview.gd")
+const _m_scr_jump = preload("res://scripts/scr_jump.gd")
 const _m_scr_language = preload("res://scripts/scr_language.gd")
+const _m_scr_link_arrow_jump = preload("res://scripts/scr_link_arrow_jump.gd")
+const _m_scr_link_arrow_swim = preload("res://scripts/scr_link_arrow_swim.gd")
+const _m_scr_link_arrow_walk = preload("res://scripts/scr_link_arrow_walk.gd")
+const _m_scr_lose_condition = preload("res://scripts/scr_lose_condition.gd")
+const _m_scr_mario_cap_fly = preload("res://scripts/scr_mario_cap_fly.gd")
+const _m_scr_mario_cap_fly_acender = preload("res://scripts/scr_mario_cap_fly_acender.gd")
+const _m_scr_mario_cap_fly_acender_decender = preload("res://scripts/scr_mario_cap_fly_acender_decender.gd")
+const _m_scr_mario_cap_fly_decender = preload("res://scripts/scr_mario_cap_fly_decender.gd")
+const _m_scr_marioclimb = preload("res://scripts/scr_marioclimb.gd")
+const _m_scr_mariodead = preload("res://scripts/scr_mariodead.gd")
+const _m_scr_mariodrop = preload("res://scripts/scr_mariodrop.gd")
+const _m_scr_marioduck = preload("res://scripts/scr_marioduck.gd")
+const _m_scr_marioduckhold = preload("res://scripts/scr_marioduckhold.gd")
+const _m_scr_mariohold = preload("res://scripts/scr_mariohold.gd")
+const _m_scr_marioidle = preload("res://scripts/scr_marioidle.gd")
+const _m_scr_mariojump = preload("res://scripts/scr_mariojump.gd")
+const _m_scr_mariojumphold = preload("res://scripts/scr_mariojumphold.gd")
+const _m_scr_mariojumpstar = preload("res://scripts/scr_mariojumpstar.gd")
+const _m_scr_mariokick = preload("res://scripts/scr_mariokick.gd")
+const _m_scr_mariorun = preload("res://scripts/scr_mariorun.gd")
+const _m_scr_mariorunjump = preload("res://scripts/scr_mariorunjump.gd")
+const _m_scr_marioshoot = preload("res://scripts/scr_marioshoot.gd")
+const _m_scr_marioskid = preload("res://scripts/scr_marioskid.gd")
+const _m_scr_marioswim = preload("res://scripts/scr_marioswim.gd")
+const _m_scr_marioswim2 = preload("res://scripts/scr_marioswim2.gd")
+const _m_scr_marioswim3 = preload("res://scripts/scr_marioswim3.gd")
+const _m_scr_marioswim_hold_idle = preload("res://scripts/scr_marioswim_hold_idle.gd")
+const _m_scr_marioswim_idle = preload("res://scripts/scr_marioswim_idle.gd")
+const _m_scr_marioswimhold = preload("res://scripts/scr_marioswimhold.gd")
+const _m_scr_marioup = preload("res://scripts/scr_marioup.gd")
+const _m_scr_mariouphold = preload("res://scripts/scr_mariouphold.gd")
+const _m_scr_mariowalk = preload("res://scripts/scr_mariowalk.gd")
+const _m_scr_mariowarp = preload("res://scripts/scr_mariowarp.gd")
+const _m_scr_music_link = preload("res://scripts/scr_music_link.gd")
+const _m_scr_musicalscale = preload("res://scripts/scr_musicalscale.gd")
+const _m_scr_musicalscale_kick = preload("res://scripts/scr_musicalscale_kick.gd")
+const _m_scr_musicalscale_SMB3 = preload("res://scripts/scr_musicalscale_SMB3.gd")
+const _m_scr_NSMBU_idle = preload("res://scripts/scr_NSMBU_idle.gd")
+const _m_scr_NSMBU_musicalscale_minirebote = preload("res://scripts/scr_NSMBU_musicalscale_minirebote.gd")
+const _m_scr_NSMBU_musicalscale_rebote = preload("res://scripts/scr_NSMBU_musicalscale_rebote.gd")
+const _m_scr_NSMBU_skid = preload("res://scripts/scr_NSMBU_skid.gd")
+const _m_scr_NSMBU_snd_dead = preload("res://scripts/scr_NSMBU_snd_dead.gd")
+const _m_scr_NSMBU_spinstomp = preload("res://scripts/scr_NSMBU_spinstomp.gd")
+const _m_scr_NSMBU_swim = preload("res://scripts/scr_NSMBU_swim.gd")
+const _m_scr_NSMBU_walk = preload("res://scripts/scr_NSMBU_walk.gd")
+const _m_scr_pink_coins = preload("res://scripts/scr_pink_coins.gd")
+const _m_scr_restart = preload("res://scripts/scr_restart.gd")
+const _m_scr_snd_airship = preload("res://scripts/scr_snd_airship.gd")
+const _m_scr_snd_autumn = preload("res://scripts/scr_snd_autumn.gd")
+const _m_scr_snd_beach = preload("res://scripts/scr_snd_beach.gd")
+const _m_scr_snd_bowserjr_shell = preload("res://scripts/scr_snd_bowserjr_shell.gd")
+const _m_scr_snd_break = preload("res://scripts/scr_snd_break.gd")
+const _m_scr_snd_bump = preload("res://scripts/scr_snd_bump.gd")
+const _m_scr_snd_castle = preload("res://scripts/scr_snd_castle.gd")
+const _m_scr_snd_coin = preload("res://scripts/scr_snd_coin.gd")
+const _m_scr_snd_dead = preload("res://scripts/scr_snd_dead.gd")
+const _m_scr_snd_desert = preload("res://scripts/scr_snd_desert.gd")
+const _m_scr_snd_forest = preload("res://scripts/scr_snd_forest.gd")
+const _m_scr_snd_ghost_house = preload("res://scripts/scr_snd_ghost_house.gd")
+const _m_scr_snd_ground = preload("res://scripts/scr_snd_ground.gd")
+const _m_scr_snd_hurryup = preload("res://scripts/scr_snd_hurryup.gd")
+const _m_scr_snd_kick = preload("res://scripts/scr_snd_kick.gd")
+const _m_scr_snd_mountain = preload("res://scripts/scr_snd_mountain.gd")
+const _m_scr_snd_powerdown = preload("res://scripts/scr_snd_powerdown.gd")
+const _m_scr_snd_powerup = preload("res://scripts/scr_snd_powerup.gd")
+const _m_scr_snd_skid = preload("res://scripts/scr_snd_skid.gd")
+const _m_scr_snd_sky = preload("res://scripts/scr_snd_sky.gd")
+const _m_scr_snd_snow = preload("res://scripts/scr_snd_snow.gd")
+const _m_scr_snd_soplete = preload("res://scripts/scr_snd_soplete.gd")
+const _m_scr_snd_spinjump = preload("res://scripts/scr_snd_spinjump.gd")
+const _m_scr_snd_sprout = preload("res://scripts/scr_snd_sprout.gd")
+const _m_scr_snd_starman = preload("res://scripts/scr_snd_starman.gd")
+const _m_scr_snd_stomp = preload("res://scripts/scr_snd_stomp.gd")
 const _m_scr_snd_switchalert = preload("res://scripts/scr_snd_switchalert.gd")
+const _m_scr_snd_switchsong = preload("res://scripts/scr_snd_switchsong.gd")
+const _m_scr_snd_thwomp = preload("res://scripts/scr_snd_thwomp.gd")
+const _m_scr_snd_underground = preload("res://scripts/scr_snd_underground.gd")
+const _m_scr_snd_underwater = preload("res://scripts/scr_snd_underwater.gd")
+const _m_scr_sprite_get_constant = preload("res://scripts/scr_sprite_get_constant.gd")
+const _m_scr_sprite_get_constant_res = preload("res://scripts/scr_sprite_get_constant_res.gd")
+const _m_scr_sprite_make_object_rieles = preload("res://scripts/scr_sprite_make_object_rieles.gd")
+const _m_scr_swim = preload("res://scripts/scr_swim.gd")
+const _m_scr_tiles_ground = preload("res://scripts/scr_tiles_ground.gd")
+const _m_scr_tiles_ground_start = preload("res://scripts/scr_tiles_ground_start.gd")
+const _m_string_add_zeros = preload("res://scripts/string_add_zeros.gd")
 
 static func __background_get(me: GMObject, argument0 = null, argument1 = null) -> Variant:
 	return _m_background_get.__background_get(me, argument0, argument1)
@@ -68,17 +179,350 @@ static func __background_set_element(me: GMObject, argument0 = null, argument1 =
 static func __background_set_internal(me: GMObject, argument0 = null, argument1 = null, argument2 = null, argument3 = null) -> Variant:
 	return _m_background_set_internal.__background_set_internal(me, argument0, argument1, argument2, argument3)
 
+static func __view_get(me: GMObject, argument0 = null, argument1 = null) -> Variant:
+	return _m_view_get.__view_get(me, argument0, argument1)
+
 static func background_create_from_surface(me: GMObject, argument0 = null, argument1 = null, argument2 = null, argument3 = null, argument4 = null, argument5 = null, argument6 = null) -> Variant:
 	return _m_background_create_from_surface.background_create_from_surface(me, argument0, argument1, argument2, argument3, argument4, argument5, argument6)
+
+static func draw_sprite_custom_origin(me: GMObject, argument0 = null, argument1 = null, argument2 = null, argument3 = null, argument4 = null, argument5 = null, argument6 = null, argument7 = null, argument8 = null, argument9 = null, argument10 = null) -> void:
+	_m_draw_sprite_custom_origin.draw_sprite_custom_origin(me, argument0, argument1, argument2, argument3, argument4, argument5, argument6, argument7, argument8, argument9, argument10)
 
 static func init_shockwave(me: GMObject) -> void:
 	_m_init_shockwave.init_shockwave(me)
 
+static func LoadJSONFromFile(me: GMObject, argument0 = null) -> Variant:
+	return _m_LoadJSONFromFile.LoadJSONFromFile(me, argument0)
+
+static func outside_view(me: GMObject) -> float:
+	return _m_outside_view.outside_view(me)
+
+static func scr_auto_tile(me: GMObject) -> Variant:
+	return _m_scr_auto_tile.scr_auto_tile(me)
+
+static func scr_bg_airship(me: GMObject) -> Variant:
+	return _m_scr_bg_airship.scr_bg_airship(me)
+
+static func scr_bg_beach(me: GMObject) -> Variant:
+	return _m_scr_bg_beach.scr_bg_beach(me)
+
+static func scr_bg_castle(me: GMObject) -> Variant:
+	return _m_scr_bg_castle.scr_bg_castle(me)
+
+static func scr_bg_desert(me: GMObject) -> Variant:
+	return _m_scr_bg_desert.scr_bg_desert(me)
+
+static func scr_bg_fall(me: GMObject) -> Variant:
+	return _m_scr_bg_fall.scr_bg_fall(me)
+
+static func scr_bg_forest(me: GMObject) -> Variant:
+	return _m_scr_bg_forest.scr_bg_forest(me)
+
+static func scr_bg_ghost_house(me: GMObject) -> Variant:
+	return _m_scr_bg_ghost_house.scr_bg_ghost_house(me)
+
+static func scr_bg_ground(me: GMObject) -> Variant:
+	return _m_scr_bg_ground.scr_bg_ground(me)
+
+static func scr_bg_mountain(me: GMObject) -> Variant:
+	return _m_scr_bg_mountain.scr_bg_mountain(me)
+
+static func scr_bg_sky(me: GMObject) -> Variant:
+	return _m_scr_bg_sky.scr_bg_sky(me)
+
+static func scr_bg_snow(me: GMObject) -> Variant:
+	return _m_scr_bg_snow.scr_bg_snow(me)
+
+static func scr_bg_underground(me: GMObject) -> Variant:
+	return _m_scr_bg_underground.scr_bg_underground(me)
+
+static func scr_bg_underwater(me: GMObject) -> Variant:
+	return _m_scr_bg_underwater.scr_bg_underwater(me)
+
+static func scr_canhold(me: GMObject) -> Variant:
+	return _m_scr_canhold.scr_canhold(me)
+
+static func scr_canpull(me: GMObject) -> Variant:
+	return _m_scr_canpull.scr_canpull(me)
+
+static func scr_constant_get_sprite(me: GMObject, argument0 = null) -> Variant:
+	return _m_scr_constant_get_sprite.scr_constant_get_sprite(me, argument0)
+
+static func scr_constant_make_object(me: GMObject, argument0 = null, argument1 = null, argument2 = null) -> Variant:
+	return _m_scr_constant_make_object.scr_constant_make_object(me, argument0, argument1, argument2)
+
+static func scr_cont_lives(me: GMObject) -> Variant:
+	return _m_scr_cont_lives.scr_cont_lives(me)
+
+static func scr_create_bg_anim(me: GMObject) -> Variant:
+	return _m_scr_create_bg_anim.scr_create_bg_anim(me)
+
+static func scr_edit_to_play(me: GMObject):
+	return _m_scr_edit_to_play.scr_edit_to_play(me)
+
 static func scr_init_globals(me: GMObject) -> void:
 	_m_scr_init_globals.scr_init_globals(me)
+
+static func scr_insideview(me: GMObject) -> Variant:
+	return _m_scr_insideview.scr_insideview(me)
+
+static func scr_jump(me: GMObject) -> Variant:
+	return _m_scr_jump.scr_jump(me)
 
 static func scr_language(me: GMObject, argument0: float = 0.0) -> Variant:
 	return _m_scr_language.scr_language(me, argument0)
 
+static func scr_link_arrow_jump(me: GMObject, argument0 = null) -> Variant:
+	return _m_scr_link_arrow_jump.scr_link_arrow_jump(me, argument0)
+
+static func scr_link_arrow_swim(me: GMObject, argument0 = null) -> Variant:
+	return _m_scr_link_arrow_swim.scr_link_arrow_swim(me, argument0)
+
+static func scr_link_arrow_walk(me: GMObject, argument0 = null) -> Variant:
+	return _m_scr_link_arrow_walk.scr_link_arrow_walk(me, argument0)
+
+static func scr_lose_condition(me: GMObject) -> Variant:
+	return _m_scr_lose_condition.scr_lose_condition(me)
+
+static func scr_mario_cap_fly(me: GMObject) -> Variant:
+	return _m_scr_mario_cap_fly.scr_mario_cap_fly(me)
+
+static func scr_mario_cap_fly_acender(me: GMObject) -> Variant:
+	return _m_scr_mario_cap_fly_acender.scr_mario_cap_fly_acender(me)
+
+static func scr_mario_cap_fly_acender_decender(me: GMObject) -> Variant:
+	return _m_scr_mario_cap_fly_acender_decender.scr_mario_cap_fly_acender_decender(me)
+
+static func scr_mario_cap_fly_decender(me: GMObject) -> Variant:
+	return _m_scr_mario_cap_fly_decender.scr_mario_cap_fly_decender(me)
+
+static func scr_marioclimb(me: GMObject) -> Variant:
+	return _m_scr_marioclimb.scr_marioclimb(me)
+
+static func scr_mariodead(me: GMObject) -> Variant:
+	return _m_scr_mariodead.scr_mariodead(me)
+
+static func scr_mariodrop(me: GMObject) -> Variant:
+	return _m_scr_mariodrop.scr_mariodrop(me)
+
+static func scr_marioduck(me: GMObject) -> Variant:
+	return _m_scr_marioduck.scr_marioduck(me)
+
+static func scr_marioduckhold(me: GMObject) -> Variant:
+	return _m_scr_marioduckhold.scr_marioduckhold(me)
+
+static func scr_mariohold(me: GMObject) -> Variant:
+	return _m_scr_mariohold.scr_mariohold(me)
+
+static func scr_marioidle(me: GMObject) -> Variant:
+	return _m_scr_marioidle.scr_marioidle(me)
+
+static func scr_mariojump(me: GMObject) -> Variant:
+	return _m_scr_mariojump.scr_mariojump(me)
+
+static func scr_mariojumphold(me: GMObject) -> Variant:
+	return _m_scr_mariojumphold.scr_mariojumphold(me)
+
+static func scr_mariojumpstar(me: GMObject) -> Variant:
+	return _m_scr_mariojumpstar.scr_mariojumpstar(me)
+
+static func scr_mariokick(me: GMObject) -> Variant:
+	return _m_scr_mariokick.scr_mariokick(me)
+
+static func scr_mariorun(me: GMObject) -> Variant:
+	return _m_scr_mariorun.scr_mariorun(me)
+
+static func scr_mariorunjump(me: GMObject) -> Variant:
+	return _m_scr_mariorunjump.scr_mariorunjump(me)
+
+static func scr_marioshoot(me: GMObject) -> Variant:
+	return _m_scr_marioshoot.scr_marioshoot(me)
+
+static func scr_marioskid(me: GMObject) -> Variant:
+	return _m_scr_marioskid.scr_marioskid(me)
+
+static func scr_marioswim(me: GMObject) -> Variant:
+	return _m_scr_marioswim.scr_marioswim(me)
+
+static func scr_marioswim2(me: GMObject) -> Variant:
+	return _m_scr_marioswim2.scr_marioswim2(me)
+
+static func scr_marioswim3(me: GMObject) -> Variant:
+	return _m_scr_marioswim3.scr_marioswim3(me)
+
+static func scr_marioswim_hold_idle(me: GMObject) -> Variant:
+	return _m_scr_marioswim_hold_idle.scr_marioswim_hold_idle(me)
+
+static func scr_marioswim_idle(me: GMObject) -> Variant:
+	return _m_scr_marioswim_idle.scr_marioswim_idle(me)
+
+static func scr_marioswimhold(me: GMObject) -> Variant:
+	return _m_scr_marioswimhold.scr_marioswimhold(me)
+
+static func scr_marioup(me: GMObject) -> Variant:
+	return _m_scr_marioup.scr_marioup(me)
+
+static func scr_mariouphold(me: GMObject) -> Variant:
+	return _m_scr_mariouphold.scr_mariouphold(me)
+
+static func scr_mariowalk(me: GMObject) -> Variant:
+	return _m_scr_mariowalk.scr_mariowalk(me)
+
+static func scr_mariowarp(me: GMObject) -> Variant:
+	return _m_scr_mariowarp.scr_mariowarp(me)
+
+static func scr_music_link(me: GMObject) -> Variant:
+	return _m_scr_music_link.scr_music_link(me)
+
+static func scr_musicalscale(me: GMObject, argument0 = null, argument1 = null, argument2 = null):
+	return _m_scr_musicalscale.scr_musicalscale(me, argument0, argument1, argument2)
+
+static func scr_musicalscale_kick(me: GMObject, argument0 = null, argument1 = null, argument2 = null):
+	return _m_scr_musicalscale_kick.scr_musicalscale_kick(me, argument0, argument1, argument2)
+
+static func scr_musicalscale_SMB3(me: GMObject, argument0 = null, argument1 = null, argument2 = null):
+	return _m_scr_musicalscale_SMB3.scr_musicalscale_SMB3(me, argument0, argument1, argument2)
+
+static func scr_NSMBU_idle(me: GMObject, argument0 = null) -> Variant:
+	return _m_scr_NSMBU_idle.scr_NSMBU_idle(me, argument0)
+
+static func scr_NSMBU_musicalscale_minirebote(me: GMObject, argument0 = null, argument1 = null, argument2 = null):
+	return _m_scr_NSMBU_musicalscale_minirebote.scr_NSMBU_musicalscale_minirebote(me, argument0, argument1, argument2)
+
+static func scr_NSMBU_musicalscale_rebote(me: GMObject, argument0 = null, argument1 = null, argument2 = null):
+	return _m_scr_NSMBU_musicalscale_rebote.scr_NSMBU_musicalscale_rebote(me, argument0, argument1, argument2)
+
+static func scr_NSMBU_skid(me: GMObject) -> Variant:
+	return _m_scr_NSMBU_skid.scr_NSMBU_skid(me)
+
+static func scr_NSMBU_snd_dead(me: GMObject, argument0 = null) -> Variant:
+	return _m_scr_NSMBU_snd_dead.scr_NSMBU_snd_dead(me, argument0)
+
+static func scr_NSMBU_spinstomp(me: GMObject, argument0 = null, argument1 = null, argument2 = null):
+	return _m_scr_NSMBU_spinstomp.scr_NSMBU_spinstomp(me, argument0, argument1, argument2)
+
+static func scr_NSMBU_swim(me: GMObject) -> Variant:
+	return _m_scr_NSMBU_swim.scr_NSMBU_swim(me)
+
+static func scr_NSMBU_walk(me: GMObject, argument0 = null) -> Variant:
+	return _m_scr_NSMBU_walk.scr_NSMBU_walk(me, argument0)
+
+static func scr_pink_coins(me: GMObject) -> Variant:
+	return _m_scr_pink_coins.scr_pink_coins(me)
+
+static func scr_restart(me: GMObject) -> Variant:
+	return _m_scr_restart.scr_restart(me)
+
+static func scr_snd_airship(me: GMObject) -> Variant:
+	return _m_scr_snd_airship.scr_snd_airship(me)
+
+static func scr_snd_autumn(me: GMObject) -> Variant:
+	return _m_scr_snd_autumn.scr_snd_autumn(me)
+
+static func scr_snd_beach(me: GMObject) -> Variant:
+	return _m_scr_snd_beach.scr_snd_beach(me)
+
+static func scr_snd_bowserjr_shell(me: GMObject) -> Variant:
+	return _m_scr_snd_bowserjr_shell.scr_snd_bowserjr_shell(me)
+
+static func scr_snd_break(me: GMObject) -> Variant:
+	return _m_scr_snd_break.scr_snd_break(me)
+
+static func scr_snd_bump(me: GMObject) -> Variant:
+	return _m_scr_snd_bump.scr_snd_bump(me)
+
+static func scr_snd_castle(me: GMObject) -> Variant:
+	return _m_scr_snd_castle.scr_snd_castle(me)
+
+static func scr_snd_coin(me: GMObject) -> Variant:
+	return _m_scr_snd_coin.scr_snd_coin(me)
+
+static func scr_snd_dead(me: GMObject) -> Variant:
+	return _m_scr_snd_dead.scr_snd_dead(me)
+
+static func scr_snd_desert(me: GMObject) -> Variant:
+	return _m_scr_snd_desert.scr_snd_desert(me)
+
+static func scr_snd_forest(me: GMObject) -> Variant:
+	return _m_scr_snd_forest.scr_snd_forest(me)
+
+static func scr_snd_ghost_house(me: GMObject) -> Variant:
+	return _m_scr_snd_ghost_house.scr_snd_ghost_house(me)
+
+static func scr_snd_ground(me: GMObject) -> Variant:
+	return _m_scr_snd_ground.scr_snd_ground(me)
+
+static func scr_snd_hurryup(me: GMObject) -> Variant:
+	return _m_scr_snd_hurryup.scr_snd_hurryup(me)
+
+static func scr_snd_kick(me: GMObject) -> Variant:
+	return _m_scr_snd_kick.scr_snd_kick(me)
+
+static func scr_snd_mountain(me: GMObject) -> Variant:
+	return _m_scr_snd_mountain.scr_snd_mountain(me)
+
+static func scr_snd_powerdown(me: GMObject) -> Variant:
+	return _m_scr_snd_powerdown.scr_snd_powerdown(me)
+
+static func scr_snd_powerup(me: GMObject) -> Variant:
+	return _m_scr_snd_powerup.scr_snd_powerup(me)
+
+static func scr_snd_skid(me: GMObject) -> Variant:
+	return _m_scr_snd_skid.scr_snd_skid(me)
+
+static func scr_snd_sky(me: GMObject) -> Variant:
+	return _m_scr_snd_sky.scr_snd_sky(me)
+
+static func scr_snd_snow(me: GMObject) -> Variant:
+	return _m_scr_snd_snow.scr_snd_snow(me)
+
+static func scr_snd_soplete(me: GMObject) -> Variant:
+	return _m_scr_snd_soplete.scr_snd_soplete(me)
+
+static func scr_snd_spinjump(me: GMObject) -> Variant:
+	return _m_scr_snd_spinjump.scr_snd_spinjump(me)
+
+static func scr_snd_sprout(me: GMObject) -> Variant:
+	return _m_scr_snd_sprout.scr_snd_sprout(me)
+
+static func scr_snd_starman(me: GMObject) -> Variant:
+	return _m_scr_snd_starman.scr_snd_starman(me)
+
+static func scr_snd_stomp(me: GMObject) -> Variant:
+	return _m_scr_snd_stomp.scr_snd_stomp(me)
+
 static func scr_snd_switchalert(me: GMObject) -> Variant:
 	return _m_scr_snd_switchalert.scr_snd_switchalert(me)
+
+static func scr_snd_switchsong(me: GMObject) -> Variant:
+	return _m_scr_snd_switchsong.scr_snd_switchsong(me)
+
+static func scr_snd_thwomp(me: GMObject) -> Variant:
+	return _m_scr_snd_thwomp.scr_snd_thwomp(me)
+
+static func scr_snd_underground(me: GMObject) -> Variant:
+	return _m_scr_snd_underground.scr_snd_underground(me)
+
+static func scr_snd_underwater(me: GMObject) -> Variant:
+	return _m_scr_snd_underwater.scr_snd_underwater(me)
+
+static func scr_sprite_get_constant(me: GMObject, argument0 = null) -> Variant:
+	return _m_scr_sprite_get_constant.scr_sprite_get_constant(me, argument0)
+
+static func scr_sprite_get_constant_res(me: GMObject, argument0 = null) -> Variant:
+	return _m_scr_sprite_get_constant_res.scr_sprite_get_constant_res(me, argument0)
+
+static func scr_sprite_make_object_rieles(me: GMObject, argument0 = null, argument1 = null, argument2 = null) -> Variant:
+	return _m_scr_sprite_make_object_rieles.scr_sprite_make_object_rieles(me, argument0, argument1, argument2)
+
+static func scr_swim(me: GMObject) -> Variant:
+	return _m_scr_swim.scr_swim(me)
+
+static func scr_tiles_ground(me: GMObject) -> Variant:
+	return _m_scr_tiles_ground.scr_tiles_ground(me)
+
+static func scr_tiles_ground_start(me: GMObject) -> Variant:
+	return _m_scr_tiles_ground_start.scr_tiles_ground_start(me)
+
+static func string_add_zeros(me: GMObject, argument0 = null, argument1 = null) -> Variant:
+	return _m_string_add_zeros.string_add_zeros(me, argument0, argument1)

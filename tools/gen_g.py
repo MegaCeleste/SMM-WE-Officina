@@ -33,6 +33,10 @@ TYPES = {
 }
 
 
+# 类型推断错了的变量：强制不带类型（第 3 批：save_changes 推断成 number，实际存关卡文件名）
+UNTYPED = {"save_changes"}
+
+
 def main() -> int:
     g = json.loads((TABLES / "globals.json").read_text(encoding="utf-8"))["globals"]
     lines = [
@@ -47,7 +51,7 @@ def main() -> int:
             bad.append(name)
             continue
         lt = g[name].get("likely_type")
-        if lt in TYPES:
+        if lt in TYPES and name not in UNTYPED:
             t, v = TYPES[lt]
             lines.append(f"var {name}: {t} = {v}")
         else:

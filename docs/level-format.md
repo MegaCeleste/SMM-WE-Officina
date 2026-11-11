@@ -241,3 +241,20 @@
 - JSON 顶层键是 `S0`、`SB1`；`S0` 下是 `S1`–`S8`。整数值不带小数点（`"xx":704`），非整数按 17 位有效数字输出（样本里出现了 `0.20000000000000001`）。写关卡时要照这个数字格式输出，原版才认。
 - Windows 上原版的关卡目录是 `%LOCALAPPDATA%\SMM_WE\Niveles\`（GMS 的 `working_directory` 在 Windows 上是可写的存档目录，不是 exe 所在目录）。同目录上一级还有 `Settings351.dat`、`dsm_351.dat`。
 - 样本里没有传送带和斜坡，§“保存/读取不对称”那两条还没有样本可对。
+
+## 附 2：3.5.1 键名 ↔ 源码键名对照（第 3 批，**推断，未经 3.5.1 源码确认**）
+
+`original/` 的源码比 3.5.1 旧，读写的是 §2–§3 的长键名；3.5.1 的文件用的是缩写键名，源码按原样会拒收（没有 `MAIN`）。移植版在 `GM.swe_load_json`（`port/gm/gm_system.gd` 的 `SWE_SECTIONS`/`SWE_KEYS`）里读入时翻回长键名，之后走 1:1 翻译的读取代码。对照表按名字和各段顺序推断：
+
+| 3.5.1 | 源码 | | 3.5.1 | 源码 |
+|---|---|---|---|---|
+| `S0` / `SB1` | `MAIN` / `SUB1` | | `S1`…`S8` | `AJUSTES` `SUELO` `DECORACION` `NIVEL` `TUBERIAS` `CANNON` `PLATAFORMAS` `PUERTAS` |
+| `xx` `yy` `ID` `i` `spr` | `x_pos` `y_pos` `object` `index` `sprite`（各段通用） | | | |
+
+- AJUSTES：`label_1/2`→`etiqueta1/2`，`gamestyle`→`apariencia`，`gametheme`→`entorno`，`timer`→`cronometro`，`autoscroll`→`autoavance`，`nightmode`→`modo_noche`，`start_y`→`ground2`，`goal_x/goal_y`→`ground3_x/ground3_y`，`wl`/`wl_limit`/`wl_speed`→`water_level`/`_limit`/`_speed`，`conditions`→`condiciones`，`t_/o_/c_conditions`→`condiciones_type/_object/_count`，`mtrs`→`meteorites`，`desc`→`description`；`user` `size` `date` `time` `ds_s` 不变。
+- NIVEL：`progress`→`progresivo`，`rot`→`rotacion`，`dir`→`direct_t`，`parachute`→`paracaidas`，`w_mode`→`modo_water`，`scl`→`s_scaley`；`sprout` `wings` `key` `inup` 不变。
+- TUBERIAS：`sz`→`size`，`rot`→`rotacion`，`dir`→`direct_t`，`sclx`→`scalex`，`clr`→`color`，`msk`→`mask`，`xscl/yscl`→`xscale/yscale`，`wrp`→`warp`，`t_sz` `t_rot` `t_dir` `t_s_sclx` `t_clr` `t_xscl` `t_yscl`→对应的 `t_*` 长名；`t_x_pos` `t_y_pos` 不变。
+- PLATAFORMAS：`clr`→`color`，`dph`→`depth`，`wth/hht`→`width/height`，`dir`→`direct_t`。PUERTAS：`dr_x/dr_y`→`door_x/door_y`。
+- CANNON：样本里是空的，除通用键外没有对照（`direct`、`down/up/left/right` 的缩写未知）。
+- 源码里没有、读入后被忽略的 3.5.1 字段：AJUSTES 的 `t`；NIVEL 的 `air` `pinkcoin` `fire` `claw` `rock` `energy` `sierra` `bumper` `ice` `can_complement`；PLATAFORMAS 的 `air` `pinkcoin` `fire` `key` `rock` `energy` `parachute` `ice`。这些对应 3.5.1 比源码多出来的功能，移植版不支持。
+- 写关卡（第 9 批）用哪套键名还没定。

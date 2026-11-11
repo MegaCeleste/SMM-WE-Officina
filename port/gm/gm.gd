@@ -10,7 +10,9 @@ extends "res://gm/gm_input.gd"
 
 var col: GMCollision = GMCollision.new()
 
-## GML 的 other：Collision 事件执行期间是碰撞的对方，其余时候为 null。
+## GML 的 other：Collision 事件执行期间是碰撞的对方；Step/Alarm/Animation End/Draw/Room Start
+## 事件执行期间是实例自身（GML 在没有 with/碰撞上下文时 other 等于 self。 UNVERIFIED(U14)：没有实测）；
+## 翻译出来的 with 循环会临时把它设成外层实例（port-plan §3.3 第 17 条）；其余时候为 null。
 ## 碰撞事件里调用的 user event / 脚本通过它拿到 other（方法参数 other 只在事件方法内可见）。
 var other: GMObject = null
 
@@ -70,7 +72,7 @@ func _ready() -> void:
 		_pools[i] = []
 	_n_active.resize(classes.size())
 	_tmp_cnt.resize(classes.size())
-	_shell_script = load("res://gm/gm_object.gd") as GDScript
+	_shell_script = load("res://gm/gm_shell.gd") as GDScript
 	GMObject.COL = col
 	_inst_root = Node.new()
 	_inst_root.name = "GMInstances"
@@ -659,7 +661,9 @@ func _run_list(list: Array[GMObject], method: StringName) -> void:
 	for inst: GMObject in list:
 		if inst._cc > c or inst._destroyed or not inst._active:
 			continue
+		other = inst
 		inst.call(method)
+		other = null
 		if _pending_room >= 0:
 			return
 
@@ -679,11 +683,15 @@ func _phase_remember_and_animate() -> void:
 			if inst.image_index >= num:
 				inst.image_index -= num
 				if inst._cls.has_animation_end and inst._cc <= c:
+					other = inst
 					inst.call(&"_animation_end")
+					other = null
 			elif inst.image_index < 0.0:
 				inst.image_index += num
 				if inst._cls.has_animation_end and inst._cc <= c:
+					other = inst
 					inst.call(&"_animation_end")
+					other = null
 		else:
 			# UNVERIFIED(U9)：没有 sprite 的实例，HTML5 runner 会每步都触发 Animation End；
 			# 这里只累加 image_index，不触发事件。
@@ -704,7 +712,9 @@ func _phase_alarm() -> void:
 				al -= 1.0
 				inst.alarm[a] = al
 			if al == 0.0:
+				other = inst
 				inst.call(ALARM_NAMES[a])
+				other = null
 				if _pending_room >= 0:
 					return
 
@@ -938,7 +948,9 @@ func _phase_draw() -> void:
 			var cls: GMClass = inst._cls
 			if cls.has_draw:
 				_draw_inst = inst
+				other = inst
 				inst.call(&"_gm_draw")
+				other = null
 			else:
 				# 默认绘制（draw_self）。画在视野外没有任何可观察的效果，直接跳过。
 				var si: int = inst.sprite_index
@@ -1040,7 +1052,9 @@ func _switch_room(r: int) -> void:
 				inst.call(&"_game_start")
 	for inst: GMObject in with_list(all):
 		if inst._cls.has_room_start:
+			other = inst
 			inst.call(&"_room_start")
+			other = null
 
 
 ## 测试用：清掉全部实例和 room 状态

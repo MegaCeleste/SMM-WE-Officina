@@ -2,6 +2,7 @@ extends "res://objects/obj_blockparent.gd"
 
 var flips: float = 0.0
 var convertirse: float = 0.0
+var spd_temp = null  # 第 4 批补：由别的 object 写入
 
 
 # from objects/obj_flipblock/Create_0.gml

@@ -223,7 +223,7 @@ func draw_surface_stretched_ext(surf: float, px: float, py: float, w: float, h: 
 	if int(surf) != application_surface:
 		push_warning("GM.draw_surface_stretched：只支持 application_surface")
 		return
-	if _ci == _ci_world:
+	if _ci == _ci_world or _ci_root == _ci_world:
 		return  # 把 application_surface 画进它自己：GMS 也不允许
 	_reset_xf()
 	RenderingServer.canvas_item_add_texture_rect(_ci, Rect2(px, py, w, h), _app_vp.get_texture().get_rid(), false, gm_color(col, alpha))
@@ -305,19 +305,88 @@ func sprite_delete(spr: float) -> void:
 
 
 # ======================================================================
-# shader（第 11 批实现；现在全部是空操作）
+# shader
+# sha_blendreplace（第 4 批）：rgb 换成顶点色，alpha = 顶点 alpha × 贴图 alpha。
+# 其余两个 shader 第 11 批实现，现在是空操作。
+#
+# 绘制命令都写进同一个 canvas item，而材质只能整个 canvas item 设一个，所以
+# shader_set / shader_reset 各开一个新的“段”（当前绘制目标的子 canvas item，按
+# draw_index 排在后面），之后的命令写进新段，先后顺序不变。
 # ======================================================================
+
+const _BLENDREPLACE_CODE: String = "shader_type canvas_item;
+varying vec4 v_col;
+void vertex() {
+	v_col = COLOR;
+}
+void fragment() {
+	COLOR = vec4(v_col.rgb, v_col.a * texture(TEXTURE, UV).a);
+}
+"
+
+var _seg_pool: Array[RID] = []
+var _seg_used: int = 0
+var _ci_root: RID = RID()
+var _shader_on: bool = false
+var _mat_blendreplace: ShaderMaterial = null
+
+
+func _begin_world_draw() -> void:
+	super._begin_world_draw()
+	for i: int in range(_seg_used):
+		RenderingServer.canvas_item_clear(_seg_pool[i])
+	_seg_used = 0
+	_ci_root = _ci_world
+	_shader_on = false
+
+
+func _begin_gui_draw() -> void:
+	super._begin_gui_draw()
+	_ci_root = _ci_gui
+	_shader_on = false
+
+
+func _exit_tree() -> void:
+	for seg: RID in _seg_pool:
+		RenderingServer.free_rid(seg)
+	_seg_pool.clear()
+	super._exit_tree()
+
+
+func _new_segment(material: RID) -> void:
+	if not _ci_root.is_valid():
+		return
+	if _seg_used == _seg_pool.size():
+		_seg_pool.append(RenderingServer.canvas_item_create())
+	var seg: RID = _seg_pool[_seg_used]
+	_seg_used += 1
+	RenderingServer.canvas_item_set_parent(seg, _ci_root)
+	RenderingServer.canvas_item_set_draw_index(seg, _seg_used)
+	RenderingServer.canvas_item_set_material(seg, material)
+	_ci = seg
+	_xf_set = false
+
 
 func shader_get_uniform(_sh: float, _uniform: String) -> int:
 	return -1
 
 
-func shader_set(_sh: float) -> void:
-	pass
+func shader_set(sh: float) -> void:
+	if int(sh) != A.sha_blendreplace:
+		return
+	if _mat_blendreplace == null:
+		var shd: Shader = Shader.new()
+		shd.code = _BLENDREPLACE_CODE
+		_mat_blendreplace = ShaderMaterial.new()
+		_mat_blendreplace.shader = shd
+	_new_segment(_mat_blendreplace.get_rid())
+	_shader_on = true
 
 
 func shader_reset() -> void:
-	pass
+	if _shader_on:
+		_new_segment(RID())
+		_shader_on = false
 
 
 func shader_set_uniform_f(_handle: float, ...values: Array) -> void:

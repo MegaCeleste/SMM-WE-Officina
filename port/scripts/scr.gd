@@ -37,7 +37,7 @@ const SMB2: float = 4.0
 enum e__BG { Visible, Foreground, Index, X, Y, Width, Height, HTiled, VTiled, XScale, YScale, HSpeed, VSpeed, Blend, Alpha }
 enum e__VW { XView, YView, WView, HView, Angle, HBorder, VBorder, HSpeed, VSpeed, Object, Visible, XPort, YPort, WPort, HPort, Camera, SurfaceID }
 
-# ---- 已移植脚本（122 个文件） ----
+# ---- 已移植脚本（192 个文件） ----
 const _m_background_get = preload("res://scripts/__background_get.gd")
 const _m_background_get_element = preload("res://scripts/__background_get_element.gd")
 const _m_background_get_internal = preload("res://scripts/__background_get_internal.gd")
@@ -50,6 +50,8 @@ const _m_draw_sprite_custom_origin = preload("res://scripts/draw_sprite_custom_o
 const _m_init_shockwave = preload("res://scripts/init_shockwave.gd")
 const _m_LoadJSONFromFile = preload("res://scripts/LoadJSONFromFile.gd")
 const _m_outside_view = preload("res://scripts/outside_view.gd")
+const _m_scr_arcon_fly = preload("res://scripts/scr_arcon_fly.gd")
+const _m_scr_arcon_fly_start = preload("res://scripts/scr_arcon_fly_start.gd")
 const _m_scr_auto_tile = preload("res://scripts/scr_auto_tile.gd")
 const _m_scr_bg_airship = preload("res://scripts/scr_bg_airship.gd")
 const _m_scr_bg_beach = preload("res://scripts/scr_bg_beach.gd")
@@ -83,21 +85,37 @@ const _m_scr_mario_cap_fly = preload("res://scripts/scr_mario_cap_fly.gd")
 const _m_scr_mario_cap_fly_acender = preload("res://scripts/scr_mario_cap_fly_acender.gd")
 const _m_scr_mario_cap_fly_acender_decender = preload("res://scripts/scr_mario_cap_fly_acender_decender.gd")
 const _m_scr_mario_cap_fly_decender = preload("res://scripts/scr_mario_cap_fly_decender.gd")
+const _m_scr_mario_drybones = preload("res://scripts/scr_mario_drybones.gd")
+const _m_scr_mario_drybones_goal = preload("res://scripts/scr_mario_drybones_goal.gd")
+const _m_scr_mario_drybones_jump = preload("res://scripts/scr_mario_drybones_jump.gd")
+const _m_scr_mario_pull = preload("res://scripts/scr_mario_pull.gd")
+const _m_scr_mario_shoe = preload("res://scripts/scr_mario_shoe.gd")
+const _m_scr_mario_shoe_fall = preload("res://scripts/scr_mario_shoe_fall.gd")
+const _m_scr_mario_swim_idle = preload("res://scripts/scr_mario_swim_idle.gd")
+const _m_scr_mario_yoshi_atack = preload("res://scripts/scr_mario_yoshi_atack.gd")
+const _m_scr_mario_yoshi_crouch = preload("res://scripts/scr_mario_yoshi_crouch.gd")
+const _m_scr_mario_yoshi_goal = preload("res://scripts/scr_mario_yoshi_goal.gd")
 const _m_scr_marioclimb = preload("res://scripts/scr_marioclimb.gd")
 const _m_scr_mariodead = preload("res://scripts/scr_mariodead.gd")
 const _m_scr_mariodrop = preload("res://scripts/scr_mariodrop.gd")
 const _m_scr_marioduck = preload("res://scripts/scr_marioduck.gd")
 const _m_scr_marioduckhold = preload("res://scripts/scr_marioduckhold.gd")
+const _m_scr_mariogoal = preload("res://scripts/scr_mariogoal.gd")
 const _m_scr_mariohold = preload("res://scripts/scr_mariohold.gd")
+const _m_scr_mariohold_fall = preload("res://scripts/scr_mariohold_fall.gd")
+const _m_scr_mariohold_jump = preload("res://scripts/scr_mariohold_jump.gd")
 const _m_scr_marioidle = preload("res://scripts/scr_marioidle.gd")
 const _m_scr_mariojump = preload("res://scripts/scr_mariojump.gd")
 const _m_scr_mariojumphold = preload("res://scripts/scr_mariojumphold.gd")
 const _m_scr_mariojumpstar = preload("res://scripts/scr_mariojumpstar.gd")
 const _m_scr_mariokick = preload("res://scripts/scr_mariokick.gd")
+const _m_scr_marioride = preload("res://scripts/scr_marioride.gd")
 const _m_scr_mariorun = preload("res://scripts/scr_mariorun.gd")
 const _m_scr_mariorunjump = preload("res://scripts/scr_mariorunjump.gd")
 const _m_scr_marioshoot = preload("res://scripts/scr_marioshoot.gd")
+const _m_scr_marioshoot_drybones = preload("res://scripts/scr_marioshoot_drybones.gd")
 const _m_scr_marioskid = preload("res://scripts/scr_marioskid.gd")
+const _m_scr_marioslide = preload("res://scripts/scr_marioslide.gd")
 const _m_scr_marioswim = preload("res://scripts/scr_marioswim.gd")
 const _m_scr_marioswim2 = preload("res://scripts/scr_marioswim2.gd")
 const _m_scr_marioswim3 = preload("res://scripts/scr_marioswim3.gd")
@@ -112,15 +130,63 @@ const _m_scr_music_link = preload("res://scripts/scr_music_link.gd")
 const _m_scr_musicalscale = preload("res://scripts/scr_musicalscale.gd")
 const _m_scr_musicalscale_kick = preload("res://scripts/scr_musicalscale_kick.gd")
 const _m_scr_musicalscale_SMB3 = preload("res://scripts/scr_musicalscale_SMB3.gd")
+const _m_scr_NSMBU_acrouch = preload("res://scripts/scr_NSMBU_acrouch.gd")
+const _m_scr_NSMBU_airspin1 = preload("res://scripts/scr_NSMBU_airspin1.gd")
+const _m_scr_NSMBU_climb_pole = preload("res://scripts/scr_NSMBU_climb_pole.gd")
+const _m_scr_NSMBU_crouch = preload("res://scripts/scr_NSMBU_crouch.gd")
+const _m_scr_NSMBU_crouch_fall = preload("res://scripts/scr_NSMBU_crouch_fall.gd")
+const _m_scr_NSMBU_crouch_idle = preload("res://scripts/scr_NSMBU_crouch_idle.gd")
+const _m_scr_NSMBU_crouch_jump = preload("res://scripts/scr_NSMBU_crouch_jump.gd")
+const _m_scr_NSMBU_drill_spin = preload("res://scripts/scr_NSMBU_drill_spin.gd")
+const _m_scr_NSMBU_flip = preload("res://scripts/scr_NSMBU_flip.gd")
+const _m_scr_NSMBU_flip_start = preload("res://scripts/scr_NSMBU_flip_start.gd")
+const _m_scr_NSMBU_goal_pole = preload("res://scripts/scr_NSMBU_goal_pole.gd")
+const _m_scr_NSMBU_ground_idle = preload("res://scripts/scr_NSMBU_ground_idle.gd")
+const _m_scr_NSMBU_groundpound = preload("res://scripts/scr_NSMBU_groundpound.gd")
+const _m_scr_NSMBU_groundpound_canceled = preload("res://scripts/scr_NSMBU_groundpound_canceled.gd")
+const _m_scr_NSMBU_groundpound_stop = preload("res://scripts/scr_NSMBU_groundpound_stop.gd")
+const _m_scr_NSMBU_hold = preload("res://scripts/scr_NSMBU_hold.gd")
+const _m_scr_NSMBU_hold_airspin = preload("res://scripts/scr_NSMBU_hold_airspin.gd")
+const _m_scr_NSMBU_hold_ground = preload("res://scripts/scr_NSMBU_hold_ground.gd")
+const _m_scr_NSMBU_hold_jump = preload("res://scripts/scr_NSMBU_hold_jump.gd")
+const _m_scr_NSMBU_hold_spinjump = preload("res://scripts/scr_NSMBU_hold_spinjump.gd")
 const _m_scr_NSMBU_idle = preload("res://scripts/scr_NSMBU_idle.gd")
+const _m_scr_NSMBU_jump1 = preload("res://scripts/scr_NSMBU_jump1.gd")
+const _m_scr_NSMBU_jump2 = preload("res://scripts/scr_NSMBU_jump2.gd")
+const _m_scr_NSMBU_jump3 = preload("res://scripts/scr_NSMBU_jump3.gd")
+const _m_scr_NSMBU_jump_star = preload("res://scripts/scr_NSMBU_jump_star.gd")
+const _m_scr_NSMBU_kick = preload("res://scripts/scr_NSMBU_kick.gd")
+const _m_scr_NSMBU_marioclimb_start = preload("res://scripts/scr_NSMBU_marioclimb_start.gd")
 const _m_scr_NSMBU_musicalscale_minirebote = preload("res://scripts/scr_NSMBU_musicalscale_minirebote.gd")
 const _m_scr_NSMBU_musicalscale_rebote = preload("res://scripts/scr_NSMBU_musicalscale_rebote.gd")
+const _m_scr_NSMBU_penguin_swim = preload("res://scripts/scr_NSMBU_penguin_swim.gd")
+const _m_scr_NSMBU_run = preload("res://scripts/scr_NSMBU_run.gd")
+const _m_scr_NSMBU_runmax = preload("res://scripts/scr_NSMBU_runmax.gd")
 const _m_scr_NSMBU_skid = preload("res://scripts/scr_NSMBU_skid.gd")
+const _m_scr_NSMBU_skid_left = preload("res://scripts/scr_NSMBU_skid_left.gd")
+const _m_scr_NSMBU_skid_right = preload("res://scripts/scr_NSMBU_skid_right.gd")
 const _m_scr_NSMBU_snd_dead = preload("res://scripts/scr_NSMBU_snd_dead.gd")
+const _m_scr_NSMBU_spincrouch = preload("res://scripts/scr_NSMBU_spincrouch.gd")
+const _m_scr_NSMBU_spinjump = preload("res://scripts/scr_NSMBU_spinjump.gd")
 const _m_scr_NSMBU_spinstomp = preload("res://scripts/scr_NSMBU_spinstomp.gd")
+const _m_scr_NSMBU_standup = preload("res://scripts/scr_NSMBU_standup.gd")
+const _m_scr_NSMBU_standup_pole = preload("res://scripts/scr_NSMBU_standup_pole.gd")
+const _m_scr_NSMBU_stun = preload("res://scripts/scr_NSMBU_stun.gd")
 const _m_scr_NSMBU_swim = preload("res://scripts/scr_NSMBU_swim.gd")
+const _m_scr_NSMBU_swim2 = preload("res://scripts/scr_NSMBU_swim2.gd")
+const _m_scr_NSMBU_swim_fall = preload("res://scripts/scr_NSMBU_swim_fall.gd")
+const _m_scr_NSMBU_swim_hold = preload("res://scripts/scr_NSMBU_swim_hold.gd")
+const _m_scr_NSMBU_triple_jump0 = preload("res://scripts/scr_NSMBU_triple_jump0.gd")
+const _m_scr_NSMBU_triple_jump1 = preload("res://scripts/scr_NSMBU_triple_jump1.gd")
+const _m_scr_NSMBU_triple_jump2 = preload("res://scripts/scr_NSMBU_triple_jump2.gd")
+const _m_scr_NSMBU_triple_jump3 = preload("res://scripts/scr_NSMBU_triple_jump3.gd")
 const _m_scr_NSMBU_walk = preload("res://scripts/scr_NSMBU_walk.gd")
+const _m_scr_NSMBU_walkhold = preload("res://scripts/scr_NSMBU_walkhold.gd")
+const _m_scr_NSMBU_walkhome = preload("res://scripts/scr_NSMBU_walkhome.gd")
+const _m_scr_NSMBU_walkpipes = preload("res://scripts/scr_NSMBU_walkpipes.gd")
+const _m_scr_NSMBU_wall_slide = preload("res://scripts/scr_NSMBU_wall_slide.gd")
 const _m_scr_pink_coins = preload("res://scripts/scr_pink_coins.gd")
+const _m_scr_powerup_editor = preload("res://scripts/scr_powerup_editor.gd")
 const _m_scr_restart = preload("res://scripts/scr_restart.gd")
 const _m_scr_snd_airship = preload("res://scripts/scr_snd_airship.gd")
 const _m_scr_snd_autumn = preload("res://scripts/scr_snd_autumn.gd")
@@ -138,6 +204,8 @@ const _m_scr_snd_ground = preload("res://scripts/scr_snd_ground.gd")
 const _m_scr_snd_hurryup = preload("res://scripts/scr_snd_hurryup.gd")
 const _m_scr_snd_kick = preload("res://scripts/scr_snd_kick.gd")
 const _m_scr_snd_mountain = preload("res://scripts/scr_snd_mountain.gd")
+const _m_scr_snd_oneway = preload("res://scripts/scr_snd_oneway.gd")
+const _m_scr_snd_pipes = preload("res://scripts/scr_snd_pipes.gd")
 const _m_scr_snd_powerdown = preload("res://scripts/scr_snd_powerdown.gd")
 const _m_scr_snd_powerup = preload("res://scripts/scr_snd_powerup.gd")
 const _m_scr_snd_skid = preload("res://scripts/scr_snd_skid.gd")
@@ -156,9 +224,11 @@ const _m_scr_snd_underwater = preload("res://scripts/scr_snd_underwater.gd")
 const _m_scr_sprite_get_constant = preload("res://scripts/scr_sprite_get_constant.gd")
 const _m_scr_sprite_get_constant_res = preload("res://scripts/scr_sprite_get_constant_res.gd")
 const _m_scr_sprite_make_object_rieles = preload("res://scripts/scr_sprite_make_object_rieles.gd")
+const _m_scr_step_sounds = preload("res://scripts/scr_step_sounds.gd")
 const _m_scr_swim = preload("res://scripts/scr_swim.gd")
 const _m_scr_tiles_ground = preload("res://scripts/scr_tiles_ground.gd")
 const _m_scr_tiles_ground_start = preload("res://scripts/scr_tiles_ground_start.gd")
+const _m_screen_round = preload("res://scripts/screen_round.gd")
 const _m_string_add_zeros = preload("res://scripts/string_add_zeros.gd")
 
 static func __background_get(me: GMObject, argument0 = null, argument1 = null) -> Variant:
@@ -196,6 +266,12 @@ static func LoadJSONFromFile(me: GMObject, argument0 = null) -> Variant:
 
 static func outside_view(me: GMObject) -> float:
 	return _m_outside_view.outside_view(me)
+
+static func scr_arcon_fly(me: GMObject):
+	return _m_scr_arcon_fly.scr_arcon_fly(me)
+
+static func scr_arcon_fly_start(me: GMObject):
+	return _m_scr_arcon_fly_start.scr_arcon_fly_start(me)
 
 static func scr_auto_tile(me: GMObject) -> Variant:
 	return _m_scr_auto_tile.scr_auto_tile(me)
@@ -296,6 +372,36 @@ static func scr_mario_cap_fly_acender_decender(me: GMObject) -> Variant:
 static func scr_mario_cap_fly_decender(me: GMObject) -> Variant:
 	return _m_scr_mario_cap_fly_decender.scr_mario_cap_fly_decender(me)
 
+static func scr_mario_drybones(me: GMObject):
+	return _m_scr_mario_drybones.scr_mario_drybones(me)
+
+static func scr_mario_drybones_goal(me: GMObject):
+	return _m_scr_mario_drybones_goal.scr_mario_drybones_goal(me)
+
+static func scr_mario_drybones_jump(me: GMObject):
+	return _m_scr_mario_drybones_jump.scr_mario_drybones_jump(me)
+
+static func scr_mario_pull(me: GMObject):
+	return _m_scr_mario_pull.scr_mario_pull(me)
+
+static func scr_mario_shoe(me: GMObject):
+	return _m_scr_mario_shoe.scr_mario_shoe(me)
+
+static func scr_mario_shoe_fall(me: GMObject):
+	return _m_scr_mario_shoe_fall.scr_mario_shoe_fall(me)
+
+static func scr_mario_swim_idle(me: GMObject):
+	return _m_scr_mario_swim_idle.scr_mario_swim_idle(me)
+
+static func scr_mario_yoshi_atack(me: GMObject):
+	return _m_scr_mario_yoshi_atack.scr_mario_yoshi_atack(me)
+
+static func scr_mario_yoshi_crouch(me: GMObject):
+	return _m_scr_mario_yoshi_crouch.scr_mario_yoshi_crouch(me)
+
+static func scr_mario_yoshi_goal(me: GMObject):
+	return _m_scr_mario_yoshi_goal.scr_mario_yoshi_goal(me)
+
 static func scr_marioclimb(me: GMObject) -> Variant:
 	return _m_scr_marioclimb.scr_marioclimb(me)
 
@@ -311,8 +417,17 @@ static func scr_marioduck(me: GMObject) -> Variant:
 static func scr_marioduckhold(me: GMObject) -> Variant:
 	return _m_scr_marioduckhold.scr_marioduckhold(me)
 
+static func scr_mariogoal(me: GMObject):
+	return _m_scr_mariogoal.scr_mariogoal(me)
+
 static func scr_mariohold(me: GMObject) -> Variant:
 	return _m_scr_mariohold.scr_mariohold(me)
+
+static func scr_mariohold_fall(me: GMObject):
+	return _m_scr_mariohold_fall.scr_mariohold_fall(me)
+
+static func scr_mariohold_jump(me: GMObject):
+	return _m_scr_mariohold_jump.scr_mariohold_jump(me)
 
 static func scr_marioidle(me: GMObject) -> Variant:
 	return _m_scr_marioidle.scr_marioidle(me)
@@ -329,6 +444,9 @@ static func scr_mariojumpstar(me: GMObject) -> Variant:
 static func scr_mariokick(me: GMObject) -> Variant:
 	return _m_scr_mariokick.scr_mariokick(me)
 
+static func scr_marioride(me: GMObject):
+	return _m_scr_marioride.scr_marioride(me)
+
 static func scr_mariorun(me: GMObject) -> Variant:
 	return _m_scr_mariorun.scr_mariorun(me)
 
@@ -338,8 +456,14 @@ static func scr_mariorunjump(me: GMObject) -> Variant:
 static func scr_marioshoot(me: GMObject) -> Variant:
 	return _m_scr_marioshoot.scr_marioshoot(me)
 
+static func scr_marioshoot_drybones(me: GMObject):
+	return _m_scr_marioshoot_drybones.scr_marioshoot_drybones(me)
+
 static func scr_marioskid(me: GMObject) -> Variant:
 	return _m_scr_marioskid.scr_marioskid(me)
+
+static func scr_marioslide(me: GMObject):
+	return _m_scr_marioslide.scr_marioslide(me)
 
 static func scr_marioswim(me: GMObject) -> Variant:
 	return _m_scr_marioswim.scr_marioswim(me)
@@ -383,8 +507,86 @@ static func scr_musicalscale_kick(me: GMObject, argument0 = null, argument1 = nu
 static func scr_musicalscale_SMB3(me: GMObject, argument0 = null, argument1 = null, argument2 = null):
 	return _m_scr_musicalscale_SMB3.scr_musicalscale_SMB3(me, argument0, argument1, argument2)
 
+static func scr_NSMBU_acrouch(me: GMObject):
+	return _m_scr_NSMBU_acrouch.scr_NSMBU_acrouch(me)
+
+static func scr_NSMBU_airspin1(me: GMObject):
+	return _m_scr_NSMBU_airspin1.scr_NSMBU_airspin1(me)
+
+static func scr_NSMBU_climb_pole(me: GMObject):
+	return _m_scr_NSMBU_climb_pole.scr_NSMBU_climb_pole(me)
+
+static func scr_NSMBU_crouch(me: GMObject):
+	return _m_scr_NSMBU_crouch.scr_NSMBU_crouch(me)
+
+static func scr_NSMBU_crouch_fall(me: GMObject):
+	return _m_scr_NSMBU_crouch_fall.scr_NSMBU_crouch_fall(me)
+
+static func scr_NSMBU_crouch_idle(me: GMObject):
+	return _m_scr_NSMBU_crouch_idle.scr_NSMBU_crouch_idle(me)
+
+static func scr_NSMBU_crouch_jump(me: GMObject):
+	return _m_scr_NSMBU_crouch_jump.scr_NSMBU_crouch_jump(me)
+
+static func scr_NSMBU_drill_spin(me: GMObject):
+	return _m_scr_NSMBU_drill_spin.scr_NSMBU_drill_spin(me)
+
+static func scr_NSMBU_flip(me: GMObject):
+	return _m_scr_NSMBU_flip.scr_NSMBU_flip(me)
+
+static func scr_NSMBU_flip_start(me: GMObject):
+	return _m_scr_NSMBU_flip_start.scr_NSMBU_flip_start(me)
+
+static func scr_NSMBU_goal_pole(me: GMObject):
+	return _m_scr_NSMBU_goal_pole.scr_NSMBU_goal_pole(me)
+
+static func scr_NSMBU_ground_idle(me: GMObject):
+	return _m_scr_NSMBU_ground_idle.scr_NSMBU_ground_idle(me)
+
+static func scr_NSMBU_groundpound(me: GMObject):
+	return _m_scr_NSMBU_groundpound.scr_NSMBU_groundpound(me)
+
+static func scr_NSMBU_groundpound_canceled(me: GMObject):
+	return _m_scr_NSMBU_groundpound_canceled.scr_NSMBU_groundpound_canceled(me)
+
+static func scr_NSMBU_groundpound_stop(me: GMObject):
+	return _m_scr_NSMBU_groundpound_stop.scr_NSMBU_groundpound_stop(me)
+
+static func scr_NSMBU_hold(me: GMObject):
+	return _m_scr_NSMBU_hold.scr_NSMBU_hold(me)
+
+static func scr_NSMBU_hold_airspin(me: GMObject):
+	return _m_scr_NSMBU_hold_airspin.scr_NSMBU_hold_airspin(me)
+
+static func scr_NSMBU_hold_ground(me: GMObject):
+	return _m_scr_NSMBU_hold_ground.scr_NSMBU_hold_ground(me)
+
+static func scr_NSMBU_hold_jump(me: GMObject):
+	return _m_scr_NSMBU_hold_jump.scr_NSMBU_hold_jump(me)
+
+static func scr_NSMBU_hold_spinjump(me: GMObject):
+	return _m_scr_NSMBU_hold_spinjump.scr_NSMBU_hold_spinjump(me)
+
 static func scr_NSMBU_idle(me: GMObject, argument0 = null) -> Variant:
 	return _m_scr_NSMBU_idle.scr_NSMBU_idle(me, argument0)
+
+static func scr_NSMBU_jump1(me: GMObject):
+	return _m_scr_NSMBU_jump1.scr_NSMBU_jump1(me)
+
+static func scr_NSMBU_jump2(me: GMObject):
+	return _m_scr_NSMBU_jump2.scr_NSMBU_jump2(me)
+
+static func scr_NSMBU_jump3(me: GMObject):
+	return _m_scr_NSMBU_jump3.scr_NSMBU_jump3(me)
+
+static func scr_NSMBU_jump_star(me: GMObject):
+	return _m_scr_NSMBU_jump_star.scr_NSMBU_jump_star(me)
+
+static func scr_NSMBU_kick(me: GMObject, argument0 = null):
+	return _m_scr_NSMBU_kick.scr_NSMBU_kick(me, argument0)
+
+static func scr_NSMBU_marioclimb_start(me: GMObject):
+	return _m_scr_NSMBU_marioclimb_start.scr_NSMBU_marioclimb_start(me)
 
 static func scr_NSMBU_musicalscale_minirebote(me: GMObject, argument0 = null, argument1 = null, argument2 = null):
 	return _m_scr_NSMBU_musicalscale_minirebote.scr_NSMBU_musicalscale_minirebote(me, argument0, argument1, argument2)
@@ -392,23 +594,89 @@ static func scr_NSMBU_musicalscale_minirebote(me: GMObject, argument0 = null, ar
 static func scr_NSMBU_musicalscale_rebote(me: GMObject, argument0 = null, argument1 = null, argument2 = null):
 	return _m_scr_NSMBU_musicalscale_rebote.scr_NSMBU_musicalscale_rebote(me, argument0, argument1, argument2)
 
+static func scr_NSMBU_penguin_swim(me: GMObject, argument0 = null):
+	return _m_scr_NSMBU_penguin_swim.scr_NSMBU_penguin_swim(me, argument0)
+
+static func scr_NSMBU_run(me: GMObject):
+	return _m_scr_NSMBU_run.scr_NSMBU_run(me)
+
+static func scr_NSMBU_runmax(me: GMObject):
+	return _m_scr_NSMBU_runmax.scr_NSMBU_runmax(me)
+
 static func scr_NSMBU_skid(me: GMObject) -> Variant:
 	return _m_scr_NSMBU_skid.scr_NSMBU_skid(me)
+
+static func scr_NSMBU_skid_left(me: GMObject):
+	return _m_scr_NSMBU_skid_left.scr_NSMBU_skid_left(me)
+
+static func scr_NSMBU_skid_right(me: GMObject):
+	return _m_scr_NSMBU_skid_right.scr_NSMBU_skid_right(me)
 
 static func scr_NSMBU_snd_dead(me: GMObject, argument0 = null) -> Variant:
 	return _m_scr_NSMBU_snd_dead.scr_NSMBU_snd_dead(me, argument0)
 
+static func scr_NSMBU_spincrouch(me: GMObject):
+	return _m_scr_NSMBU_spincrouch.scr_NSMBU_spincrouch(me)
+
+static func scr_NSMBU_spinjump(me: GMObject):
+	return _m_scr_NSMBU_spinjump.scr_NSMBU_spinjump(me)
+
 static func scr_NSMBU_spinstomp(me: GMObject, argument0 = null, argument1 = null, argument2 = null):
 	return _m_scr_NSMBU_spinstomp.scr_NSMBU_spinstomp(me, argument0, argument1, argument2)
+
+static func scr_NSMBU_standup(me: GMObject):
+	return _m_scr_NSMBU_standup.scr_NSMBU_standup(me)
+
+static func scr_NSMBU_standup_pole(me: GMObject):
+	return _m_scr_NSMBU_standup_pole.scr_NSMBU_standup_pole(me)
+
+static func scr_NSMBU_stun(me: GMObject):
+	return _m_scr_NSMBU_stun.scr_NSMBU_stun(me)
 
 static func scr_NSMBU_swim(me: GMObject) -> Variant:
 	return _m_scr_NSMBU_swim.scr_NSMBU_swim(me)
 
+static func scr_NSMBU_swim2(me: GMObject):
+	return _m_scr_NSMBU_swim2.scr_NSMBU_swim2(me)
+
+static func scr_NSMBU_swim_fall(me: GMObject):
+	return _m_scr_NSMBU_swim_fall.scr_NSMBU_swim_fall(me)
+
+static func scr_NSMBU_swim_hold(me: GMObject):
+	return _m_scr_NSMBU_swim_hold.scr_NSMBU_swim_hold(me)
+
+static func scr_NSMBU_triple_jump0(me: GMObject):
+	return _m_scr_NSMBU_triple_jump0.scr_NSMBU_triple_jump0(me)
+
+static func scr_NSMBU_triple_jump1(me: GMObject):
+	return _m_scr_NSMBU_triple_jump1.scr_NSMBU_triple_jump1(me)
+
+static func scr_NSMBU_triple_jump2(me: GMObject):
+	return _m_scr_NSMBU_triple_jump2.scr_NSMBU_triple_jump2(me)
+
+static func scr_NSMBU_triple_jump3(me: GMObject):
+	return _m_scr_NSMBU_triple_jump3.scr_NSMBU_triple_jump3(me)
+
 static func scr_NSMBU_walk(me: GMObject, argument0 = null) -> Variant:
 	return _m_scr_NSMBU_walk.scr_NSMBU_walk(me, argument0)
 
+static func scr_NSMBU_walkhold(me: GMObject):
+	return _m_scr_NSMBU_walkhold.scr_NSMBU_walkhold(me)
+
+static func scr_NSMBU_walkhome(me: GMObject):
+	return _m_scr_NSMBU_walkhome.scr_NSMBU_walkhome(me)
+
+static func scr_NSMBU_walkpipes(me: GMObject):
+	return _m_scr_NSMBU_walkpipes.scr_NSMBU_walkpipes(me)
+
+static func scr_NSMBU_wall_slide(me: GMObject):
+	return _m_scr_NSMBU_wall_slide.scr_NSMBU_wall_slide(me)
+
 static func scr_pink_coins(me: GMObject) -> Variant:
 	return _m_scr_pink_coins.scr_pink_coins(me)
+
+static func scr_powerup_editor(me: GMObject, argument0 = null):
+	return _m_scr_powerup_editor.scr_powerup_editor(me, argument0)
 
 static func scr_restart(me: GMObject) -> Variant:
 	return _m_scr_restart.scr_restart(me)
@@ -460,6 +728,12 @@ static func scr_snd_kick(me: GMObject) -> Variant:
 
 static func scr_snd_mountain(me: GMObject) -> Variant:
 	return _m_scr_snd_mountain.scr_snd_mountain(me)
+
+static func scr_snd_oneway(me: GMObject) -> Variant:
+	return _m_scr_snd_oneway.scr_snd_oneway(me)
+
+static func scr_snd_pipes(me: GMObject):
+	return _m_scr_snd_pipes.scr_snd_pipes(me)
 
 static func scr_snd_powerdown(me: GMObject) -> Variant:
 	return _m_scr_snd_powerdown.scr_snd_powerdown(me)
@@ -515,6 +789,9 @@ static func scr_sprite_get_constant_res(me: GMObject, argument0 = null) -> Varia
 static func scr_sprite_make_object_rieles(me: GMObject, argument0 = null, argument1 = null, argument2 = null) -> Variant:
 	return _m_scr_sprite_make_object_rieles.scr_sprite_make_object_rieles(me, argument0, argument1, argument2)
 
+static func scr_step_sounds(me: GMObject, argument0 = null, argument1 = null):
+	return _m_scr_step_sounds.scr_step_sounds(me, argument0, argument1)
+
 static func scr_swim(me: GMObject) -> Variant:
 	return _m_scr_swim.scr_swim(me)
 
@@ -523,6 +800,9 @@ static func scr_tiles_ground(me: GMObject) -> Variant:
 
 static func scr_tiles_ground_start(me: GMObject) -> Variant:
 	return _m_scr_tiles_ground_start.scr_tiles_ground_start(me)
+
+static func screen_round(me: GMObject, value = null):
+	return _m_screen_round.screen_round(me, value)
 
 static func string_add_zeros(me: GMObject, argument0 = null, argument1 = null) -> Variant:
 	return _m_string_add_zeros.string_add_zeros(me, argument0, argument1)

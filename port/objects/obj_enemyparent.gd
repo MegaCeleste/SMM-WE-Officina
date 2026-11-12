@@ -13,6 +13,7 @@ var mytopid = null
 var imdead = null
 var claw = null
 var boo_huida = null
+var can_wings_deads = null  # 第 4 批补：由别的 object 写入
 
 
 # from objects/obj_enemyparent/Create_0.gml

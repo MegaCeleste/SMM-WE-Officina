@@ -12,6 +12,8 @@ var kickme: float = 0.0
 var ready_v = null  # 原名 ready（和 Node.ready 撞名）；仅子类（obj_spring 等）赋值
 var ready2 = null  # 仅子类赋值
 var walk = null  # 仅子类赋值
+var fisica = null  # 第 4 批补：由别的 object 写入
+var explode = null  # 第 4 批补：由别的 object 写入
 
 
 # from objects/obj_holdparent/Create_0.gml

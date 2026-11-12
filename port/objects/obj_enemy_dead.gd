@@ -8,6 +8,7 @@ var direct = null
 var direct_y: float = 0.0
 var scale: float = 0.0
 var dead_boss: float = 0.0
+var rot_max = null  # 第 4 批补：由 obj_link_arrow 写入
 
 
 # from objects/obj_enemy_dead/Create_0.gml

@@ -815,7 +815,7 @@ const obj_n64_snd_res: int = 808
 const obj_bonus_snd_res: int = 809
 const obj_boss_snd_res: int = 810
 
-# ---- sprites (4645) ----
+# ---- sprites (4646) ----
 const spr_SMB_mario_small_idle: int = 0
 const spr_SMB_mario_small_walk: int = 1
 const spr_SMB_mario_small_jump: int = 2
@@ -5461,6 +5461,7 @@ const spr_SMB3_meteorite_big: int = 4641
 const spr_settings_vsync: int = 4642
 const spr_NSMBU_mario_small_slide: int = 4643
 const spr_NSMBU_ssp3_forest_night: int = 4644
+const spr_NSMBU_ninji_jump2: int = 4645
 
 # ---- sounds (707) ----
 const snd_NSMBU_pink_coin5: int = 0

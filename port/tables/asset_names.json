@@ -1,7 +1,7 @@
 {
  "counts": {
   "objects": 811,
-  "sprites": 4645,
+  "sprites": 4646,
   "sounds": 707,
   "rooms": 10,
   "paths": 5,
@@ -5468,7 +5468,8 @@
   "spr_SMB3_meteorite_big",
   "spr_settings_vsync",
   "spr_NSMBU_mario_small_slide",
-  "spr_NSMBU_ssp3_forest_night"
+  "spr_NSMBU_ssp3_forest_night",
+  "spr_NSMBU_ninji_jump2"
  ],
  "sounds": [
   "snd_NSMBU_pink_coin5",

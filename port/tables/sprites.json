@@ -1,5 +1,5 @@
 {
- "count": 4645,
+ "count": 4646,
  "sprites": {
   "spr_SMB_mario_small_idle": {
    "index": 0,
@@ -181284,6 +181284,39 @@
     "5394210c-fcb0-47e1-9c9d-4b9bf57a22e7",
     "93888f52-f1eb-4c4f-a2ed-5a751e5113cc",
     "ee139cd9-ed54-44fe-882e-ff50cb2f55d7"
+   ]
+  },
+  "spr_NSMBU_ninji_jump2": {
+   "index": 4645,
+   "file": "assets/sprites/spr_NSMBU_ninji_jump2.png",
+   "frames": 1,
+   "width": 20,
+   "height": 23,
+   "origin": 4,
+   "xorigin": 10,
+   "yorigin": 11,
+   "bbox_left": 1,
+   "bbox_top": 3,
+   "bbox_right": 19,
+   "bbox_bottom": 22,
+   "bboxMode": 0,
+   "collisionKind": 1,
+   "collisionTolerance": 0,
+   "playbackSpeed": 2.0,
+   "playbackSpeedType": 1,
+   "playback": 1,
+   "sequence_length": 1.0,
+   "timeUnits": 1,
+   "HTile": false,
+   "VTile": false,
+   "type": 0,
+   "edgeFiltering": false,
+   "preMultiplyAlpha": false,
+   "nineSlice_enabled": null,
+   "textureGroup": "Default",
+   "folder": "Sprites/Enemies/NSMBU",
+   "frame_guids": [
+    "9c9e991b-ebb1-4966-8c7a-467912c8a36b"
    ]
   }
  }

@@ -4,8 +4,6 @@ var edible: float = 0.0
 var ready_v: float = 0.0  # PORT: 原名 ready，和 Node.ready 撞名
 var w_wings: float = 0.0
 var lava: float = 0.0
-# UNSURE: image_single 是 GM 旧版内置变量（赋值会让 image_speed=0 并定格到该帧），兼容层没有实现；这里只是普通变量，不起作用
-var image_single = null
 
 
 # from objects/obj_blooper/Create_0.gml
@@ -73,11 +71,11 @@ func _step_end() -> void:
 			if image_index >= 11.5:
 				image_index = 11.0
 		else:
-			image_single = 0.0
+			image_index = 0.0  # PORT: 原版 image_single = 0（GM 旧内置变量：定格到第 0 帧）。用户确认 Blooper 会随上浮/下沉换帧；非 NSMBU 画风 image_speed 已是 0
 	elif G.apariencia == 3.0:
 		sprite_index = A.spr_NSMBU_blooper
 	else:
-		image_single = 1.0
+		image_index = 1.0  # PORT: 原版 image_single = 1（定格到第 1 帧）
 
 
 # from objects/obj_blooper/Alarm_0.gml

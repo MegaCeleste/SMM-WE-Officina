@@ -6,7 +6,7 @@ import sys
 
 from gmlib import ASSETS, TABLES
 
-EXPECT = {"objects": 811, "sprites": 4645, "sounds": 707, "rooms": 10, "scripts": 294}
+EXPECT = {"objects": 811, "sprites": 4645 + 1, "sounds": 707, "rooms": 10, "scripts": 294}  # sprites +1：gmlib.PORT_EXTRA_SPRITES
 
 
 def load(name: str) -> dict:

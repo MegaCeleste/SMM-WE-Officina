@@ -4,7 +4,6 @@ var edible: float = 0.0
 var isheavy: float = 0.0
 var jumping: float = 0.0
 var hopcount: float = 0.0  # PORT: 原版 Create 没初始化，Alarm_0 里直接读（GML 会报错）；alarm[0] 只有 Alarm_0 自己设置，实际走不到
-var spr_NSMBU_ninji_jump2 = null  # UNSURE: 原工程没有 spr_NSMBU_ninji_jump2 资源（只有 jump、jump3、idle），原版读它会报错；Alarm_0 走不到
 
 
 # from objects/obj_ninji/Create_0.gml
@@ -82,7 +81,7 @@ func _alarm_0() -> void:
 	if G.apariencia != 3.0:
 		image_index = 1.0
 	else:
-		sprite_index = spr_NSMBU_ninji_jump2
+		sprite_index = A.spr_NSMBU_ninji_jump2  # PORT: 原工程缺这个 sprite，用 spr_NSMBU_ninji_jump 复制补上（用户确认同图，tools/gmlib.py PORT_EXTRA_SPRITES）
 	# Hop again
 	alarm[0] = 100.0
 

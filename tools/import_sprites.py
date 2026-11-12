@@ -14,7 +14,7 @@ from typing import Any
 
 from PIL import Image
 
-from gmlib import ASSETS, ORIG, TABLES, folder_of, load_yy, ref_name, resources, write_bytes_if_changed, write_json
+from gmlib import ASSETS, ORIG, PORT_EXTRA_SPRITES, TABLES, folder_of, load_yy, ref_name, resources, write_bytes_if_changed, write_json
 
 OUT_DIR = ASSETS / "sprites"
 
@@ -35,7 +35,8 @@ def main() -> int:
             anomaly(name, "missing_yy", path)
             continue
         y = load_yy(yy_path)
-        if y.get("name") != name:
+        src_name = PORT_EXTRA_SPRITES.get(name, name)  # PORT: 复制补上的 sprite 读源 sprite 的帧
+        if y.get("name") != src_name:
             anomaly(name, "name_mismatch", f"yy name={y.get('name')}")
         w = int(y["width"])
         h = int(y["height"])
@@ -72,7 +73,7 @@ def main() -> int:
 
         strip = Image.new("RGBA", (max(w * max(len(frames), 1), 1), max(h, 1)), (0, 0, 0, 0))
         for fi, guid in enumerate(frames):
-            png = ORIG / "sprites" / name / f"{guid}.png"
+            png = ORIG / "sprites" / src_name / f"{guid}.png"
             if not png.exists():
                 anomaly(name, "missing_frame", f"帧 {fi} 缺文件 {png.relative_to(ORIG).as_posix()}，条带中留空")
                 continue

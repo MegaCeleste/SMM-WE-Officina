@@ -72,13 +72,25 @@ def yyp() -> Any:
     return _yyp_cache
 
 
+# PORT: 原工程缺失、由用户指定用已有 sprite 复制补上的资源（新名 → 源 sprite 名）。
+# 追加在 sprite 列表末尾，不改动已有编号。
+PORT_EXTRA_SPRITES: dict[str, str] = {
+    "spr_NSMBU_ninji_jump2": "spr_NSMBU_ninji_jump",  # obj_ninji / obj_NSMBU_ninji 的 Alarm_0 引用；用户确认与 jump 同图（2026-11-12）
+}
+
+
 def resources(kind: str) -> list[tuple[int, str, str]]:
-    """按 yyp resources 顺序返回 (该类型内序号, 名字, 相对路径)。kind 为 id.path 的第一段。"""
+    """按 yyp resources 顺序返回 (该类型内序号, 名字, 相对路径)。kind 为 id.path 的第一段。
+    kind == "sprites" 时在末尾追加 PORT_EXTRA_SPRITES（路径是源 sprite 的 .yy）。"""
     res: list[tuple[int, str, str]] = []
     for r in yyp()["resources"]:
         p: str = r["id"]["path"]
         if p.split("/")[0] == kind:
             res.append((len(res), r["id"]["name"], p))
+    if kind == "sprites":
+        by_name = {n: path for _, n, path in res}
+        for new_name, src in PORT_EXTRA_SPRITES.items():
+            res.append((len(res), new_name, by_name[src]))
     return res
 
 

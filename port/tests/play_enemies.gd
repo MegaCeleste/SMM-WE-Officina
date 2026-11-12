@@ -25,10 +25,17 @@ var _shot_n: int = 0
 var _sections: Array = []  ## [[名字, 起点 x], …]，截图模式用
 
 
+## 子类（tests/play_specials.gd）覆盖
+func _groups() -> Dictionary:
+	return TestEnemies.GROUPS
+
+
 func _ready() -> void:
 	var a: PackedStringArray = OS.get_cmdline_user_args()
 	if a.size() > 0:
 		_group = a[0]
+	if not _groups().has(_group):
+		_group = _groups().keys()[0]
 	if a.size() > 1:
 		_style = clampi(int(a[1]), 0, 3)
 	if a.size() > 3 and a[2] == "shot":
@@ -101,7 +108,7 @@ func _physics_process(_d: float) -> void:
 func _place() -> void:
 	_sections = []
 	var x: float = START_X
-	var names: Array = TestEnemies.GROUPS[_group]
+	var names: Array = _groups()[_group]
 	for n: String in names:
 		if n.ends_with("_dead") or n.begins_with("obj_splash") or n == "obj_paracaidas_go" or n == "obj_smoke_goomba":
 			continue  # 死亡/特效 object 不单独摆

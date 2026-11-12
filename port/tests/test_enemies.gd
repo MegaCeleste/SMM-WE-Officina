@@ -190,6 +190,14 @@ func _spawn(m: GMObject, name: String, variant: String, dx: float) -> GMObject:
 	return inst
 
 
+func _extra_tests() -> void:
+	pass
+
+
+func _label() -> String:
+	return "enemy tests"
+
+
 static func _apply_init(inst: GMObject, name: String) -> void:
 	if inst == null or not INIT.has(name):
 		return
@@ -199,16 +207,31 @@ static func _apply_init(inst: GMObject, name: String) -> void:
 		inst.set(k, GM.asset_get_index(v) if v is String else v)
 
 
+## 子类（tests/test_specials.gd）覆盖这三个
+func _groups() -> Dictionary:
+	return GROUPS
+
+
+func _variants() -> Array[String]:
+	return VARIANTS
+
+
+## 这个 object 碰到后离开关卡算不算正常（终点、门之类）
+func _may_leave(_name: String) -> bool:
+	return false
+
+
 func _ready() -> void:
 	GM.auto_tick = false
 	var args: PackedStringArray = OS.get_cmdline_user_args()
 	var group: String = args[0] if args.size() > 0 else "all"
 	var names: Array = []
+	var groups: Dictionary = _groups()
 	if group == "all":
-		for g: String in GROUPS:
-			names.append_array(GROUPS[g])
+		for g: String in groups:
+			names.append_array(groups[g])
 	else:
-		names = GROUPS[group]
+		names = groups[group]
 	var styles: Array[int] = []
 	for i: int in range(1, args.size()):
 		styles.append(int(args[i]))
@@ -224,7 +247,7 @@ func _ready() -> void:
 			ok(idx >= 0, "%s 有编号" % name)
 			if idx < 0:
 				continue
-			for variant: String in VARIANTS:
+			for variant: String in _variants():
 				for mode: String in ["walk", "stomp"]:
 					m = _reset(style)
 					if m == null:
@@ -251,10 +274,11 @@ func _ready() -> void:
 						_hold(G.derecha, 40)
 						_ticks(30)
 					print("   end: ", _alive_msg())
-					ok(GM.room == A.rm_guardabot_play or _find(A.obj_deadmario) != null,
+					ok(GM.room == A.rm_guardabot_play or _find(A.obj_deadmario) != null or _may_leave(name),
 						"style %d obj %s %s %s：还在关卡里" % [style, name, variant, mode])
 					for o: GMObject in GM.with_list(idx):
 						GM.instance_destroy(o)
-	print("enemy tests: %d checks, %d failed" % [_checks, _fails])
+	_extra_tests()
+	print("%s: %d checks, %d failed" % [_label(), _checks, _fails])
 	await get_tree().create_timer(0.3).timeout
 	get_tree().quit(1 if _fails > 0 else 0)

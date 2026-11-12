@@ -243,6 +243,43 @@ func gpu_get_blendenable() -> bool:
 	return _blend_enable
 
 
+# ---- 混合模式（第 7 批）。GMS 的编号：bm_normal 0、bm_add 1、bm_max 2、bm_subtract 3 ----
+const bm_normal: int = 0
+const bm_add: int = 1
+const bm_max: int = 2
+const bm_subtract: int = 3
+var _blend_mode: int = bm_normal
+var _mat_blend: Dictionary = {}  ## 模式 → CanvasItemMaterial
+
+
+## 换混合模式就开一个新的绘制分段（同 shader_set）。bm_add = (src_alpha, one)，与 Godot 的
+## BLEND_MODE_ADD 相同。bm_subtract 在 GMS 里是 (zero, inv_src_colour)，Godot 没有对应的固定
+## 混合方式，暂用 BLEND_MODE_SUB 近似；bm_max 暂按 bm_add 处理（本批只有 obj_blend_ring 用 bm_add）。
+## 混合模式不是 normal 时，shader_set 的材质被覆盖（原版没有两者同时用的地方）。
+func gpu_set_blendmode(mode: float) -> void:
+	var m: int = int(mode)
+	if m == _blend_mode:
+		return
+	_blend_mode = m
+	_new_segment(_current_material())
+
+
+func gpu_get_blendmode() -> int:
+	return _blend_mode
+
+
+func _current_material() -> RID:
+	if _blend_mode != bm_normal:
+		if not _mat_blend.has(_blend_mode):
+			var cm: CanvasItemMaterial = CanvasItemMaterial.new()
+			cm.blend_mode = CanvasItemMaterial.BLEND_MODE_SUB if _blend_mode == bm_subtract else CanvasItemMaterial.BLEND_MODE_ADD
+			_mat_blend[_blend_mode] = cm
+		return (_mat_blend[_blend_mode] as CanvasItemMaterial).get_rid()
+	if _shader_on and _mat_blendreplace != null:
+		return _mat_blendreplace.get_rid()
+	return RID()
+
+
 # ======================================================================
 # 动态 sprite（截图）
 # ======================================================================
@@ -338,12 +375,16 @@ func _begin_world_draw() -> void:
 	_seg_used = 0
 	_ci_root = _ci_world
 	_shader_on = false
+	if _blend_mode != bm_normal:
+		_new_segment(_current_material())
 
 
 func _begin_gui_draw() -> void:
 	super._begin_gui_draw()
 	_ci_root = _ci_gui
 	_shader_on = false
+	if _blend_mode != bm_normal:
+		_new_segment(_current_material())
 
 
 func _exit_tree() -> void:
@@ -379,14 +420,14 @@ func shader_set(sh: float) -> void:
 		shd.code = _BLENDREPLACE_CODE
 		_mat_blendreplace = ShaderMaterial.new()
 		_mat_blendreplace.shader = shd
-	_new_segment(_mat_blendreplace.get_rid())
 	_shader_on = true
+	_new_segment(_current_material())
 
 
 func shader_reset() -> void:
 	if _shader_on:
-		_new_segment(RID())
 		_shader_on = false
+		_new_segment(_current_material())
 
 
 func shader_set_uniform_f(_handle: float, ...values: Array) -> void:

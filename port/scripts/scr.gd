@@ -37,7 +37,7 @@ const SMB2: float = 4.0
 enum e__BG { Visible, Foreground, Index, X, Y, Width, Height, HTiled, VTiled, XScale, YScale, HSpeed, VSpeed, Blend, Alpha }
 enum e__VW { XView, YView, WView, HView, Angle, HBorder, VBorder, HSpeed, VSpeed, Object, Visible, XPort, YPort, WPort, HPort, Camera, SurfaceID }
 
-# ---- 已移植脚本（201 个文件） ----
+# ---- 已移植脚本（206 个文件） ----
 const _m_background_get = preload("res://scripts/__background_get.gd")
 const _m_background_get_element = preload("res://scripts/__background_get_element.gd")
 const _m_background_get_internal = preload("res://scripts/__background_get_internal.gd")
@@ -198,12 +198,17 @@ const _m_scr_snd_bowserjr_shell = preload("res://scripts/scr_snd_bowserjr_shell.
 const _m_scr_snd_break = preload("res://scripts/scr_snd_break.gd")
 const _m_scr_snd_bump = preload("res://scripts/scr_snd_bump.gd")
 const _m_scr_snd_castle = preload("res://scripts/scr_snd_castle.gd")
+const _m_scr_snd_clown_damage = preload("res://scripts/scr_snd_clown_damage.gd")
+const _m_scr_snd_clown_fire_charge = preload("res://scripts/scr_snd_clown_fire_charge.gd")
 const _m_scr_snd_coin = preload("res://scripts/scr_snd_coin.gd")
 const _m_scr_snd_dead = preload("res://scripts/scr_snd_dead.gd")
 const _m_scr_snd_desert = preload("res://scripts/scr_snd_desert.gd")
+const _m_scr_snd_door_close = preload("res://scripts/scr_snd_door_close.gd")
+const _m_scr_snd_door_open = preload("res://scripts/scr_snd_door_open.gd")
 const _m_scr_snd_explode = preload("res://scripts/scr_snd_explode.gd")
 const _m_scr_snd_fireball = preload("res://scripts/scr_snd_fireball.gd")
 const _m_scr_snd_forest = preload("res://scripts/scr_snd_forest.gd")
+const _m_scr_snd_getcheckpoint = preload("res://scripts/scr_snd_getcheckpoint.gd")
 const _m_scr_snd_ghost_house = preload("res://scripts/scr_snd_ghost_house.gd")
 const _m_scr_snd_ground = preload("res://scripts/scr_snd_ground.gd")
 const _m_scr_snd_hurryup = preload("res://scripts/scr_snd_hurryup.gd")
@@ -720,6 +725,12 @@ static func scr_snd_bump(me: GMObject) -> Variant:
 static func scr_snd_castle(me: GMObject) -> Variant:
 	return _m_scr_snd_castle.scr_snd_castle(me)
 
+static func scr_snd_clown_damage(me: GMObject) -> Variant:
+	return _m_scr_snd_clown_damage.scr_snd_clown_damage(me)
+
+static func scr_snd_clown_fire_charge(me: GMObject) -> Variant:
+	return _m_scr_snd_clown_fire_charge.scr_snd_clown_fire_charge(me)
+
 static func scr_snd_coin(me: GMObject) -> Variant:
 	return _m_scr_snd_coin.scr_snd_coin(me)
 
@@ -729,6 +740,12 @@ static func scr_snd_dead(me: GMObject) -> Variant:
 static func scr_snd_desert(me: GMObject) -> Variant:
 	return _m_scr_snd_desert.scr_snd_desert(me)
 
+static func scr_snd_door_close(me: GMObject) -> Variant:
+	return _m_scr_snd_door_close.scr_snd_door_close(me)
+
+static func scr_snd_door_open(me: GMObject) -> Variant:
+	return _m_scr_snd_door_open.scr_snd_door_open(me)
+
 static func scr_snd_explode(me: GMObject) -> Variant:
 	return _m_scr_snd_explode.scr_snd_explode(me)
 
@@ -737,6 +754,9 @@ static func scr_snd_fireball(me: GMObject) -> Variant:
 
 static func scr_snd_forest(me: GMObject) -> Variant:
 	return _m_scr_snd_forest.scr_snd_forest(me)
+
+static func scr_snd_getcheckpoint(me: GMObject) -> Variant:
+	return _m_scr_snd_getcheckpoint.scr_snd_getcheckpoint(me)
 
 static func scr_snd_ghost_house(me: GMObject) -> Variant:
 	return _m_scr_snd_ghost_house.scr_snd_ghost_house(me)

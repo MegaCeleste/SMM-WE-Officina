@@ -17,6 +17,7 @@ var prevvspeed: float = 0.0
 var harmplayer: float = 0.0
 var inmune: float = 0.0
 var imheld = null
+var ready_v: float = 0.0  # PORT（第 7 批）：obj_helmet 写入（原名 ready）
 
 
 # from objects/obj_snow_ball_held/Create_0.gml

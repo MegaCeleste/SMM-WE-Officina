@@ -139,10 +139,16 @@ func _ready() -> void:
 			ok(mu != null, "蘑菇出芽完成，变成 obj_mushroom")
 			if mu != null:
 				var pw0: float = G.powerup
+				# 第 7 批：obj_tuberia 移植后样本里那根水管是实心的，蘑菇贴着水管走，把 Mario 瞬移到蘑菇上
+				# 会卡进水管被压死。改成 Mario 回到起点站好，把蘑菇挪到 Mario 身上（与原版行为无关，是测试场景的问题）
+				m.x = x0
+				m.y = y0
+				m.hspeed = 0.0
+				m.vspeed = 0.0
 				for i: int in 200:
-					if is_instance_valid(mu) and not mu._destroyed:
-						m.x = mu.x
-						m.y = mu.y - 8.0
+					if is_instance_valid(mu) and not mu._destroyed and is_instance_valid(m) and not m._destroyed:
+						mu.x = m.x
+						mu.y = m.y + 8.0  # 原来的写法是 m.y = mu.y - 8
 					GM.tick()
 				print("after mushroom: powerup %s -> %s, mushroom left=%d, mario valid=%s" % [pw0, G.powerup, _count(A.obj_mushroom), is_instance_valid(m) and not m._destroyed])
 				ok(G.powerup != pw0, "吃蘑菇后 powerup 变了（%s → %s）" % [pw0, G.powerup])
@@ -157,8 +163,12 @@ func _ready() -> void:
 			var vmax: float = 0.0
 			var stop_at: int = -1
 			var bx0: float = 0.0
+			# 第 7 批：无壳乌龟停下后可能走回去钻进壳里（SMW 原版行为），所以看“出现过壳”，不看结束时还在不在
+			var shell_seen: bool = false
 			for i: int in 240:
 				GM.tick()
+				if _count(A.obj_shell) >= 1:
+					shell_seen = true
 				if bk == null:
 					for q: GMObject in GM.instances:
 						if q.object_index == A.obj_beachkoopa and not q._destroyed:
@@ -175,7 +185,7 @@ func _ready() -> void:
 			if bk != null and is_instance_valid(bk):
 				print("beachkoopa: vmax=%s stop_at=%d slid=%s ready=%s shells=%d" % [vmax, stop_at, bk.x - bx0, bk.get("ready_v"), _count(A.obj_shell)])
 			ok(stop_at >= 0 and stop_at < 120, "无壳乌龟滑出后减速到停（最大速度 %s，第 %d 步停）" % [vmax, stop_at])
-			ok(_count(A.obj_shell) >= 1, "踩乌龟后留下一个壳")
+			ok(shell_seen, "踩乌龟后留下一个壳")
 		# ---- 死亡与重开：小个子 Mario 从侧面撞上乌龟 ----
 		var k: GMObject = GM.instance_find(A.obj_koopa, 0)
 		ok(k != null, "视野里有活动的 koopa")

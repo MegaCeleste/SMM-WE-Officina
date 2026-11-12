@@ -1,4 +1,4 @@
-extends "res://gm/gm_input.gd"
+extends "res://gm/gm_particles.gd"
 ## autoload `GM`：实例表、固定 60 tick 的事件循环、room 切换、休眠。
 ##
 ## 每个 tick 的阶段顺序照 GameMaker HTML5 runner 的 GameMaker_DoAStep（docs/port-plan.md §4）：
@@ -426,6 +426,9 @@ func _flip_commit(flag: bool) -> void:
 
 
 func instance_deactivate_object(obj: Variant) -> void:
+	# 已释放的实例（销毁后节点已 free）：GMS 里对已销毁的 id 什么都不做（第 7 批）
+	if typeof(obj) == TYPE_OBJECT and not is_instance_valid(obj):
+		return
 	col.flush()
 	if obj is GMObject:
 		_set_active(obj, false)
@@ -445,6 +448,9 @@ func instance_deactivate_object(obj: Variant) -> void:
 
 
 func instance_activate_object(obj: Variant) -> void:
+	# 已释放的实例（销毁后节点已 free）：GMS 里对已销毁的 id 什么都不做（第 7 批）
+	if typeof(obj) == TYPE_OBJECT and not is_instance_valid(obj):
+		return
 	if obj is GMObject:
 		_set_active(obj, true)
 		return
@@ -651,6 +657,8 @@ func _step_once() -> void:
 	if _pending_room >= 0:
 		_sweep()
 		return
+	# 粒子系统自动更新（第 7 批，UNVERIFIED U20）
+	_part_update_all()
 	_sweep()
 	_phase_draw()
 
@@ -1092,13 +1100,17 @@ func _update_view_follow() -> void:
 func _phase_draw() -> void:
 	_update_view_follow()
 	_update_layers()
-	if _depths_dirty or _layers_dirty:
+	if _depths_dirty or _layers_dirty or _part_dirty:
 		_depths_dirty = false
 		_layers_dirty = false
+		_part_dirty = false
 		_depths.assign(_buckets.keys())
 		for ld: float in _layer_depths():
-			if not _buckets.has(ld):
+			if not _depths.has(ld):
 				_depths.append(ld)
+		for pd: float in _part_depths():
+			if not _depths.has(pd):
+				_depths.append(pd)
 		_depths.sort()
 		_depths.reverse()
 	_begin_world_draw()
@@ -1112,6 +1124,7 @@ func _phase_draw() -> void:
 		for l: GMLayer in _layers_at(d):
 			_draw_layer(l)
 		if not _buckets.has(d):
+			_draw_parts_at(d)
 			continue
 		for inst: GMObject in _buckets[d]:
 			if not inst._active or inst._destroyed or not inst.visible:
@@ -1133,6 +1146,7 @@ func _phase_draw() -> void:
 						draw_sprite_ext(si, inst.image_index, ix, iy, inst.image_xscale, inst.image_yscale, inst.image_angle, inst.image_blend, inst.image_alpha)
 			if cls.has_draw_gui:
 				any_gui = true
+		_draw_parts_at(d)
 	_reset_xf()
 	if any_gui:
 		_begin_gui_draw()
@@ -1236,6 +1250,7 @@ func _reset_for_test() -> void:
 	col.clear()
 	_buckets.clear()
 	_depths.clear()
+	_part_reset()
 	_movers.clear()
 	_inactive_nogrid.clear()
 	_lists_dirty = true

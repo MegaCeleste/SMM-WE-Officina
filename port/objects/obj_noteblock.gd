@@ -180,7 +180,7 @@ func _user_0() -> void:
 		if sprout == -28.0:
 			GM.audio_play_sound(Scr.scr_snd_sprout(self), 0.0, false)
 			for inst in GM.with_list(GM.instance_create(x, ystart, A.obj_beanstalk)):
-				inst.ready_v = 0.0  # PORT: GML 的 ready 在移植里统一改名 ready_v；obj_beanstalk 未移植（空壳）
+				inst.ready_v = 0.0  # PORT: GML 的 ready 在移植里统一改名 ready_v（obj_beanstalk 第 7 批已移植，同名声明）
 				inst.alarm[2] = 60.0
 			sprout = -1.0
 		else:

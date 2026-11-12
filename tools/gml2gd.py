@@ -962,7 +962,7 @@ class Proj:
         self.gm_funcs: dict[str, Sig] = {}
         self.gm_vars: dict[str, str] = {}
         self.gm_consts: dict[str, str] = {}
-        for f in ("gm_base.gd", "gm_draw.gd", "gm_layer.gd", "gm_system.gd", "gm_audio.gd", "gm_input.gd", "gm.gd"):
+        for f in ("gm_base.gd", "gm_draw.gd", "gm_layer.gd", "gm_system.gd", "gm_audio.gd", "gm_input.gd", "gm_particles.gd", "gm.gd"):
             fu, va, co = scan_gd(GMDIR / f)
             self.gm_funcs.update({k: v for k, v in fu.items() if not k.startswith("_")})
             self.gm_vars.update({k: v for k, v in va.items() if not k.startswith("_")})

@@ -59,6 +59,16 @@ var gravity: float = 0.0:
 		if not _mv:
 			_join_movers()
 var gravity_direction: float = 270.0
+## 路径（第 5 批）。path_start/path_end 和每步沿路径移动见 GM._path_step；行为照 HTML5 runner 的 Adapt_Path，UNVERIFIED
+var path_index: int = -1
+var path_position: float = 0.0
+var path_positionprevious: float = 0.0
+var path_speed: float = 0.0
+var path_scale: float = 1.0
+var path_orientation: float = 0.0
+var path_endaction: int = 0
+var _path_xs: float = 0.0  ## runner 的 path_xstart：路径坐标原点在房间里的位置
+var _path_ys: float = 0.0
 var image_index: float = 0.0
 var image_speed: float = 1.0
 var image_alpha: float = 1.0
@@ -388,6 +398,15 @@ func move_snap(hsnap: float, vsnap: float) -> void:
 	# UNVERIFIED(U8)：正好落在半格时 runner 用哪种舍入未确认，这里用 GML 的 round
 	x = GM.gm_round(x / hsnap) * hsnap
 	y = GM.gm_round(y / vsnap) * vsnap
+
+
+## absolute=false：路径的起点（speed<0 时是终点）放在实例当前位置
+func path_start(path: int, spd: float, endaction: int, absolute: bool) -> void:
+	GM.path_start_inst(self, path, spd, endaction, absolute)
+
+
+func path_end() -> void:
+	path_index = -1
 
 
 func instance_destroy() -> void:

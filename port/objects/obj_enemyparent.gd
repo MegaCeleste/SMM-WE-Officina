@@ -1,6 +1,7 @@
 extends "res://objects/obj_physicsparent.gd"
 
 var hardness = null
+var hitpoints = null  # Boss 在 Create 里赋值；obj_invincibility/Collision_obj_enemyparent.gml:6 给全部敌人写（第 5 批补）
 var stomp = null
 var innave = null
 var dead_h = null
@@ -294,7 +295,7 @@ func _collision_obj_mario(other: GMObject) -> void:
 							si = 0.0
 					A.obj_shell_held:
 						var _oi3 = GM.instance_find(object_index, 0)  # UNSURE: 同上（object_index.mytopid）
-						if _oi3.mytopid == A.obj_lighting:
+						if GM.veq(_oi3.mytopid, A.obj_lighting):
 							si = 1.0
 						else:
 							si = 0.0
@@ -340,7 +341,7 @@ func _collision_obj_mario(other: GMObject) -> void:
 				_user_1()
 		elif bbox_bottom < ((other.bbox_top - other.vspeed) + 3.0) and vspeed > 0.0 and obj_mario_inst.helmet == 1.0:
 			return
-		elif object_index == A.obj_shell_held and mytopid != A.obj_lighting and mytopid != A.obj_rainmaker and other.y < (y - 29.0) and other.y > (y - 32.0):
+		elif object_index == A.obj_shell_held and not GM.veq(mytopid, A.obj_lighting) and not GM.veq(mytopid, A.obj_rainmaker) and other.y < (y - 29.0) and other.y > (y - 32.0):
 			return
 		else:
 			GM.other = self

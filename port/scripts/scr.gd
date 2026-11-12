@@ -37,7 +37,7 @@ const SMB2: float = 4.0
 enum e__BG { Visible, Foreground, Index, X, Y, Width, Height, HTiled, VTiled, XScale, YScale, HSpeed, VSpeed, Blend, Alpha }
 enum e__VW { XView, YView, WView, HView, Angle, HBorder, VBorder, HSpeed, VSpeed, Object, Visible, XPort, YPort, WPort, HPort, Camera, SurfaceID }
 
-# ---- 已移植脚本（192 个文件） ----
+# ---- 已移植脚本（198 个文件） ----
 const _m_background_get = preload("res://scripts/__background_get.gd")
 const _m_background_get_element = preload("res://scripts/__background_get_element.gd")
 const _m_background_get_internal = preload("res://scripts/__background_get_internal.gd")
@@ -47,12 +47,14 @@ const _m_background_set_internal = preload("res://scripts/__background_set_inter
 const _m_view_get = preload("res://scripts/__view_get.gd")
 const _m_background_create_from_surface = preload("res://scripts/background_create_from_surface.gd")
 const _m_draw_sprite_custom_origin = preload("res://scripts/draw_sprite_custom_origin.gd")
+const _m_init_shake = preload("res://scripts/init_shake.gd")
 const _m_init_shockwave = preload("res://scripts/init_shockwave.gd")
 const _m_LoadJSONFromFile = preload("res://scripts/LoadJSONFromFile.gd")
 const _m_outside_view = preload("res://scripts/outside_view.gd")
 const _m_scr_arcon_fly = preload("res://scripts/scr_arcon_fly.gd")
 const _m_scr_arcon_fly_start = preload("res://scripts/scr_arcon_fly_start.gd")
 const _m_scr_auto_tile = preload("res://scripts/scr_auto_tile.gd")
+const _m_scr_auto_tile_slope = preload("res://scripts/scr_auto_tile_slope.gd")
 const _m_scr_bg_airship = preload("res://scripts/scr_bg_airship.gd")
 const _m_scr_bg_beach = preload("res://scripts/scr_bg_beach.gd")
 const _m_scr_bg_castle = preload("res://scripts/scr_bg_castle.gd")
@@ -198,6 +200,8 @@ const _m_scr_snd_castle = preload("res://scripts/scr_snd_castle.gd")
 const _m_scr_snd_coin = preload("res://scripts/scr_snd_coin.gd")
 const _m_scr_snd_dead = preload("res://scripts/scr_snd_dead.gd")
 const _m_scr_snd_desert = preload("res://scripts/scr_snd_desert.gd")
+const _m_scr_snd_explode = preload("res://scripts/scr_snd_explode.gd")
+const _m_scr_snd_fireball = preload("res://scripts/scr_snd_fireball.gd")
 const _m_scr_snd_forest = preload("res://scripts/scr_snd_forest.gd")
 const _m_scr_snd_ghost_house = preload("res://scripts/scr_snd_ghost_house.gd")
 const _m_scr_snd_ground = preload("res://scripts/scr_snd_ground.gd")
@@ -208,11 +212,13 @@ const _m_scr_snd_oneway = preload("res://scripts/scr_snd_oneway.gd")
 const _m_scr_snd_pipes = preload("res://scripts/scr_snd_pipes.gd")
 const _m_scr_snd_powerdown = preload("res://scripts/scr_snd_powerdown.gd")
 const _m_scr_snd_powerup = preload("res://scripts/scr_snd_powerup.gd")
+const _m_scr_snd_pwarning = preload("res://scripts/scr_snd_pwarning.gd")
 const _m_scr_snd_skid = preload("res://scripts/scr_snd_skid.gd")
 const _m_scr_snd_sky = preload("res://scripts/scr_snd_sky.gd")
 const _m_scr_snd_snow = preload("res://scripts/scr_snd_snow.gd")
 const _m_scr_snd_soplete = preload("res://scripts/scr_snd_soplete.gd")
 const _m_scr_snd_spinjump = preload("res://scripts/scr_snd_spinjump.gd")
+const _m_scr_snd_spring = preload("res://scripts/scr_snd_spring.gd")
 const _m_scr_snd_sprout = preload("res://scripts/scr_snd_sprout.gd")
 const _m_scr_snd_starman = preload("res://scripts/scr_snd_starman.gd")
 const _m_scr_snd_stomp = preload("res://scripts/scr_snd_stomp.gd")
@@ -258,6 +264,9 @@ static func background_create_from_surface(me: GMObject, argument0 = null, argum
 static func draw_sprite_custom_origin(me: GMObject, argument0 = null, argument1 = null, argument2 = null, argument3 = null, argument4 = null, argument5 = null, argument6 = null, argument7 = null, argument8 = null, argument9 = null, argument10 = null) -> void:
 	_m_draw_sprite_custom_origin.draw_sprite_custom_origin(me, argument0, argument1, argument2, argument3, argument4, argument5, argument6, argument7, argument8, argument9, argument10)
 
+static func init_shake(me: GMObject, argument0 = null) -> void:
+	_m_init_shake.init_shake(me, argument0)
+
 static func init_shockwave(me: GMObject) -> void:
 	_m_init_shockwave.init_shockwave(me)
 
@@ -275,6 +284,9 @@ static func scr_arcon_fly_start(me: GMObject):
 
 static func scr_auto_tile(me: GMObject) -> Variant:
 	return _m_scr_auto_tile.scr_auto_tile(me)
+
+static func scr_auto_tile_slope(me: GMObject) -> void:
+	_m_scr_auto_tile_slope.scr_auto_tile_slope(me)
 
 static func scr_bg_airship(me: GMObject) -> Variant:
 	return _m_scr_bg_airship.scr_bg_airship(me)
@@ -711,6 +723,12 @@ static func scr_snd_dead(me: GMObject) -> Variant:
 static func scr_snd_desert(me: GMObject) -> Variant:
 	return _m_scr_snd_desert.scr_snd_desert(me)
 
+static func scr_snd_explode(me: GMObject) -> Variant:
+	return _m_scr_snd_explode.scr_snd_explode(me)
+
+static func scr_snd_fireball(me: GMObject) -> Variant:
+	return _m_scr_snd_fireball.scr_snd_fireball(me)
+
 static func scr_snd_forest(me: GMObject) -> Variant:
 	return _m_scr_snd_forest.scr_snd_forest(me)
 
@@ -741,6 +759,9 @@ static func scr_snd_powerdown(me: GMObject) -> Variant:
 static func scr_snd_powerup(me: GMObject) -> Variant:
 	return _m_scr_snd_powerup.scr_snd_powerup(me)
 
+static func scr_snd_pwarning(me: GMObject) -> Variant:
+	return _m_scr_snd_pwarning.scr_snd_pwarning(me)
+
 static func scr_snd_skid(me: GMObject) -> Variant:
 	return _m_scr_snd_skid.scr_snd_skid(me)
 
@@ -755,6 +776,9 @@ static func scr_snd_soplete(me: GMObject) -> Variant:
 
 static func scr_snd_spinjump(me: GMObject) -> Variant:
 	return _m_scr_snd_spinjump.scr_snd_spinjump(me)
+
+static func scr_snd_spring(me: GMObject) -> Variant:
+	return _m_scr_snd_spring.scr_snd_spring(me)
 
 static func scr_snd_sprout(me: GMObject) -> Variant:
 	return _m_scr_snd_sprout.scr_snd_sprout(me)

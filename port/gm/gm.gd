@@ -798,6 +798,177 @@ func _phase_positions() -> void:
 		if inst.hspeed != 0.0 or inst.vspeed != 0.0:
 			inst.x += inst.hspeed
 			inst.y += inst.vspeed
+		if inst.path_index >= 0:
+			if _path_step(inst) and inst._cls.has_path_end and not inst._destroyed:
+				inst.call(&"_path_end")
+
+
+# ---- 路径（第 5 批）----
+# 数据：tables/paths.json（tools/gen_paths.py）。行为照 HTML5 runner（yyPath.js、yyInstance.js 的 Adapt_Path），
+# UNVERIFIED：没有在 Windows runner 上实测。平滑路径（kind 1）还没实现，按折线走并警告一次。
+const path_action_stop: int = 0
+const path_action_restart: int = 1
+const path_action_continue: int = 2
+const path_action_reverse: int = 3
+
+var _paths: Array = []  ## 每个 path：{closed, kind, pts: PackedVector3Array (x, y, speed), cum: PackedFloat64Array, len}
+var _paths_warned: Dictionary = {}
+
+
+func _paths_load() -> void:
+	var f: FileAccess = FileAccess.open("res://tables/paths.json", FileAccess.READ)
+	if f == null:
+		push_error("GM: 读不到 res://tables/paths.json，先运行 tools/gen_paths.py")
+		return
+	var data: Dictionary = (JSON.parse_string(f.get_as_text()) as Dictionary)["paths"]
+	f.close()
+	_paths.resize(data.size())
+	for k: String in data:
+		var d: Dictionary = data[k]
+		var pts: PackedVector3Array = PackedVector3Array()
+		for p: Array in d["points"]:
+			pts.append(Vector3(float(p[0]), float(p[1]), float(p[2])))
+		if bool(d["closed"]) and pts.size() > 0:
+			pts.append(pts[0])
+		var cum: PackedFloat64Array = PackedFloat64Array()
+		var total: float = 0.0
+		for i: int in pts.size():
+			if i > 0:
+				total += Vector2(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y).length()
+			cum.append(total)
+		_paths[int(d["index"])] = {"name": k, "kind": int(d["kind"]), "pts": pts, "cum": cum, "len": total}
+
+
+func _path_get(path: int) -> Variant:
+	if _paths.is_empty():
+		_paths_load()
+	if path < 0 or path >= _paths.size():
+		return null
+	var p: Dictionary = _paths[path]
+	if int(p["kind"]) != 0 and not _paths_warned.has(path):
+		_paths_warned[path] = true
+		push_warning("GM: 平滑路径 %s 还没实现，按折线处理" % p["name"])
+	return p
+
+
+## 路径上 t（0–1）处的 (x, y, speed)，按长度线性插值
+func _path_pos(p: Dictionary, t: float) -> Vector3:
+	var pts: PackedVector3Array = p["pts"]
+	var cum: PackedFloat64Array = p["cum"]
+	var n: int = pts.size()
+	if n == 0:
+		return Vector3(0.0, 0.0, 100.0)
+	if n == 1 or float(p["len"]) <= 0.0:
+		return pts[0]
+	var d: float = clampf(t, 0.0, 1.0) * float(p["len"])
+	var i: int = 1
+	while i < n - 1 and cum[i] < d:
+		i += 1
+	var seg: float = cum[i] - cum[i - 1]
+	var f: float = 0.0 if seg <= 0.0 else (d - cum[i - 1]) / seg
+	return pts[i - 1].lerp(pts[i], f)
+
+
+func path_get_length(path: int) -> float:
+	var p: Variant = _path_get(path)
+	return 0.0 if p == null else float((p as Dictionary)["len"])
+
+
+func path_get_x(path: int, t: float) -> float:
+	var p: Variant = _path_get(path)
+	return 0.0 if p == null else _path_pos(p, t).x
+
+
+func path_get_y(path: int, t: float) -> float:
+	var p: Variant = _path_get(path)
+	return 0.0 if p == null else _path_pos(p, t).y
+
+
+func path_exists(path: int) -> bool:
+	return _path_get(path) != null
+
+
+func path_start_inst(inst: GMObject, path: int, spd: float, endaction: int, absolute: bool) -> void:
+	var p: Variant = _path_get(path)
+	if p == null:
+		inst.path_index = -1
+		return
+	inst.path_index = path
+	inst.path_speed = spd
+	inst.path_endaction = endaction
+	inst.path_scale = 1.0
+	inst.path_orientation = 0.0
+	# UNVERIFIED：速度为负时从终点出发（手册：“负速度表示从终点走向起点”）
+	inst.path_position = 1.0 if spd < 0.0 else 0.0
+	inst.path_positionprevious = inst.path_position
+	if absolute:
+		inst._path_xs = 0.0
+		inst._path_ys = 0.0
+		var a: Vector3 = _path_pos(p, inst.path_position)
+		inst.x = a.x
+		inst.y = a.y
+	else:
+		var r: Vector3 = _path_pos(p, inst.path_position)
+		inst._path_xs = inst.x - r.x
+		inst._path_ys = inst.y - r.y
+	if not inst._mv:
+		inst._join_movers()
+
+
+## 沿路径走一步；走到端点时返回 true（触发 Path End）
+func _path_step(inst: GMObject) -> bool:
+	var p: Variant = _path_get(inst.path_index)
+	if p == null:
+		inst.path_index = -1
+		return false
+	var pd: Dictionary = p
+	var plen: float = float(pd["len"]) * inst.path_scale
+	if plen <= 0.0:
+		return false
+	var orient: float = inst.path_orientation * PI / 180.0
+	var cur: Vector3 = _path_pos(pd, inst.path_position)
+	var sp: float = inst.path_speed * cur.z / 100.0
+	inst.path_positionprevious = inst.path_position
+	inst.path_position += sp / plen
+	var ended: bool = false
+	if inst.path_position >= 1.0 or inst.path_position <= 0.0:
+		ended = true
+		match inst.path_endaction:
+			path_action_stop:
+				inst.path_position = clampf(inst.path_position, 0.0, 1.0)
+				inst.path_index = -1
+			path_action_restart:
+				if inst.path_position >= 1.0:
+					inst.path_position -= 1.0
+				else:
+					inst.path_position += 1.0
+			path_action_continue:
+				var p0: Vector3 = _path_pos(pd, 0.0)
+				var p1: Vector3 = _path_pos(pd, 1.0)
+				var xd: float = (p1.x - p0.x) * inst.path_scale
+				var yd: float = (p1.y - p0.y) * inst.path_scale
+				var xx: float = xd * cos(orient) + yd * sin(orient)
+				var yy: float = yd * cos(orient) - xd * sin(orient)
+				if inst.path_position >= 1.0:
+					inst._path_xs += xx
+					inst._path_ys += yy
+					inst.path_position -= 1.0
+				else:
+					inst._path_xs -= xx
+					inst._path_ys -= yy
+					inst.path_position += 1.0
+			path_action_reverse:
+				if inst.path_position >= 1.0:
+					inst.path_position = 2.0 - inst.path_position
+				else:
+					inst.path_position = -inst.path_position
+				inst.path_speed = -inst.path_speed
+	var np: Vector3 = _path_pos(pd, inst.path_position)
+	var px: float = np.x * inst.path_scale
+	var py: float = np.y * inst.path_scale
+	inst.x = inst._path_xs + px * cos(orient) + py * sin(orient)
+	inst.y = inst._path_ys + py * cos(orient) - px * sin(orient)
+	return ended
 
 
 ## Outside Room（Other_0）、Outside View 0（Other_40）

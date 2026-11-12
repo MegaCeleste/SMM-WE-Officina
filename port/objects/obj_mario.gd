@@ -1,6 +1,7 @@
 extends GMObject
 
 var pmeter = null
+var jumping = null  # 原版 obj_mario 自己不用，obj_spring/Collision_obj_mario.gml:227 给它赋值（第 5 批补）
 var canjump: float = 0.0
 var invincible: float = 0.0
 var disablecontrols: float = 0.0

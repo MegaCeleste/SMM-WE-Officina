@@ -48,7 +48,7 @@ func _create() -> void:
 
 # from objects/obj_shell_held/Destroy_0.gml
 func _destroy() -> void:
-	if mytopid != A.obj_lighting and mytopid != A.obj_rainmaker and GM.instance_exists(mytopid):
+	if not GM.veq(mytopid, A.obj_lighting) and not GM.veq(mytopid, A.obj_rainmaker) and GM.instance_exists(mytopid):
 		for inst in GM.with_list(mytopid):
 			inst.instance_destroy()
 	if GM.instance_exists(A.obj_shell_trail):
@@ -128,9 +128,9 @@ func _step() -> void:
 			inst.image_speed = 0.0
 			inst.set("direct", 1.0)
 		instance_destroy()
-	if mytopid == A.obj_lighting:
+	if GM.veq(mytopid, A.obj_lighting):
 		return
-	if mytopid != A.obj_lighting and mytopid != A.obj_rainmaker and GM.instance_exists(mytopid) and GM.instance_exists(A.obj_mario):
+	if not GM.veq(mytopid, A.obj_lighting) and not GM.veq(mytopid, A.obj_rainmaker) and GM.instance_exists(mytopid) and GM.instance_exists(A.obj_mario):
 		mytopid.x = x
 		mytopid.y = y
 		check = collision_rectangle(i_mario.bbox_left, (i_mario.bbox_bottom - 1.0), i_mario.bbox_right, (i_mario.bbox_bottom + 1.0), A.obj_solidtop, false, false)
@@ -184,7 +184,7 @@ func _alarm_2() -> void:
 
 # from objects/obj_shell_held/Alarm_10.gml
 func _alarm_10() -> void:
-	if mytopid == A.obj_rainmaker and sprite_index != A.spr_SMB_shell_empty_spiny and sprite_index != A.spr_shell_spiny_empty and sprite_index != A.spr_SMB3_shell_spiny_empty:
+	if GM.veq(mytopid, A.obj_rainmaker) and sprite_index != A.spr_SMB_shell_empty_spiny and sprite_index != A.spr_shell_spiny_empty and sprite_index != A.spr_SMB3_shell_spiny_empty:
 		mytopid = GM.instance_create(x, y, A.obj_solidtop)
 
 
@@ -390,7 +390,7 @@ func _user_1() -> void:
 			for inst in GM.with_list(A.obj_mario):
 				inst.event_user(0)
 			GM.other = _o2
-	elif mytopid == A.obj_lighting:
+	elif GM.veq(mytopid, A.obj_lighting):
 		if sprite_index == A.spr_NSMBU_shell_buzzy_empty or sprite_index == A.spr_shell_buzzy_empty or sprite_index == A.spr_SMB3_shell_empty or sprite_index == A.spr_SMB3_shell_empty_night or sprite_index == A.spr_SMB_shell_empty or sprite_index == A.spr_SMB_shell_empty_night:
 			for inst in GM.with_list(GM.instance_create(x, y, A.obj_shell_empty)):
 				inst.set("inwall", 1.0)

@@ -1,6 +1,9 @@
 extends "res://objects/obj_physicsparent.gd"
 
 var held = null
+var triple_jump = null  # Step 里 with (other.id) 按 U14 写到自身（holdparent/pswitch/block_pow_hold 的 Step_0），第 5 批补声明
+var triple_count = null
+var stomp = null  # obj_enemyfrozen/Other_10.gml:48 给被冻的对象写 stomp，壳类链上原先没有（第 5 批补）
 var inup: float = 0.0
 var big: float = 0.0
 var modo_lava: float = 0.0

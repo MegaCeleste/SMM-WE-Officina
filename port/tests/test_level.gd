@@ -81,6 +81,9 @@ func _ready() -> void:
 		ok(absf(m.y - y0) < 1.0, "走路时没有掉下去或浮起来（y %s → %s）" % [y0, m.y])
 		for i: int in 60:
 			GM.tick()
+		# 第 5 批：样本里的耀西蛋移植后会自己孵化，不再挡住栗子，栗子会一路走到 x≈150。
+		# 跳跃放回起点做，免得 Mario 在栗子旁边落地被碰死（与原版行为无关，是测试场景的问题）
+		m.x = x0
 		GM.keyboard_key_press(int(G.saltar))
 		var ymin: float = m.y
 		for i: int in 20:
@@ -107,7 +110,7 @@ func _ready() -> void:
 				if m.vspeed < -1.0:
 					bounced = true
 			print("after stomp: galoomba=%d galoomba_hold=%d mario pos=(%s,%s) v=(%s,%s) destroyed=%s" % [_count(A.obj_galoomba), _count(A.obj_galoomba_hold), m.x, m.y, m.hspeed, m.vspeed, m._destroyed])
-			ok(_count(A.obj_galoomba) == ng - 1, "踩到的 galoomba 没了（%d → %d）" % [ng, _count(A.obj_galoomba)])
+			ok(_count(A.obj_galoomba) < ng, "踩到的 galoomba 没了（%d → %d；栗子挤在一起时会连踩两个）" % [ng, _count(A.obj_galoomba)])
 			ok(bounced, "踩怪后 Mario 弹起")
 			ok(not m._destroyed, "踩怪后 Mario 还活着")
 		# ---- 顶问号块（样本里 sprout=1：蘑菇）----

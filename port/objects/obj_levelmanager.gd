@@ -381,7 +381,7 @@ func _step_end() -> void:
 		if editor == 0.0:
 			if G.bonus_music > 0.0:
 				if G.bonus_music == 2.0:
-					if G.bonus_obj != A.obj_lighting and (not GM.instance_exists(G.bonus_obj)) and G.ef_repeat == 0.0 and (not GM.instance_exists(A.obj_player_goal_parent)) and (not GM.instance_exists(A.obj_deadmario)):
+					if not GM.veq(G.bonus_obj, A.obj_lighting) and (not GM.instance_exists(G.bonus_obj)) and G.ef_repeat == 0.0 and (not GM.instance_exists(A.obj_player_goal_parent)) and (not GM.instance_exists(A.obj_deadmario)):
 						GM.audio_stop_sound(levelmusic)
 						match G.powerup:
 							-50.0:
@@ -418,7 +418,7 @@ func _step_end() -> void:
 					G.ef_repeat = 0.0
 			if G.boss_music > 0.0:
 				if G.boss_music == 2.0:
-					if G.bowser_obj != A.obj_lighting and (not GM.instance_exists(G.bowser_obj)) and G.ef_repeat == 0.0 and (not GM.instance_exists(A.obj_player_goal_parent)) and (not GM.instance_exists(A.obj_deadmario)):
+					if not GM.veq(G.bowser_obj, A.obj_lighting) and (not GM.instance_exists(G.bowser_obj)) and G.ef_repeat == 0.0 and (not GM.instance_exists(A.obj_player_goal_parent)) and (not GM.instance_exists(A.obj_deadmario)):
 						GM.audio_stop_sound(levelmusic)
 						match G.powerup:
 							-50.0:

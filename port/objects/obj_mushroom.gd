@@ -4,7 +4,7 @@ var t_mario: String = ""
 var jump: float = 0.0
 var jump2: float = 0.0
 var position: float = 0.0
-var path_position: float = 0.0  # GML 内置的路径变量，GMObject 没有；这里只当普通变量用（原版只在 Create 里赋 0）
+
 var delay: float = 0.0
 
 

@@ -37,7 +37,7 @@ const SMB2: float = 4.0
 enum e__BG { Visible, Foreground, Index, X, Y, Width, Height, HTiled, VTiled, XScale, YScale, HSpeed, VSpeed, Blend, Alpha }
 enum e__VW { XView, YView, WView, HView, Angle, HBorder, VBorder, HSpeed, VSpeed, Object, Visible, XPort, YPort, WPort, HPort, Camera, SurfaceID }
 
-# ---- 已移植脚本（198 个文件） ----
+# ---- 已移植脚本（201 个文件） ----
 const _m_background_get = preload("res://scripts/__background_get.gd")
 const _m_background_get_element = preload("res://scripts/__background_get_element.gd")
 const _m_background_get_internal = preload("res://scripts/__background_get_internal.gd")
@@ -47,6 +47,7 @@ const _m_background_set_internal = preload("res://scripts/__background_set_inter
 const _m_view_get = preload("res://scripts/__view_get.gd")
 const _m_background_create_from_surface = preload("res://scripts/background_create_from_surface.gd")
 const _m_draw_sprite_custom_origin = preload("res://scripts/draw_sprite_custom_origin.gd")
+const _m_draw_sprite_tiled_area_ext = preload("res://scripts/draw_sprite_tiled_area_ext.gd")
 const _m_init_shake = preload("res://scripts/init_shake.gd")
 const _m_init_shockwave = preload("res://scripts/init_shockwave.gd")
 const _m_LoadJSONFromFile = preload("res://scripts/LoadJSONFromFile.gd")
@@ -229,6 +230,7 @@ const _m_scr_snd_underground = preload("res://scripts/scr_snd_underground.gd")
 const _m_scr_snd_underwater = preload("res://scripts/scr_snd_underwater.gd")
 const _m_scr_sprite_get_constant = preload("res://scripts/scr_sprite_get_constant.gd")
 const _m_scr_sprite_get_constant_res = preload("res://scripts/scr_sprite_get_constant_res.gd")
+const _m_scr_sprite_make_object = preload("res://scripts/scr_sprite_make_object.gd")
 const _m_scr_sprite_make_object_rieles = preload("res://scripts/scr_sprite_make_object_rieles.gd")
 const _m_scr_step_sounds = preload("res://scripts/scr_step_sounds.gd")
 const _m_scr_swim = preload("res://scripts/scr_swim.gd")
@@ -236,6 +238,7 @@ const _m_scr_tiles_ground = preload("res://scripts/scr_tiles_ground.gd")
 const _m_scr_tiles_ground_start = preload("res://scripts/scr_tiles_ground_start.gd")
 const _m_screen_round = preload("res://scripts/screen_round.gd")
 const _m_string_add_zeros = preload("res://scripts/string_add_zeros.gd")
+const _m_tile_layer_find = preload("res://scripts/tile_layer_find.gd")
 
 static func __background_get(me: GMObject, argument0 = null, argument1 = null) -> Variant:
 	return _m_background_get.__background_get(me, argument0, argument1)
@@ -263,6 +266,9 @@ static func background_create_from_surface(me: GMObject, argument0 = null, argum
 
 static func draw_sprite_custom_origin(me: GMObject, argument0 = null, argument1 = null, argument2 = null, argument3 = null, argument4 = null, argument5 = null, argument6 = null, argument7 = null, argument8 = null, argument9 = null, argument10 = null) -> void:
 	_m_draw_sprite_custom_origin.draw_sprite_custom_origin(me, argument0, argument1, argument2, argument3, argument4, argument5, argument6, argument7, argument8, argument9, argument10)
+
+static func draw_sprite_tiled_area_ext(me: GMObject, argument0 = null, argument1 = null, argument2 = null, argument3 = null, argument4 = null, argument5 = null, argument6 = null, argument7 = null, argument8 = null, argument9 = null) -> Variant:
+	return _m_draw_sprite_tiled_area_ext.draw_sprite_tiled_area_ext(me, argument0, argument1, argument2, argument3, argument4, argument5, argument6, argument7, argument8, argument9)
 
 static func init_shake(me: GMObject, argument0 = null) -> void:
 	_m_init_shake.init_shake(me, argument0)
@@ -810,6 +816,9 @@ static func scr_sprite_get_constant(me: GMObject, argument0 = null) -> Variant:
 static func scr_sprite_get_constant_res(me: GMObject, argument0 = null) -> Variant:
 	return _m_scr_sprite_get_constant_res.scr_sprite_get_constant_res(me, argument0)
 
+static func scr_sprite_make_object(me: GMObject, argument0 = null, argument1 = null, argument2 = null) -> Variant:
+	return _m_scr_sprite_make_object.scr_sprite_make_object(me, argument0, argument1, argument2)
+
 static func scr_sprite_make_object_rieles(me: GMObject, argument0 = null, argument1 = null, argument2 = null) -> Variant:
 	return _m_scr_sprite_make_object_rieles.scr_sprite_make_object_rieles(me, argument0, argument1, argument2)
 
@@ -830,3 +839,6 @@ static func screen_round(me: GMObject, value = null):
 
 static func string_add_zeros(me: GMObject, argument0 = null, argument1 = null) -> Variant:
 	return _m_string_add_zeros.string_add_zeros(me, argument0, argument1)
+
+static func tile_layer_find(me: GMObject, argument0: float, argument1: float, argument2: float) -> Variant:
+	return _m_tile_layer_find.tile_layer_find(me, argument0, argument1, argument2)

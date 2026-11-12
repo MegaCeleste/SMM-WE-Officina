@@ -36,7 +36,6 @@ var deltayspeed = null
 var snelheidsfout = null
 var f = null
 var raedy = null  # ORIG-BUG: Step_2 里 ready 拼成了 raedy，见 _step_end
-var sspd = null  # ORIG-BUG: Collision_obj_egg 里 spd 拼成了 sspd，见 _collision_obj_egg
 var posyy = null
 var i = null  # Draw_0 用的是实例变量 i（Create/Step 里的 i 是局部变量）
 
@@ -524,9 +523,7 @@ func _collision_obj_egg(other: GMObject) -> void:
 		release = 1.0
 		alarm[1] = 30.0
 		if other.hspeed > 3.0:
-			# ORIG-BUG: 原版写成 sspd（实例变量），局部 spd 没赋值就写进 knopen_xspeed，照搬
-			# UNSURE: 原版读未赋值的局部 spd 是报错还是得到 undefined 不确定；移植版 spd 为 null，下一步 Step 里对它做算术会报运行时错误
-			sspd = 3.0
+			spd = 3.0  # PORT（用户定，2026-11-12）：原版拼成 sspd，spd 没赋值，下一步算术会出错；改回 spd，与其他碰撞事件一致
 		elif other.hspeed < -3.0:
 			spd = -3.0
 		else:

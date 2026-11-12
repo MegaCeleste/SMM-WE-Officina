@@ -134,7 +134,8 @@ func _user_5() -> void:
 	if G.apariencia < 2.0 or G.apariencia == 3.0:
 		_user_0()
 	elif G.apariencia == 2.0:
-		imheld = GM.instance_create(x, (y - 2.0), A.obj_galoomba_hold2)
+		# PORT（用户定，2026-11-12）：原版建的是小号 obj_galoomba_hold2，大 Galoomba 被顶翻后变小；改成大号，与 Other_11（踩）一致
+		imheld = GM.instance_create(x, (y - 2.0), A.obj_galoomba_hold2_b)
 		if (collision_rectangle(bbox_left, (bbox_top - 1.0), bbox_right, bbox_top, A.obj_solid, true, false) == null) and (collision_rectangle(bbox_left, (bbox_top - 1.0), bbox_right, bbox_top, A.obj_physicssolid, true, false) == null) and (collision_rectangle(bbox_left, (bbox_top - 1.0), bbox_right, bbox_top, A.obj_solidphy, true, false) == null) and (collision_rectangle(bbox_left, (bbox_top - 1.0), bbox_right, bbox_top, A.obj_bullebill_base, true, false) == null):
 			if swimming == 1.0:
 				imheld.vspeed = -1.8

@@ -75,8 +75,8 @@ func _create() -> void:
 		mybody[b].depth = b
 		mybody[b].parent = self
 		if b == 1:
-			# UNSURE: 原版 mybody[b].prevsegment = other（注释 "Snap to the head"，意图应是自身）。Create 事件里的 other 按 U14 沿用创建者当时的 GM.other，可能不是自身
-			mybody[b].prevsegment = GM.other  # Snap to the head.
+			# PORT（用户定，2026-11-12）：原版写 other（是创建者，不是头），第一节身体因此不随头转向；按注释意图改成头自身
+			mybody[b].prevsegment = self  # Snap to the head.
 		else:
 			mybody[b].prevsegment = mybody[b - 1]  # Snap to other consecutive parts.
 		b += 1

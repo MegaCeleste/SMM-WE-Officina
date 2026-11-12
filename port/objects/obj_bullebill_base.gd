@@ -66,9 +66,9 @@ func _create() -> void:
 
 # from objects/obj_bullebill_base/Destroy_0.gml
 func _destroy() -> void:
-	if not GM.veq(solidtop, A.obj_lighting) and GM.instance_exists(solidtop):
-		for inst in GM.with_list(solidtop):
-			inst.instance_destroy()
+	# PORT（用户定，2026-11-12）：原版 solidtop 在 Alarm_1 之前是 0，instance_exists(0)/with(0) 会落到 0 号 object（obj_big_pplant）上；改成只处理真正建出来的 obj_solidtop 实例
+	if solidtop is GMObject and GM.instance_exists(solidtop):
+		solidtop.instance_destroy()
 
 
 # from objects/obj_bullebill_base/Step_0.gml
@@ -82,11 +82,10 @@ func _step() -> void:
 			anim_shoot = 0.0
 		else:
 			anim_shoot += 0.5
-	if not GM.veq(solidtop, A.obj_lighting) and GM.instance_exists(solidtop):
-		# PORT: solidtop 在 Create 里先赋 0（object 编号），GML 里 `solidtop.x = x` 对数字等于写该 object 的所有实例；用 with_list 保持同样语义
-		for inst in GM.with_list(solidtop):
-			inst.x = x
-			inst.y = y
+	# PORT（用户定，2026-11-12）：原版 solidtop 在 Alarm_1 之前是 0，instance_exists(0)/with(0) 会落到 0 号 object（obj_big_pplant）上；改成只处理真正建出来的 obj_solidtop 实例
+	if solidtop is GMObject and GM.instance_exists(solidtop):
+		solidtop.x = x
+		solidtop.y = y
 	if GM.instance_exists(A.obj_mario) and place_meeting(x, y, A.obj_mario) and (GM.instance_find(A.obj_mario, 0).y + 16.0) >= y:
 		if GM.instance_find(A.obj_mario, 0).x > (x + 8.0):
 			for inst in GM.with_list(A.obj_mario):

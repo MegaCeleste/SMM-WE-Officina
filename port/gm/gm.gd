@@ -1007,7 +1007,21 @@ func _phase_other() -> void:
 
 ## Collision 事件。两个实例重叠（精确判定）时：先触发 a 对 b 的事件，紧接着触发 b 对 a 的事件；
 ## 同一对实例、同一个事件每 tick 只触发一次。
-## UNVERIFIED(U5)：实例同时有“对父类”和“对子类”两个碰撞事件、而对方两者都匹配时，这里两个都触发。
+## UNVERIFIED(U5)：实例同时有“对父类”和“对子类”两个碰撞事件、而对方两者都匹配时，只触发最具体的
+## 那个（对方所属类最近的祖先）。第 7 批定（用户确认）：obj_flagpole 对 obj_mario 和 obj_marioU 各有一个事件，
+## 原版 NSMBU 画风只走 obj_marioU 的。
+## cls 对 target 的碰撞事件是否是它对 other_cls 的实例能用的最具体的事件：cls 没有另一个目标 t2，
+## 满足 other_cls 属于 t2、且 t2 是 target 的子类（U5）
+func _coll_most_specific(cls: GMClass, other_cls: GMClass, target: int) -> bool:
+	if cls.collisions.size() < 2:
+		return true
+	for h: Array in cls.collisions:
+		var t2: int = h[0]
+		if t2 != target and other_cls.is_a[t2] != 0 and classes[t2].is_a[target] != 0:
+			return false
+	return true
+
+
 func _phase_collision() -> void:
 	_refresh_lists()
 	if _l_coll.is_empty():
@@ -1043,6 +1057,8 @@ func _phase_collision() -> void:
 					b._bb_update()
 				if not col.pair_test(a, b):
 					continue
+				if not _coll_most_specific(a._cls, b._cls, target):
+					continue
 				var key: Vector3i = Vector3i(a._uid, b._uid, target)
 				if fired.has(key):
 					continue
@@ -1050,7 +1066,7 @@ func _phase_collision() -> void:
 				other = b
 				a.call(h[1], b)
 				for hb: Array in b._cls.collisions:
-					if a._cls.is_a[hb[0]] != 0:
+					if a._cls.is_a[hb[0]] != 0 and _coll_most_specific(b._cls, a._cls, hb[0]):
 						var key2: Vector3i = Vector3i(b._uid, a._uid, hb[0])
 						if not fired.has(key2):
 							fired[key2] = true

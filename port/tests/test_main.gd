@@ -15,6 +15,7 @@ var o_mario: int
 var o_coll_a: int
 var o_coll_b: int
 var o_coll_b_child: int
+var o_coll_spec: int
 var o_room: int
 var o_mouse: int
 var o_precise: int
@@ -79,6 +80,7 @@ func _setup() -> void:
 	o_coll_a = _reg("t_coll_a", -1, rs.index)
 	o_coll_b = _reg("t_coll_b", -1, rs.index)
 	o_coll_b_child = _reg("t_coll_b_child", o_coll_b, rs.index)
+	o_coll_spec = _reg("t_coll_spec", -1, rs.index)
 	o_room = _reg("t_room")
 	o_mouse = _reg("t_mouse", -1, rs.index)
 	var base_script: GDScript = load("res://tests/objs/t_base.gd") as GDScript
@@ -425,6 +427,19 @@ func _test_collision_events() -> void:
 	TLog.lines.clear()
 	GM.tick()
 	eq(TLog.lines, ["A:end"] as Array[String], "销毁后不再触发")
+	# U5（第 7 批定）：同时有对父类、对子类的事件时只触发最具体的那个
+	GM.instance_destroy(a)
+	var sp: GMObject = _mk(o_coll_spec, 100.0, 100.0, "S")
+	var pb: GMObject = _mk(o_coll_b, 100.0, 100.0, "P")
+	var cb: GMObject = _mk(o_coll_b_child, 100.0, 100.0, "K")
+	TLog.lines.clear()
+	GM.tick()
+	ok(TLog.lines.has("S:parent P"), "父类实例走对父类的事件")
+	ok(TLog.lines.has("S:child K"), "子类实例走对子类的事件")
+	ok(not TLog.lines.has("S:parent K"), "子类实例不再走对父类的事件")
+	GM.instance_destroy(sp)
+	GM.instance_destroy(pb)
+	GM.instance_destroy(cb)
 
 
 func _test_speed() -> void:

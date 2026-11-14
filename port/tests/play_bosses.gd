@@ -1,6 +1,7 @@
 extends "res://tests/play_enemies.gd"
 ## 第 8 批试玩：一条平地，按原版画风映射摆放 Boss；_res 的默认值来自 test_bosses.gd。
-## 运行：godot --path port res://tests/play_bosses.tscn -- [bowser|junior|boomboom] [画风 0..3]
+## 默认摆放全部 Boss；沿平地向右依次是库巴、小库巴、Boom Boom、大号 Boom Boom。
+## 运行：godot --path port res://tests/play_bosses.tscn -- [all|bowser|junior|boomboom] [画风 0..3]
 ## 截图：-- 组 画风 shot <输出目录>。控制键、F5 重开、Esc 退出同 play_enemies。
 
 const TestBosses = preload("res://tests/test_bosses.gd")
@@ -8,6 +9,7 @@ const TestBosses = preload("res://tests/test_bosses.gd")
 
 func _groups() -> Dictionary:
 	return {
+		"all": TestBosses.names_for(_style, "all"),
 		"bowser": TestBosses.names_for(_style, "bowser"),
 		"junior": TestBosses.names_for(_style, "junior"),
 		"boomboom": TestBosses.names_for(_style, "boomboom"),

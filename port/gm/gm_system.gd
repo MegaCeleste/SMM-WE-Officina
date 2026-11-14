@@ -478,6 +478,106 @@ func directory_create(p: String) -> void:
 	DirAccess.make_dir_recursive_absolute(_fix_path(p).trim_suffix("/"))
 
 
+# 第 9 批：保存脚本使用的固定字节缓冲区。只使用 alignment=1、u8/text/string。
+const buffer_fixed: int = 0
+const buffer_u8: int = 1
+const buffer_string: int = 11
+const buffer_text: int = 13
+const buffer_seek_start: int = 0
+var _buffers: Dictionary = {}
+var _buffer_next: int = 1
+
+
+func buffer_create(size_bytes: float, _kind: float, _alignment: float) -> int:
+	var bytes: PackedByteArray = []
+	bytes.resize(int(size_bytes))
+	bytes.fill(0)
+	var handle: int = _buffer_next
+	_buffer_next += 1
+	_buffers[handle] = {"bytes": bytes, "pos": 0}
+	return handle
+
+
+func buffer_delete(handle: float) -> void:
+	_buffers.erase(int(handle))
+
+
+func buffer_seek(handle: float, _base: float, offset: float) -> void:
+	_buffers[int(handle)]["pos"] = int(offset)
+
+
+func buffer_peek(handle: float, offset: float, _kind: float) -> float:
+	return float(_buffers[int(handle)]["bytes"][int(offset)])
+
+
+func buffer_poke(handle: float, offset: float, _kind: float, value: float) -> void:
+	var bytes: PackedByteArray = _buffers[int(handle)]["bytes"]
+	bytes[int(offset)] = int(value) & 255
+	_buffers[int(handle)]["bytes"] = bytes
+
+
+func buffer_write(handle: float, kind: float, value: Variant) -> void:
+	var b: Dictionary = _buffers[int(handle)]
+	var bytes: PackedByteArray = b["bytes"]
+	var pos: int = b["pos"]
+	if int(kind) == buffer_u8:
+		bytes[pos] = int(value) & 255
+		pos += 1
+	else:
+		var text_bytes: PackedByteArray = str(value).to_utf8_buffer()
+		if int(kind) == buffer_string:
+			text_bytes.append(0)
+		for byte: int in text_bytes:
+			bytes[pos] = byte
+			pos += 1
+	b["bytes"] = bytes
+	b["pos"] = pos
+
+
+func buffer_save(handle: float, filename: String) -> void:
+	var file: FileAccess = FileAccess.open(_fix_path(filename), FileAccess.WRITE)
+	if file != null:
+		file.store_buffer(_buffers[int(handle)]["bytes"])
+	else:
+		push_error("GM.buffer_save: %s (%s)" % [filename, FileAccess.get_open_error()])
+
+
+func buffer_sha1(handle: float, offset: float, size_bytes: float) -> String:
+	var ctx: HashingContext = HashingContext.new()
+	ctx.start(HashingContext.HASH_SHA1)
+	var bytes: PackedByteArray = _buffers[int(handle)]["bytes"]
+	ctx.update(bytes.slice(int(offset), int(offset + size_bytes)))
+	return ctx.finish().hex_encode()
+
+
+func sha1_string_utf8(value: String) -> String:
+	return value.sha1_text()
+
+
+func base64_encode(value: String) -> String:
+	return Marshalls.utf8_to_base64(value)
+
+
+func json_encode(value: Variant) -> String:
+	# full_precision 保留 GML 双精度 JSON 的有效数字；整数值不带小数点。
+	return JSON.stringify(value, "", false, true)
+
+
+func file_delete(filename: String) -> bool:
+	return DirAccess.remove_absolute(_fix_path(filename)) == OK
+
+
+var _view_surface_ids: Dictionary = {}
+
+
+func view_set_surface_id(view: int, surface: int) -> void:
+	_view_surface_ids[view] = surface
+
+
+func view_get_surface_id(view: int) -> int:
+	return int(_view_surface_ids.get(view, -1))
+
+
 ## 3.5.1 的关卡文件把键名缩短了（样本 docs/samples/3.5.1level1.swe），源码读的是旧键名。
 ## 下面的对照表是按名字和各段的先后顺序推断的（docs/level-format.md 附录），读入时翻回旧键名；
 ## 表里没有的键原样保留（源码不读它们）。 UNVERIFIED：没有 3.5.1 的源码可对。

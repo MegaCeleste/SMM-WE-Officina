@@ -37,7 +37,7 @@ const SMB2: float = 4.0
 enum e__BG { Visible, Foreground, Index, X, Y, Width, Height, HTiled, VTiled, XScale, YScale, HSpeed, VSpeed, Blend, Alpha }
 enum e__VW { XView, YView, WView, HView, Angle, HBorder, VBorder, HSpeed, VSpeed, Object, Visible, XPort, YPort, WPort, HPort, Camera, SurfaceID }
 
-# ---- 已移植脚本（206 个文件） ----
+# ---- 已移植脚本（236 个文件） ----
 const _m_background_get = preload("res://scripts/__background_get.gd")
 const _m_background_get_element = preload("res://scripts/__background_get_element.gd")
 const _m_background_get_internal = preload("res://scripts/__background_get_internal.gd")
@@ -45,13 +45,19 @@ const _m_background_set = preload("res://scripts/__background_set.gd")
 const _m_background_set_element = preload("res://scripts/__background_set_element.gd")
 const _m_background_set_internal = preload("res://scripts/__background_set_internal.gd")
 const _m_view_get = preload("res://scripts/__view_get.gd")
+const _m_view_set = preload("res://scripts/__view_set.gd")
+const _m_view_set_internal = preload("res://scripts/__view_set_internal.gd")
 const _m_background_create_from_surface = preload("res://scripts/background_create_from_surface.gd")
 const _m_draw_sprite_custom_origin = preload("res://scripts/draw_sprite_custom_origin.gd")
 const _m_draw_sprite_tiled_area_ext = preload("res://scripts/draw_sprite_tiled_area_ext.gd")
+const _m_hex_string_byte = preload("res://scripts/hex_string_byte.gd")
 const _m_init_shake = preload("res://scripts/init_shake.gd")
 const _m_init_shockwave = preload("res://scripts/init_shockwave.gd")
 const _m_LoadJSONFromFile = preload("res://scripts/LoadJSONFromFile.gd")
 const _m_outside_view = preload("res://scripts/outside_view.gd")
+const _m_SaveStringToFile = preload("res://scripts/SaveStringToFile.gd")
+const _m_scr_anim_hover = preload("res://scripts/scr_anim_hover.gd")
+const _m_scr_anim_hover2 = preload("res://scripts/scr_anim_hover2.gd")
 const _m_scr_arcon_fly = preload("res://scripts/scr_arcon_fly.gd")
 const _m_scr_arcon_fly_start = preload("res://scripts/scr_arcon_fly_start.gd")
 const _m_scr_auto_tile = preload("res://scripts/scr_auto_tile.gd")
@@ -76,6 +82,7 @@ const _m_scr_constant_make_object = preload("res://scripts/scr_constant_make_obj
 const _m_scr_cont_lives = preload("res://scripts/scr_cont_lives.gd")
 const _m_scr_create_bg_anim = preload("res://scripts/scr_create_bg_anim.gd")
 const _m_scr_edit_to_play = preload("res://scripts/scr_edit_to_play.gd")
+const _m_scr_header = preload("res://scripts/scr_header.gd")
 const _m_scr_init_globals = preload("res://scripts/scr_init_globals.gd")
 const _m_scr_insideview = preload("res://scripts/scr_insideview.gd")
 const _m_scr_jump = preload("res://scripts/scr_jump.gd")
@@ -129,6 +136,9 @@ const _m_scr_marioup = preload("res://scripts/scr_marioup.gd")
 const _m_scr_mariouphold = preload("res://scripts/scr_mariouphold.gd")
 const _m_scr_mariowalk = preload("res://scripts/scr_mariowalk.gd")
 const _m_scr_mariowarp = preload("res://scripts/scr_mariowarp.gd")
+const _m_scr_mushroom_platform1_sprites = preload("res://scripts/scr_mushroom_platform1_sprites.gd")
+const _m_scr_mushroom_platform2_sprites = preload("res://scripts/scr_mushroom_platform2_sprites.gd")
+const _m_scr_mushroom_platform3_sprites = preload("res://scripts/scr_mushroom_platform3_sprites.gd")
 const _m_scr_music_link = preload("res://scripts/scr_music_link.gd")
 const _m_scr_musicalscale = preload("res://scripts/scr_musicalscale.gd")
 const _m_scr_musicalscale_kick = preload("res://scripts/scr_musicalscale_kick.gd")
@@ -189,8 +199,14 @@ const _m_scr_NSMBU_walkhome = preload("res://scripts/scr_NSMBU_walkhome.gd")
 const _m_scr_NSMBU_walkpipes = preload("res://scripts/scr_NSMBU_walkpipes.gd")
 const _m_scr_NSMBU_wall_slide = preload("res://scripts/scr_NSMBU_wall_slide.gd")
 const _m_scr_pink_coins = preload("res://scripts/scr_pink_coins.gd")
+const _m_scr_play_to_edit = preload("res://scripts/scr_play_to_edit.gd")
 const _m_scr_powerup_editor = preload("res://scripts/scr_powerup_editor.gd")
+const _m_scr_reset_variables = preload("res://scripts/scr_reset_variables.gd")
+const _m_scr_resources_get_sprite = preload("res://scripts/scr_resources_get_sprite.gd")
 const _m_scr_restart = preload("res://scripts/scr_restart.gd")
+const _m_scr_semisolid_platform1_sprites = preload("res://scripts/scr_semisolid_platform1_sprites.gd")
+const _m_scr_semisolid_platform2_sprites = preload("res://scripts/scr_semisolid_platform2_sprites.gd")
+const _m_scr_semisolid_platform3_sprites = preload("res://scripts/scr_semisolid_platform3_sprites.gd")
 const _m_scr_snd_airship = preload("res://scripts/scr_snd_airship.gd")
 const _m_scr_snd_autumn = preload("res://scripts/scr_snd_autumn.gd")
 const _m_scr_snd_beach = preload("res://scripts/scr_snd_beach.gd")
@@ -205,6 +221,17 @@ const _m_scr_snd_dead = preload("res://scripts/scr_snd_dead.gd")
 const _m_scr_snd_desert = preload("res://scripts/scr_snd_desert.gd")
 const _m_scr_snd_door_close = preload("res://scripts/scr_snd_door_close.gd")
 const _m_scr_snd_door_open = preload("res://scripts/scr_snd_door_open.gd")
+const _m_scr_snd_editor_airship = preload("res://scripts/scr_snd_editor_airship.gd")
+const _m_scr_snd_editor_castle = preload("res://scripts/scr_snd_editor_castle.gd")
+const _m_scr_snd_editor_desert = preload("res://scripts/scr_snd_editor_desert.gd")
+const _m_scr_snd_editor_forest = preload("res://scripts/scr_snd_editor_forest.gd")
+const _m_scr_snd_editor_ghost = preload("res://scripts/scr_snd_editor_ghost.gd")
+const _m_scr_snd_editor_ground = preload("res://scripts/scr_snd_editor_ground.gd")
+const _m_scr_snd_editor_mountain = preload("res://scripts/scr_snd_editor_mountain.gd")
+const _m_scr_snd_editor_sky = preload("res://scripts/scr_snd_editor_sky.gd")
+const _m_scr_snd_editor_snow = preload("res://scripts/scr_snd_editor_snow.gd")
+const _m_scr_snd_editor_underground = preload("res://scripts/scr_snd_editor_underground.gd")
+const _m_scr_snd_editor_underwater = preload("res://scripts/scr_snd_editor_underwater.gd")
 const _m_scr_snd_explode = preload("res://scripts/scr_snd_explode.gd")
 const _m_scr_snd_fireball = preload("res://scripts/scr_snd_fireball.gd")
 const _m_scr_snd_forest = preload("res://scripts/scr_snd_forest.gd")
@@ -238,10 +265,13 @@ const _m_scr_sprite_get_constant_res = preload("res://scripts/scr_sprite_get_con
 const _m_scr_sprite_make_object = preload("res://scripts/scr_sprite_make_object.gd")
 const _m_scr_sprite_make_object_rieles = preload("res://scripts/scr_sprite_make_object_rieles.gd")
 const _m_scr_step_sounds = preload("res://scripts/scr_step_sounds.gd")
+const _m_scr_stop_effect_sounds = preload("res://scripts/scr_stop_effect_sounds.gd")
 const _m_scr_swim = preload("res://scripts/scr_swim.gd")
 const _m_scr_tiles_ground = preload("res://scripts/scr_tiles_ground.gd")
 const _m_scr_tiles_ground_start = preload("res://scripts/scr_tiles_ground_start.gd")
+const _m_scr_toast = preload("res://scripts/scr_toast.gd")
 const _m_screen_round = preload("res://scripts/screen_round.gd")
+const _m_sha1_string_utf8_hmac = preload("res://scripts/sha1_string_utf8_hmac.gd")
 const _m_string_add_zeros = preload("res://scripts/string_add_zeros.gd")
 const _m_tile_layer_find = preload("res://scripts/tile_layer_find.gd")
 
@@ -266,6 +296,12 @@ static func __background_set_internal(me: GMObject, argument0 = null, argument1 
 static func __view_get(me: GMObject, argument0 = null, argument1 = null) -> Variant:
 	return _m_view_get.__view_get(me, argument0, argument1)
 
+static func __view_set(me: GMObject, argument0 = null, argument1 = null, argument2 = null):
+	return _m_view_set.__view_set(me, argument0, argument1, argument2)
+
+static func __view_set_internal(me: GMObject, argument0 = null, argument1 = null, argument2 = null):
+	return _m_view_set_internal.__view_set_internal(me, argument0, argument1, argument2)
+
 static func background_create_from_surface(me: GMObject, argument0 = null, argument1 = null, argument2 = null, argument3 = null, argument4 = null, argument5 = null, argument6 = null) -> Variant:
 	return _m_background_create_from_surface.background_create_from_surface(me, argument0, argument1, argument2, argument3, argument4, argument5, argument6)
 
@@ -274,6 +310,9 @@ static func draw_sprite_custom_origin(me: GMObject, argument0 = null, argument1 
 
 static func draw_sprite_tiled_area_ext(me: GMObject, argument0 = null, argument1 = null, argument2 = null, argument3 = null, argument4 = null, argument5 = null, argument6 = null, argument7 = null, argument8 = null, argument9 = null) -> Variant:
 	return _m_draw_sprite_tiled_area_ext.draw_sprite_tiled_area_ext(me, argument0, argument1, argument2, argument3, argument4, argument5, argument6, argument7, argument8, argument9)
+
+static func hex_string_byte(me: GMObject, argument0 = null, argument1 = null):
+	return _m_hex_string_byte.hex_string_byte(me, argument0, argument1)
 
 static func init_shake(me: GMObject, argument0 = null) -> void:
 	_m_init_shake.init_shake(me, argument0)
@@ -286,6 +325,15 @@ static func LoadJSONFromFile(me: GMObject, argument0 = null) -> Variant:
 
 static func outside_view(me: GMObject) -> float:
 	return _m_outside_view.outside_view(me)
+
+static func SaveStringToFile(me: GMObject, argument0 = null, argument1 = null):
+	return _m_SaveStringToFile.SaveStringToFile(me, argument0, argument1)
+
+static func scr_anim_hover(me: GMObject, argument0 = null, argument1 = null, argument2 = null, argument3 = null):
+	return _m_scr_anim_hover.scr_anim_hover(me, argument0, argument1, argument2, argument3)
+
+static func scr_anim_hover2(me: GMObject, argument0 = null, argument1 = null, argument2 = null, argument3 = null):
+	return _m_scr_anim_hover2.scr_anim_hover2(me, argument0, argument1, argument2, argument3)
 
 static func scr_arcon_fly(me: GMObject):
 	return _m_scr_arcon_fly.scr_arcon_fly(me)
@@ -358,6 +406,9 @@ static func scr_create_bg_anim(me: GMObject) -> Variant:
 
 static func scr_edit_to_play(me: GMObject):
 	return _m_scr_edit_to_play.scr_edit_to_play(me)
+
+static func scr_header(me: GMObject, argument0 = null):
+	return _m_scr_header.scr_header(me, argument0)
 
 static func scr_init_globals(me: GMObject) -> void:
 	_m_scr_init_globals.scr_init_globals(me)
@@ -517,6 +568,15 @@ static func scr_mariowalk(me: GMObject) -> Variant:
 
 static func scr_mariowarp(me: GMObject) -> Variant:
 	return _m_scr_mariowarp.scr_mariowarp(me)
+
+static func scr_mushroom_platform1_sprites(me: GMObject):
+	return _m_scr_mushroom_platform1_sprites.scr_mushroom_platform1_sprites(me)
+
+static func scr_mushroom_platform2_sprites(me: GMObject):
+	return _m_scr_mushroom_platform2_sprites.scr_mushroom_platform2_sprites(me)
+
+static func scr_mushroom_platform3_sprites(me: GMObject):
+	return _m_scr_mushroom_platform3_sprites.scr_mushroom_platform3_sprites(me)
 
 static func scr_music_link(me: GMObject) -> Variant:
 	return _m_scr_music_link.scr_music_link(me)
@@ -698,11 +758,29 @@ static func scr_NSMBU_wall_slide(me: GMObject):
 static func scr_pink_coins(me: GMObject) -> Variant:
 	return _m_scr_pink_coins.scr_pink_coins(me)
 
+static func scr_play_to_edit(me: GMObject):
+	return _m_scr_play_to_edit.scr_play_to_edit(me)
+
 static func scr_powerup_editor(me: GMObject, argument0 = null):
 	return _m_scr_powerup_editor.scr_powerup_editor(me, argument0)
 
+static func scr_reset_variables(me: GMObject):
+	return _m_scr_reset_variables.scr_reset_variables(me)
+
+static func scr_resources_get_sprite(me: GMObject, argument0 = null):
+	return _m_scr_resources_get_sprite.scr_resources_get_sprite(me, argument0)
+
 static func scr_restart(me: GMObject) -> Variant:
 	return _m_scr_restart.scr_restart(me)
+
+static func scr_semisolid_platform1_sprites(me: GMObject):
+	return _m_scr_semisolid_platform1_sprites.scr_semisolid_platform1_sprites(me)
+
+static func scr_semisolid_platform2_sprites(me: GMObject):
+	return _m_scr_semisolid_platform2_sprites.scr_semisolid_platform2_sprites(me)
+
+static func scr_semisolid_platform3_sprites(me: GMObject):
+	return _m_scr_semisolid_platform3_sprites.scr_semisolid_platform3_sprites(me)
 
 static func scr_snd_airship(me: GMObject) -> Variant:
 	return _m_scr_snd_airship.scr_snd_airship(me)
@@ -745,6 +823,39 @@ static func scr_snd_door_close(me: GMObject) -> Variant:
 
 static func scr_snd_door_open(me: GMObject) -> Variant:
 	return _m_scr_snd_door_open.scr_snd_door_open(me)
+
+static func scr_snd_editor_airship(me: GMObject):
+	return _m_scr_snd_editor_airship.scr_snd_editor_airship(me)
+
+static func scr_snd_editor_castle(me: GMObject):
+	return _m_scr_snd_editor_castle.scr_snd_editor_castle(me)
+
+static func scr_snd_editor_desert(me: GMObject):
+	return _m_scr_snd_editor_desert.scr_snd_editor_desert(me)
+
+static func scr_snd_editor_forest(me: GMObject):
+	return _m_scr_snd_editor_forest.scr_snd_editor_forest(me)
+
+static func scr_snd_editor_ghost(me: GMObject):
+	return _m_scr_snd_editor_ghost.scr_snd_editor_ghost(me)
+
+static func scr_snd_editor_ground(me: GMObject):
+	return _m_scr_snd_editor_ground.scr_snd_editor_ground(me)
+
+static func scr_snd_editor_mountain(me: GMObject):
+	return _m_scr_snd_editor_mountain.scr_snd_editor_mountain(me)
+
+static func scr_snd_editor_sky(me: GMObject):
+	return _m_scr_snd_editor_sky.scr_snd_editor_sky(me)
+
+static func scr_snd_editor_snow(me: GMObject):
+	return _m_scr_snd_editor_snow.scr_snd_editor_snow(me)
+
+static func scr_snd_editor_underground(me: GMObject):
+	return _m_scr_snd_editor_underground.scr_snd_editor_underground(me)
+
+static func scr_snd_editor_underwater(me: GMObject):
+	return _m_scr_snd_editor_underwater.scr_snd_editor_underwater(me)
 
 static func scr_snd_explode(me: GMObject) -> Variant:
 	return _m_scr_snd_explode.scr_snd_explode(me)
@@ -845,6 +956,9 @@ static func scr_sprite_make_object_rieles(me: GMObject, argument0 = null, argume
 static func scr_step_sounds(me: GMObject, argument0 = null, argument1 = null):
 	return _m_scr_step_sounds.scr_step_sounds(me, argument0, argument1)
 
+static func scr_stop_effect_sounds(me: GMObject):
+	return _m_scr_stop_effect_sounds.scr_stop_effect_sounds(me)
+
 static func scr_swim(me: GMObject) -> Variant:
 	return _m_scr_swim.scr_swim(me)
 
@@ -854,8 +968,14 @@ static func scr_tiles_ground(me: GMObject) -> Variant:
 static func scr_tiles_ground_start(me: GMObject) -> Variant:
 	return _m_scr_tiles_ground_start.scr_tiles_ground_start(me)
 
+static func scr_toast(me: GMObject, argument0 = null, argument1 = null):
+	return _m_scr_toast.scr_toast(me, argument0, argument1)
+
 static func screen_round(me: GMObject, value = null):
 	return _m_screen_round.screen_round(me, value)
+
+static func sha1_string_utf8_hmac(me: GMObject, argument0 = null, argument1 = null):
+	return _m_sha1_string_utf8_hmac.sha1_string_utf8_hmac(me, argument0, argument1)
 
 static func string_add_zeros(me: GMObject, argument0 = null, argument1 = null) -> Variant:
 	return _m_string_add_zeros.string_add_zeros(me, argument0, argument1)

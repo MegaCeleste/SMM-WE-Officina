@@ -1,0 +1,104 @@
+extends "res://objects/obj_parent_resource.gd"
+
+
+# from objects/obj_goombrat_b_res/Create_0.gml
+func _create() -> void:
+	super._create()
+	grid_selected = A.spr_grid_selected_32x32
+	w_sprite = A.spr_wings_editor_32x32
+	wings_x = 17.0
+	wings_y = 0.0
+	para_x = 0.0
+	para_y = 32.0
+
+
+# from objects/obj_goombrat_b_res/Step_2.gml
+func _step_end() -> void:
+	if GM.instance_find(A.obj_levelmanager, 0).editor == 1.0:
+		image_index = G.apariencia
+		if G.apariencia == 3.0:
+			w_sprite = A.spr_wings_editor_big
+			wings_x = 17.0
+			wings_y = 0.0
+		else:
+			w_sprite = A.spr_wings_editor_32x32
+			wings_x = 0.0
+			wings_y = 0.0
+
+
+# from objects/obj_goombrat_b_res/Other_10.gml
+func _user_0() -> void:
+	for inst in GM.with_list(GM.instance_create((x + 8.0), (y + 9.0), A.obj_ventana)):
+		inst.id_object = self
+		inst.index_object1 = 69.0
+		inst.index_object2 = 70.0
+		inst.selected_1 = 0.0
+		inst.selected_2 = 1.0
+		inst.s_hongo_1 = 1.0
+		inst.s_contorno_1 = self.wings
+		inst.s_paracaidas = self.paracaidas
+
+
+# from objects/obj_goombrat_b_res/Other_11.gml
+func _user_1() -> void:
+	for inst in GM.with_list(GM.instance_create(x, y, A.obj_smoke)):
+		inst.sprite_index = A.spr_effect_transform
+		inst.image_speed = 0.3
+	G.goomba = 0.0
+	for inst in GM.with_list(GM.instance_create(x, y, A.obj_goomba_b_res)):
+		inst.wings = self.wings
+		inst.paracaidas = self.paracaidas
+		inst.key = self.key
+	if GM.instance_exists(A.obj_card_item):
+		for inst in GM.with_list(A.obj_card_item):
+			if inst.obj == A.obj_goombrat_b_res:
+				inst.obj = A.obj_goomba_b_res
+				inst.obj_draw = 69.0
+	instance_destroy()
+
+
+# from objects/obj_goombrat_b_res/Other_13.gml
+func _user_3() -> void:
+	GM.audio_play_sound(Scr.scr_snd_powerdown(self), 0.0, false)
+	for inst in GM.with_list(GM.instance_create(x, y, A.obj_enemy_dead)):
+		inst.girar = 1.0
+		inst.sprite_index = A.spr_mushroon_deads
+		inst.image_index = G.apariencia
+		inst.hspeed = 1.0
+	for inst in GM.with_list(GM.instance_create((x + 16.0), (y + 16.0), A.obj_goombrat_res)):
+		inst.wings = self.wings
+		inst.paracaidas = self.paracaidas
+		inst.key = self.key
+	instance_destroy()
+
+
+# from objects/obj_goombrat_b_res/Other_14.gml
+func _user_4() -> void:
+	if wings == 0.0:
+		GM.audio_play_sound(A.snd_agregar_wings, 0.0, false)
+		wings = 1.0
+	else:
+		GM.audio_play_sound(A.snd_remove_wings, 0.0, false)
+		for inst in GM.with_list(GM.instance_create((x + 17.0), (y + 8.0), A.obj_wings_dead)):
+			inst.direct = -1.0
+		for inst in GM.with_list(GM.instance_create((x - 3.0), (y + 8.0), A.obj_wings_dead)):
+			inst.sprite_index = A.spr_wings_dead2
+			inst.direct = -1.0
+		wings = 0.0
+
+
+# from objects/obj_goombrat_b_res/Draw_0.gml
+func _gm_draw() -> void:
+	if GM.instance_find(A.obj_levelmanager, 0).editor == 0.0 or Scr.outside_view(self) > 0.5:
+		return
+	if drag == 1.0:
+		GM.draw_sprite_ext(grid_selected, drop_lock, x, y, 1.0, 1.0, 0.0, GM.c_white, 1.0)
+	elif mouse_up == 1.0 and G.cursor == 0.0:
+		GM.draw_sprite_ext(grid_selected, 0.0, x, y, 1.0, 1.0, 0.0, GM.c_white, 1.0)
+	if paracaidas == 1.0:
+		GM.draw_sprite_ext(p_sprite, G.apariencia, (x_draw + para_x), (y_draw - para_y), s_scalex * 2.0, s_scaley * 2.0, 1.0, GM.c_white, m_alpha)
+	GM.draw_sprite_ext(sprite_index, image_index, x_draw, y_draw, s_scalex, s_scaley, rotacion, GM.c_white, m_alpha)
+	if wings == 1.0:
+		GM.draw_sprite_ext(w_sprite, G.apariencia, (x_draw + wings_x), (y_draw - wings_y), s_scalex, s_scaley, 1.0, GM.c_white, m_alpha)
+	if mouse_up == 1.0 and drag == 0.0 and G.cursor == 2.0:
+		GM.draw_sprite_ext(grid_selected, 0.0, x, y, 1.0, 1.0, 0.0, GM.c_white, 1.0)

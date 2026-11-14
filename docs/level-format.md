@@ -257,4 +257,4 @@
 - PLATAFORMAS：`clr`→`color`，`dph`→`depth`，`wth/hht`→`width/height`，`dir`→`direct_t`。PUERTAS：`dr_x/dr_y`→`door_x/door_y`。
 - CANNON：样本里是空的，除通用键外没有对照（`direct`、`down/up/left/right` 的缩写未知）。
 - 源码里没有、读入后被忽略的 3.5.1 字段：AJUSTES 的 `t`；NIVEL 的 `air` `pinkcoin` `fire` `claw` `rock` `energy` `sierra` `bumper` `ice` `can_complement`；PLATAFORMAS 的 `air` `pinkcoin` `fire` `key` `rock` `energy` `parachute` `ice`。这些对应 3.5.1 比源码多出来的功能，移植版不支持。
-- 写关卡（第 9 批）用哪套键名还没定。
+- 写关卡（第 9 批，用户已定，2026-11-14）：使用仓库源码长键名（`MAIN`、`AJUSTES`、`apariencia` 等），继续兼容读取 3.5.1 缩写文件；不承诺保存结果可被 3.5.1 exe 打开。保存仍走原版两个事件的八个列表、base64、HMAC-SHA1 和结尾空字节；测试覆盖各列表的记录及保存后自动重载。

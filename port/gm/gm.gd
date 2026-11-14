@@ -27,6 +27,7 @@ var room_persistent: bool = false
 ## room 创建代码：room 名 → Callable()；实例创建代码：room 实例名 → Callable(inst)
 var room_code: Dictionary = {}
 var room_inst_code: Dictionary = {}
+var room_setup: Dictionary = {}  ## room 视图等初始设置，在实例 Create 之前应用
 
 var instances: Array[GMObject] = []  ## 全部存活实例（含休眠），按创建顺序
 var _pools: Array = []  ## object 编号 → 该 object 及其后代的实例数组（含休眠）
@@ -80,6 +81,7 @@ func _ready() -> void:
 	_init_draw()
 	_init_audio()
 	_init_input()
+	preload("res://rooms/rm_editor.gd").install()
 
 
 func _physics_process(_delta: float) -> void:
@@ -169,6 +171,9 @@ func asset_get_index(asset_name: String) -> int:
 # ======================================================================
 
 func instance_create(px: float, py: float, obj: int) -> GMObject:
+	if not object_exists(obj):
+		push_error("GM.instance_create: invalid object %d" % obj)
+		return null
 	return _spawn(px, py, classes[obj].depth, obj, {})
 
 
@@ -176,7 +181,76 @@ func instance_create_depth(px: float, py: float, obj_depth: float, obj: int) -> 
 	return _spawn(px, py, obj_depth, obj, {})
 
 
+## 第 9 批：保留实例引用和变量，只切换对象及其事件表。
+## 依据 GameMaker-HTML5 Function_Instance.js instance_change_RELEASE。
+func instance_change_inst(inst: GMObject, obj: int, perform_events: bool) -> void:
+	if inst._destroyed or not object_exists(obj):
+		return
+	if perform_events:
+		if inst._cls.has_destroy:
+			inst.call(&"_destroy")
+		if inst._cls.has_cleanup:
+			inst.call(&"_cleanup")
+	var saved: Dictionary = {}
+	var readonly: Array[String] = ["bbox_left", "bbox_top", "bbox_right", "bbox_bottom", "image_number", "sprite_width", "sprite_height", "sprite_xoffset", "sprite_yoffset"]
+	col.remove(inst)
+	col.dirty.erase(inst)
+	inst._grid_dirty = false
+	for prop: Dictionary in inst.get_property_list():
+		var key: String = prop["name"]
+		if int(prop["usage"]) & PROPERTY_USAGE_SCRIPT_VARIABLE and not readonly.has(key):
+			saved[key] = inst.get(key)
+	var p: int = inst.object_index
+	while p >= 0:
+		(_pools[p] as Array).erase(inst)
+		if inst._active:
+			_n_active[p] -= 1
+		p = classes[p].parent_id
+	var c: GMClass = _class_of(obj)
+	inst.set_script(c.gd)
+	var declared: Dictionary = {}
+	for prop: Dictionary in inst.get_property_list():
+		declared[prop["name"]] = true
+	# Setters must not enqueue duplicate movers/depth buckets during restoration.
+	inst._sp_lock = true
+	for key: String in saved:
+		if key in ["_uid", "_sp_lock", "_cls", "_isa", "object_index"]:
+			continue
+		if declared.has(key):
+			inst.set(key, saved[key])
+		else:
+			inst._changed_fields[key] = saved[key]
+	inst._sp_lock = bool(saved["_sp_lock"])
+	inst._uid = int(saved["_uid"])
+	inst._cls = c
+	inst._isa = c.is_a
+	inst.object_index = obj
+	inst.sprite_index = c.sprite
+	inst.mask_index = c.mask
+	inst.visible = c.visible
+	inst.persistent = c.persistent
+	p = obj
+	while p >= 0:
+		var pool: Array = _pools[p]
+		var at_index: int = 0
+		while at_index < pool.size() and pool[at_index]._uid < inst._uid:
+			at_index += 1
+		pool.insert(at_index, inst)
+		if inst._active:
+			_n_active[p] += 1
+		p = classes[p].parent_id
+	if not c.scanned:
+		c.scan(inst, obj_name_to_id)
+	_lists_dirty = true
+	inst._touch()
+	if perform_events and c.has_create:
+		inst.call(&"_create")
+
+
 func _spawn(px: float, py: float, obj_depth: float, obj: int, preset: Dictionary) -> GMObject:
+	if not object_exists(obj):
+		push_error("GM.instance_create_depth: invalid object %d" % obj)
+		return null
 	var c: GMClass = _class_of(obj)
 	var inst: GMObject = c.gd.new() as GMObject
 	inst._cls = c
@@ -669,6 +743,9 @@ func _run_list(list: Array[GMObject], method: StringName) -> void:
 	for inst: GMObject in list:
 		if inst._cc > c or inst._destroyed or not inst._active:
 			continue
+		# instance_change may replace a later instance's event table within this phase.
+		if not inst.has_method(method):
+			continue
 		other = inst
 		inst.call(method)
 		other = null
@@ -894,6 +971,30 @@ func path_get_y(path: int, t: float) -> float:
 
 func path_exists(path: int) -> bool:
 	return _path_get(path) != null
+
+
+func path_add() -> int:
+	if _paths.is_empty():
+		_paths_load()
+	var index: int = _paths.size()
+	_paths.append({"name": "__dynamic_path_%d" % index, "kind": 0, "pts": PackedVector3Array(), "cum": PackedFloat64Array(), "len": 0.0})
+	return index
+
+
+func path_add_point(path: int, px: float, py: float, point_speed: float) -> void:
+	var p: Variant = _path_get(path)
+	if p == null:
+		return
+	var pts: PackedVector3Array = p["pts"]
+	var cum: PackedFloat64Array = p["cum"]
+	var total: float = p["len"]
+	if not pts.is_empty():
+		total += Vector2(px - pts[-1].x, py - pts[-1].y).length()
+	pts.append(Vector3(px, py, point_speed))
+	cum.append(total)
+	p["pts"] = pts
+	p["cum"] = cum
+	p["len"] = total
 
 
 func path_start_inst(inst: GMObject, path: int, spd: float, endaction: int, absolute: bool) -> void:
@@ -1238,6 +1339,9 @@ func _switch_room(r: int) -> void:
 	room_height = float(def["height"])
 	room_persistent = bool(def["persistent"])
 	_load_room_layers(def.get("layers", []))
+	var setup: Variant = room_setup.get(def["name"])
+	if setup != null:
+		(setup as Callable).call()
 	for it: Dictionary in def["instances"]:
 		var inst: GMObject = _spawn(float(it["x"]), float(it["y"]), float(it["depth"]), int(it["object"]), it)
 		var code: Variant = room_inst_code.get(it["name"])
@@ -1251,8 +1355,13 @@ func _switch_room(r: int) -> void:
 		for inst: GMObject in with_list(all):
 			if inst._cls.has_game_start:
 				inst.call(&"_game_start")
-	for inst: GMObject in with_list(all):
-		if inst._cls.has_room_start:
+	# PORT（用户定，2026-11-14）：Room Start 中创建的载入器也收到本次事件。
+	# 不改动 tick 中各阶段的快照规则；见 port-plan U23。
+	var room_start_index: int = 0
+	while room_start_index < instances.size():
+		var inst: GMObject = instances[room_start_index]
+		room_start_index += 1
+		if not inst._destroyed and inst._active and inst._cls.has_room_start:
 			other = inst
 			inst.call(&"_room_start")
 			other = null

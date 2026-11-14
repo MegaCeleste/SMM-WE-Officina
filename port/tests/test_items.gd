@@ -178,7 +178,16 @@ func _reset(style: int) -> GMObject:
 
 ## 生成后让对象落在 Mario 前方 24px、地面高度
 func _spawn(m: GMObject, name: String) -> GMObject:
-	return GM.instance_create(m.x + 24.0, m.y - 8.0, GM.asset_get_index(name))
+	var inst: GMObject = GM.instance_create(m.x + 24.0, m.y - 8.0, GM.asset_get_index(name))
+	if name == "obj_enemyfrozen":
+		# from obj_snowball/Collision_obj_enemyparent: the projectile supplies the frozen enemy.
+		# A directly-created frozen block otherwise retains enemy=-4, which is not an object ID.
+		var enemy: GMObject = GM.instance_create(inst.x, inst.y, A.obj_galoomba)
+		inst.set("enemy", A.obj_galoomba)
+		inst.set("sprite", enemy.sprite_index)
+		inst.set("index", enemy.image_index)
+		GM.instance_destroy(enemy)
+	return inst
 
 
 func _ready() -> void:

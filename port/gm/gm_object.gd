@@ -39,6 +39,8 @@ var _sp_lock: bool = false
 var _mouse_over: bool = false
 var _was_outside: bool = false
 var _room_inst_name: String = ""
+## instance_change 保留下来的旧对象字段（新对象没有对应声明时）。
+var _changed_fields: Dictionary = {}
 
 # ---- GMS 内置变量 ----
 var object_index: int = -1
@@ -193,6 +195,28 @@ var sprite_xoffset: float:
 var sprite_yoffset: float:
 	get:
 		return GM.sprites[sprite_index].yo * image_yscale if sprite_index >= 0 else 0.0
+
+
+func _get(property: StringName) -> Variant:
+	return _changed_fields.get(property)
+
+
+func _set(property: StringName, value: Variant) -> bool:
+	if _changed_fields.has(property):
+		_changed_fields[property] = value
+		return true
+	return false
+
+
+func _get_property_list() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for property: String in _changed_fields:
+		result.append({"name": property, "type": typeof(_changed_fields[property]), "usage": PROPERTY_USAGE_SCRIPT_VARIABLE})
+	return result
+
+
+func instance_change(obj: int, perform_events: bool) -> void:
+	GM.instance_change_inst(self, obj, perform_events)
 
 
 func _touch() -> void:

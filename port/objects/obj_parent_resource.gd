@@ -21,7 +21,7 @@ var prev_x: float = 0.0
 var prev_y: float = 0.0
 var play_sound: float = 0.0
 var exepcion: float = 0.0
-var grid_selected: int = 0  ## sprite 编号
+var grid_selected: int = 0
 var mouse_up: float = 0.0
 var sprout = null
 var inup: float = 0.0
@@ -30,11 +30,11 @@ var s_scalex: float = 0.0
 var s_scaley: float = 0.0
 var ventana: float = 0.0
 var wings: float = 0.0
-var w_sprite: int = 0  ## sprite 编号
+var w_sprite: int = 0
 var wings_x: float = 0.0
 var wings_y = null
 var paracaidas: float = 0.0
-var p_sprite: int = 0  ## sprite 编号
+var p_sprite: int = 0
 var para_x: float = 0.0
 var para_y: float = 0.0
 var size: float = 0.0
@@ -46,7 +46,7 @@ var modo_water: float = 0.0
 var key: float = 0.0
 var pos_cal: float = 0.0
 var m_alpha: float = 0.0
-var warp = null  # 仅子类赋值(warp)
+var warp = null
 
 
 # from objects/obj_parent_resource/Create_0.gml
@@ -153,7 +153,7 @@ func _step_begin() -> void:
 		m_alpha = 0.5
 	else:
 		m_alpha = 1.0
-	if GM.instance_exists(A.obj_levelmanager) and GM.instance_find(A.obj_levelmanager, 0).get("editor") == 1.0 and drag == 0.0 and (x >= GM.room_width or x < 0.0 or y >= GM.room_height or y < 0.0):
+	if GM.instance_exists(A.obj_levelmanager) and GM.instance_find(A.obj_levelmanager, 0).editor == 1.0 and drag == 0.0 and (x >= GM.room_width or x < 0.0 or y >= GM.room_height or y < 0.0):
 		instance_destroy()
 
 
@@ -163,8 +163,7 @@ func _alarm_0() -> void:
 		if (object_index == A.obj_egg_res or object_index == A.obj_egg_red_res) and G.apariencia < 2.0:
 			image_speed = 0.0
 			image_index = 0.0
-		var _prev: GMObject = GM.instance_find(A.obj_creation_preview, 0)
-		if (place_meeting(_prev.x, _prev.y, A.obj_parent_resource) and (not place_meeting(_prev.x, _prev.y, self)) and unlocked == 0.0) or place_meeting(x, y, A.obj_arrow_lock):
+		if (place_meeting(GM.instance_find(A.obj_creation_preview, 0).x, GM.instance_find(A.obj_creation_preview, 0).y, A.obj_parent_resource) and (not place_meeting(GM.instance_find(A.obj_creation_preview, 0).x, GM.instance_find(A.obj_creation_preview, 0).y, self)) and unlocked == 0.0) or place_meeting(x, y, A.obj_arrow_lock):
 			drop_lock = 1.0
 		else:
 			drop_lock = 0.0
@@ -177,19 +176,18 @@ func _alarm_0() -> void:
 		if play_sound == 0.0 and (x != x_start or y != y_start):
 			GM.audio_play_sound(A.snd_drag, 0.0, false)
 			play_sound = 1.0
-		if GM.instance_find(A.obj_persistent, 0).modo_android == 1.0 and GM.instance_find(A.obj_cursor, 0).get("move_view") == 0.0:
-			for inst in GM.with_list(A.obj_cursor):
-				inst.set("move_view", 1.0)
-			for inst in GM.with_list(A.obj_editormanager):
-				inst.set("expand_open", 2.0)
 		if x != prev_x or y != prev_y:
 			GM.audio_stop_sound(A.snd_move_object)
 			GM.audio_play_sound(A.snd_move_object, 0.0, false)
 			prev_x = x
 			prev_y = y
 			if GM.instance_exists(A.obj_ventana):
-				for inst in GM.with_list(A.obj_ventana):
-					inst.set("can_anim2", 1.0)
+				var _with_target4 = A.obj_ventana
+				var _other3: GMObject = GM.other
+				GM.other = self
+				for inst in GM.with_list(_with_target4):
+					inst.can_anim2 = 1.0
+				GM.other = _other3
 		if ventana > 0.0 and x == x_start and y == y_start:
 			ventana += 0.5
 			if ventana >= 14.0:
@@ -213,14 +211,6 @@ func _alarm_0() -> void:
 		move_snap(16.0, 16.0)
 		drop_lock = 0.0
 		ventana = 0.0
-		if GM.instance_find(A.obj_persistent, 0).modo_android == 1.0:
-			for inst in GM.with_list(A.obj_cursor):
-				inst.set("move_view", 0.0)
-			for inst in GM.with_list(A.obj_editormanager):
-				inst.speed = 0.0
-			if GM.instance_find(A.obj_levelmanager, 0).get("editor_sonidos") == 0.0:
-				for inst in GM.with_list(A.obj_editormanager):
-					inst.set("expand_open", 0.0)
 		depth = laller
 		play_sound = 0.0
 		x_draw = x
@@ -244,32 +234,44 @@ func _alarm_5() -> void:
 
 # from objects/obj_parent_resource/Collision_obj_key_res.gml
 func _collision_obj_key_res(other: GMObject) -> void:
-	if drag == 0.0 and other.get("drag") == 0.0:
+	if drag == 0.0 and other.drag == 0.0:
 		if object_index == A.obj_bowser_res or object_index == A.obj_bowserjr_res or object_index == A.obj_koopa_res or object_index == A.obj_koopa_red_res or object_index == A.obj_koopa_b_res or object_index == A.obj_koopa_red_b_res or object_index == A.obj_goomba_res or object_index == A.obj_goomba_b_res or object_index == A.obj_goombrat_res or object_index == A.obj_boomboom_res or object_index == A.obj_boomboom_b_res:
 			GM.audio_play_sound(A.snd_SMB3_getkey, 0.0, false)
-			for inst in GM.with_list(GM.instance_create(x, y, A.obj_smoke)):
+			var _with_target9 = GM.instance_create(x, y, A.obj_smoke)
+			var _other8: GMObject = GM.other
+			GM.other = self
+			for inst in GM.with_list(_with_target9):
 				inst.image_speed = 0.21
 				if G.apariencia < 2.0:
 					inst.sprite_index = A.spr_SMB3_sparkles_keys
 				else:
 					inst.sprite_index = A.spr_sparkles_keys
+			GM.other = _other8
 			key = 1.0
-			for inst in GM.with_list(other):
+			var _with_target11 = other
+			var _other10: GMObject = GM.other
+			GM.other = self
+			for inst in GM.with_list(_with_target11):
 				inst.instance_destroy()
+			GM.other = _other10
 		elif object_index == A.obj_qblock_res or object_index == A.obj_block_hidden_res or object_index == A.obj_block_res or object_index == A.obj_noteblock_res:
 			GM.audio_play_sound(A.snd_colocar_item_bloque, 0.0, false)
 			sprout = Scr.scr_sprite_get_constant_res(self, other.sprite_index)
-			for inst in GM.with_list(other):
+			var _with_target13 = other
+			var _other12: GMObject = GM.other
+			GM.other = self
+			for inst in GM.with_list(_with_target13):
 				inst.instance_destroy()
+			GM.other = _other12
 
 
 # from objects/obj_parent_resource/Collision_obj_parent_resource.gml
 func _collision_obj_parent_resource(other: GMObject) -> void:
 	if pos_cal == 1.0 and other != self and GM.object_get_parent(other.object_index) != A.obj_parent_sounds:
-		# with 块内调用了 event_user：GM.other 设为外层 self（§3.3 第 17 条）
-		var _o: GMObject = GM.other
+		var _with_target15 = other
+		var _other14: GMObject = GM.other
 		GM.other = self
-		for inst in GM.with_list(other):
+		for inst in GM.with_list(_with_target15):
 			if inst.object_index == A.obj_ground:
 				inst.event_user(2)
 				GM.instance_create(inst.x, inst.y, A.obj_tile_trigger)
@@ -278,12 +280,12 @@ func _collision_obj_parent_resource(other: GMObject) -> void:
 				GM.instance_create(inst.x, inst.y, A.obj_tile_trigger)
 			elif inst.object_index != A.obj_platform_res and inst.object_index != A.obj_platform_blue_res and inst.object_index != A.obj_vine_res and inst.object_index != A.obj_semisolid_platform1 and inst.object_index != A.obj_mushroom_platform_res and inst.object_index != A.obj_door_res and inst.object_index != A.obj_door_exit_res and inst.object_index != A.obj_door_switch_res and inst.object_index != A.obj_door_switch_exit_res and inst.object_index != A.obj_door_lock_res and inst.object_index != A.obj_door_lock_exit_res and inst.object_index != A.obj_oneway_res and inst.object_index != A.obj_platform_res and inst.object_index != A.obj_platform_blue_res and inst.object_index != A.obj_nube_res:
 				inst.instance_destroy()
-		GM.other = _o
+		GM.other = _other14
 
 
 # from objects/obj_parent_resource/Other_0.gml
 func _outside_room() -> void:
-	if GM.instance_exists(A.obj_levelmanager) and GM.instance_find(A.obj_levelmanager, 0).get("editor") == 1.0 and drag == 0.0:
+	if GM.instance_exists(A.obj_levelmanager) and GM.instance_find(A.obj_levelmanager, 0).editor == 1.0 and drag == 0.0:
 		instance_destroy()
 
 
@@ -303,14 +305,18 @@ func _user_4() -> void:
 		wings = 1.0
 	else:
 		GM.audio_play_sound(A.snd_remove_wings, 0.0, false)
-		for inst in GM.with_list(GM.instance_create((x + wings_x), ((y - wings_y) + 16.0), A.obj_wings_dead)):
-			inst.set("direct", -1.0)
+		var _with_target17 = GM.instance_create((x + wings_x), ((y - wings_y) + 16.0), A.obj_wings_dead)
+		var _other16: GMObject = GM.other
+		GM.other = self
+		for inst in GM.with_list(_with_target17):
+			inst.direct = -1.0
+		GM.other = _other16
 		wings = 0.0
 
 
 # from objects/obj_parent_resource/Draw_0.gml
 func _gm_draw() -> void:
-	if GM.instance_find(A.obj_levelmanager, 0).get("editor") == 0.0 or Scr.outside_view(self) > 0.5:
+	if GM.instance_find(A.obj_levelmanager, 0).editor == 0.0 or (Scr.outside_view(self) > 0.5):
 		return
 	if drag == 1.0:
 		GM.draw_sprite_ext(grid_selected, drop_lock, x, y, 1.0, 1.0, 0.0, GM.c_white, 1.0)
@@ -327,7 +333,7 @@ func _gm_draw() -> void:
 
 # from objects/obj_parent_resource/Mouse_0.gml
 func _mouse_0() -> void:
-	if G.resource_create == 0.0 and Scr.scr_insideview(self) > 0.5 and GM.instance_exists(A.obj_levelmanager) and GM.instance_find(A.obj_levelmanager, 0).get("editor_sonidos") == 0.0 and GM.instance_exists(A.obj_editormanager) and GM.instance_find(A.obj_editormanager, 0).get("zoom") == 0.0:
+	if G.resource_create == 0.0 and (Scr.scr_insideview(self) > 0.5) and GM.instance_exists(A.obj_levelmanager) and GM.instance_find(A.obj_levelmanager, 0).editor_sonidos == 0.0 and GM.instance_exists(A.obj_editormanager) and GM.instance_find(A.obj_editormanager, 0).zoom == 0.0:
 		if G.editor_activity == 1.0:
 			if G.cursor == 2.0:
 				_user_2()
@@ -335,38 +341,42 @@ func _mouse_0() -> void:
 
 # from objects/obj_parent_resource/Mouse_1.gml
 func _mouse_1() -> void:
-	if GM.instance_exists(A.obj_levelmanager) and GM.os_type != GM.os_android and Scr.scr_insideview(self) > 0.5 and GM.instance_find(A.obj_editormanager, 0).get("expand_open") == 0.0 and GM.instance_find(A.obj_levelmanager, 0).get("editor_sonidos") == 0.0 and GM.instance_exists(A.obj_editormanager) and GM.instance_find(A.obj_editormanager, 0).get("zoom") == 0.0:
-		if GM.instance_find(A.obj_levelmanager, 0).get("editor") == 1.0:
+	if GM.instance_exists(A.obj_levelmanager) and GM.os_type != GM.os_android and (Scr.scr_insideview(self) > 0.5) and GM.instance_find(A.obj_editormanager, 0).expand_open == 0.0 and GM.instance_find(A.obj_levelmanager, 0).editor_sonidos == 0.0 and GM.instance_exists(A.obj_editormanager) and GM.instance_find(A.obj_editormanager, 0).zoom == 0.0:
+		if GM.instance_find(A.obj_levelmanager, 0).editor == 1.0:
 			if G.cursor == 2.0:
 				_user_2()
 
 
 # from objects/obj_parent_resource/Mouse_4.gml
 func _mouse_4() -> void:
-	if GM.instance_find(A.obj_levelmanager, 0).get("editor") == 1.0 and Scr.scr_insideview(self) > 0.5 and G.resource_create == 0.0 and object_index != A.obj_resource_empty and GM.instance_find(A.obj_editormanager, 0).get("expand_open") == 0.0 and GM.instance_find(A.obj_levelmanager, 0).get("editor_sonidos") == 0.0 and GM.instance_exists(A.obj_editormanager) and GM.instance_find(A.obj_editormanager, 0).get("zoom") == 0.0 and GM.instance_exists(A.obj_cursor) and GM.instance_find(A.obj_cursor, 0).get("dont_move") == 0.0:
+	if GM.instance_find(A.obj_levelmanager, 0).editor == 1.0 and (Scr.scr_insideview(self) > 0.5) and G.resource_create == 0.0 and object_index != A.obj_resource_empty and GM.instance_find(A.obj_editormanager, 0).expand_open == 0.0 and GM.instance_find(A.obj_levelmanager, 0).editor_sonidos == 0.0 and GM.instance_exists(A.obj_editormanager) and GM.instance_find(A.obj_editormanager, 0).zoom == 0.0 and GM.instance_exists(A.obj_cursor) and GM.instance_find(A.obj_cursor, 0).dont_move == 0.0:
 		if G.editor_activity == 1.0:
 			if G.cursor == 0.0:
 				if GM.instance_find(A.obj_parent_resource, 0).alarm[0] == -1.0 and alarm[0] == -1.0:
 					GM.audio_play_sound(A.snd_ground_bomb, 0.0, false)
 					xx = (x - GM.mouse_x)
 					yy = (y - GM.mouse_y)
-					for inst in GM.with_list(A.obj_creation_preview):
-						inst.set("xx", xx)
-						inst.set("yy", yy)
+					var _with_target19 = A.obj_creation_preview
+					var _other18: GMObject = GM.other
+					GM.other = self
+					for inst in GM.with_list(_with_target19):
+						inst.xx = self.xx
+						inst.yy = self.yy
+					GM.other = _other18
 					x_start = x
 					y_start = y
 					G.resource_block = 1.0
 					drag = 1.0
-					for inst in GM.with_list(A.obj_cursor):
-						inst.set("move", 1.0)
+					for _obj_write20 in GM.with_list(A.obj_cursor):
+						_obj_write20.move = 1.0
 					ventana = 1.0
 					G.cursor = 1.0
-					# with (obj_cursor) event_user(0)：GM.other 设为外层 self（§3.3 第 17 条）
-					var _o: GMObject = GM.other
+					var _with_target22 = A.obj_cursor
+					var _other21: GMObject = GM.other
 					GM.other = self
-					for inst in GM.with_list(A.obj_cursor):
+					for inst in GM.with_list(_with_target22):
 						inst.event_user(0)
-					GM.other = _o
+					GM.other = _other21
 					if not GM.instance_exists(A.obj_effect_touch):
 						GM.instance_create(GM.mouse_x, GM.mouse_y, A.obj_effect_touch)
 					G.resource_move = object_index
@@ -376,21 +386,22 @@ func _mouse_4() -> void:
 # from objects/obj_parent_resource/Mouse_7.gml
 func _mouse_7() -> void:
 	drag = 0.0
-	for inst in GM.with_list(A.obj_cursor):
-		inst.set("move", 0.0)
+	for _obj_write23 in GM.with_list(A.obj_cursor):
+		_obj_write23.move = 0.0
 	G.resource_block = 0.0
 	if G.cursor != 2.0:
 		G.cursor = 0.0
-		var _o: GMObject = GM.other
+		var _with_target25 = A.obj_cursor
+		var _other24: GMObject = GM.other
 		GM.other = self
-		for inst in GM.with_list(A.obj_cursor):
+		for inst in GM.with_list(_with_target25):
 			inst.event_user(0)
-		GM.other = _o
+		GM.other = _other24
 
 
 # from objects/obj_parent_resource/Mouse_10.gml
 func _mouse_10() -> void:
-	if drag == 0.0 and GM.instance_exists(A.obj_editormanager) and GM.instance_find(A.obj_editormanager, 0).get("expand_open") == 0.0 and GM.instance_find(A.obj_levelmanager, 0).get("editor_sonidos") == 0.0:
+	if drag == 0.0 and GM.instance_exists(A.obj_editormanager) and GM.instance_find(A.obj_editormanager, 0).expand_open == 0.0 and GM.instance_find(A.obj_levelmanager, 0).editor_sonidos == 0.0:
 		mouse_up = 1.0
 
 

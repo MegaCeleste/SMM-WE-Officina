@@ -1,0 +1,521 @@
+extends "res://objects/obj_bossparent.gd"
+
+var state: float = 0.0
+var fire: float = 0.0
+var alt: float = 0.0
+var turning: float = 0.0
+var disup_cont: float = 0.0
+var imdead = null
+
+
+# from objects/obj_SMW_bowser/Create_0.gml
+func _create() -> void:
+	super._create()
+	cooldown = 0.0
+	state = 1.0
+	fire = 0.0
+	alt = 0.0
+	turning = 0.0
+	disup_cont = 0.0
+	swimming = 0.0
+	prevhspeed = 0.0
+	image_speed = 0.09
+	paracaidas = 0.0
+	firehitpoints = 40.0
+	key = 0.0
+	alarm[10] = 2.0
+
+
+# from objects/obj_SMW_bowser/Step_0.gml
+func _step() -> void:
+	if GM.instance_exists(A.obj_mario) and state < 3.0:
+		if GM.instance_find(A.obj_mario, 0).x > x:
+			if fire == 0.0 and turning == 0.0:
+				hspeed = 0.6
+			else:
+				if prevhspeed == 0.0:
+					prevhspeed = hspeed
+				hspeed = 0.0
+		elif fire == 0.0 and turning == 0.0:
+			if prevhspeed != 0.0:
+				hspeed = prevhspeed
+				prevhspeed = 0.0
+			elif hspeed > 0.0:
+				hspeed = 0.3
+				if x > (xstart + 64.0):
+					hspeed = (-hspeed)
+			elif hspeed < 0.0:
+				hspeed = -0.3
+				if x < (xstart - 64.0):
+					hspeed = (-hspeed)
+		else:
+			if prevhspeed == 0.0:
+				prevhspeed = hspeed
+			hspeed = 0.0
+	_user_3()
+	_user_4()
+	_user_6()
+	if gravity > 0.0:
+		gravity = 0.1
+		if vspeed > 3.2:
+			vspeed = 3.2
+	if cooldown > 0.0:
+		cooldown -= 1.0
+
+
+# from objects/obj_SMW_bowser/Step_2.gml
+func _step_end() -> void:
+	if state == 1.0:
+		if turning == 1.0:
+			if sprite_index != A.spr_bowser_turning:
+				sprite_index = A.spr_bowser_turning
+				image_index = 0.0
+			if image_index >= 2.9:
+				turning = 0.0
+				direct = (-direct)
+				alarm[10] = 1.0
+			else:
+				image_speed = 0.1
+		elif fire == 1.0:
+			if sprite_index != A.spr_bowser_fire:
+				sprite_index = A.spr_bowser_fire
+				image_index = 0.0
+			if image_index >= 1.9:
+				image_speed = 0.0
+				image_index = 1.9
+			else:
+				image_speed = 0.1
+		else:
+			sprite_index = A.spr_bowser_walk
+			if GM.instance_exists(A.obj_mario) and GM.instance_find(A.obj_mario, 0).x > x:
+				image_speed = 0.14
+			else:
+				image_speed = 0.09
+	elif state == 2.0:
+		if turning == 1.0:
+			turning = 0.0
+		if fire == 1.0:
+			if sprite_index != A.spr_bowser_fire:
+				sprite_index = A.spr_bowser_fire
+				image_index = 0.0
+			if image_index >= 1.9:
+				image_speed = 0.0
+				image_index = 1.9
+			else:
+				image_speed = 0.1
+		else:
+			sprite_index = A.spr_bowser_jump
+			image_speed = 0.0
+			image_index = 0.0
+	elif state > 2.0 and state < 5.0:
+		if sprite_index != A.spr_bowser_atack:
+			sprite_index = A.spr_bowser_atack
+			image_index = 0.0
+		if state == 4.0:
+			image_speed = 0.0
+			image_index = 3.0
+		elif image_index >= 2.9:
+			image_speed = 0.0
+			image_index = 2.9
+		else:
+			image_speed = 0.1
+	elif state >= 5.0:
+		if state == 6.0:
+			sprite_index = A.spr_bowser_big_fire
+			image_speed = 0.1
+		else:
+			if sprite_index != A.spr_bowser_prepare_fire:
+				sprite_index = A.spr_bowser_prepare_fire
+				image_index = 0.0
+			if image_index >= 4.9:
+				image_speed = 0.0
+				image_index = 4.9
+			else:
+				image_speed = 0.1
+
+
+# from objects/obj_SMW_bowser/Alarm_0.gml
+func _alarm_0() -> void:
+	if vspeed == 0.0 and state == 1.0 and turning == 0.0:
+		alt = GM.choose(0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0)
+		if alt == 1.0:
+			alarm[4] = 1.0
+			alarm[0] = 120.0
+		else:
+			# ORIG-BUG: 原版顶部检测重复检查 obj_bullebill_base，照搬。
+			if collision_rectangle(bbox_left, (bbox_top - 4.0), bbox_right, bbox_top, A.obj_solid, true, false) != null or collision_rectangle(bbox_left, (bbox_top - 4.0), bbox_right, bbox_top, A.obj_physicssolid, true, false) != null or collision_rectangle(bbox_left, (bbox_top - 4.0), bbox_right, bbox_top, A.obj_solidphy, true, false) != null or collision_rectangle(bbox_left, (bbox_top - 4.0), bbox_right, bbox_top, A.obj_bullebill_base, true, false) != null or collision_rectangle(bbox_left, (bbox_top - 4.0), bbox_right, bbox_top, A.obj_bullebill_base, true, false) != null:
+				vspeed = -0.5
+			else:
+				vspeed = GM.choose(-2.5, -2.5, -3.5, -2.5)
+			state = 2.0
+			alarm[0] = 120.0
+	else:
+		alarm[0] = 120.0
+
+
+# from objects/obj_SMW_bowser/Alarm_1.gml
+func _alarm_1() -> void:
+	fire = 1.0
+	alarm[2] = 20.0
+
+
+# from objects/obj_SMW_bowser/Alarm_2.gml
+func _alarm_2() -> void:
+	GM.audio_play_sound(A.snd_SMB3_bowser_fire, 0.0, false)
+	if direct == 1.0:
+		for inst in GM.with_list(GM.instance_create((x + 20.0), (y - 11.0), A.obj_bowser_fire)):
+			inst.hspeed = (1.5 * self.direct)
+			inst.direct = self.direct
+			if inst.vspeed == 0.0:
+				inst.decender = 1.0
+	else:
+		for inst in GM.with_list(GM.instance_create((x - 20.0), (y - 11.0), A.obj_bowser_fire)):
+			inst.hspeed = (1.5 * self.direct)
+			inst.direct = self.direct
+			if inst.vspeed == 0.0:
+				inst.decender = 1.0
+	alarm[3] = 20.0
+
+
+# from objects/obj_SMW_bowser/Alarm_3.gml
+func _alarm_3() -> void:
+	fire = 0.0
+	alarm[1] = GM.choose(120.0, 220.0, 90.0, 120.0)
+
+
+# from objects/obj_SMW_bowser/Alarm_4.gml
+func _alarm_4() -> void:
+	if state == 1.0 and turning == 0.0 and GM.instance_exists(A.obj_mario) and (GM.instance_find(A.obj_mario, 0).x > (x + 80.0) or GM.instance_find(A.obj_mario, 0).x < (x - 80.0) or alt == 1.0):
+		state = 3.0
+		fire = 0.0
+		alt = 0.0
+		alarm[0] = -1.0
+		alarm[1] = -1.0
+		alarm[2] = -1.0
+		alarm[3] = -1.0
+		alarm[6] = -1.0
+		alarm[7] = -1.0
+		alarm[5] = 30.0
+	else:
+		alarm[4] = 2.0
+
+
+# from objects/obj_SMW_bowser/Alarm_5.gml
+func _alarm_5() -> void:
+	# ORIG-BUG: 原版顶部检测重复检查 obj_bullebill_base，照搬。
+	if collision_rectangle(bbox_left, (bbox_top - 4.0), bbox_right, bbox_top, A.obj_solid, true, false) != null or collision_rectangle(bbox_left, (bbox_top - 4.0), bbox_right, bbox_top, A.obj_physicssolid, true, false) != null or collision_rectangle(bbox_left, (bbox_top - 4.0), bbox_right, bbox_top, A.obj_solidphy, true, false) != null or collision_rectangle(bbox_left, (bbox_top - 4.0), bbox_right, bbox_top, A.obj_bullebill_base, true, false) != null or collision_rectangle(bbox_left, (bbox_top - 4.0), bbox_right, bbox_top, A.obj_bullebill_base, true, false) != null:
+		vspeed = -0.5
+	else:
+		vspeed = GM.choose(-3.0, -3.5, -3.0, -3.0)
+	if GM.instance_exists(A.obj_mario):
+		if GM.instance_find(A.obj_mario, 0).x < x:
+			hspeed = ((absf((x / GM.instance_find(A.obj_mario, 0).x)) + 0.8) * direct)
+		else:
+			hspeed = ((absf((GM.instance_find(A.obj_mario, 0).x / x)) + 0.8) * direct)
+	state = 4.0
+
+
+# from objects/obj_SMW_bowser/Alarm_6.gml
+func _alarm_6() -> void:
+	if vspeed == 0.0 and turning == 0.0 and state == 1.0:
+		state = 5.0
+		fire = 0.0
+		hspeed = 0.0
+		alarm[0] = -1.0
+		alarm[1] = -1.0
+		alarm[2] = -1.0
+		alarm[3] = -1.0
+		alarm[4] = -1.0
+		alarm[5] = -1.0
+		alarm[7] = 25.0
+	else:
+		alarm[6] = 2.0
+
+
+# from objects/obj_SMW_bowser/Alarm_7.gml
+func _alarm_7() -> void:
+	GM.audio_play_sound(A.snd_flames, 0.0, false)
+	state = 6.0
+	if direct == 1.0:
+		# ORIG-BUG: 向右喷火分支没有像向左分支那样写 id_cont，照搬。
+		for inst in GM.with_list(GM.instance_create((x + 21.0), (y - 23.0), A.obj_bowserfire_up)):
+			match self.disup_cont:
+				0.0:
+					inst.hspeed = (0.8 * self.direct)
+				1.0:
+					inst.hspeed = (0.7 * self.direct)
+				2.0:
+					inst.hspeed = (0.6 * self.direct)
+				3.0:
+					inst.hspeed = (0.5 * self.direct)
+				4.0:
+					inst.hspeed = (0.4 * self.direct)
+					inst.last = 1.0
+					inst.pos = (self.x + 224.0)
+			inst.direct = self.direct
+	else:
+		for inst in GM.with_list(GM.instance_create((x - 21.0), (y - 23.0), A.obj_bowserfire_up)):
+			match self.disup_cont:
+				0.0:
+					inst.hspeed = (0.8 * self.direct)
+					inst.id_cont = 1.0
+				1.0:
+					inst.hspeed = (0.7 * self.direct)
+					inst.id_cont = 2.0
+				2.0:
+					inst.hspeed = (0.6 * self.direct)
+					inst.id_cont = 3.0
+				3.0:
+					inst.hspeed = (0.5 * self.direct)
+					inst.id_cont = 4.0
+				4.0:
+					inst.hspeed = (0.4 * self.direct)
+					inst.last = 1.0
+					inst.pos = (self.x - 224.0)
+			inst.direct = self.direct
+	if disup_cont == 4.0:
+		disup_cont = 0.0
+		state = 1.0
+		alarm[10] = 10.0
+	else:
+		disup_cont += 1.0
+		alarm[7] = 25.0
+
+
+# from objects/obj_SMW_bowser/Alarm_10.gml
+func _alarm_10() -> void:
+	hspeed = -0.3
+	alarm[0] = GM.choose(120.0, 180.0, 120.0)
+	alarm[1] = GM.choose(180.0, 90.0, 120.0)
+	alarm[4] = GM.choose(480.0, 520.0, 480.0, 340.0)
+	alarm[6] = GM.choose(420.0, 560.0, 320.0, 480.0)
+	alarm[11] = 20.0
+
+
+# from objects/obj_SMW_bowser/Alarm_11.gml
+func _alarm_11() -> void:
+	if state == 1.0:
+		alarm[11] = 60.0
+		if GM.instance_exists(A.obj_mario):
+			if (GM.instance_find(A.obj_mario, 0).x < x and direct == 1.0) or (GM.instance_find(A.obj_mario, 0).x > x and direct == -1.0):
+				turning = 1.0
+				fire = 0.0
+				alarm[0] = -1.0
+				alarm[1] = -1.0
+				alarm[2] = -1.0
+				alarm[3] = -1.0
+				alarm[4] = -1.0
+				alarm[6] = -1.0
+				alarm[7] = -1.0
+	else:
+		alarm[11] = 10.0
+
+
+# from objects/obj_SMW_bowser/Collision_obj_blockparent.gml
+func _collision_obj_blockparent(other: GMObject) -> void:
+	if other.vspeed < 0.0 and bbox_bottom < (other.yprevious + 5.0):
+		if G.bg_level == "underwater" or (G.bg_level == "sky" and G.modo_noche == 1.0) or (G.bg_level == "airship" and G.modo_noche == 1.0):
+			vspeed = -0.5
+		else:
+			vspeed = -1.0
+
+
+# from objects/obj_SMW_bowser/Collision_obj_mario.gml
+func _collision_obj_mario(other: GMObject) -> void:
+	if GM.instance_exists(A.obj_invincibility):
+		return
+	if G.yoshi > 0.0 and other.bbox_bottom < ((bbox_top - vspeed) + 5.0):
+		if GM.instance_exists(A.obj_kuribo_drybones) and GM.instance_find(A.obj_kuribo_drybones, 0).get("gran_golpe") == 1.0:
+			GM.audio_play_sound(A.snd_SMB_kick, 0.0, false)
+			var _other_1: GMObject = GM.other
+			GM.other = self
+			for inst in GM.with_list(other):
+				inst.event_user(1)
+			GM.other = _other_1
+			for inst in GM.with_list(A.obj_kuribo_drybones):
+				inst.gran_golpe = 0.0
+			_user_0()
+		else:
+			_user_15()
+			firehitpoints -= 1.0
+			cooldown = 6.0
+			if firehitpoints <= 0.0:
+				_user_0()
+			other.hspeed = GM.lengthdir_x(3.0, GM.point_direction(x, y, other.x, (other.y + 16.0)))
+			var _other_2: GMObject = GM.other
+			GM.other = self
+			for inst in GM.with_list(other):
+				inst.event_user(1)
+			GM.other = _other_2
+	else:
+		other.hspeed = GM.lengthdir_x(3.0, GM.point_direction(x, y, other.x, (other.y + 16.0)))
+		if (other.y + 16.0) < (y - 12.0):
+			if G.bg_level == "underwater" or (G.bg_level == "sky" and G.modo_noche == 1.0):
+				other.vspeed = -2.125
+			else:
+				other.vspeed = -5.0
+		var _other_3: GMObject = GM.other
+		GM.other = self
+		for inst in GM.with_list(other):
+			inst.event_user(0)
+
+
+		GM.other = _other_3
+# from objects/obj_SMW_bowser/Other_10.gml
+func _user_0() -> void:
+	if key == 1.0:
+		for inst in GM.with_list(GM.instance_create((x - 8.0), (y - 8.0), A.obj_key_appear)):
+			inst.vspeed = -4.0
+	GM.audio_play_sound(A.snd_bowser_dead, 0.0, false)
+	imdead = GM.instance_create(x, y, A.obj_bowser_dead)
+	imdead.direct = direct
+	imdead.vspeed = -3.5
+	if direct == 1.0:
+		imdead.hspeed = -1.0
+	else:
+		imdead.hspeed = 1.0
+	instance_destroy()
+
+
+# from objects/obj_SMW_bowser/Other_13.gml
+func _user_3() -> void:
+	var col_one_left
+	var col_one_right
+	if (hspeed > 0.0 and collision_rectangle(bbox_right, (bbox_top + 1.0), (bbox_right + 1.0), (bbox_bottom - 4.0), A.obj_solid, false, false) != null) or (hspeed < 0.0 and collision_rectangle((bbox_left - 1.0), (bbox_top + 1.0), bbox_left, (bbox_bottom - 4.0), A.obj_solid, false, false) != null) or (hspeed > 0.0 and collision_rectangle(bbox_right, (bbox_top + 1.0), (bbox_right + 1.0), (bbox_bottom - 4.0), A.obj_hurtsolid2, false, false) != null) or (hspeed < 0.0 and collision_rectangle((bbox_left - 1.0), (bbox_top + 1.0), bbox_left, (bbox_bottom - 4.0), A.obj_hurtsolid2, false, false) != null) or (hspeed > 0.0 and collision_rectangle(bbox_right, (bbox_top + 1.0), (bbox_right + 1.0), (bbox_bottom - 4.0), A.obj_solidphy, false, false) != null) or (hspeed < 0.0 and collision_rectangle((bbox_left - 1.0), (bbox_top + 1.0), bbox_left, (bbox_bottom - 4.0), A.obj_solidphy, false, false) != null) or (hspeed > 0.0 and collision_rectangle(bbox_right, (bbox_top + 1.0), (bbox_right + 1.0), (bbox_bottom - 4.0), A.obj_enemyparent_held, false, false) != null) or (hspeed < 0.0 and collision_rectangle((bbox_left - 1.0), (bbox_top + 1.0), bbox_left, (bbox_bottom - 4.0), A.obj_enemyparent_held, false, false) != null) or (hspeed > 0.0 and collision_rectangle(bbox_right, (bbox_top + 1.0), (bbox_right + 1.0), (bbox_bottom - 4.0), A.obj_bullebill_base, false, false) != null) or (hspeed < 0.0 and collision_rectangle((bbox_left - 1.0), (bbox_top + 1.0), bbox_left, (bbox_bottom - 4.0), A.obj_bullebill_base, false, false) != null) or (hspeed > 0.0 and collision_rectangle(bbox_right, (bbox_top + 1.0), (bbox_right + 1.0), (bbox_bottom - 4.0), A.obj_onewaygate_left, false, false) != null) or (hspeed < 0.0 and collision_rectangle((bbox_left - 1.0), (bbox_top + 1.0), bbox_left, (bbox_bottom - 4.0), A.obj_onewaygate_right, false, false) != null):
+		col_one_left = collision_rectangle(bbox_right, (bbox_top + 1.0), (bbox_right + 1.0), (bbox_bottom - 4.0), A.obj_onewaygate_left, false, false)
+		col_one_right = collision_rectangle((bbox_left - 1.0), (bbox_top + 1.0), bbox_left, (bbox_bottom - 4.0), A.obj_onewaygate_right, false, false)
+		if hspeed > 0.0 and col_one_left != null:
+			var _other_4: GMObject = GM.other
+			GM.other = self
+			for inst in GM.with_list(col_one_left):
+				inst.rot = 1.0
+				inst.event_user(0)
+			GM.other = _other_4
+		if hspeed < 0.0 and col_one_right != null:
+			var _other_5: GMObject = GM.other
+			GM.other = self
+			for inst in GM.with_list(col_one_right):
+				inst.rot = 1.0
+				inst.event_user(0)
+			GM.other = _other_5
+		if (direct == 1.0 and hspeed > 0.0) or state == 3.0 or state == 4.0:
+			hspeed = 0.0
+		else:
+			hspeed = (-hspeed)
+		if state == 4.0:
+			state = 1.0
+			alarm[10] = 1.0
+		if (collision_rectangle((bbox_left - 1.0), (bbox_top + 1.0), bbox_left, (bbox_bottom - 4.0), A.obj_solid, false, false) == null) and (collision_rectangle((bbox_left - 1.0), (bbox_top + 1.0), bbox_left, (bbox_bottom - 4.0), A.obj_physicssolid, false, false) == null) and (collision_rectangle((bbox_left - 1.0), (bbox_top + 1.0), bbox_left, (bbox_bottom - 4.0), A.obj_solidphy, false, false) == null) and (collision_rectangle((bbox_left - 1.0), (bbox_top + 1.0), bbox_left, (bbox_bottom - 4.0), A.obj_bullebill_base, false, false) == null) and (collision_rectangle((bbox_left - 1.0), (bbox_top + 1.0), bbox_left, (bbox_bottom - 4.0), A.obj_onewaygate_right, false, false) == null):
+			while collision_rectangle(bbox_right, (bbox_top + 4.0), bbox_right, (bbox_bottom - 4.0), A.obj_physicssolid, true, false) != null:
+				x -= 1.0
+			while collision_rectangle(bbox_right, (bbox_top + 4.0), bbox_right, (bbox_bottom - 4.0), A.obj_solidphy, true, false) != null:
+				x -= 1.0
+			while collision_rectangle(bbox_right, (bbox_top + 4.0), bbox_right, (bbox_bottom - 4.0), A.obj_bullebill_base, true, false) != null:
+				x -= 1.0
+			while collision_rectangle(bbox_right, (bbox_top + 4.0), bbox_right, (bbox_bottom - 4.0), A.obj_onewaygate_left, true, false) != null:
+				x -= 1.0
+		if (collision_rectangle(bbox_right, (bbox_top + 1.0), (bbox_right + 1.0), (bbox_bottom - 4.0), A.obj_solid, false, false) == null) and (collision_rectangle(bbox_right, (bbox_top + 1.0), (bbox_right + 1.0), (bbox_bottom - 4.0), A.obj_physicssolid, false, false) == null) and (collision_rectangle(bbox_right, (bbox_top + 1.0), (bbox_right + 1.0), (bbox_bottom - 4.0), A.obj_solidphy, false, false) == null) and (collision_rectangle(bbox_right, (bbox_top + 1.0), (bbox_right + 1.0), (bbox_bottom - 4.0), A.obj_bullebill_base, false, false) == null) and (collision_rectangle(bbox_right, (bbox_top + 1.0), (bbox_right + 1.0), (bbox_bottom - 4.0), A.obj_onewaygate_left, false, false) == null):
+			while collision_rectangle(bbox_left, (bbox_top + 4.0), bbox_left, (bbox_bottom - 4.0), A.obj_physicssolid, true, false) != null:
+				x += 1.0
+			while collision_rectangle(bbox_left, (bbox_top + 4.0), bbox_left, (bbox_bottom - 4.0), A.obj_solidphy, true, false) != null:
+				x += 1.0
+			while collision_rectangle(bbox_left, (bbox_top + 4.0), bbox_left, (bbox_bottom - 4.0), A.obj_bullebill_base, true, false) != null:
+				x += 1.0
+			while collision_rectangle(bbox_left, (bbox_top + 4.0), bbox_left, (bbox_bottom - 4.0), A.obj_onewaygate_right, true, false) != null:
+				x += 1.0
+		while collision_rectangle(bbox_right, (bbox_top + 4.0), bbox_right, (bbox_bottom - 4.0), A.obj_solid, true, false) != null:
+			x -= 1.0
+		while collision_rectangle(bbox_left, (bbox_top + 4.0), bbox_left, (bbox_bottom - 4.0), A.obj_solid, true, false) != null:
+			x += 1.0
+
+
+# from objects/obj_SMW_bowser/Other_14.gml
+func _user_4() -> void:
+	var solidtop
+	var solidpow
+	var solidmuncher
+	var solidpinchos
+	var col_one_top
+	var col_one_bottom
+	if vspeed >= 0.0:
+		solidtop = collision_rectangle(bbox_left, bbox_bottom, bbox_right, (bbox_bottom + vspeed), A.obj_solidtop, false, false)
+		solidpow = collision_rectangle(bbox_left, bbox_bottom, bbox_right, (bbox_bottom + vspeed), A.obj_block_pow_hold, false, false)
+		solidmuncher = collision_rectangle(bbox_left, bbox_bottom, bbox_right, (bbox_bottom + vspeed), A.obj_muncher, false, false)
+		solidpinchos = collision_rectangle(bbox_left, bbox_bottom, bbox_right, (bbox_bottom + vspeed), A.obj_pinchos, false, false)
+		if solidtop != null and bbox_bottom < (solidtop.yprevious + 5.0):
+			y = (solidtop.y + floorf(((y - bbox_bottom) - 0.9)))
+		if solidmuncher != null and bbox_bottom < (solidmuncher.yprevious + 5.0) and GM.instance_find(A.obj_levelmanager, 0).get("editor") == 0.0:
+			y = (solidmuncher.y + floorf(((y - bbox_bottom) - 0.9)))
+		if solidpinchos != null and bbox_bottom < (solidpinchos.yprevious + 5.0) and GM.instance_find(A.obj_levelmanager, 0).get("editor") == 0.0:
+			y = (solidpinchos.y + floorf(((y - bbox_bottom) - 0.9)))
+		if solidpow != null and bbox_bottom < (solidpow.yprevious + 5.0) and GM.instance_find(A.obj_levelmanager, 0).get("editor") == 0.0:
+			y = (solidpow.y + floorf(((y - bbox_bottom) - 0.9)))
+		if vspeed > 4.0:
+			vspeed = 4.0
+	if (collision_rectangle(bbox_left, (bbox_bottom + 1.0), bbox_right, (bbox_bottom + 1.0), A.obj_solidtop, false, false) != null and (collision_rectangle(bbox_left, (bbox_bottom - 4.0), bbox_right, (bbox_bottom - 4.0), A.obj_solidtop, false, false) == null)) or (collision_rectangle(bbox_left, (bbox_bottom + 1.0), bbox_right, (bbox_bottom + 1.0), A.obj_block_pow_hold, false, false) != null and (collision_rectangle(bbox_left, (bbox_bottom - 4.0), bbox_right, (bbox_bottom - 4.0), A.obj_block_pow_hold, false, false) == null)) or (collision_rectangle(bbox_left, (bbox_bottom + 1.0), bbox_right, (bbox_bottom + 1.0), A.obj_muncher, false, false) != null and (collision_rectangle(bbox_left, (bbox_bottom - 4.0), bbox_right, (bbox_bottom - 4.0), A.obj_muncher, false, false) == null)) or (collision_rectangle(bbox_left, (bbox_bottom + 1.0), bbox_right, (bbox_bottom + 1.0), A.obj_pinchos, false, false) != null and (collision_rectangle(bbox_left, (bbox_bottom - 4.0), bbox_right, (bbox_bottom - 4.0), A.obj_pinchos, false, false) == null)):
+		gravity = 0.0
+		if vspeed > 0.0:
+			vspeed = 0.0
+			col_one_top = collision_rectangle(bbox_left, (bbox_bottom + 1.0), bbox_right, (bbox_bottom + 1.0), A.obj_onewaygate_top, false, false)
+			if col_one_top != null:
+				if not GM.audio_is_playing(A.snd_oneway):
+					GM.audio_play_sound(A.snd_oneway, 0.0, false)
+				for inst in GM.with_list(col_one_top):
+					inst.rot = 1.0
+			if state == 4.0:
+				alarm[10] = 1.0
+			if state != 5.0 and state != 6.0:
+				state = 1.0
+	elif paracaidas == 1.0:
+		gravity = 0.1
+		if vspeed > 0.4:
+			vspeed = 0.4
+	elif not (swimming > 0.5):
+		gravity = 0.2
+		if vspeed > 4.0:
+			vspeed = 4.0
+	elif swimming == 1.0:
+		gravity = 0.1
+		if vspeed > 0.4:
+			vspeed = 0.4
+	if vspeed < 0.0 and (collision_rectangle((bbox_left + 1.0), ((bbox_top + vspeed) - 1.0), (bbox_right - 1.0), (bbox_top - 1.0), A.obj_solid, true, false) != null or collision_rectangle((bbox_left + 1.0), ((bbox_top + vspeed) - 1.0), (bbox_right - 1.0), (bbox_top - 1.0), A.obj_onewaygate_bottom, true, false) != null or collision_rectangle((bbox_left + 1.0), (bbox_top - 1.0), (bbox_right - 1.0), bbox_top, A.obj_pinchos, true, false) != null):
+		col_one_bottom = collision_rectangle((bbox_left + 1.0), ((bbox_top + vspeed) - 1.0), (bbox_right - 1.0), (bbox_top - 1.0), A.obj_onewaygate_bottom, true, false)
+		if col_one_bottom != null:
+			var _other_6: GMObject = GM.other
+			GM.other = self
+			for inst in GM.with_list(col_one_bottom):
+				inst.rot = 1.0
+				inst.event_user(0)
+			GM.other = _other_6
+		while collision_rectangle((bbox_left + 1.0), bbox_top, (bbox_right - 1.0), bbox_top, A.obj_solid, true, false) != null:
+			y += 1.0
+		vspeed = 0.0
+	if GM.instance_exists(A.obj_lava_water) and (bbox_bottom - 8.0) > (GM.instance_find(A.obj_lava_water, 0).y - 12.0) and (G.bg_level == "castle" or (G.bg_level == "forest" and G.modo_noche == 1.0)):
+		if key == 1.0:
+			for inst in GM.with_list(GM.instance_create((x - 8.0), (y - 8.0), A.obj_key_appear)):
+				inst.vspeed = -4.0
+		GM.audio_stop_sound(A.snd_bowser_dead)
+		GM.audio_play_sound(A.snd_bowser_dead, 0.0, false)
+		for inst in GM.with_list(GM.instance_create(x, y, A.obj_bowser_dead)):
+			inst.direct = self.direct
+		instance_destroy()
+	elif (bbox_top - 16.0) > GM.room_height and G.bg_level != "castle" and G.bg_level != "forest" and G.bg_level != "beach":
+		if key == 1.0:
+			for inst in GM.with_list(GM.instance_create((x - 8.0), (y - 8.0), A.obj_key_appear)):
+				inst.vspeed = -4.0
+		GM.audio_stop_sound(A.snd_bowser_dead)
+		GM.audio_play_sound(A.snd_bowser_dead, 0.0, false)
+		if GM.instance_exists(A.obj_levelmanager):
+			for inst in GM.with_list(A.obj_levelmanager):
+				inst.dead_bowser = 1.0
+				inst.alarm[11] = 120.0
+		instance_destroy()
+	_user_14()
+
+
+# from objects/obj_SMW_bowser/Draw_0.gml
+func _gm_draw() -> void:
+	if cooldown > 0.0:
+		GM.draw_sprite_ext(sprite_index, image_index, GM.gm_round(x), y, direct, 1.0, 0.0, GM.make_colour_rgb(255.0, 60.0, 109.0), (cooldown / 4.0))
+	else:
+		GM.draw_sprite_ext(sprite_index, image_index, GM.gm_round(x), y, direct, 1.0, 0.0, GM.c_white, 1.0)

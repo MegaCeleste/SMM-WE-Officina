@@ -3,7 +3,7 @@ extends "res://objects/obj_bowser_fire.gd"
 var id_boss: float = 0.0
 var id_cont: float = 0.0
 var last: float = 0.0
-var pos: float = 0.0  # 由 boss（空壳，第 8 批）写入
+var pos: float = 0.0  # 由 boss 写入
 var out_1: float = 0.0
 var out_2: float = 0.0
 var out_3: float = 0.0

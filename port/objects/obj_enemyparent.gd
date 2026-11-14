@@ -93,39 +93,46 @@ func _step_begin() -> void:
 
 # from objects/obj_enemyparent/Step_0.gml
 func _step() -> void:
-	if G.bg_level == "underwater" or (GM.instance_exists(A.obj_lava_water) and (y + 8.0) >= (GM.instance_find(A.obj_lava_water, 0).y - 12.0)) or (G.modo_noche == 1.0 and G.bg_level == "sky") or (G.modo_noche == 1.0 and G.bg_level == "airship") or (GM.instance_exists(A.obj_lava_water) and y > (GM.instance_find(A.obj_lava_water, 0).y + 4.0) and ((G.bg_level == "forest" and G.modo_noche == 0.0) or G.bg_level == "beach")):
-		swimming = 1.0
+	_step_for(self)
+
+
+# PORT: event_perform_object in obj_bossparent calls this event across the inheritance tree.
+# from objects/obj_enemyparent/Step_0.gml
+static func _step_for(me: GMObject) -> void:
+	var _me = me
+	if G.bg_level == "underwater" or (GM.instance_exists(A.obj_lava_water) and (_me.y + 8.0) >= (GM.instance_find(A.obj_lava_water, 0).y - 12.0)) or (G.modo_noche == 1.0 and G.bg_level == "sky") or (G.modo_noche == 1.0 and G.bg_level == "airship") or (GM.instance_exists(A.obj_lava_water) and _me.y > (GM.instance_find(A.obj_lava_water, 0).y + 4.0) and ((G.bg_level == "forest" and G.modo_noche == 0.0) or G.bg_level == "beach")):
+		_me.swimming = 1.0
 	else:
-		swimming = 0.0
-	_user_2()
-	_user_3()
-	_user_4()
-	if hspeed > 0.0:
-		direct = 1.0
-	elif hspeed < 0.0:
-		direct = -1.0
-	if GM.instance_exists(A.obj_lava_water) and (y + 8.0) >= (GM.instance_find(A.obj_lava_water, 0).y - 12.0) and object_index != A.obj_grinder and object_index != A.obj_thwomp and object_index != A.obj_podoboo and object_index != A.obj_cheepcheep and object_index != A.obj_boo and object_index != A.obj_bobomb and object_index != A.obj_bobomb_ready and object_index != A.obj_pokey:
+		_me.swimming = 0.0
+	_me._user_2()
+	_me._user_3()
+	_me._user_4()
+	if _me.hspeed > 0.0:
+		_me.direct = 1.0
+	elif _me.hspeed < 0.0:
+		_me.direct = -1.0
+	if GM.instance_exists(A.obj_lava_water) and (_me.y + 8.0) >= (GM.instance_find(A.obj_lava_water, 0).y - 12.0) and _me.object_index != A.obj_grinder and _me.object_index != A.obj_thwomp and _me.object_index != A.obj_podoboo and _me.object_index != A.obj_cheepcheep and _me.object_index != A.obj_boo and _me.object_index != A.obj_bobomb and _me.object_index != A.obj_bobomb_ready and _me.object_index != A.obj_pokey:
 		if G.bg_level == "castle":
 			if G.apariencia != 0.0:
-				GM.instance_create(x, (GM.instance_find(A.obj_lava_water, 0).y - 26.0), A.obj_splash_lava)
-			for inst in GM.with_list(GM.instance_create(x, y, A.obj_enemyparent_lava)):
-				inst.sprite_index = self.sprite_index
-				inst.set("direct", self.direct)
-			instance_destroy()
+				GM.instance_create(_me.x, (GM.instance_find(A.obj_lava_water, 0).y - 26.0), A.obj_splash_lava)
+			for inst in GM.with_list(GM.instance_create(_me.x, _me.y, A.obj_enemyparent_lava)):
+				inst.sprite_index = _me.sprite_index
+				inst.set("direct", _me.direct)
+			_me.instance_destroy()
 		elif G.bg_level == "forest" and G.modo_noche == 1.0:
 			if G.apariencia != 0.0:
-				GM.instance_create(x, (GM.instance_find(A.obj_lava_water, 0).y - 26.0), A.obj_splash_posion)
-			for inst in GM.with_list(GM.instance_create(x, y, A.obj_enemyparent_lava)):
-				inst.sprite_index = self.sprite_index
-				inst.set("direct", self.direct)
-			instance_destroy()
+				GM.instance_create(_me.x, (GM.instance_find(A.obj_lava_water, 0).y - 26.0), A.obj_splash_posion)
+			for inst in GM.with_list(GM.instance_create(_me.x, _me.y, A.obj_enemyparent_lava)):
+				inst.sprite_index = _me.sprite_index
+				inst.set("direct", _me.direct)
+			_me.instance_destroy()
 		elif G.bg_level == "mountain" and G.modo_noche == 1.0:
 			if G.apariencia != 0.0:
-				GM.instance_create(x, (GM.instance_find(A.obj_lava_water, 0).y - 26.0), A.obj_splash_lava)
-			for inst in GM.with_list(GM.instance_create(x, y, A.obj_enemyparent_lava)):
-				inst.sprite_index = self.sprite_index
-				inst.set("direct", self.direct)
-			instance_destroy()
+				GM.instance_create(_me.x, (GM.instance_find(A.obj_lava_water, 0).y - 26.0), A.obj_splash_lava)
+			for inst in GM.with_list(GM.instance_create(_me.x, _me.y, A.obj_enemyparent_lava)):
+				inst.sprite_index = _me.sprite_index
+				inst.set("direct", _me.direct)
+			_me.instance_destroy()
 
 
 # from objects/obj_enemyparent/Alarm_10.gml

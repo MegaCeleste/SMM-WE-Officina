@@ -1,0 +1,43 @@
+extends "res://objects/obj_button_parent.gd"
+
+var canpress: float = 0.0
+
+
+# from objects/obj_button_settings_close/Create_0.gml
+func _create() -> void:
+	super._create()
+	canpress = 0.0
+	text = Scr.scr_language(self, 28.0)
+	alarm[2] = 15.0
+
+
+# from objects/obj_button_settings_close/Alarm_2.gml
+func _alarm_2() -> void:
+	canpress = 1.0
+
+
+# from objects/obj_button_settings_close/Mouse_4.gml
+func _mouse_4() -> void:
+	if visible == true:
+		GM.audio_stop_sound(A.snd_aceptar)
+		GM.audio_play_sound(A.snd_aceptar, 0.0, false)
+		if GM.instance_exists(A.obj_settings_panel):
+			for inst in GM.with_list(A.obj_settings_panel):
+				inst.instance_destroy()
+		var creator = GM.instance_find(A.obj_creator_jugar_editar, 0)
+		if creator != null and GM.audio_is_paused(creator.music_editor) and G.keymod == 0.0:
+			GM.audio_resume_sound(creator.music_editor)
+		if GM.instance_exists(A.obj_gb_button):
+			for inst in GM.with_list(A.obj_gb_button):
+				inst.alarm[0] = 15.0
+		if GM.instance_exists(A.obj_menu_editor_ext):
+			for inst in GM.with_list(A.obj_menu_editor_ext):
+				inst.alarm[0] = 15.0
+		if GM.instance_exists(A.obj_guardabot):
+			for inst in GM.with_list(A.obj_guardabot):
+				inst.can_anim = 1.0
+		var previous_other: GMObject = GM.other
+		GM.other = self
+		for inst in GM.with_list(A.obj_persistent):
+			inst.event_user(7)
+		GM.other = previous_other

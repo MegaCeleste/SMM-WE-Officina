@@ -37,7 +37,7 @@ const SMB2: float = 4.0
 enum e__BG { Visible, Foreground, Index, X, Y, Width, Height, HTiled, VTiled, XScale, YScale, HSpeed, VSpeed, Blend, Alpha }
 enum e__VW { XView, YView, WView, HView, Angle, HBorder, VBorder, HSpeed, VSpeed, Object, Visible, XPort, YPort, WPort, HPort, Camera, SurfaceID }
 
-# ---- 已移植脚本（236 个文件） ----
+# ---- 已移植脚本（239 个文件） ----
 const _m_background_get = preload("res://scripts/__background_get.gd")
 const _m_background_get_element = preload("res://scripts/__background_get_element.gd")
 const _m_background_get_internal = preload("res://scripts/__background_get_internal.gd")
@@ -53,9 +53,11 @@ const _m_draw_sprite_tiled_area_ext = preload("res://scripts/draw_sprite_tiled_a
 const _m_hex_string_byte = preload("res://scripts/hex_string_byte.gd")
 const _m_init_shake = preload("res://scripts/init_shake.gd")
 const _m_init_shockwave = preload("res://scripts/init_shockwave.gd")
+const _m_key_to_string = preload("res://scripts/key_to_string.gd")
 const _m_LoadJSONFromFile = preload("res://scripts/LoadJSONFromFile.gd")
 const _m_outside_view = preload("res://scripts/outside_view.gd")
 const _m_SaveStringToFile = preload("res://scripts/SaveStringToFile.gd")
+const _m_scr_add3points = preload("res://scripts/scr_add3points.gd")
 const _m_scr_anim_hover = preload("res://scripts/scr_anim_hover.gd")
 const _m_scr_anim_hover2 = preload("res://scripts/scr_anim_hover2.gd")
 const _m_scr_arcon_fly = preload("res://scripts/scr_arcon_fly.gd")
@@ -271,6 +273,7 @@ const _m_scr_tiles_ground = preload("res://scripts/scr_tiles_ground.gd")
 const _m_scr_tiles_ground_start = preload("res://scripts/scr_tiles_ground_start.gd")
 const _m_scr_toast = preload("res://scripts/scr_toast.gd")
 const _m_screen_round = preload("res://scripts/screen_round.gd")
+const _m_set_keys = preload("res://scripts/set_keys.gd")
 const _m_sha1_string_utf8_hmac = preload("res://scripts/sha1_string_utf8_hmac.gd")
 const _m_string_add_zeros = preload("res://scripts/string_add_zeros.gd")
 const _m_tile_layer_find = preload("res://scripts/tile_layer_find.gd")
@@ -320,6 +323,9 @@ static func init_shake(me: GMObject, argument0 = null) -> void:
 static func init_shockwave(me: GMObject) -> void:
 	_m_init_shockwave.init_shockwave(me)
 
+static func key_to_string(_me: GMObject, argument0: float) -> Variant:
+	return _m_key_to_string.key_to_string(_me, argument0)
+
 static func LoadJSONFromFile(me: GMObject, argument0 = null) -> Variant:
 	return _m_LoadJSONFromFile.LoadJSONFromFile(me, argument0)
 
@@ -328,6 +334,9 @@ static func outside_view(me: GMObject) -> float:
 
 static func SaveStringToFile(me: GMObject, argument0 = null, argument1 = null):
 	return _m_SaveStringToFile.SaveStringToFile(me, argument0, argument1)
+
+static func scr_add3points(_me: GMObject, argument0: String, argument1: float, argument2: float) -> Variant:
+	return _m_scr_add3points.scr_add3points(_me, argument0, argument1, argument2)
 
 static func scr_anim_hover(me: GMObject, argument0 = null, argument1 = null, argument2 = null, argument3 = null):
 	return _m_scr_anim_hover.scr_anim_hover(me, argument0, argument1, argument2, argument3)
@@ -973,6 +982,9 @@ static func scr_toast(me: GMObject, argument0 = null, argument1 = null):
 
 static func screen_round(me: GMObject, value = null):
 	return _m_screen_round.screen_round(me, value)
+
+static func set_keys(me: GMObject, argument0: float, argument1: String, argument2: float) -> Variant:
+	return _m_set_keys.set_keys(me, argument0, argument1, argument2)
 
 static func sha1_string_utf8_hmac(me: GMObject, argument0 = null, argument1 = null):
 	return _m_sha1_string_utf8_hmac.sha1_string_utf8_hmac(me, argument0, argument1)

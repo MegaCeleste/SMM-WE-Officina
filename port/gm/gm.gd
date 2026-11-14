@@ -1329,6 +1329,8 @@ func _update_view_follow() -> void:
 	_presentation_camera_follow = Vector2(_cam_x[0], _cam_y[0])
 	var t: Variant = _cam_target[view_camera[0]]
 	var inst: GMObject = null
+	if typeof(t) == TYPE_OBJECT and not is_instance_valid(t):
+		return
 	if t is GMObject:
 		if instance_exists(t):
 			inst = t

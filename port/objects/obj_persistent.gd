@@ -1,6 +1,6 @@
 # from objects/obj_persistent/（第 2 批移植，已逐事件核对）
-# 唯一的 persistent object。不移植的部分：设置文件（Other_2 的读、Other_17 的写，第 10 批改用
-# ConfigFile）、Discord/NekoPresence（Other_60、Other_70、np_* 调用）、Android 分支。
+# 唯一的 persistent object。设置文件改用 ConfigFile；Discord/NekoPresence
+#（Other_60、Other_70、np_* 调用）和 Android 分支不移植。
 # 触屏虚拟按键（Other_12–15）照翻，兼容层的 virtual_key_* 现在是空实现。
 extends GMObject
 
@@ -43,6 +43,13 @@ var var_shock_width = null  # init_shockwave 里赋值
 var cronometro = null
 var cronometro_play = null
 var cronometro_restart = null
+
+const SETTINGS_PATH: String = "user://settings.cfg"
+const SETTINGS_NUMBERS: Array[String] = [
+	"vsync", "lanzar_agarrar", "saltar", "saltar_spin", "pause", "jugador",
+	"arriba", "abajo", "izquierda", "derecha", "idioma", "w_scale",
+	"audiomaster", "sm4j_style", "effect_star", "hd", "controller",
+]
 
 
 # from objects/obj_persistent/Create_0.gml
@@ -461,24 +468,20 @@ func _game_start() -> void:
 		sleep_tm = 4.0
 	else:
 		sleep_tm = 10.0
-	# 设置文件 Settings_new.dat 不移植（port-plan §0：设置改用 ConfigFile，第 10 批），
-	# 这里固定走“没有设置文件”的分支。原文件第 21–69 行读文件。
-	if false:
-		pass
-	else:
-		fullscreen = 0.0
-		filter = 1.0
-		G.vsync = 1.0
-		G.jugador = 0.0
-		G.derecha = 68.0
-		G.izquierda = 65.0
-		G.arriba = 87.0
-		G.abajo = 83.0
-		G.saltar = 38.0
-		G.saltar_spin = 40.0
-		G.lanzar_agarrar = 37.0
-		G.pause = 32.0
-		G.w_scale = 1.0
+	fullscreen = 0.0
+	filter = 1.0
+	G.vsync = 1.0
+	G.jugador = 0.0
+	G.derecha = 68.0
+	G.izquierda = 65.0
+	G.arriba = 87.0
+	G.abajo = 83.0
+	G.saltar = 38.0
+	G.saltar_spin = 40.0
+	G.lanzar_agarrar = 37.0
+	G.pause = 32.0
+	G.w_scale = 1.0
+	_load_settings()
 	alarm[5] = 1.0
 	GM.audio_play_sound(A.snd_coin, 0.0, false)
 	alarm[4] = 260.0
@@ -702,8 +705,47 @@ func _user_6() -> void:
 
 # from objects/obj_persistent/Other_17.gml
 func _user_7() -> void:
-	# 写 Settings_new.dat。设置文件不移植（port-plan §0：改用 ConfigFile，第 10 批），先留空。
-	pass
+	var config: ConfigFile = ConfigFile.new()
+	config.set_value("settings", "fullscreen", fullscreen)
+	config.set_value("settings", "filter", filter)
+	for key: String in SETTINGS_NUMBERS:
+		config.set_value("settings", key, G.get(key))
+	config.set_value("settings", "last_level", G.last_level)
+	# ORIG-BUG: 原版写 name_user，读入 name_users。
+	config.set_value("settings", "name_user", G.name_user)
+	config.set_value("settings", "my1", GM.string(G.my1))
+	var error: Error = config.save(SETTINGS_PATH)
+	if error != OK:
+		push_warning("无法保存设置：%s（错误 %d）" % [SETTINGS_PATH, error])
+
+
+func _load_settings() -> void:
+	var config: ConfigFile = ConfigFile.new()
+	var error: Error = config.load(SETTINGS_PATH)
+	if error != OK:
+		if error != ERR_FILE_NOT_FOUND:
+			push_warning("无法读取设置：%s（错误 %d）" % [SETTINGS_PATH, error])
+		return
+	var value: Variant = config.get_value("settings", "fullscreen", fullscreen)
+	if value is int or value is float:
+		fullscreen = float(value)
+	value = config.get_value("settings", "filter", filter)
+	if value is int or value is float:
+		filter = float(value)
+	for key: String in SETTINGS_NUMBERS:
+		value = config.get_value("settings", key, G.get(key))
+		if value is int or value is float:
+			G.set(key, float(value))
+	value = config.get_value("settings", "last_level", G.last_level)
+	if value is String:
+		G.last_level = value
+	value = config.get_value("settings", "name_user", G.name_users)
+	if value is String:
+		G.name_users = value
+	value = config.get_value("settings", "my1", G.my1)
+	if value is String:
+		G.my1 = value
+	GM.audio_master_gain(G.audiomaster)
 
 
 # Other_60（异步：头像下载）、Other_70（异步：NekoPresence 的 Discord 事件）不移植：

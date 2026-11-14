@@ -208,9 +208,15 @@ func _draw_layer(l: GMLayer) -> void:
 		if b.htiled:
 			x0 = l.x + floorf((vx - l.x) / tw) * tw
 			nx = int(ceilf((vx + vw - x0) / tw)) + 1
+			if _ordered_world:
+				x0 -= tw
+				nx += 1
 		if b.vtiled:
 			y0 = l.y + floorf((vy - l.y) / th) * th
 			ny = int(ceilf((vy + vh - y0) / th)) + 1
+			if _ordered_world:
+				y0 -= th
+				ny += 1
 		for j: int in ny:
 			for i: int in nx:
 				RenderingServer.canvas_item_add_texture_rect_region(_ci, Rect2(x0 + tw * i, y0 + th * j, tw, th), tex.get_rid(), src, c)

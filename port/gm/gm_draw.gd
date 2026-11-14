@@ -6,6 +6,8 @@ extends "res://gm/gm_base.gd"
 
 const VIEW_W: float = 384.0
 const VIEW_H: float = 216.0
+## Legacy GUI canvas dimensions; actual output is sized to the window.
+const OUTPUT_SCALE: float = 2.0
 
 # ---- 绘制状态（GMS 里是全局的，跨事件、跨帧保留） ----
 var _draw_colour: int = c_white
@@ -23,6 +25,10 @@ var _ci_gui: RID = RID()
 var _ci: RID = RID()  ## 当前绘制目标
 var _xf_set: bool = false
 var _draw_inst: GMObject = null  ## 正在执行 Draw 事件的实例（subimg = -1 时取它的 image_index）
+var _ordered_world: bool = false
+var _prototype_capture_anchor: bool = false
+var _prototype_anchor_found: bool = false
+var _prototype_anchor: Vector2 = Vector2.ZERO
 
 ## 字体表：{"kind": "ttf", "font": Font, "size": int} 或
 ## {"kind": "spr", "spr": int, "map": Dictionary, "prop": bool, "sep": float}
@@ -60,6 +66,8 @@ var _ci_app: RID = RID()
 ## display_set_gui_size 设的 GUI 坐标范围，映射到整个画面
 var _gui_w: float = VIEW_W
 var _gui_h: float = VIEW_H
+## 16:9 output rectangle in native window pixels, including letterbox offset.
+var _output_rect: Rect2 = Rect2(0.0, 0.0, VIEW_W * OUTPUT_SCALE, VIEW_H * OUTPUT_SCALE)
 
 
 func _init_draw() -> void:
@@ -108,6 +116,8 @@ func _init_draw() -> void:
 	_ci_gui = RenderingServer.canvas_item_create()
 	RenderingServer.canvas_item_set_parent(_ci_gui, _gui_node.get_canvas_item())
 	_ci = _ci_world
+	get_viewport().size_changed.connect(_refresh_output_layout)
+	_refresh_output_layout()
 
 
 func _exit_tree() -> void:
@@ -122,9 +132,32 @@ func _exit_tree() -> void:
 func _set_app_surface_size(w: float, h: float) -> void:
 	_app_w = maxf(1.0, floorf(w))
 	_app_h = maxf(1.0, floorf(h))
-	if _app_vp != null:
-		_app_vp.size = Vector2i(int(_app_w), int(_app_h))
 	_update_app_surface_quad()
+
+
+## Render world and legacy GUI at the physical output size, but retain GMS's
+## application_surface dimensions for its API and screenshot coordinates.
+func _refresh_output_layout() -> void:
+	var window_size: Vector2 = get_viewport().get_visible_rect().size
+	if window_size.x <= 0.0 or window_size.y <= 0.0:
+		return
+	var scale: float = minf(window_size.x / VIEW_W, window_size.y / VIEW_H)
+	var output_size: Vector2 = Vector2(maxf(1.0, floorf(VIEW_W * scale)), maxf(1.0, floorf(VIEW_H * scale)))
+	var offset: Vector2 = Vector2(floorf((window_size.x - output_size.x) / 2.0), floorf((window_size.y - output_size.y) / 2.0))
+	_output_rect = Rect2(offset, output_size)
+	if _app_vp != null:
+		_app_vp.size = Vector2i(int(output_size.x), int(output_size.y))
+	if _ci_app.is_valid():
+		RenderingServer.canvas_item_set_transform(_ci_app, Transform2D(0.0, output_size / Vector2(VIEW_W * OUTPUT_SCALE, VIEW_H * OUTPUT_SCALE), 0.0, offset))
+	if _ci_gui.is_valid():
+		RenderingServer.canvas_item_set_transform(_ci_gui, Transform2D(0.0, output_size / Vector2(_gui_w, _gui_h), 0.0, offset))
+	if _ci_world.is_valid():
+		_apply_world_transform(Vector2(_cam_x[0], _cam_y[0]))
+
+
+func _apply_world_transform(camera: Vector2) -> void:
+	var scale: Vector2 = Vector2(float(_app_vp.size.x) / _cam_w[0], float(_app_vp.size.y) / _cam_h[0])
+	RenderingServer.canvas_item_set_transform(_ci_world, Transform2D(0.0, scale, 0.0, -camera * scale))
 
 
 ## application_surface 自动显示：铺满整个画面（GMS 在 Draw 和 Draw GUI 之间画它）
@@ -133,7 +166,7 @@ func _update_app_surface_quad() -> void:
 		return
 	RenderingServer.canvas_item_clear(_ci_app)
 	if _app_surface_draw_on():
-		RenderingServer.canvas_item_add_texture_rect(_ci_app, Rect2(0.0, 0.0, VIEW_W, VIEW_H), _app_vp.get_texture().get_rid())
+		RenderingServer.canvas_item_add_texture_rect(_ci_app, Rect2(0.0, 0.0, VIEW_W * OUTPUT_SCALE, VIEW_H * OUTPUT_SCALE), _app_vp.get_texture().get_rid())
 
 
 ## gm_system.gd 覆盖
@@ -144,10 +177,8 @@ func _app_surface_draw_on() -> bool:
 func _begin_world_draw() -> void:
 	RenderingServer.canvas_item_clear(_ci_world)
 	RenderingServer.canvas_item_clear(_ci_gui)
-	var sx: float = _app_w / _cam_w[0]
-	var sy: float = _app_h / _cam_h[0]
-	RenderingServer.canvas_item_set_transform(_ci_world, Transform2D(0.0, Vector2(sx, sy), 0.0, Vector2(-_cam_x[0] * sx, -_cam_y[0] * sy)))
-	RenderingServer.canvas_item_set_transform(_ci_gui, Transform2D(0.0, Vector2(VIEW_W / _gui_w, VIEW_H / _gui_h), 0.0, Vector2.ZERO))
+	_apply_world_transform(Vector2(_cam_x[0], _cam_y[0]))
+	RenderingServer.canvas_item_set_transform(_ci_gui, Transform2D(0.0, _output_rect.size / Vector2(_gui_w, _gui_h), 0.0, _output_rect.position))
 	_ci = _ci_world
 	_xf_set = false
 
@@ -223,6 +254,9 @@ func draw_sprite(spr: int, subimg: float, px: float, py: float) -> void:
 func draw_sprite_ext(spr: int, subimg: float, px: float, py: float, xs: float, ys: float, rot: float, col: int, alpha: float) -> void:
 	if not sprite_exists(spr):
 		return
+	if _prototype_capture_anchor and not _prototype_anchor_found and _draw_inst != null and spr == _draw_inst.sprite_index:
+		_prototype_anchor = Vector2(px, py)
+		_prototype_anchor_found = true
 	var s: GMSprite = sprites[spr]
 	var tex: Texture2D = s.texture()
 	if tex == null:
@@ -621,7 +655,41 @@ func camera_set_view_speed(cam: int, sx: float, sy: float) -> void:
 
 
 ## 相机跟随目标（GMS 在每步画图前做）。target 由 gm.gd 解析成实例后传进来。
+func _camera_follow_position(cam: int, tx: float, ty: float) -> Vector2:
+	var w: float = _cam_w[cam]
+	var h: float = _cam_h[cam]
+	var vx: float = _cam_x[cam]
+	var vy: float = _cam_y[cam]
+	var nx: float = vx
+	var ny: float = vy
+	var bx: float = _cam_bx[cam]
+	var by: float = _cam_by[cam]
+	if 2.0 * bx >= w:
+		nx = tx - w / 2.0
+	elif tx - bx < vx:
+		nx = tx - bx
+	elif tx + bx > vx + w:
+		nx = tx + bx - w
+	if 2.0 * by >= h:
+		ny = ty - h / 2.0
+	elif ty - by < vy:
+		ny = ty - by
+	elif ty + by > vy + h:
+		ny = ty + by - h
+	nx = clampf(nx, 0.0, maxf(room_width - w, 0.0))
+	ny = clampf(ny, 0.0, maxf(room_height - h, 0.0))
+	var sx: float = _cam_sx[cam]
+	var sy: float = _cam_sy[cam]
+	if sx >= 0.0:
+		nx = clampf(nx, vx - sx, vx + sx)
+	if sy >= 0.0:
+		ny = clampf(ny, vy - sy, vy + sy)
+	return Vector2(nx, ny)
+
+
 func _camera_follow(cam: int, tx: float, ty: float) -> void:
+	# Keep the logical camera's original double-precision arithmetic; the
+	# Vector2-returning helper above is used only for presentation.
 	var w: float = _cam_w[cam]
 	var h: float = _cam_h[cam]
 	var vx: float = _cam_x[cam]

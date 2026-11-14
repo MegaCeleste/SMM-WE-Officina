@@ -61,6 +61,9 @@ var slowdown: float = 0.0
 var direct_x: float = 0.0
 var direct_y: float = 0.0
 var reverb: float = 0.0
+## Display-only residual before the original camera-controller rounding.
+var _presentation_round_bias: Vector2 = Vector2.ZERO
+var _presentation_round_tick: int = -1
 
 
 # from objects/obj_levelmanager/Create_0.gml
@@ -241,8 +244,11 @@ func _step_end() -> void:
 				x += ((GM.instance_find(follow, 0).x - x) * 0.2)
 	else:
 		speed = 0.0
+	var _presentation_before_round: Vector2 = Vector2(x, y)
 	x = GM.gm_round(x)
 	y = GM.gm_round(y)
+	_presentation_round_bias = _presentation_before_round - Vector2(x, y)
+	_presentation_round_tick = GM.tick_count
 	_user_11()
 	if G.instance_deactivate == 1.0:
 		if GM.room != A.rm_editor:

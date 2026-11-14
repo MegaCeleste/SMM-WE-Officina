@@ -70,7 +70,11 @@ func _init_input() -> void:
 func _mouse_view_pos() -> Vector2:
 	if mouse_override != null:
 		return mouse_override
-	return get_viewport().get_mouse_position()
+	return _output_to_view(get_viewport().get_mouse_position())
+
+
+func _output_to_view(pos: Vector2) -> Vector2:
+	return (pos - _output_rect.position) * Vector2(VIEW_W / _output_rect.size.x, VIEW_H / _output_rect.size.y)
 
 
 ## Godot 键码 → GMS vk 码；不认识的返回 0

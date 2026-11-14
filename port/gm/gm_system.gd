@@ -121,6 +121,17 @@ func window_set_size(w: float, h: float) -> void:
 	DisplayServer.window_set_size(Vector2i(int(w), int(h)))
 
 
+## Prefer a larger native-pixel window while staying within the usable desktop.
+## The original requested size remains the minimum on sufficiently large screens.
+func window_set_game_size(w: float, h: float) -> void:
+	if _headless() or w <= 0.0 or h <= 0.0:
+		return
+	var screen: int = DisplayServer.window_get_current_screen()
+	var usable: Vector2i = DisplayServer.screen_get_usable_rect(screen).size
+	var scale: float = minf(2.0, minf(float(usable.x) * 0.95 / w, float(usable.y) * 0.95 / h))
+	window_set_size(w * scale, h * scale)
+
+
 func window_get_width() -> float:
 	return float(DisplayServer.window_get_size().x)
 
@@ -366,6 +377,7 @@ var _seg_used: int = 0
 var _ci_root: RID = RID()
 var _shader_on: bool = false
 var _mat_blendreplace: ShaderMaterial = null
+var _world_draw_order: int = 0
 
 
 func _begin_world_draw() -> void:
@@ -373,9 +385,10 @@ func _begin_world_draw() -> void:
 	for i: int in range(_seg_used):
 		RenderingServer.canvas_item_clear(_seg_pool[i])
 	_seg_used = 0
+	_world_draw_order = 0
 	_ci_root = _ci_world
 	_shader_on = false
-	if _blend_mode != bm_normal:
+	if _ordered_world or _blend_mode != bm_normal:
 		_new_segment(_current_material())
 
 
@@ -402,10 +415,15 @@ func _new_segment(material: RID) -> void:
 	var seg: RID = _seg_pool[_seg_used]
 	_seg_used += 1
 	RenderingServer.canvas_item_set_parent(seg, _ci_root)
-	RenderingServer.canvas_item_set_draw_index(seg, _seg_used)
+	RenderingServer.canvas_item_set_draw_index(seg, _next_world_draw_order() if _ordered_world and _ci_root == _ci_world else _seg_used)
 	RenderingServer.canvas_item_set_material(seg, material)
 	_ci = seg
 	_xf_set = false
+
+
+func _next_world_draw_order() -> int:
+	_world_draw_order += 1
+	return _world_draw_order
 
 
 func shader_get_uniform(_sh: float, _uniform: String) -> int:

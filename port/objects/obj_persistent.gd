@@ -615,7 +615,8 @@ func _user_0() -> void:
 func _user_1() -> void:
 	s = (filter + 1.0)
 	GM.display_reset(0.0, 0.0)
-	GM.window_set_size((G.gw * s), (G.gh * s))
+	# PORT: use the available native window pixels for world and GUI rendering.
+	GM.window_set_game_size((G.gw * s), (G.gh * s))
 	GM.display_set_gui_size((G.gw * s), (G.gh * s))
 	GM.surface_resize(GM.application_surface, (G.gw * 2.0), (G.gh * 2.0))
 	alarm[2] = 1.0

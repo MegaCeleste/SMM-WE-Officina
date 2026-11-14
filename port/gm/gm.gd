@@ -64,6 +64,53 @@ var _buckets: Dictionary = {}
 var _depths: Array[float] = []
 var _depths_dirty: bool = false
 
+# Presentation interpolation never changes game state or dispatches Draw again.
+var interpolation_auto: bool = true
+var interpolation_profile: bool = false
+var interpolation_camera_smoothing: bool = true
+var prototype_actor: GMObject = null
+var _prototype_item: RID = RID()
+var _prototype_hud_item: RID = RID()
+var _prototype_default_items: Array[RID] = []
+var _prototype_default_offsets: Array[Vector2] = []
+var _prototype_default_subpixels: Array[Vector2] = []
+var _prototype_layer_items: Array[RID] = []
+var _prototype_layer_offsets: Array[Vector2] = []
+var _prototype_layer_camera_fixed: Array[bool] = []
+var _prototype_layer_history: Dictionary = {}
+var _rigid_draw_cache: Dictionary = {}
+## Draw implementations audited to contain only this actor's body/attachments.
+const _RIGID_DRAW_OWNERS: Array[String] = [
+	"obj_physicsparent", "obj_1up", "obj_banzaibill", "obj_beachkoopa", "obj_big_pplant",
+	"obj_billbanzai_red", "obj_blooper", "obj_bobomb", "obj_bonybeetle", "obj_boo",
+	"obj_bulletbill", "obj_bulletbull_red", "obj_buzzy_ceiling", "obj_buzzybeetle",
+	"obj_buzzybeetle_b", "obj_charginchuck", "obj_cheepcheep", "obj_coin", "obj_cooligan",
+	"obj_crumblebones", "obj_drybones", "obj_egg", "obj_egg_blue", "obj_egg_red",
+	"obj_fishbone", "obj_floruga", "obj_floruga_body", "obj_foo", "obj_galoomba",
+	"obj_galoomba_b", "obj_grinder", "obj_grrrol", "obj_grrrol_b", "obj_grrrol_new",
+	"obj_hammerbro", "obj_jumppiranha", "obj_koopa", "obj_koopa_b", "obj_koopa_red",
+	"obj_koopa_red_b", "obj_lakitu", "obj_magikoopa", "obj_mechakoopa", "obj_monty_chase",
+	"obj_ninji", "obj_NSMBU_ninji", "obj_piranhaplant", "obj_plant_fire", "obj_podoboo",
+	"obj_pokey", "obj_powerupparent", "obj_rocangrejo", "obj_rocky", "obj_sledgebro",
+	"obj_spike", "obj_spiny", "obj_superarcon", "obj_thwomp", "obj_waddlewing",
+]
+var _prototype_actor_prev: Vector2 = Vector2.ZERO
+var _prototype_actor_curr: Vector2 = Vector2.ZERO
+var _prototype_display_actor: Vector2 = Vector2.ZERO
+var _prototype_actor_subpixel: Vector2 = Vector2.ZERO
+var _prototype_camera_prev: Vector2 = Vector2.ZERO
+var _prototype_camera_curr: Vector2 = Vector2.ZERO
+var _prototype_display_camera: Vector2 = Vector2.ZERO
+var _prototype_camera_draw: Vector2 = Vector2.ZERO
+var _presentation_camera_follow: Vector2 = Vector2.ZERO
+var _presentation_camera_history: Array[Vector2] = []
+var _presentation_camera_snap: bool = false
+var _prototype_valid: bool = false
+var prototype_draw_count: int = 0
+var prototype_tick_ms: Array[float] = []
+var prototype_draw_ms: Array[float] = []
+var prototype_present_ms: Array[float] = []
+
 
 func _ready() -> void:
 	process_physics_priority = -1000
@@ -82,12 +129,87 @@ func _ready() -> void:
 	_init_audio()
 	_init_input()
 	preload("res://rooms/rm_editor.gd").install()
+	RenderingServer.frame_pre_draw.connect(_present_interpolation)
 
 
 func _physics_process(_delta: float) -> void:
 	if auto_tick:
+		if interpolation_auto:
+			_update_interpolation_target()
+		var start_us: int = Time.get_ticks_usec() if interpolation_profile and prototype_actor != null else 0
 		tick()
+		if start_us != 0:
+			if prototype_tick_ms.size() >= 3600:
+				prototype_tick_ms.clear()
+			prototype_tick_ms.append(float(Time.get_ticks_usec() - start_us) / 1000.0)
 		fps = Engine.get_frames_per_second()
+
+
+func _update_interpolation_target() -> void:
+	var target: GMObject = null
+	var manager: GMObject = instance_find(A.obj_levelmanager, 0)
+	if manager != null and float(manager.get("editor")) == 0.0:
+		target = instance_find(A.obj_mario, 0)
+	var current: GMObject = prototype_actor if is_instance_valid(prototype_actor) else null
+	if current != target or (current == null and prototype_actor != null):
+		prototype_interpolate_actor(target)
+
+
+func _present_interpolation() -> void:
+	if not _prototype_valid or not _prototype_item.is_valid():
+		return
+	if get_tree().paused:
+		return
+	var start_us: int = Time.get_ticks_usec() if interpolation_profile else 0
+	var fraction: float = Engine.get_physics_interpolation_fraction()
+	var actor_offset: Vector2 = _prototype_actor_prev.lerp(_prototype_actor_curr, fraction) - _prototype_actor_curr + _prototype_actor_subpixel
+	_prototype_display_actor = _prototype_actor_prev.lerp(_prototype_actor_curr, fraction)
+	var cam: Vector2 = _prototype_camera_prev.lerp(_prototype_camera_curr, fraction)
+	_prototype_display_camera = cam
+	RenderingServer.canvas_item_set_transform(_prototype_item, Transform2D(0.0, actor_offset))
+	for i: int in _prototype_default_offsets.size():
+		RenderingServer.canvas_item_set_transform(_prototype_default_items[i], Transform2D(0.0, _prototype_default_offsets[i] * (1.0 - fraction) + _prototype_default_subpixels[i]))
+	for i: int in _prototype_layer_offsets.size():
+		var offset: Vector2 = cam - _prototype_camera_draw if _prototype_layer_camera_fixed[i] else _prototype_layer_offsets[i] * (1.0 - fraction)
+		RenderingServer.canvas_item_set_transform(_prototype_layer_items[i], Transform2D(0.0, offset))
+	if _prototype_hud_item.is_valid():
+		# The level HUD is recorded in world coordinates relative to the tick camera.
+		# Cancel the interpolated camera movement without re-running its Draw event.
+		RenderingServer.canvas_item_set_transform(_prototype_hud_item, Transform2D(0.0, cam - _prototype_camera_draw))
+	_apply_world_transform(cam)
+	if start_us != 0:
+		if prototype_present_ms.size() >= 3600:
+			prototype_present_ms.clear()
+		prototype_present_ms.append(float(Time.get_ticks_usec() - start_us) / 1000.0)
+
+
+func prototype_interpolate_actor(actor: GMObject) -> void:
+	prototype_actor = actor
+	_prototype_valid = false
+	prototype_draw_count = 0
+	prototype_tick_ms.clear()
+	prototype_draw_ms.clear()
+	prototype_present_ms.clear()
+	if not _prototype_item.is_valid():
+		_prototype_item = RenderingServer.canvas_item_create()
+		RenderingServer.canvas_item_set_parent(_prototype_item, _ci_world)
+		_prototype_hud_item = RenderingServer.canvas_item_create()
+		RenderingServer.canvas_item_set_parent(_prototype_hud_item, _ci_world)
+	else:
+		RenderingServer.canvas_item_clear(_prototype_item)
+		RenderingServer.canvas_item_clear(_prototype_hud_item)
+	for item: RID in _prototype_default_items:
+		RenderingServer.canvas_item_clear(item)
+	_prototype_default_offsets.clear()
+	_prototype_default_subpixels.clear()
+	for item: RID in _prototype_layer_items:
+		RenderingServer.canvas_item_clear(item)
+	_prototype_layer_offsets.clear()
+	_prototype_layer_camera_fixed.clear()
+	_prototype_layer_history.clear()
+	_presentation_camera_history.clear()
+	if actor == null:
+		_apply_world_transform(Vector2(_cam_x[0], _cam_y[0]))
 
 
 # ======================================================================
@@ -734,6 +856,10 @@ func _step_once() -> void:
 	# 粒子系统自动更新（第 7 批，UNVERIFIED U20）
 	_part_update_all()
 	_sweep()
+	# A play/edit transition or destroyed player can change the target during
+	# this tick; resolve it again before capturing any presentation commands.
+	if auto_tick and interpolation_auto:
+		_update_interpolation_target()
 	_phase_draw()
 
 
@@ -1200,6 +1326,7 @@ func _depth_changed(inst: GMObject, old: float) -> void:
 
 
 func _update_view_follow() -> void:
+	_presentation_camera_follow = Vector2(_cam_x[0], _cam_y[0])
 	var t: Variant = _cam_target[view_camera[0]]
 	var inst: GMObject = null
 	if t is GMObject:
@@ -1210,12 +1337,25 @@ func _update_view_follow() -> void:
 		if not l.is_empty():
 			inst = l[0]
 	if inst != null:
-		_camera_follow(view_camera[0], inst.x, inst.y)
+		var cam: int = view_camera[0]
+		var visual_target: Vector2 = Vector2(inst.x, inst.y)
+		if prototype_actor != null and inst.object_index == A.obj_levelmanager and int(inst.get("_presentation_round_tick")) == tick_count:
+			visual_target += inst.get("_presentation_round_bias") as Vector2
+		_presentation_camera_follow = _camera_follow_position(cam, visual_target.x, visual_target.y)
+		_camera_follow(cam, inst.x, inst.y)
 
 
 ## Draw（depth 从大到小；相同 depth 按加入顺序）再 Draw GUI
 func _phase_draw() -> void:
+	var prototype_draw_start: int = Time.get_ticks_usec() if interpolation_profile and prototype_actor != null else 0
 	_update_view_follow()
+	if prototype_actor != null:
+		_prototype_camera_draw = Vector2(_cam_x[0], _cam_y[0])
+		var visual_camera: Vector2 = _smooth_presentation_camera(_presentation_camera_follow)
+		_prototype_camera_prev = _prototype_camera_curr if _prototype_valid else visual_camera
+		_prototype_camera_curr = visual_camera
+		if _presentation_camera_snap or _prototype_camera_curr.distance_to(_prototype_camera_prev) >= 32.0:
+			_prototype_camera_prev = _prototype_camera_curr
 	_update_layers()
 	if _depths_dirty or _layers_dirty or _part_dirty:
 		_depths_dirty = false
@@ -1230,16 +1370,34 @@ func _phase_draw() -> void:
 				_depths.append(pd)
 		_depths.sort()
 		_depths.reverse()
+	_ordered_world = prototype_actor != null
 	_begin_world_draw()
+	if _prototype_item.is_valid():
+		RenderingServer.canvas_item_clear(_prototype_item)
+		RenderingServer.canvas_item_clear(_prototype_hud_item)
+	for i: int in _prototype_default_offsets.size():
+		RenderingServer.canvas_item_clear(_prototype_default_items[i])
+	_prototype_default_offsets.clear()
+	_prototype_default_subpixels.clear()
+	for i: int in _prototype_layer_offsets.size():
+		RenderingServer.canvas_item_clear(_prototype_layer_items[i])
+	_prototype_layer_offsets.clear()
+	_prototype_layer_camera_fixed.clear()
 	var any_gui: bool = false
 	var vx0: float = _cam_x[0]
 	var vy0: float = _cam_y[0]
 	var vx1: float = vx0 + _cam_w[0]
 	var vy1: float = vy0 + _cam_h[0]
+	# The displayed camera may lag the logic camera during interpolation.
+	var cull_margin: float = 32.0 if prototype_actor != null else 0.0
 	for d: float in _depths:
 		# 同一 depth 上先画背景图层，再画实例（UNVERIFIED U12）
 		for l: GMLayer in _layers_at(d):
+			if prototype_actor != null:
+				_begin_interpolated_layer(l)
 			_draw_layer(l)
+			if prototype_actor != null:
+				_end_interpolated_item()
 		if not _buckets.has(d):
 			_draw_parts_at(d)
 			continue
@@ -1247,6 +1405,38 @@ func _phase_draw() -> void:
 			if not inst._active or inst._destroyed or not inst.visible:
 				continue
 			var cls: GMClass = inst._cls
+			var prototype_this: bool = inst == prototype_actor
+			var prototype_hud: bool = prototype_actor != null and inst.object_index == A.obj_levelmanager
+			var delta: Vector2 = Vector2(inst.xprevious - inst.x, inst.yprevious - inst.y)
+			if delta.length() >= 32.0:
+				delta = Vector2.ZERO
+			var prototype_custom: bool = prototype_actor != null and cls.has_draw and _rigid_actor_draw(inst)
+			var fractional: bool = not GM.eq(inst.x, gm_round(inst.x)) or not GM.eq(inst.y, gm_round(inst.y))
+			var prototype_default: bool = prototype_actor != null and (not cls.has_draw and inst.sprite_index >= 0 and delta != Vector2.ZERO or prototype_custom and (delta != Vector2.ZERO or fractional))
+			if prototype_this or prototype_hud or prototype_default:
+				_reset_xf()
+				if prototype_this:
+					_ci = _prototype_item
+				elif prototype_hud:
+					_ci = _prototype_hud_item
+				else:
+					var slot: int = _prototype_default_offsets.size()
+					if slot == _prototype_default_items.size():
+						var item: RID = RenderingServer.canvas_item_create()
+						RenderingServer.canvas_item_set_parent(item, _ci_world)
+						_prototype_default_items.append(item)
+					_ci = _prototype_default_items[slot]
+					_prototype_default_offsets.append(delta)
+					_prototype_default_subpixels.append(Vector2.ZERO)
+				RenderingServer.canvas_item_set_draw_index(_ci, _next_world_draw_order())
+				_ci_root = _ci
+				if _shader_on or _blend_mode != bm_normal:
+					_new_segment(_current_material())
+			if prototype_this or prototype_custom:
+				_prototype_capture_anchor = true
+				_prototype_anchor_found = false
+			if prototype_this:
+				prototype_draw_count += 1
 			if cls.has_draw:
 				_draw_inst = inst
 				other = inst
@@ -1259,8 +1449,35 @@ func _phase_draw() -> void:
 					var ext: float = sprites[si].cull_r * maxf(absf(inst.image_xscale), absf(inst.image_yscale))
 					var ix: float = inst.x
 					var iy: float = inst.y
-					if ix + ext >= vx0 and ix - ext <= vx1 and iy + ext >= vy0 and iy - ext <= vy1:
+					if ix + ext >= vx0 - cull_margin and ix - ext <= vx1 + cull_margin and iy + ext >= vy0 - cull_margin and iy - ext <= vy1 + cull_margin:
 						draw_sprite_ext(si, inst.image_index, ix, iy, inst.image_xscale, inst.image_yscale, inst.image_angle, inst.image_blend, inst.image_alpha)
+			if prototype_this or prototype_custom:
+				_prototype_capture_anchor = false
+			if prototype_this:
+				var position: Vector2 = Vector2(inst.x, inst.y)
+				_prototype_actor_prev = _prototype_actor_curr if _prototype_valid else position
+				_prototype_actor_curr = position
+				_prototype_actor_subpixel = Vector2.ZERO
+				# Mario's normal Draw rounds x/y; use its physical position for
+				# even visual velocity, preserving shake and the current sprite pose.
+				# The SMB swimming branch already draws at the raw x/y instead.
+				var mario_raw_draw: bool = inst.object_index != A.obj_marioU and G.apariencia == 0.0 and float(inst.get("state")) == 3.0
+				if _prototype_anchor_found and not mario_raw_draw:
+					_prototype_actor_subpixel = position - Vector2(gm_round(position.x), gm_round(position.y))
+				if _prototype_actor_curr.distance_to(_prototype_actor_prev) >= 32.0:
+					_prototype_actor_prev = _prototype_actor_curr
+				_prototype_valid = true
+			elif prototype_custom and prototype_default and _prototype_anchor_found:
+				var origin: Vector2 = Vector2(gm_round(inst.x), gm_round(inst.y))
+				var relative: Vector2 = _prototype_anchor - origin
+				var correction: Vector2 = Vector2.ZERO
+				if GM.eq(relative.x, gm_round(relative.x)):
+					correction.x = inst.x - origin.x
+				if GM.eq(relative.y, gm_round(relative.y)):
+					correction.y = inst.y - origin.y
+				_prototype_default_subpixels[_prototype_default_subpixels.size() - 1] = correction
+			if prototype_this or prototype_hud or prototype_default:
+				_end_interpolated_item()
 			if cls.has_draw_gui:
 				any_gui = true
 		_draw_parts_at(d)
@@ -1276,6 +1493,106 @@ func _phase_draw() -> void:
 					inst.call(&"_gm_draw_gui")
 		_reset_xf()
 	_draw_inst = null
+	if prototype_draw_start != 0:
+		if prototype_draw_ms.size() >= 3600:
+			prototype_draw_ms.clear()
+		prototype_draw_ms.append(float(Time.get_ticks_usec() - prototype_draw_start) / 1000.0)
+
+
+## These Draw implementations were checked to draw their body and attachments
+## relative to their own x/y. Camera-anchored sun, chained geometry and held
+## objects require separate handling and deliberately stay on the tick path.
+func _rigid_actor_draw(inst: GMObject) -> bool:
+	if inst._isa[A.obj_angrysun] != 0 or inst._isa[A.obj_chain_chomp_free] != 0 or inst._isa[A.obj_enemyparent_held] != 0:
+		return false
+	if inst._cls.name.contains("_held"):
+		return false
+	if inst._isa[A.obj_enemyparent] == 0 and inst._isa[A.obj_powerupparent] == 0 and inst._isa[A.obj_coin] == 0:
+		return false
+	if _rigid_draw_cache.has(inst.object_index):
+		return _rigid_draw_cache[inst.object_index]
+	var script: Script = inst.get_script()
+	var owner: String = ""
+	while script != null:
+		var base: Script = script.get_base_script()
+		if _draw_method_count(script) > _draw_method_count(base):
+			owner = script.resource_path.get_file().get_basename()
+			break
+		script = base
+	var approved: bool = owner in _RIGID_DRAW_OWNERS
+	_rigid_draw_cache[inst.object_index] = approved
+	return approved
+
+
+func _draw_method_count(script: Script) -> int:
+	if script == null:
+		return 0
+	var count: int = 0
+	for method: Dictionary in script.get_script_method_list():
+		if method.name == "_gm_draw":
+			count += 1
+	return count
+
+
+## The original controller rounds its position on every logic tick. Averaging
+## completed camera samples reduces that quantization's alternating velocity;
+## this is presentation-only and keeps the logical camera untouched.
+func _smooth_presentation_camera(position: Vector2) -> Vector2:
+	_presentation_camera_snap = false
+	if not interpolation_camera_smoothing:
+		_presentation_camera_history.clear()
+		return position
+	if not _presentation_camera_history.is_empty() and position.distance_to(_presentation_camera_history.back()) >= 32.0:
+		_presentation_camera_history.clear()
+		_presentation_camera_snap = true
+	_presentation_camera_history.append(position)
+	if _presentation_camera_history.size() > 3:
+		_presentation_camera_history.pop_front()
+	var total: Vector2 = Vector2.ZERO
+	for sample: Vector2 in _presentation_camera_history:
+		total += sample
+	return total / float(_presentation_camera_history.size())
+
+
+func _begin_interpolated_layer(layer: GMLayer) -> void:
+	_reset_xf()
+	var slot: int = _prototype_layer_offsets.size()
+	if slot == _prototype_layer_items.size():
+		var item: RID = RenderingServer.canvas_item_create()
+		RenderingServer.canvas_item_set_parent(item, _ci_world)
+		_prototype_layer_items.append(item)
+	var position: Vector2 = Vector2(layer.x, layer.y)
+	var previous: Vector2 = position
+	var history: Dictionary = _prototype_layer_history.get(layer.id, {})
+	if not history.is_empty() and int(history["tick"]) == tick_count - 1:
+		previous = history["position"]
+	var offset: Vector2 = previous - position
+	if offset.length() >= 32.0:
+		offset = Vector2.ZERO
+	_prototype_layer_history[layer.id] = {"position": position, "tick": tick_count}
+	var has_sprite: bool = false
+	var has_colour: bool = false
+	for element: int in layer.elements:
+		var background: GMBackground = _bgs.get(element)
+		if background != null and background.visible:
+			has_sprite = has_sprite or background.sprite >= 0
+			has_colour = has_colour or background.sprite < 0
+	# A mixed colour/sprite layer cannot be moved safely as one item.
+	if has_colour and has_sprite:
+		offset = Vector2.ZERO
+	_prototype_layer_offsets.append(offset)
+	_prototype_layer_camera_fixed.append(has_colour and not has_sprite)
+	_ci = _prototype_layer_items[slot]
+	RenderingServer.canvas_item_set_draw_index(_ci, _next_world_draw_order())
+	_ci_root = _ci
+	if _shader_on or _blend_mode != bm_normal:
+		_new_segment(_current_material())
+
+
+func _end_interpolated_item() -> void:
+	_reset_xf()
+	_ci_root = _ci_world
+	_new_segment(_current_material())
 
 
 # ======================================================================
@@ -1322,6 +1639,8 @@ func game_start(first_room: int) -> void:
 
 
 func _switch_room(r: int) -> void:
+	if _prototype_item.is_valid():
+		prototype_interpolate_actor(null)
 	if room >= 0:
 		for inst: GMObject in with_list(all):
 			if inst._cls.has_room_end:
@@ -1369,6 +1688,8 @@ func _switch_room(r: int) -> void:
 
 ## 测试用：清掉全部实例和 room 状态
 func _reset_for_test() -> void:
+	if _prototype_item.is_valid():
+		prototype_interpolate_actor(null)
 	for inst: GMObject in instances.duplicate():
 		_mark_dead(inst)
 	_sweep()
@@ -1390,6 +1711,16 @@ func _reset_for_test() -> void:
 
 
 func _exit_tree() -> void:
+	if RenderingServer.frame_pre_draw.is_connected(_present_interpolation):
+		RenderingServer.frame_pre_draw.disconnect(_present_interpolation)
+	for item: RID in _prototype_layer_items:
+		RenderingServer.free_rid(item)
+	for item: RID in _prototype_default_items:
+		RenderingServer.free_rid(item)
+	if _prototype_item.is_valid():
+		RenderingServer.free_rid(_prototype_item)
+	if _prototype_hud_item.is_valid():
+		RenderingServer.free_rid(_prototype_hud_item)
 	super._exit_tree()
 	for h: int in _players.keys():
 		var pl: AudioStreamPlayer = _players[h]

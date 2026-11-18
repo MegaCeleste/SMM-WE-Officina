@@ -254,23 +254,24 @@ func draw_sprite(spr: int, subimg: float, px: float, py: float) -> void:
 	draw_sprite_ext(spr, subimg, px, py, 1.0, 1.0, 0.0, c_white, _draw_alpha)
 
 
-func _sprite_shadow_allowed() -> bool:
-	return true
+func _sprite_shadow_target() -> RID:
+	return RID()
 
 
 func _draw_sprite_region(texture: RID, dest: Rect2, source: Rect2, color: Color, transform: Transform2D = Transform2D.IDENTITY) -> void:
 	var transformed: bool = transform != Transform2D.IDENTITY
 	if not transformed:
 		_reset_xf()
-	var shadow: bool = _draw_sprite_shadows and color.a > 0.0 and _sprite_shadow_allowed()
-	if shadow:
+	var shadow: RID = _sprite_shadow_target() if _draw_sprite_shadows and color.a > 0.0 else RID()
+	if shadow.is_valid():
 		var shadow_color: Color = Color(0.0, 0.0, 0.0, minf(color.a, 1.0) * SPRITE_SHADOW_OPACITY)
 		if transformed:
 			var shadow_transform: Transform2D = transform.translated(SPRITE_SHADOW_OFFSET)
-			RenderingServer.canvas_item_add_set_transform(_ci, shadow_transform)
-			RenderingServer.canvas_item_add_texture_rect_region(_ci, dest, texture, source, shadow_color)
+			RenderingServer.canvas_item_add_set_transform(shadow, shadow_transform)
+			RenderingServer.canvas_item_add_texture_rect_region(shadow, dest, texture, source, shadow_color)
+			RenderingServer.canvas_item_add_set_transform(shadow, Transform2D.IDENTITY)
 		else:
-			RenderingServer.canvas_item_add_texture_rect_region(_ci, Rect2(dest.position + SPRITE_SHADOW_OFFSET, dest.size), texture, source, shadow_color)
+			RenderingServer.canvas_item_add_texture_rect_region(shadow, Rect2(dest.position + SPRITE_SHADOW_OFFSET, dest.size), texture, source, shadow_color)
 	if transformed:
 		RenderingServer.canvas_item_add_set_transform(_ci, transform)
 		_xf_set = true

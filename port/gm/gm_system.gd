@@ -403,8 +403,16 @@ func gpu_get_blendmode() -> int:
 	return _blend_mode
 
 
-func _sprite_shadow_allowed() -> bool:
-	return _surface_target == null and _blend_enable and _blend_mode == bm_normal and (not _shader_on or _shader_id == A.sha_blendreplace)
+func _sprite_shadow_target() -> RID:
+	if _surface_target != null or not _blend_enable or _blend_mode != bm_normal or (_shader_on and _shader_id != A.sha_blendreplace):
+		return RID()
+	if _ci_root == _ci_world:
+		return _sprite_shadow_pass
+	if not _sprite_shadow_tracks.has(_ci_root):
+		var track: RID = RenderingServer.canvas_item_create()
+		RenderingServer.canvas_item_set_parent(track, _sprite_shadow_pass)
+		_sprite_shadow_tracks[_ci_root] = track
+	return _sprite_shadow_tracks[_ci_root]
 
 
 func _current_material() -> RID:
@@ -512,9 +520,37 @@ const _SHOCK_UNIFORMS: Array[StringName] = [
 	&"time", &"mouse_pos", &"resolution", &"shock_amplitude", &"shock_refraction", &"shock_width",
 ]
 var _world_draw_order: int = 0
+var _sprite_shadow_pass: RID
+var _sprite_shadow_tracks: Dictionary[RID, RID] = {}
+
+
+func _begin_sprite_shadow_pass() -> void:
+	if not _sprite_shadow_pass.is_valid():
+		_sprite_shadow_pass = RenderingServer.canvas_item_create()
+		RenderingServer.canvas_item_set_parent(_sprite_shadow_pass, _ci_world)
+	# Keep prior background commands in their segment and put later sprite draws
+	# above the combined shadows, even when several tiles share the same depth.
+	_reset_xf()
+	RenderingServer.canvas_item_set_draw_index(_sprite_shadow_pass, _next_world_draw_order())
+	_new_segment(_current_material())
+
+
+func _clear_sprite_shadow_pass() -> void:
+	if _sprite_shadow_pass.is_valid():
+		RenderingServer.canvas_item_clear(_sprite_shadow_pass)
+	for track: RID in _sprite_shadow_tracks.values():
+		RenderingServer.canvas_item_clear(track)
+		RenderingServer.canvas_item_set_transform(track, Transform2D.IDENTITY)
+
+
+func _set_sprite_shadow_offset(source: RID, transform: Transform2D) -> void:
+	var track: RID = _sprite_shadow_tracks.get(source, RID())
+	if track.is_valid():
+		RenderingServer.canvas_item_set_transform(track, transform)
 
 
 func _begin_world_draw() -> void:
+	_clear_sprite_shadow_pass()
 	for item: RID in _camera_fixed_surface_segments:
 		RenderingServer.canvas_item_set_transform(item, Transform2D.IDENTITY)
 	_camera_fixed_surface_segments.clear()
@@ -538,6 +574,10 @@ func _begin_gui_draw() -> void:
 
 
 func _exit_tree() -> void:
+	for track: RID in _sprite_shadow_tracks.values():
+		RenderingServer.free_rid(track)
+	if _sprite_shadow_pass.is_valid():
+		RenderingServer.free_rid(_sprite_shadow_pass)
 	for surface: MaskSurface in _surfaces.values():
 		for segment: RID in surface.segments:
 			RenderingServer.free_rid(segment)

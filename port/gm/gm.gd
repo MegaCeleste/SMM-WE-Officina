@@ -166,12 +166,16 @@ func _present_interpolation() -> void:
 	_prototype_display_actor = _prototype_actor_prev.lerp(_prototype_actor_curr, fraction)
 	var cam: Vector2 = _prototype_camera_prev.lerp(_prototype_camera_curr, fraction)
 	_prototype_display_camera = cam
-	RenderingServer.canvas_item_set_transform(_prototype_item, Transform2D(0.0, actor_offset))
+	var actor_transform: Transform2D = Transform2D(0.0, actor_offset)
+	RenderingServer.canvas_item_set_transform(_prototype_item, actor_transform)
+	_set_sprite_shadow_offset(_prototype_item, actor_transform)
 	# Screen-anchored Draw events record positions relative to the tick camera.
 	var camera_offset: Vector2 = cam - _prototype_camera_draw
 	for i: int in _prototype_default_offsets.size():
 		var offset: Vector2 = camera_offset if _prototype_default_camera_fixed[i] else _prototype_default_offsets[i] * (1.0 - fraction) + _prototype_default_subpixels[i]
-		RenderingServer.canvas_item_set_transform(_prototype_default_items[i], Transform2D(0.0, offset))
+		var transform: Transform2D = Transform2D(0.0, offset)
+		RenderingServer.canvas_item_set_transform(_prototype_default_items[i], transform)
+		_set_sprite_shadow_offset(_prototype_default_items[i], transform)
 	for i: int in _prototype_layer_offsets.size():
 		var offset: Vector2 = camera_offset if _prototype_layer_camera_fixed[i] else _prototype_layer_offsets[i] * (1.0 - fraction)
 		RenderingServer.canvas_item_set_transform(_prototype_layer_items[i], Transform2D(0.0, offset))
@@ -1369,9 +1373,10 @@ func _phase_draw() -> void:
 				_depths.append(pd)
 		_depths.sort()
 		_depths.reverse()
-	_ordered_world = prototype_actor != null
-	_begin_world_draw()
 	var sprite_shadows: bool = _gameplay_sprite_shadows_enabled()
+	_ordered_world = prototype_actor != null or sprite_shadows
+	_begin_world_draw()
+	var shadow_pass_pending: bool = sprite_shadows
 	_draw_sprite_shadows = false
 	if _prototype_item.is_valid():
 		RenderingServer.canvas_item_clear(_prototype_item)
@@ -1399,6 +1404,9 @@ func _phase_draw() -> void:
 			_draw_layer(l)
 			if prototype_actor != null:
 				_end_interpolated_item()
+		if shadow_pass_pending and (_buckets.has(d) or _part_depths().has(d)):
+			_begin_sprite_shadow_pass()
+			shadow_pass_pending = false
 		if not _buckets.has(d):
 			_draw_parts_at(d, sprite_shadows)
 			continue

@@ -37,14 +37,20 @@ func _check_fixed_ui(player: GMObject) -> void:
 
 
 func _capture_shadow_samples(sprite: int, enabled: bool) -> Image:
+	GM._ordered_world = enabled
 	GM._begin_world_draw()
 	GM.draw_set_color(GM.c_white)
 	GM.draw_rectangle(0.0, 0.0, GM.VIEW_W, GM.VIEW_H, false)
+	if enabled:
+		GM._begin_sprite_shadow_pass()
 	GM._draw_sprite_shadows = enabled
 	GM.draw_sprite(sprite, 0.0, 40.0, 40.0)
 	GM.draw_sprite_ext(sprite, 0.0, 100.0, 40.0, -1.0, 1.0, 90.0, GM.c_white, 1.0)
 	GM.draw_sprite_part_ext(sprite, 0.0, 2.0, 2.0, 3.0, 2.0, 160.0, 40.0, 2.0, 1.0, GM.c_white, 0.5)
 	GM.draw_sprite_stretched(sprite, 0.0, 210.0, 40.0, 16.0, 16.0)
+	# Draw the right tile first and the left tile last, as can happen when placing terrain.
+	GM.draw_sprite_part(sprite, 0.0, 2.0, 2.0, 4.0, 3.0, 268.0, 40.0)
+	GM.draw_sprite_part(sprite, 0.0, 2.0, 2.0, 4.0, 3.0, 264.0, 40.0)
 	GM._draw_sprite_shadows = false
 	await RenderingServer.frame_post_draw
 	return GM._app_vp.get_texture().get_image()
@@ -76,6 +82,8 @@ func _check_sprite_shadows() -> void:
 	var crop_shadow: Vector2 = Vector2(167.5, 43.5)
 	ok(_sample_view(off, crop_shadow) == Color.WHITE and absf(_sample_view(on, crop_shadow).r - 0.85) < 0.02, "cropped sprite shadow respects sprite opacity")
 	ok(_sample_view(on, Vector2(43.5, 43.5)) == Color.RED and _sample_view(on, Vector2(41.5, 41.5)) == Color.WHITE, "sprite keeps its colors and transparent outline")
+	ok(_sample_view(on, Vector2(268.5, 42.5)) == Color.RED, "a later tile's shadow cannot darken the adjacent tile")
+	ok(absf(_sample_view(on, Vector2(273.5, 43.5)).r - 0.70) < 0.02, "joined tiles still cast a visible shadow along the external edge")
 	GM.sprite_delete(sprite)
 	print("sprite shadows: %d checks, %d failed" % [_checks - start_checks, _fails - start_fails])
 

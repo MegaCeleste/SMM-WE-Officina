@@ -94,6 +94,7 @@ func _create() -> void:
 	GM.instance_create((GM.camera_get_view_x(GM.view_get_camera(0)) + 8.0), (GM.camera_get_view_y(GM.view_get_camera(0)) + 101.0), A.obj_button_settings_idioma)
 	if persistent.modo_android == 0.0:
 		GM.instance_create((GM.camera_get_view_x(GM.view_get_camera(0)) + 8.0), (GM.camera_get_view_y(GM.view_get_camera(0)) + 142.0), A.obj_button_settings_estrella)
+		GM.instance_create(GM.camera_get_view_x(0) + 146.0, GM.camera_get_view_y(0) + 142.0, A.obj_button_sombras)
 	else:
 		GM.instance_create((GM.camera_get_view_x(GM.view_get_camera(0)) + 8.0), (GM.camera_get_view_y(GM.view_get_camera(0)) + 142.0), A.obj_button_settings_sm4j)
 	GM.instance_create((GM.camera_get_view_x(GM.view_get_camera(0)) + 8.0), (GM.camera_get_view_y(GM.view_get_camera(0)) + 191.0), A.obj_selecting_fps)
@@ -151,7 +152,7 @@ func _destroy() -> void:
 		inst.instance_destroy()
 	for inst in GM.with_list(A.obj_button_settings_idioma):
 		inst.instance_destroy()
-	for inst in GM.with_list(A.obj_button_settings_sombras):
+	for inst in GM.with_list(A.obj_button_sombras):
 		inst.instance_destroy()
 	for inst in GM.with_list(A.obj_selecting_player):
 		inst.instance_destroy()
@@ -192,6 +193,7 @@ func _user_0() -> void:
 	GM.instance_create((GM.camera_get_view_x(GM.view_get_camera(0)) + 8.0), (GM.camera_get_view_y(GM.view_get_camera(0)) + 101.0), A.obj_button_settings_idioma)
 	if persistent.modo_android == 0.0:
 		GM.instance_create((GM.camera_get_view_x(GM.view_get_camera(0)) + 8.0), (GM.camera_get_view_y(GM.view_get_camera(0)) + 142.0), A.obj_button_settings_estrella)
+		GM.instance_create(GM.camera_get_view_x(0) + 146.0, GM.camera_get_view_y(0) + 142.0, A.obj_button_sombras)
 	else:
 		GM.instance_create((GM.camera_get_view_x(GM.view_get_camera(0)) + 8.0), (GM.camera_get_view_y(GM.view_get_camera(0)) + 142.0), A.obj_button_settings_sm4j)
 	GM.instance_create((GM.camera_get_view_x(GM.view_get_camera(0)) + 8.0), (GM.camera_get_view_y(GM.view_get_camera(0)) + 191.0), A.obj_selecting_fps)

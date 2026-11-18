@@ -20,6 +20,7 @@ func _ready() -> void:
 	var p = GM.instance_create(0.0, 0.0, A.obj_persistent)
 	p._game_start()
 	check(p.fullscreen == 0.0 and p.filter == 1.0, "window defaults")
+	check(G.shadows == 1.0, "gameplay shadows default to enabled")
 	check(G.derecha == 68.0 and G.saltar == 38.0 and G.pause == 32.0, "key defaults")
 	p.fullscreen = 1.0
 	p.filter = 0.0

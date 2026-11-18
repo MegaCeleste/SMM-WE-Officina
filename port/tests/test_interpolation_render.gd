@@ -36,6 +36,50 @@ func _check_fixed_ui(player: GMObject) -> void:
 	print("interpolation UI: %d checks, %d failed" % [_checks, _fails])
 
 
+func _capture_shadow_samples(sprite: int, enabled: bool) -> Image:
+	GM._begin_world_draw()
+	GM.draw_set_color(GM.c_white)
+	GM.draw_rectangle(0.0, 0.0, GM.VIEW_W, GM.VIEW_H, false)
+	GM._draw_sprite_shadows = enabled
+	GM.draw_sprite(sprite, 0.0, 40.0, 40.0)
+	GM.draw_sprite_ext(sprite, 0.0, 100.0, 40.0, -1.0, 1.0, 90.0, GM.c_white, 1.0)
+	GM.draw_sprite_part_ext(sprite, 0.0, 2.0, 2.0, 3.0, 2.0, 160.0, 40.0, 2.0, 1.0, GM.c_white, 0.5)
+	GM.draw_sprite_stretched(sprite, 0.0, 210.0, 40.0, 16.0, 16.0)
+	GM._draw_sprite_shadows = false
+	await RenderingServer.frame_post_draw
+	return GM._app_vp.get_texture().get_image()
+
+
+func _sample_view(image: Image, position: Vector2) -> Color:
+	var pixel: Vector2i = Vector2i(position * Vector2(image.get_size()) / Vector2(GM.VIEW_W, GM.VIEW_H))
+	return image.get_pixelv(pixel)
+
+
+func _check_sprite_shadows() -> void:
+	var start_checks: int = _checks
+	var start_fails: int = _fails
+	ok(GM._gameplay_sprite_shadows_enabled(), "local gameplay enables sprite shadows")
+	G.shadows = 0.0
+	ok(not GM._gameplay_sprite_shadows_enabled(), "the setting disables gameplay sprite shadows")
+	G.shadows = 1.0
+	ok(GM.classes[A.obj_mario].casts_sprite_shadow and GM.classes[A.obj_ground].casts_sprite_shadow, "Mario and terrain cast shadows")
+	ok(not GM.classes[A.obj_levelmanager].casts_sprite_shadow and not GM.classes[A.obj_menu_pausa].casts_sprite_shadow, "HUD and pause menu are excluded")
+	GM.camera_set_view_pos(0, 0.0, 0.0)
+	GM.camera_set_view_size(0, GM.VIEW_W, GM.VIEW_H)
+	var texture: Image = Image.create_empty(8, 8, false, Image.FORMAT_RGBA8)
+	texture.fill_rect(Rect2i(2, 2, 4, 3), Color.RED)
+	var sprite: int = GM._add_dynamic_sprite(texture, 0.0, 0.0)
+	var off: Image = await _capture_shadow_samples(sprite, false)
+	var on: Image = await _capture_shadow_samples(sprite, true)
+	for sample: Vector2 in [Vector2(46.5, 45.5), Vector2(106.5, 47.5), Vector2(223.5, 51.5)]:
+		ok(_sample_view(off, sample) == Color.WHITE and absf(_sample_view(on, sample).r - 0.70) < 0.02, "opaque sprite casts a 30%% shadow at %s" % sample)
+	var crop_shadow: Vector2 = Vector2(167.5, 43.5)
+	ok(_sample_view(off, crop_shadow) == Color.WHITE and absf(_sample_view(on, crop_shadow).r - 0.85) < 0.02, "cropped sprite shadow respects sprite opacity")
+	ok(_sample_view(on, Vector2(43.5, 43.5)) == Color.RED and _sample_view(on, Vector2(41.5, 41.5)) == Color.WHITE, "sprite keeps its colors and transparent outline")
+	GM.sprite_delete(sprite)
+	print("sprite shadows: %d checks, %d failed" % [_checks - start_checks, _fails - start_fails])
+
+
 func _ready() -> void:
 	GM.auto_tick = false
 	var args: PackedStringArray = OS.get_cmdline_user_args()
@@ -75,4 +119,5 @@ func _ready() -> void:
 	print("INTERPOLATION_IMAGE style=%d differing_pixels=%d significant=%d max_delta=%.3f player=%s,%s depth=%.1f overlap=%s/%s" % [style, different, significant, max_delta, sx, sy, player.depth, baseline.get_pixel(sx, sy), experiment.get_pixel(sx, sy)])
 	await _check_fixed_ui(player)
 	GM.prototype_interpolate_actor(null)
+	await _check_sprite_shadows()
 	get_tree().quit(0 if different == 0 and _fails == 0 else 1)

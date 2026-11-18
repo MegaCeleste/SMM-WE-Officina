@@ -8,6 +8,8 @@ const VIEW_W: float = 384.0
 const VIEW_H: float = 216.0
 ## Legacy GUI canvas dimensions; actual output is sized to the window.
 const OUTPUT_SCALE: float = 2.0
+const SPRITE_SHADOW_OFFSET: Vector2 = Vector2(2.0, 2.0)
+const SPRITE_SHADOW_OPACITY: float = 0.30
 
 # ---- 绘制状态（GMS 里是全局的，跨事件、跨帧保留） ----
 var _draw_colour: int = c_white
@@ -25,6 +27,7 @@ var _ci_gui: RID = RID()
 var _ci: RID = RID()  ## 当前绘制目标
 var _xf_set: bool = false
 var _draw_inst: GMObject = null  ## 正在执行 Draw 事件的实例（subimg = -1 时取它的 image_index）
+var _draw_sprite_shadows: bool = false
 var _ordered_world: bool = false
 var _prototype_capture_anchor: bool = false
 var _prototype_anchor_found: bool = false
@@ -251,6 +254,29 @@ func draw_sprite(spr: int, subimg: float, px: float, py: float) -> void:
 	draw_sprite_ext(spr, subimg, px, py, 1.0, 1.0, 0.0, c_white, _draw_alpha)
 
 
+func _sprite_shadow_allowed() -> bool:
+	return true
+
+
+func _draw_sprite_region(texture: RID, dest: Rect2, source: Rect2, color: Color, transform: Transform2D = Transform2D.IDENTITY) -> void:
+	var transformed: bool = transform != Transform2D.IDENTITY
+	if not transformed:
+		_reset_xf()
+	var shadow: bool = _draw_sprite_shadows and color.a > 0.0 and _sprite_shadow_allowed()
+	if shadow:
+		var shadow_color: Color = Color(0.0, 0.0, 0.0, minf(color.a, 1.0) * SPRITE_SHADOW_OPACITY)
+		if transformed:
+			var shadow_transform: Transform2D = transform.translated(SPRITE_SHADOW_OFFSET)
+			RenderingServer.canvas_item_add_set_transform(_ci, shadow_transform)
+			RenderingServer.canvas_item_add_texture_rect_region(_ci, dest, texture, source, shadow_color)
+		else:
+			RenderingServer.canvas_item_add_texture_rect_region(_ci, Rect2(dest.position + SPRITE_SHADOW_OFFSET, dest.size), texture, source, shadow_color)
+	if transformed:
+		RenderingServer.canvas_item_add_set_transform(_ci, transform)
+		_xf_set = true
+	RenderingServer.canvas_item_add_texture_rect_region(_ci, dest, texture, source, color)
+
+
 func draw_sprite_ext(spr: int, subimg: float, px: float, py: float, xs: float, ys: float, rot: float, col: int, alpha: float) -> void:
 	if not sprite_exists(spr):
 		return
@@ -264,12 +290,10 @@ func draw_sprite_ext(spr: int, subimg: float, px: float, py: float, xs: float, y
 	var f: int = _frame_of(s, subimg)
 	var src: Rect2 = Rect2(f * s.width, 0.0, s.width, s.height)
 	if xs == 1.0 and ys == 1.0 and rot == 0.0:
-		_reset_xf()
-		RenderingServer.canvas_item_add_texture_rect_region(_ci, Rect2(px - s.xo, py - s.yo, s.width, s.height), tex.get_rid(), src, gm_color(col, alpha))
+		_draw_sprite_region(tex.get_rid(), Rect2(px - s.xo, py - s.yo, s.width, s.height), src, gm_color(col, alpha))
 	else:
-		RenderingServer.canvas_item_add_set_transform(_ci, Transform2D(-deg_to_rad(rot), Vector2(xs, ys), 0.0, Vector2(px, py)))
-		_xf_set = true
-		RenderingServer.canvas_item_add_texture_rect_region(_ci, Rect2(-s.xo, -s.yo, s.width, s.height), tex.get_rid(), src, gm_color(col, alpha))
+		var transform: Transform2D = Transform2D(-deg_to_rad(rot), Vector2(xs, ys), 0.0, Vector2(px, py))
+		_draw_sprite_region(tex.get_rid(), Rect2(-s.xo, -s.yo, s.width, s.height), src, gm_color(col, alpha), transform)
 
 
 func draw_sprite_part(spr: int, subimg: float, left: float, top: float, w: float, h: float, px: float, py: float) -> void:
@@ -297,9 +321,8 @@ func draw_sprite_part_ext(spr: int, subimg: float, left: float, top: float, w: f
 	h = minf(h, s.height - top)
 	if w <= 0.0 or h <= 0.0:
 		return
-	RenderingServer.canvas_item_add_set_transform(_ci, Transform2D(0.0, Vector2(xs, ys), 0.0, Vector2(px, py)))
-	_xf_set = true
-	RenderingServer.canvas_item_add_texture_rect_region(_ci, Rect2(0.0, 0.0, w, h), tex.get_rid(), Rect2(f * s.width + left, top, w, h), gm_color(col, alpha))
+	var transform: Transform2D = Transform2D(0.0, Vector2(xs, ys), 0.0, Vector2(px, py))
+	_draw_sprite_region(tex.get_rid(), Rect2(0.0, 0.0, w, h), Rect2(f * s.width + left, top, w, h), gm_color(col, alpha), transform)
 
 
 func draw_sprite_stretched(spr: int, subimg: float, px: float, py: float, w: float, h: float) -> void:
@@ -314,8 +337,7 @@ func draw_sprite_stretched_ext(spr: int, subimg: float, px: float, py: float, w:
 	if tex == null:
 		return
 	var f: int = _frame_of(s, subimg)
-	_reset_xf()
-	RenderingServer.canvas_item_add_texture_rect_region(_ci, Rect2(px, py, w, h), tex.get_rid(), Rect2(f * s.width, 0.0, s.width, s.height), gm_color(col, alpha))
+	_draw_sprite_region(tex.get_rid(), Rect2(px, py, w, h), Rect2(f * s.width, 0.0, s.width, s.height), gm_color(col, alpha))
 
 
 func sprite_get_width(spr: int) -> float:

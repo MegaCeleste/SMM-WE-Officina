@@ -2,9 +2,13 @@
 # 第 2 批移植，已核对。
 extends RefCounted
 
+const SHADOW_LABELS: Array[String] = ["Sombras", "Shadows", "Sombras", "Ombre", "阴影"]
+
 
 # from scripts/scr_language/scr_language.gml
 static func scr_language(me: GMObject, argument0: float = 0.0) -> Variant:
+	if argument0 == 202.0:
+		return SHADOW_LABELS[clampi(int(G.idioma), 0, 4)]
 	if G.idioma == 0.0:
 		match argument0:
 			0.0:

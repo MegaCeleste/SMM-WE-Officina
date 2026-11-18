@@ -1371,6 +1371,8 @@ func _phase_draw() -> void:
 		_depths.reverse()
 	_ordered_world = prototype_actor != null
 	_begin_world_draw()
+	var sprite_shadows: bool = _gameplay_sprite_shadows_enabled()
+	_draw_sprite_shadows = false
 	if _prototype_item.is_valid():
 		RenderingServer.canvas_item_clear(_prototype_item)
 	for i: int in _prototype_default_offsets.size():
@@ -1398,12 +1400,13 @@ func _phase_draw() -> void:
 			if prototype_actor != null:
 				_end_interpolated_item()
 		if not _buckets.has(d):
-			_draw_parts_at(d)
+			_draw_parts_at(d, sprite_shadows)
 			continue
 		for inst: GMObject in _buckets[d]:
 			if not inst._active or inst._destroyed or not inst.visible:
 				continue
 			var cls: GMClass = inst._cls
+			_draw_sprite_shadows = sprite_shadows and cls.casts_sprite_shadow
 			var prototype_this: bool = inst == prototype_actor
 			var camera_fixed: bool = prototype_actor != null and _is_view_anchored_draw(inst.object_index)
 			var delta: Vector2 = Vector2(inst.xprevious - inst.x, inst.yprevious - inst.y)
@@ -1445,6 +1448,8 @@ func _phase_draw() -> void:
 				var si: int = inst.sprite_index
 				if si >= 0:
 					var ext: float = sprites[si].cull_r * maxf(absf(inst.image_xscale), absf(inst.image_yscale))
+					if _draw_sprite_shadows:
+						ext += SPRITE_SHADOW_OFFSET.x
 					var ix: float = inst.x
 					var iy: float = inst.y
 					if ix + ext >= vx0 - cull_margin and ix - ext <= vx1 + cull_margin and iy + ext >= vy0 - cull_margin and iy - ext <= vy1 + cull_margin:
@@ -1478,7 +1483,7 @@ func _phase_draw() -> void:
 				_end_interpolated_item()
 			if cls.has_draw_gui:
 				any_gui = true
-		_draw_parts_at(d)
+		_draw_parts_at(d, sprite_shadows)
 	_reset_xf()
 	if any_gui:
 		_begin_gui_draw()
@@ -1495,6 +1500,15 @@ func _phase_draw() -> void:
 		if prototype_draw_ms.size() >= 3600:
 			prototype_draw_ms.clear()
 		prototype_draw_ms.append(float(Time.get_ticks_usec() - prototype_draw_start) / 1000.0)
+
+
+func _gameplay_sprite_shadows_enabled() -> bool:
+	if G.shadows <= 0.5:
+		return false
+	if room == A.rm_editor:
+		var manager: GMObject = instance_find(A.obj_levelmanager, 0)
+		return manager != null and float(manager.get("editor")) == 0.0
+	return room == A.rm_guardabot_play or room == A.rm_template
 
 
 func _is_view_anchored_draw(object_id: int) -> bool:

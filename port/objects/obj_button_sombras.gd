@@ -9,23 +9,16 @@ var text: String = ""
 # from objects/obj_button_sombras/Create_0.gml
 func _create() -> void:
 	image_speed = 0.0
-	image_index = 0.0
 	effect_hover = 0.0
 	c_color = GM.make_colour_rgb(89.0, 15.0, 16.0)
 	anim = 0.0
-	text = "Sombras"
-	if G.shadows == 0.0:
-		image_index = 0.0
-	elif G.shadows == 1.0:
-		image_index = 1.0
+	_step()
 
 
 # from objects/obj_button_sombras/Step_0.gml
 func _step() -> void:
-	if G.shadows == 0.0:
-		image_index = 0.0
-	elif G.shadows == 1.0:
-		image_index = 1.0
+	text = Scr.scr_language(self, 202.0)
+	image_index = 1.0 if G.shadows > 0.5 else 0.0
 
 
 # from objects/obj_button_sombras/Draw_0.gml
@@ -43,12 +36,8 @@ func _gm_draw() -> void:
 func _mouse_4() -> void:
 	GM.audio_stop_sound(A.snd_aceptar)
 	GM.audio_play_sound(A.snd_aceptar, 0.0, false)
-	if G.shadows == 0.0:
-		G.shadows = 1.0
-		image_index = 1.0
-	elif G.shadows == 1.0:
-		G.shadows = 0.0
-		image_index = 0.0
+	G.shadows = 0.0 if G.shadows > 0.5 else 1.0
+	image_index = G.shadows
 
 
 # from objects/obj_button_sombras/Mouse_10.gml

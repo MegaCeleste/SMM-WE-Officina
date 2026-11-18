@@ -396,7 +396,8 @@ func _part_depths() -> Array[float]:
 
 
 ## gm.gd 的 _phase_draw 在每个 depth 的实例画完后调用
-func _draw_parts_at(d: float) -> void:
+func _draw_parts_at(d: float, sprite_shadows: bool) -> void:
+	_draw_sprite_shadows = sprite_shadows
 	for s: Variant in _part_systems:
 		var ps: GMPartSystem = s
 		if ps == null or not ps.automatic_draw or ps.depth != d:
@@ -416,6 +417,7 @@ func _draw_parts_at(d: float) -> void:
 				var c: Color = gm_color(t.colour, t.alpha)
 				_reset_xf()
 				RenderingServer.canvas_item_add_rect(_ci, Rect2(floorf(p.x), floorf(p.y), maxf(1.0, sz), maxf(1.0, sz)), c)
+	_draw_sprite_shadows = false
 
 
 ## 测试用

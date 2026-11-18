@@ -38,6 +38,8 @@ func _ready() -> void:
 	GM.room_goto(A.rm_guardabot_play)
 	GM.tick()
 	ok(GM.room == A.rm_guardabot_play, "进入 rm_guardabot_play（实际 room %d）" % GM.room)
+	ok(GM._gameplay_sprite_shadows_enabled(), "载入游玩关卡后启用精灵阴影")
+	ok(not GM.classes[A.obj_lava_water].casts_sprite_shadow and not GM.classes[A.obj_lave_draw].casts_sprite_shadow, "整片水面和岩浆不产生拼接暗线")
 	ok(G.apariencia == 2.0, "画风 = SMW（%s）" % G.apariencia)
 	ok(G.bg_level == "castle", "场景 = castle（%s）" % G.bg_level)
 	ok(GM.room_width == 1152.0, "关卡宽度 1152（%s）" % GM.room_width)

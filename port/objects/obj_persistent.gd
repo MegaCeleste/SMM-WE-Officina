@@ -48,7 +48,7 @@ const SETTINGS_PATH: String = "user://settings.cfg"
 const SETTINGS_NUMBERS: Array[String] = [
 	"vsync", "lanzar_agarrar", "saltar", "saltar_spin", "pause", "jugador",
 	"arriba", "abajo", "izquierda", "derecha", "idioma", "w_scale",
-	"audiomaster", "sm4j_style", "effect_star", "hd", "controller",
+	"audiomaster", "sm4j_style", "effect_star", "hd", "controller", "shadows",
 ]
 
 
@@ -94,7 +94,7 @@ func _create() -> void:
 	G.warp_y = 0.0
 	G.hd = 1.0
 	G.meteoritos = 0.0
-	G.shadows = 0.0
+	G.shadows = 1.0
 	G.user_gb = ""
 	G.jump = 0.0
 	G.etiq_nm = ""

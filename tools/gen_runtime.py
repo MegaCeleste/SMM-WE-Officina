@@ -50,9 +50,19 @@ def main() -> int:
 
     # ---- runtime.json ----
     rt_objects = []
+    shadow_exclusions = []
+    composite_draws = {
+        "obj_persistent", "obj_levelmanager", "obj_editormanager", "obj_cursor",
+        "obj_lava_water", "obj_lave_draw",  # Fluid strips form one continuous surface.
+    }
     for n in names["objects"]:
         o = objects[n]
         assert o["index"] == obj_idx[n], n
+        folder = o["folder"]
+        interface = folder.startswith(("Objects/UI/", "Objects/Editor Res "))
+        transition = folder == "Objects/Interactive/Special/Transitions"
+        if interface or transition or n in composite_draws:
+            shadow_exclusions.append(o["index"])
         rt_objects.append([
             n,
             obj_idx.get(o["parent"], -1) if o["parent"] else -1,
@@ -106,6 +116,7 @@ def main() -> int:
         })
     write_json(TABLES / "runtime.json", {
         "objects": rt_objects, "sprites": rt_sprites, "sounds": rt_sounds, "rooms": rt_rooms,
+        "sprite_shadow_exclusions": shadow_exclusions,
     })
     print(f"gen_runtime: objects {len(rt_objects)}, sprites {len(rt_sprites)}, "
           f"sounds {len(rt_sounds)}, rooms {len(rt_rooms)}")

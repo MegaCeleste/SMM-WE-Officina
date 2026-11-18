@@ -185,6 +185,8 @@ func _load_tables() -> void:
 		c.depth = float(r[6])
 		classes[i] = c
 		obj_name_to_id[c.name] = i
+	for object_id: int in data["sprite_shadow_exclusions"]:
+		classes[object_id].casts_sprite_shadow = false
 	_rebuild_class_ancestry()
 
 	sound_defs = data["sounds"]

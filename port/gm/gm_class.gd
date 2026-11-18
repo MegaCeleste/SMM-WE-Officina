@@ -11,6 +11,7 @@ var mask: int = -1
 var visible: bool = true
 var persistent: bool = false
 var depth: float = 0.0
+var casts_sprite_shadow: bool = true
 ## is_a[obj_id] != 0 表示本类是 obj_id 或其后代
 var is_a: PackedByteArray = PackedByteArray()
 

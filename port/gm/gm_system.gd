@@ -403,6 +403,10 @@ func gpu_get_blendmode() -> int:
 	return _blend_mode
 
 
+func _sprite_shadow_allowed() -> bool:
+	return _surface_target == null and _blend_enable and _blend_mode == bm_normal and (not _shader_on or _shader_id == A.sha_blendreplace)
+
+
 func _current_material() -> RID:
 	if _blend_mode != bm_normal:
 		if not _mat_blend.has(_blend_mode):

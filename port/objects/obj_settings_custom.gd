@@ -60,7 +60,7 @@ func _user_0() -> void:
 	GM.instance_create((GM.camera_get_view_x(GM.view_get_camera(0)) + 263.0), (GM.camera_get_view_y(GM.view_get_camera(0)) + 186.0), A.obj_button_settings_close2)
 	GM.instance_destroy(A.obj_settings_custom)
 	GM.instance_destroy(A.obj_button_settings_idioma)
-	GM.instance_destroy(A.obj_button_settings_sombras)
+	GM.instance_destroy(A.obj_button_sombras)
 	GM.instance_destroy(A.obj_selecting_player)
 	GM.instance_destroy(A.obj_selecting_fps)
 	GM.instance_destroy(A.obj_button_creditos)

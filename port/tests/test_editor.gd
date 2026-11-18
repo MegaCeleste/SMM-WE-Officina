@@ -122,6 +122,7 @@ func test_play() -> void:
 			break
 		GM.tick()
 	ok(first(A.obj_levelmanager).editor == 0.0, "click enters playtest")
+	ok(GM._gameplay_sprite_shadows_enabled(), "playtest enables gameplay sprite shadows")
 	ok(palette.all(func(control: GMObject) -> bool: return not control.visible), "playtest hides the palette immediately")
 	ticks(90)
 	ok(first(A.obj_levelmanager).editor == 0.0, "play button enters gameplay")
@@ -131,6 +132,7 @@ func test_play() -> void:
 	click_at(button.x + 10.0, button.y + 15.0)
 	ticks(100)
 	ok(first(A.obj_levelmanager).editor == 1.0, "play button returns to editor")
+	ok(not GM._gameplay_sprite_shadows_enabled(), "editor does not use gameplay sprite shadows")
 	ok(GM.instance_exists(A.obj_mario_editor), "editor Mario restored")
 	ok(GM.instance_exists(A.obj_goomba_res), "editable resource restored")
 	ok(palette.all(func(control: GMObject) -> bool: return control.visible), "returning to edit restores the palette")

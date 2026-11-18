@@ -95,6 +95,9 @@ func _gm_draw() -> void:
 
 # from objects/obj_button_home/Mouse_4.gml
 func _mouse_4() -> void:
+	# Online course entries remain inert in the offline port.
+	if image_index == 1.0 or image_index == 2.0:
+		return
 	if disabled == 0.0 and press == 1.0 and (not GM.instance_exists(A.obj_settings_panel)) and sprite_index == A.spr_buttons_plays:
 		if GM.instance_exists(A.obj_creator_jugar_editar):
 			var creator = GM.instance_find(A.obj_creator_jugar_editar, 0)
@@ -121,12 +124,6 @@ func _mouse_4() -> void:
 				GM.audio_play_sound(A.snd_modo_historia, 0.0, false)
 				sprite_index = A.spr_buttons_plays_press
 				alarm[1] = 15.0
-			1.0, 2.0:
-				if GM.veq(G.my1, 0.0) or GM.veq(G.my2, 0.0) or GM.veq(G.my3, -1.0) or GM.veq(G.my4, -1.0) or GM.veq(G.my5, 0.0) or GM.veq(G.my6, -1.0):
-					for inst in GM.with_list(A.obj_cursor):
-						inst.active_menu = 0.0
-					press = 1.0
-					GM.instance_create(GM.camera_get_view_x(GM.view_get_camera(0)) + 112.0, GM.camera_get_view_y(GM.view_get_camera(0)) + 12.0, A.obj_iname_control2)
 
 
 # from objects/obj_button_home/Mouse_10.gml

@@ -1,11 +1,11 @@
 extends "res://gm/gm_layer.gd"
 ## 兼容层第 2c 层（第 2 批）：系统、日期、窗口/显示、application_surface、动态 sprite、
-## shader 占位、杂项内置函数。
+## shader、杂项内置函数。
 ##
 ## application_surface：世界层画进一个 SubViewport（见 gm_draw._init_draw），它的纹理就是
 ## application_surface。原版调了 application_surface_draw_enable(false)，由 obj_persistent 的
 ## Draw GUI 自己把它画到屏幕上（draw_surface_stretched），这里照此实现，所以 port_y（屏幕震动）
-## 和以后的冲击波 shader 都能按原样工作。
+## 和冲击波 shader 都能作用在同一张世界纹理上。
 
 # ---- 系统 ----
 ## 数值没有核对过 GMS 的定义；原版只拿 os_type 和它们比较，不依赖具体数值。
@@ -214,16 +214,122 @@ func surface_resize(surf: float, w: float, h: float) -> void:
 	_set_app_surface_size(w, h)
 
 
+# User surfaces in this project contain grayscale masks. The opaque viewport
+# stores the mask value and logical alpha in R and G so Godot's compositing
+# cannot discard RGB when GMS writes alpha zero.
+# UNVERIFIED U24: visual parity with Windows GameMaker has not been tested.
+class MaskSurface:
+	var viewport: SubViewport
+	var segments: Array[RID] = []
+	var used: int = 0
+
+
+const _MASK_WRITE: Shader = preload("res://gm/shaders/mask_write.gdshader")
+const _MASK_SUBTRACT: Shader = preload("res://gm/shaders/mask_subtract.gdshader")
+const _MASK_DRAW: Shader = preload("res://gm/shaders/mask_draw.gdshader")
+const _MASK_DRAW_SUBTRACT: Shader = preload("res://gm/shaders/mask_draw_subtract.gdshader")
+var _mask_materials: Dictionary[Shader, ShaderMaterial] = {}
+var _surfaces: Dictionary[int, MaskSurface] = {}
+var _next_surface: int = 0
+var _surface_target: MaskSurface
+var _surface_previous_ci: RID
+var _camera_fixed_surface_segments: Array[RID] = []
+
+
+func surface_create(w: float, h: float) -> int:
+	var surface: MaskSurface = MaskSurface.new()
+	var vp: SubViewport = SubViewport.new()
+	vp.size = Vector2i(maxi(2, int(w)), maxi(2, int(h)))
+	vp.world_2d = World2D.new()
+	vp.disable_3d = true
+	vp.render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE
+	vp.canvas_item_default_texture_filter = Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
+	_app_vp.add_child(vp)
+	surface.viewport = vp
+	_next_surface += 1
+	_surfaces[_next_surface] = surface
+	return _next_surface
+
+
 func surface_get_width(surf: float) -> float:
-	return _app_w if int(surf) == application_surface else 0.0
+	if int(surf) == application_surface:
+		return _app_w
+	var surface: MaskSurface = _surfaces.get(int(surf))
+	return float(surface.viewport.size.x) if surface != null else 0.0
 
 
 func surface_get_height(surf: float) -> float:
-	return _app_h if int(surf) == application_surface else 0.0
+	if int(surf) == application_surface:
+		return _app_h
+	var surface: MaskSurface = _surfaces.get(int(surf))
+	return float(surface.viewport.size.y) if surface != null else 0.0
 
 
 func surface_exists(surf: float) -> bool:
-	return int(surf) == application_surface
+	return int(surf) == application_surface or _surfaces.has(int(surf))
+
+
+func surface_free(surf: float) -> void:
+	var surface: MaskSurface = _surfaces.get(int(surf))
+	if surface == null:
+		return
+	if surface == _surface_target:
+		surface_reset_target()
+	for segment: RID in surface.segments:
+		RenderingServer.free_rid(segment)
+	surface.viewport.queue_free()
+	_surfaces.erase(int(surf))
+
+
+func surface_set_target(surf: float) -> void:
+	var surface: MaskSurface = _surfaces.get(int(surf))
+	if surface == null or _surface_target != null:
+		return
+	_reset_xf()
+	_surface_previous_ci = _ci
+	_surface_target = surface
+	# All user surfaces in this project redraw the whole mask on each update.
+	for i: int in surface.used:
+		RenderingServer.canvas_item_clear(surface.segments[i])
+	surface.used = 0
+	_new_surface_segment()
+
+
+func surface_reset_target() -> void:
+	if _surface_target == null:
+		return
+	_surface_target = null
+	_ci = _surface_previous_ci
+	_xf_set = false
+
+
+func _mask_material(shader: Shader) -> RID:
+	if not _mask_materials.has(shader):
+		var material: ShaderMaterial = ShaderMaterial.new()
+		material.shader = shader
+		_mask_materials[shader] = material
+	return _mask_materials[shader].get_rid()
+
+
+func _new_surface_segment() -> void:
+	var surface: MaskSurface = _surface_target
+	if surface.used == surface.segments.size():
+		var item: RID = RenderingServer.canvas_item_create()
+		RenderingServer.canvas_item_set_parent(item, surface.viewport.world_2d.canvas)
+		RenderingServer.canvas_item_set_draw_index(item, surface.used)
+		surface.segments.append(item)
+	_ci = surface.segments[surface.used]
+	surface.used += 1
+	RenderingServer.canvas_item_set_material(_ci, _mask_material(_MASK_SUBTRACT if _blend_mode == bm_subtract else _MASK_WRITE))
+	_xf_set = false
+
+
+func draw_clear_alpha(col: int, alpha: float) -> void:
+	if _surface_target == null:
+		super.draw_clear_alpha(col, alpha)
+		return
+	_reset_xf()
+	RenderingServer.canvas_item_add_rect(_ci, Rect2(Vector2.ZERO, Vector2(_surface_target.viewport.size)), gm_color(col, alpha))
 
 
 func draw_surface_stretched(surf: float, px: float, py: float, w: float, h: float) -> void:
@@ -231,17 +337,32 @@ func draw_surface_stretched(surf: float, px: float, py: float, w: float, h: floa
 
 
 func draw_surface_stretched_ext(surf: float, px: float, py: float, w: float, h: float, col: int, alpha: float) -> void:
-	if int(surf) != application_surface:
-		push_warning("GM.draw_surface_stretched：只支持 application_surface")
+	var rect: Rect2 = Rect2(px, py, w, h)
+	if int(surf) == application_surface:
+		if _ci_root != _ci_gui or _surface_target != null:
+			return
+		_reset_xf()
+		RenderingServer.canvas_item_add_texture_rect(_ci, rect, _app_vp.get_texture().get_rid(), false, gm_color(col, alpha))
 		return
-	if _ci == _ci_world or _ci_root == _ci_world:
-		return  # 把 application_surface 画进它自己：GMS 也不允许
-	_reset_xf()
-	RenderingServer.canvas_item_add_texture_rect(_ci, Rect2(px, py, w, h), _app_vp.get_texture().get_rid(), false, gm_color(col, alpha))
+	var surface: MaskSurface = _surfaces.get(int(surf))
+	if surface == null or _surface_target != null:
+		return
+	_new_segment(_mask_material(_MASK_DRAW_SUBTRACT if _blend_mode == bm_subtract else _MASK_DRAW))
+	if _ci_root == _ci_world:
+		_camera_fixed_surface_segments.append(_ci)
+	RenderingServer.canvas_item_add_texture_rect(_ci, rect, surface.viewport.get_texture().get_rid(), false, gm_color(col, alpha))
+	_new_segment(_current_material())
 
 
 func draw_surface(surf: float, px: float, py: float) -> void:
 	draw_surface_stretched(surf, px, py, surface_get_width(surf), surface_get_height(surf))
+
+
+func _apply_world_transform(camera: Vector2) -> void:
+	super._apply_world_transform(camera)
+	var offset: Vector2 = camera - Vector2(_cam_x[0], _cam_y[0])
+	for item: RID in _camera_fixed_surface_segments:
+		RenderingServer.canvas_item_set_transform(item, Transform2D(0.0, offset))
 
 
 ## GMS 关掉混合时源像素直接覆盖目标。原版只在画不透明的截图和 application_surface 时关，
@@ -265,14 +386,17 @@ var _mat_blend: Dictionary = {}  ## 模式 → CanvasItemMaterial
 
 ## 换混合模式就开一个新的绘制分段（同 shader_set）。bm_add = (src_alpha, one)，与 Godot 的
 ## BLEND_MODE_ADD 相同。bm_subtract 在 GMS 里是 (zero, inv_src_colour)，Godot 没有对应的固定
-## 混合方式，暂用 BLEND_MODE_SUB 近似；bm_max 暂按 bm_add 处理（本批只有 obj_blend_ring 用 bm_add）。
+## 混合方式，对直接绘制暂用 BLEND_MODE_SUB 近似；离屏遮罩实现其乘法公式。bm_max 暂按 bm_add 处理。
 ## 混合模式不是 normal 时，shader_set 的材质被覆盖（原版没有两者同时用的地方）。
 func gpu_set_blendmode(mode: float) -> void:
 	var m: int = int(mode)
 	if m == _blend_mode:
 		return
 	_blend_mode = m
-	_new_segment(_current_material())
+	if _surface_target != null:
+		_new_surface_segment()
+	else:
+		_new_segment(_current_material())
 
 
 func gpu_get_blendmode() -> int:
@@ -286,8 +410,8 @@ func _current_material() -> RID:
 			cm.blend_mode = CanvasItemMaterial.BLEND_MODE_SUB if _blend_mode == bm_subtract else CanvasItemMaterial.BLEND_MODE_ADD
 			_mat_blend[_blend_mode] = cm
 		return (_mat_blend[_blend_mode] as CanvasItemMaterial).get_rid()
-	if _shader_on and _mat_blendreplace != null:
-		return _mat_blendreplace.get_rid()
+	if _shader_on:
+		return _shader_materials[_shader_id].get_rid()
 	return RID()
 
 
@@ -355,7 +479,6 @@ func sprite_delete(spr: float) -> void:
 # ======================================================================
 # shader
 # sha_blendreplace（第 4 批）：rgb 换成顶点色，alpha = 顶点 alpha × 贴图 alpha。
-# 其余两个 shader 第 11 批实现，现在是空操作。
 #
 # 绘制命令都写进同一个 canvas item，而材质只能整个 canvas item 设一个，所以
 # shader_set / shader_reset 各开一个新的“段”（当前绘制目标的子 canvas item，按
@@ -376,11 +499,21 @@ var _seg_pool: Array[RID] = []
 var _seg_used: int = 0
 var _ci_root: RID = RID()
 var _shader_on: bool = false
-var _mat_blendreplace: ShaderMaterial = null
+var _shader_id: int = -1
+var _shader_materials: Dictionary[int, ShaderMaterial] = {}
+
+const _SHOCKWAVE: Shader = preload("res://gm/shaders/shd_shockwave.gdshader")
+const _BLUR: Shader = preload("res://gm/shaders/Shader3.gdshader")
+const _SHOCK_UNIFORMS: Array[StringName] = [
+	&"time", &"mouse_pos", &"resolution", &"shock_amplitude", &"shock_refraction", &"shock_width",
+]
 var _world_draw_order: int = 0
 
 
 func _begin_world_draw() -> void:
+	for item: RID in _camera_fixed_surface_segments:
+		RenderingServer.canvas_item_set_transform(item, Transform2D.IDENTITY)
+	_camera_fixed_surface_segments.clear()
 	super._begin_world_draw()
 	for i: int in range(_seg_used):
 		RenderingServer.canvas_item_clear(_seg_pool[i])
@@ -401,6 +534,10 @@ func _begin_gui_draw() -> void:
 
 
 func _exit_tree() -> void:
+	for surface: MaskSurface in _surfaces.values():
+		for segment: RID in surface.segments:
+			RenderingServer.free_rid(segment)
+	_surfaces.clear()
 	for seg: RID in _seg_pool:
 		RenderingServer.free_rid(seg)
 	_seg_pool.clear()
@@ -426,18 +563,27 @@ func _next_world_draw_order() -> int:
 	return _world_draw_order
 
 
-func shader_get_uniform(_sh: float, _uniform: String) -> int:
-	return -1
+func shader_get_uniform(sh: float, uniform: String) -> int:
+	return _SHOCK_UNIFORMS.find(StringName(uniform)) if int(sh) == A.shd_shockwave else -1
 
 
 func shader_set(sh: float) -> void:
-	if int(sh) != A.sha_blendreplace:
+	var id: int = int(sh)
+	if not shader_is_compiled(sh):
 		return
-	if _mat_blendreplace == null:
-		var shd: Shader = Shader.new()
-		shd.code = _BLENDREPLACE_CODE
-		_mat_blendreplace = ShaderMaterial.new()
-		_mat_blendreplace.shader = shd
+	if not _shader_materials.has(id):
+		var material: ShaderMaterial = ShaderMaterial.new()
+		match id:
+			A.sha_blendreplace:
+				var shader: Shader = Shader.new()
+				shader.code = _BLENDREPLACE_CODE
+				material.shader = shader
+			A.shd_shockwave:
+				material.shader = _SHOCKWAVE
+			A.Shader3:
+				material.shader = _BLUR
+		_shader_materials[id] = material
+	_shader_id = id
 	_shader_on = true
 	_new_segment(_current_material())
 
@@ -448,12 +594,19 @@ func shader_reset() -> void:
 		_new_segment(_current_material())
 
 
-func shader_set_uniform_f(_handle: float, ...values: Array) -> void:
-	pass
+func shader_set_uniform_f(handle: float, ...values: Array) -> void:
+	var index: int = int(handle)
+	if not _shader_on or _shader_id != A.shd_shockwave or index < 0 or index >= _SHOCK_UNIFORMS.size():
+		return
+	var uniform: StringName = _SHOCK_UNIFORMS[index]
+	if values.size() == 2:
+		_shader_materials[_shader_id].set_shader_parameter(uniform, Vector2(float(values[0]), float(values[1])))
+	elif values.size() == 1:
+		_shader_materials[_shader_id].set_shader_parameter(uniform, float(values[0]))
 
 
-func shader_is_compiled(_sh: float) -> bool:
-	return false
+func shader_is_compiled(sh: float) -> bool:
+	return int(sh) in [A.sha_blendreplace, A.shd_shockwave, A.Shader3]
 
 
 # ======================================================================

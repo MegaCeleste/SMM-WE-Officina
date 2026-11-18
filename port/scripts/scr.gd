@@ -37,7 +37,7 @@ const SMB2: float = 4.0
 enum e__BG { Visible, Foreground, Index, X, Y, Width, Height, HTiled, VTiled, XScale, YScale, HSpeed, VSpeed, Blend, Alpha }
 enum e__VW { XView, YView, WView, HView, Angle, HBorder, VBorder, HSpeed, VSpeed, Object, Visible, XPort, YPort, WPort, HPort, Camera, SurfaceID }
 
-# ---- 已移植脚本（239 个文件） ----
+# ---- 已移植脚本（240 个文件） ----
 const _m_background_get = preload("res://scripts/__background_get.gd")
 const _m_background_get_element = preload("res://scripts/__background_get_element.gd")
 const _m_background_get_internal = preload("res://scripts/__background_get_internal.gd")
@@ -48,6 +48,7 @@ const _m_view_get = preload("res://scripts/__view_get.gd")
 const _m_view_set = preload("res://scripts/__view_set.gd")
 const _m_view_set_internal = preload("res://scripts/__view_set_internal.gd")
 const _m_background_create_from_surface = preload("res://scripts/background_create_from_surface.gd")
+const _m_draw_circle_colour_precise = preload("res://scripts/draw_circle_colour_precise.gd")
 const _m_draw_sprite_custom_origin = preload("res://scripts/draw_sprite_custom_origin.gd")
 const _m_draw_sprite_tiled_area_ext = preload("res://scripts/draw_sprite_tiled_area_ext.gd")
 const _m_hex_string_byte = preload("res://scripts/hex_string_byte.gd")
@@ -307,6 +308,9 @@ static func __view_set_internal(me: GMObject, argument0 = null, argument1 = null
 
 static func background_create_from_surface(me: GMObject, argument0 = null, argument1 = null, argument2 = null, argument3 = null, argument4 = null, argument5 = null, argument6 = null) -> Variant:
 	return _m_background_create_from_surface.background_create_from_surface(me, argument0, argument1, argument2, argument3, argument4, argument5, argument6)
+
+static func draw_circle_colour_precise(_me: GMObject, x: float, y: float, radius: float, centre: int, edge: int, outline: bool, precision: float) -> void:
+	_m_draw_circle_colour_precise.draw_circle_colour_precise(_me, x, y, radius, centre, edge, outline, precision)
 
 static func draw_sprite_custom_origin(me: GMObject, argument0 = null, argument1 = null, argument2 = null, argument3 = null, argument4 = null, argument5 = null, argument6 = null, argument7 = null, argument8 = null, argument9 = null, argument10 = null) -> void:
 	_m_draw_sprite_custom_origin.draw_sprite_custom_origin(me, argument0, argument1, argument2, argument3, argument4, argument5, argument6, argument7, argument8, argument9, argument10)

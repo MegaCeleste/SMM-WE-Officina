@@ -1,6 +1,6 @@
 extends GMObject
 
-var target: float = 0.0  # PORT: 由 obj_curtainout（空壳）在 instance_create 之后写入
+var target: float = 0.0  # PORT: 由 obj_curtainout在 instance_create 之后写入
 var back: float = -1.0
 var alpha: float = 0.0
 

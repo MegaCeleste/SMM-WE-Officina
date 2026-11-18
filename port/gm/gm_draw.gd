@@ -391,6 +391,8 @@ func draw_circle(px: float, py: float, r: float, outline: bool) -> void:
 
 
 func draw_circle_colour(px: float, py: float, r: float, c1: int, _c2: int, outline: bool) -> void:
+	if r == 0.0:
+		return
 	_reset_xf()
 	var c: Color = gm_color(c1, _draw_alpha)
 	var pts: PackedVector2Array = PackedVector2Array()
@@ -409,7 +411,7 @@ func draw_line(x1: float, y1: float, x2: float, y2: float) -> void:
 	RenderingServer.canvas_item_add_line(_ci, Vector2(x1, y1), Vector2(x2, y2), gm_color(_draw_colour, _draw_alpha), 1.0)
 
 
-## 在当前目标上铺满颜色（原版只在 surface 上用；surface 在特效批次实现）
+## 在当前目标上铺满颜色（离屏目标由 gm_system.gd 处理）
 func draw_clear(col: int) -> void:
 	draw_clear_alpha(col, 1.0)
 

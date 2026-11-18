@@ -104,8 +104,6 @@ func _alarm_4() -> void:
 		_obj_write12.visible = false
 	for _obj_write13 in GM.with_list(A.obj_expand_panels_left):
 		_obj_write13.visible = false
-	for _obj_write14 in GM.with_list(A.obj_expand_paneles_top):
-		_obj_write14.visible = false
 	if GM.instance_exists(A.obj_panel_left):
 		for _obj_write15 in GM.with_list(A.obj_panel_left):
 			_obj_write15.visible = false
@@ -337,6 +335,7 @@ func _user_3() -> void:
 			GM.instance_create(0.0, 0.0, A.obj_firemaker)
 		for _obj_write49 in GM.with_list(A.obj_levelmanager):
 			_obj_write49.editor = 0.0
+		_set_top_palette_visible(false)
 		var _with_target51 = A.obj_cursor
 		var _other50: GMObject = GM.other
 		GM.other = self
@@ -458,8 +457,7 @@ func _user_3() -> void:
 			_obj_write74.visible = true
 		for _obj_write75 in GM.with_list(A.obj_expand_panels_left):
 			_obj_write75.visible = true
-		for _obj_write76 in GM.with_list(A.obj_expand_paneles_top):
-			_obj_write76.visible = true
+		_set_top_palette_visible(true)
 		if GM.instance_exists(A.obj_panel_left):
 			for _obj_write77 in GM.with_list(A.obj_panel_left):
 				_obj_write77.visible = true
@@ -575,6 +573,12 @@ func _user_3() -> void:
 			GM.other = _other99
 		moment = 0.0
 		G.instance_deactivate = 1.0
+
+
+func _set_top_palette_visible(show_palette: bool) -> void:
+	for object_id: int in [A.obj_card_item, A.obj_card_block_sounds, A.obj_expand, A.obj_expand_paneles_top]:
+		for control: GMObject in GM.with_list(object_id):
+			control.visible = show_palette
 
 
 # from objects/obj_creator_jugar_editar/Draw_0.gml

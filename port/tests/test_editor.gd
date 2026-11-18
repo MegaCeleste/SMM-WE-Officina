@@ -108,16 +108,33 @@ func test_save() -> void:
 
 func test_play() -> void:
 	var button = first(A.obj_creator_jugar_editar)
-	button._user_2()
+	var palette: Array = GM.with_list(A.obj_card_item)
+	ok(not palette.is_empty(), "editor creates item cards")
+	palette.append_array([first(A.obj_card_block_sounds), first(A.obj_expand), first(A.obj_expand_paneles_top)])
+	ok(palette.all(func(control: GMObject) -> bool: return control.visible), "palette starts visible")
+	# Start play while the manually collapsed palette is sliding back in.
+	var cursor = first(A.obj_cursor)
+	cursor.anim_top = 34.0
+	cursor.cont_panel_top = 2.0
+	click_at(button.x + 10.0, button.y + 15.0)
+	for frame: int in 10:
+		if first(A.obj_levelmanager).editor == 0.0:
+			break
+		GM.tick()
+	ok(first(A.obj_levelmanager).editor == 0.0, "click enters playtest")
+	ok(palette.all(func(control: GMObject) -> bool: return not control.visible), "playtest hides the palette immediately")
 	ticks(90)
 	ok(first(A.obj_levelmanager).editor == 0.0, "play button enters gameplay")
 	ok(GM.instance_exists(A.obj_mario), "play spawns Mario")
 	ok(GM.instance_exists(A.obj_galoomba), "resource becomes runtime enemy")
-	button._user_2()
+	ok(cursor.anim_top == 34.0 and cursor.cont_panel_top == 3.0, "palette finishes closing during playtest")
+	click_at(button.x + 10.0, button.y + 15.0)
 	ticks(100)
 	ok(first(A.obj_levelmanager).editor == 1.0, "play button returns to editor")
 	ok(GM.instance_exists(A.obj_mario_editor), "editor Mario restored")
 	ok(GM.instance_exists(A.obj_goomba_res), "editable resource restored")
+	ok(palette.all(func(control: GMObject) -> bool: return control.visible), "returning to edit restores the palette")
+	ok(cursor.anim_top == 0.0 and cursor.cont_panel_top == 0.0, "the revealed palette settles at its exact endpoint")
 
 
 func test_compat() -> void:

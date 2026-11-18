@@ -140,23 +140,23 @@ func _step_begin() -> void:
 	if GM.instance_exists(A.obj_levelmanager):
 		if (GM.instance_find(A.obj_levelmanager, 0).editor == 1.0 and y < (GM.camera_get_view_y(GM.view_get_camera(0)) + 36.0) and move == 1.0 and anim_top <= 34.0 and cont_panel_top == 0.0) or (GM.instance_find(A.obj_levelmanager, 0).editor == 1.0 and y < (GM.camera_get_view_y(GM.view_get_camera(0)) + 36.0) and GM.instance_find(A.obj_erase, 0).active == 1.0 and anim_top <= 34.0 and cont_panel_top == 0.0):
 			if anim_top < 34.0:
-				anim_top += 6.8
+				anim_top = minf(anim_top + 6.8, 34.0)
 			else:
 				anim_top = 34.0
 		elif GM.instance_find(A.obj_levelmanager, 0).editor == 1.0 and y > (GM.camera_get_view_y(GM.view_get_camera(0)) + 36.0) and cont_panel_top == 0.0 and anim_top > 0.0:
 			if anim_top > 0.0:
-				anim_top -= 6.8
+				anim_top = maxf(anim_top - 6.8, 0.0)
 			else:
 				anim_top = 0.0
-	if cont_panel_top == 1.0 and anim_top <= 34.0:
+	if cont_panel_top == 1.0:
 		if anim_top < 34.0:
-			anim_top += 6.8
+			anim_top = minf(anim_top + 6.8, 34.0)
 		else:
 			anim_top = 34.0
 			cont_panel_top = 3.0
-	if cont_panel_top == 2.0 and anim_top >= 0.0:
+	if cont_panel_top == 2.0:
 		if anim_top > 0.0:
-			anim_top -= 6.8
+			anim_top = maxf(anim_top - 6.8, 0.0)
 		else:
 			anim_top = 0.0
 			cont_panel_top = 0.0
@@ -275,7 +275,8 @@ func _user_3() -> void:
 		cont_panel_right = 1.0
 	if cont_panel_left == 0.0:
 		cont_panel_left = 1.0
-	if cont_panel_top == 0.0:
+	# Reverse an in-progress reveal when switching into a playtest.
+	if cont_panel_top == 0.0 or cont_panel_top == 2.0:
 		cont_panel_top = 1.0
 	cont_panel_creator = 1.0
 

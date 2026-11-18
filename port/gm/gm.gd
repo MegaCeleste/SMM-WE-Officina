@@ -70,10 +70,10 @@ var interpolation_profile: bool = false
 var interpolation_camera_smoothing: bool = true
 var prototype_actor: GMObject = null
 var _prototype_item: RID = RID()
-var _prototype_hud_item: RID = RID()
 var _prototype_default_items: Array[RID] = []
 var _prototype_default_offsets: Array[Vector2] = []
 var _prototype_default_subpixels: Array[Vector2] = []
+var _prototype_default_camera_fixed: Array[bool] = []
 var _prototype_layer_items: Array[RID] = []
 var _prototype_layer_offsets: Array[Vector2] = []
 var _prototype_layer_camera_fixed: Array[bool] = []
@@ -167,15 +167,14 @@ func _present_interpolation() -> void:
 	var cam: Vector2 = _prototype_camera_prev.lerp(_prototype_camera_curr, fraction)
 	_prototype_display_camera = cam
 	RenderingServer.canvas_item_set_transform(_prototype_item, Transform2D(0.0, actor_offset))
+	# Screen-anchored Draw events record positions relative to the tick camera.
+	var camera_offset: Vector2 = cam - _prototype_camera_draw
 	for i: int in _prototype_default_offsets.size():
-		RenderingServer.canvas_item_set_transform(_prototype_default_items[i], Transform2D(0.0, _prototype_default_offsets[i] * (1.0 - fraction) + _prototype_default_subpixels[i]))
+		var offset: Vector2 = camera_offset if _prototype_default_camera_fixed[i] else _prototype_default_offsets[i] * (1.0 - fraction) + _prototype_default_subpixels[i]
+		RenderingServer.canvas_item_set_transform(_prototype_default_items[i], Transform2D(0.0, offset))
 	for i: int in _prototype_layer_offsets.size():
-		var offset: Vector2 = cam - _prototype_camera_draw if _prototype_layer_camera_fixed[i] else _prototype_layer_offsets[i] * (1.0 - fraction)
+		var offset: Vector2 = camera_offset if _prototype_layer_camera_fixed[i] else _prototype_layer_offsets[i] * (1.0 - fraction)
 		RenderingServer.canvas_item_set_transform(_prototype_layer_items[i], Transform2D(0.0, offset))
-	if _prototype_hud_item.is_valid():
-		# The level HUD is recorded in world coordinates relative to the tick camera.
-		# Cancel the interpolated camera movement without re-running its Draw event.
-		RenderingServer.canvas_item_set_transform(_prototype_hud_item, Transform2D(0.0, cam - _prototype_camera_draw))
 	_apply_world_transform(cam)
 	if start_us != 0:
 		if prototype_present_ms.size() >= 3600:
@@ -193,15 +192,13 @@ func prototype_interpolate_actor(actor: GMObject) -> void:
 	if not _prototype_item.is_valid():
 		_prototype_item = RenderingServer.canvas_item_create()
 		RenderingServer.canvas_item_set_parent(_prototype_item, _ci_world)
-		_prototype_hud_item = RenderingServer.canvas_item_create()
-		RenderingServer.canvas_item_set_parent(_prototype_hud_item, _ci_world)
 	else:
 		RenderingServer.canvas_item_clear(_prototype_item)
-		RenderingServer.canvas_item_clear(_prototype_hud_item)
 	for item: RID in _prototype_default_items:
 		RenderingServer.canvas_item_clear(item)
 	_prototype_default_offsets.clear()
 	_prototype_default_subpixels.clear()
+	_prototype_default_camera_fixed.clear()
 	for item: RID in _prototype_layer_items:
 		RenderingServer.canvas_item_clear(item)
 	_prototype_layer_offsets.clear()
@@ -1376,11 +1373,11 @@ func _phase_draw() -> void:
 	_begin_world_draw()
 	if _prototype_item.is_valid():
 		RenderingServer.canvas_item_clear(_prototype_item)
-		RenderingServer.canvas_item_clear(_prototype_hud_item)
 	for i: int in _prototype_default_offsets.size():
 		RenderingServer.canvas_item_clear(_prototype_default_items[i])
 	_prototype_default_offsets.clear()
 	_prototype_default_subpixels.clear()
+	_prototype_default_camera_fixed.clear()
 	for i: int in _prototype_layer_offsets.size():
 		RenderingServer.canvas_item_clear(_prototype_layer_items[i])
 	_prototype_layer_offsets.clear()
@@ -1408,19 +1405,17 @@ func _phase_draw() -> void:
 				continue
 			var cls: GMClass = inst._cls
 			var prototype_this: bool = inst == prototype_actor
-			var prototype_hud: bool = prototype_actor != null and inst.object_index == A.obj_levelmanager
+			var camera_fixed: bool = prototype_actor != null and _is_view_anchored_draw(inst.object_index)
 			var delta: Vector2 = Vector2(inst.xprevious - inst.x, inst.yprevious - inst.y)
 			if delta.length() >= 32.0:
 				delta = Vector2.ZERO
 			var prototype_custom: bool = prototype_actor != null and cls.has_draw and _rigid_actor_draw(inst)
 			var fractional: bool = not GM.eq(inst.x, gm_round(inst.x)) or not GM.eq(inst.y, gm_round(inst.y))
 			var prototype_default: bool = prototype_actor != null and (not cls.has_draw and inst.sprite_index >= 0 and delta != Vector2.ZERO or prototype_custom and (delta != Vector2.ZERO or fractional))
-			if prototype_this or prototype_hud or prototype_default:
+			if prototype_this or camera_fixed or prototype_default:
 				_reset_xf()
 				if prototype_this:
 					_ci = _prototype_item
-				elif prototype_hud:
-					_ci = _prototype_hud_item
 				else:
 					var slot: int = _prototype_default_offsets.size()
 					if slot == _prototype_default_items.size():
@@ -1430,6 +1425,7 @@ func _phase_draw() -> void:
 					_ci = _prototype_default_items[slot]
 					_prototype_default_offsets.append(delta)
 					_prototype_default_subpixels.append(Vector2.ZERO)
+					_prototype_default_camera_fixed.append(camera_fixed)
 				RenderingServer.canvas_item_set_draw_index(_ci, _next_world_draw_order())
 				_ci_root = _ci
 				if _shader_on or _blend_mode != bm_normal:
@@ -1478,7 +1474,7 @@ func _phase_draw() -> void:
 				if GM.eq(relative.y, gm_round(relative.y)):
 					correction.y = inst.y - origin.y
 				_prototype_default_subpixels[_prototype_default_subpixels.size() - 1] = correction
-			if prototype_this or prototype_hud or prototype_default:
+			if prototype_this or camera_fixed or prototype_default:
 				_end_interpolated_item()
 			if cls.has_draw_gui:
 				any_gui = true
@@ -1499,6 +1495,13 @@ func _phase_draw() -> void:
 		if prototype_draw_ms.size() >= 3600:
 			prototype_draw_ms.clear()
 		prototype_draw_ms.append(float(Time.get_ticks_usec() - prototype_draw_start) / 1000.0)
+
+
+func _is_view_anchored_draw(object_id: int) -> bool:
+	match object_id:
+		A.obj_levelmanager, A.obj_creator_jugar_editar, A.obj_cursor, A.obj_alert_condicion:
+			return true
+	return false
 
 
 ## These Draw implementations were checked to draw their body and attachments
@@ -1721,8 +1724,6 @@ func _exit_tree() -> void:
 		RenderingServer.free_rid(item)
 	if _prototype_item.is_valid():
 		RenderingServer.free_rid(_prototype_item)
-	if _prototype_hud_item.is_valid():
-		RenderingServer.free_rid(_prototype_hud_item)
 	super._exit_tree()
 	for h: int in _players.keys():
 		var pl: AudioStreamPlayer = _players[h]

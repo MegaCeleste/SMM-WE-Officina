@@ -163,8 +163,9 @@ func _create() -> void:
 	Scr.scr_init_globals(self)
 	G.gw = 384.0
 	G.gh = 216.0
-	G.font_google_legacy = GM.font_add("font_as.ttf", 12.0, 0.0, 0.0, 32.0, 128.0)
-	G.font_google = GM.font_add("fontcjk.ttf", 12.0, 0.0, 0.0, 32.0, 128.0)
+	var latin_font: Font = preload("res://assets/fonts/MARIOMAKER.otf")
+	G.font_google_legacy = GM.font_add("font_as.ttf", 12.0, 0.0, 0.0, 32.0, 128.0, latin_font, 9)
+	G.font_google = GM.font_add("fontcjk.ttf", 12.0, 0.0, 0.0, 32.0, 128.0, latin_font, 9)
 	G.levelmusic = A.snd_gameover
 	G.drez = "2559F35097-2021"
 	G.ctor = "2024 | OpenWE"  # 

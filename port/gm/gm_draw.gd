@@ -69,7 +69,7 @@ var _ci_app: RID = RID()
 ## display_set_gui_size 设的 GUI 坐标范围，映射到整个画面
 var _gui_w: float = VIEW_W
 var _gui_h: float = VIEW_H
-## 16:9 output rectangle in native window pixels, including letterbox offset.
+## Native output rectangle shared by rendering and pointer mapping.
 var _output_rect: Rect2 = Rect2(0.0, 0.0, VIEW_W * OUTPUT_SCALE, VIEW_H * OUTPUT_SCALE)
 
 
@@ -144,10 +144,9 @@ func _refresh_output_layout() -> void:
 	var window_size: Vector2 = get_viewport().get_visible_rect().size
 	if window_size.x <= 0.0 or window_size.y <= 0.0:
 		return
-	var scale: float = minf(window_size.x / VIEW_W, window_size.y / VIEW_H)
-	var output_size: Vector2 = Vector2(maxf(1.0, floorf(VIEW_W * scale)), maxf(1.0, floorf(VIEW_H * scale)))
-	var offset: Vector2 = Vector2(floorf((window_size.x - output_size.x) / 2.0), floorf((window_size.y - output_size.y) / 2.0))
-	_output_rect = Rect2(offset, output_size)
+	_output_rect = _get_output_rect(window_size, OS.has_feature("android"))
+	var output_size: Vector2 = _output_rect.size
+	var offset: Vector2 = _output_rect.position
 	if _app_vp != null:
 		_app_vp.size = Vector2i(int(output_size.x), int(output_size.y))
 	if _ci_app.is_valid():
@@ -156,6 +155,14 @@ func _refresh_output_layout() -> void:
 		RenderingServer.canvas_item_set_transform(_ci_gui, Transform2D(0.0, output_size / Vector2(_gui_w, _gui_h), 0.0, offset))
 	if _ci_world.is_valid():
 		_apply_world_transform(Vector2(_cam_x[0], _cam_y[0]))
+
+
+func _get_output_rect(window_size: Vector2, fill_screen: bool) -> Rect2:
+	if fill_screen:
+		return Rect2(Vector2.ZERO, window_size)
+	var scale: float = minf(window_size.x / VIEW_W, window_size.y / VIEW_H)
+	var output_size: Vector2 = (Vector2(VIEW_W, VIEW_H) * scale).floor().max(Vector2.ONE)
+	return Rect2(((window_size - output_size) / 2.0).floor(), output_size)
 
 
 func _apply_world_transform(camera: Vector2) -> void:
@@ -449,7 +456,7 @@ func draw_clear_alpha(col: int, alpha: float) -> void:
 # 字体与文字
 # ======================================================================
 
-func font_add(file_name: String, size: float, _bold: Variant, _italic: Variant, _first: float, _last: float) -> int:
+func font_add(file_name: String, size: float, _bold: Variant, _italic: Variant, _first: float, _last: float, latin_font: Font = null, latin_size: int = 0) -> int:
 	var path: String = "res://assets/fonts/" + file_name
 	var font: Font = null
 	if ResourceLoader.exists(path):
@@ -458,7 +465,7 @@ func font_add(file_name: String, size: float, _bold: Variant, _italic: Variant, 
 		push_warning("GM.font_add: 找不到字体 %s，用引擎默认字体" % path)
 		font = ThemeDB.fallback_font
 	# GMS 的字号是点数，按 96 DPI 折成像素
-	_fonts.append({"kind": "ttf", "font": font, "size": int(roundf(size * 96.0 / 72.0))})
+	_fonts.append({"kind": "ttf", "font": font, "size": int(roundf(size * 96.0 / 72.0)), "latin_font": latin_font, "latin_size": latin_size})
 	return _fonts.size() - 1
 
 
@@ -474,6 +481,32 @@ func _font() -> Dictionary:
 	if _draw_font >= 0 and _draw_font < _fonts.size():
 		return _fonts[_draw_font]
 	return {"kind": "ttf", "font": ThemeDB.fallback_font, "size": 12}
+
+
+func _shape_latin_line(fd: Dictionary, line: String) -> TextLine:
+	var latin_font: Font = fd.get("latin_font")
+	if latin_font == null:
+		return null
+	var has_latin: bool = false
+	for i: int in line.length():
+		var code: int = line.unicode_at(i)
+		if (code >= 65 and code <= 90) or (code >= 97 and code <= 122):
+			has_latin = true
+			break
+	if not has_latin:
+		return null
+	var shaped: TextLine = TextLine.new()
+	var start: int = 0
+	var latin: bool = line.unicode_at(0) >= 32 and line.unicode_at(0) <= 126
+	for i: int in range(1, line.length()):
+		var code: int = line.unicode_at(i)
+		var next_latin: bool = code >= 32 and code <= 126
+		if next_latin != latin:
+			shaped.add_string(line.substr(start, i - start), latin_font if latin else fd["font"], fd["latin_size"] if latin else fd["size"])
+			start = i
+			latin = next_latin
+	shaped.add_string(line.substr(start), latin_font if latin else fd["font"], fd["latin_size"] if latin else fd["size"])
+	return shaped
 
 
 func _line_width(fd: Dictionary, line: String) -> float:
@@ -493,7 +526,8 @@ func string_width(v: Variant) -> float:
 	var fd: Dictionary = _font()
 	var w: float = 0.0
 	for line: String in string(v).split("\n"):
-		w = maxf(w, _line_width(fd, line))
+		var shaped: TextLine = _shape_latin_line(fd, line)
+		w = maxf(w, shaped.get_size().x if shaped != null else _line_width(fd, line))
 	return w
 
 
@@ -536,7 +570,8 @@ func _draw_text_impl(px: float, py: float, text: String, xs: float, ys: float, a
 	var c: Color = gm_color(col, alpha)
 	for li: int in lines.size():
 		var line: String = lines[li]
-		var lw: float = _line_width(fd, line)
+		var shaped: TextLine = _shape_latin_line(fd, line)
+		var lw: float = shaped.get_size().x if shaped != null else _line_width(fd, line)
 		var ox: float = 0.0
 		if _draw_halign == fa_center:
 			ox = -lw / 2.0
@@ -545,7 +580,11 @@ func _draw_text_impl(px: float, py: float, text: String, xs: float, ys: float, a
 		var ly: float = oy + lh * float(li)
 		if fd["kind"] == "ttf":
 			var font: Font = fd["font"]
-			font.draw_string(_ci, Vector2(ox, ly + font.get_ascent(fd["size"])), line, HORIZONTAL_ALIGNMENT_LEFT, -1.0, fd["size"], c)
+			var baseline: float = ly + font.get_ascent(fd["size"])
+			if shaped != null:
+				shaped.draw(_ci, Vector2(ox, baseline - shaped.get_line_ascent()), c)
+			else:
+				font.draw_string(_ci, Vector2(ox, baseline), line, HORIZONTAL_ALIGNMENT_LEFT, -1.0, fd["size"], c)
 		else:
 			var s: GMSprite = sprites[fd["spr"]]
 			var tex: Texture2D = s.texture()

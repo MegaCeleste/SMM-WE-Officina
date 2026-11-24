@@ -17,6 +17,8 @@ func _ready() -> void:
 		return
 	GM.game_start(A.rm_logo)
 	var p = GM.instance_find(A.obj_persistent, 0)
+	var latin_font: FontFile = GM._fonts[G.font_google]["latin_font"]
+	check(latin_font != null and latin_font.multichannel_signed_distance_field and latin_font.has_char(65), "imported Mario Maker font supplies Latin glyphs")
 	G.my1 = 0.0
 	var guest = GM.instance_create(149.0, 138.0, A.obj_btn_invitado)
 	guest._mouse_4()
@@ -27,13 +29,21 @@ func _ready() -> void:
 	GM.keyboard_string = "测试#玩家"
 	entry._step()
 	check(entry.new_texto == "测试玩家", "input removes hash characters")
+	entry._create_touch_input()
+	var touch_input: LineEdit = entry._touch_input
+	check(touch_input.virtual_keyboard_enabled and touch_input.text == "测试玩家", "touch field uses the virtual keyboard and existing name")
+	check(GM._output_to_view(touch_input.position).is_equal_approx(Vector2(entry.x, entry.y)), "touch field aligns with the drawn field")
+	touch_input.text = "手机#玩家"
+	touch_input.text_changed.emit(touch_input.text)
+	check(touch_input.text == "手机玩家" and entry.new_texto == "手机玩家", "touch field passes sanitized Unicode text to the game")
 	var button = GM.instance_find(A.obj_bl2, 0)
 	button._mouse_4()
-	check(G.my1 == "测试玩家", "confirmation sets author name")
+	check(G.my1 == "手机玩家", "confirmation sets author name")
 	check(FileAccess.file_exists("user://settings.cfg"), "confirmation saves settings")
 	check(p != null, "persistent instance remains")
 	GM.tick()
 	check(GM.room == A.rm_title, "confirmation enters title room")
+	check(not touch_input.visible, "room transition hides the touch field")
 	for i: int in range(35):
 		GM.tick()
 	check(GM.instance_exists(A.obj_title_controller), "title controller exists")

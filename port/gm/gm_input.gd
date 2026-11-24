@@ -356,7 +356,8 @@ func gamepad_axis_value(device: int, axis: int) -> float:
 # ---- 窗口 ----
 
 func window_set_fullscreen(full: Variant) -> void:
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if bool(full) else DisplayServer.WINDOW_MODE_WINDOWED)
+	var fullscreen: bool = OS.has_feature("android") or bool(full)
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 
 
 func window_get_fullscreen() -> bool:
